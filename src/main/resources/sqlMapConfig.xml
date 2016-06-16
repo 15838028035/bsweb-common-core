@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig 
+    PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" 
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<settings cacheModelsEnabled="true" enhancementEnabled="true"
+       lazyLoadingEnabled="true" maxRequests="256" maxSessions="64"
+       maxTransactions="32" useStatementNamespaces="true"/>
+      <sqlMap resource="com/lj/app/core/common/base/model/UpmToken.SqlMap.xml"/>
+      <sqlMap resource="com/lj/app/core/common/notify/model/UpmNotice.SqlMap.xml"/>
+      
+      <sqlMap resource="com/lj/app/core/common/base/model/UpmDictionary.SqlMap.xml"/>
+      <sqlMap resource="com/lj/app/core/common/base/model/UpmDictionaryNote.SqlMap.xml"/>
+      
+</sqlMapConfig>
+    
