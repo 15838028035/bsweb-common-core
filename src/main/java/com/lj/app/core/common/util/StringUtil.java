@@ -1,9 +1,5 @@
 package com.lj.app.core.common.util;
 
-/**
- * 内容摘要:处理字符串类型共用类
- */
-
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +12,7 @@ import com.lj.app.core.common.properties.PropertiesUtil;
 
 /**
  * 
- *         内容摘要:处理数字类型共用类.
+ *内容摘要:处理数字类型共用类.
  */
 public class StringUtil {
 
@@ -98,10 +94,6 @@ public class StringUtil {
      */
     public static String getRound(BigDecimal dividend, BigDecimal divisor, int scale) {
         return dividend.divide(divisor, scale, BigDecimal.ROUND_HALF_UP).toString();
-    }
-
-    public static void main(String[] args) {
-        System.out.println(StringUtil.subStringFrontZero("000010020200"));
     }
 
     public static java.sql.Date strTosqlDate(String s_DateStr, String s_FormatStr) {
@@ -341,6 +333,7 @@ public class StringUtil {
             return false;
         }
     }
+    
     /**
      * 判断字符串非空
      */

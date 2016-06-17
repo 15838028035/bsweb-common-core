@@ -1,5 +1,5 @@
 *.class
-.classpath
+
 *.log
 *.jar
 .project
@@ -12,23 +12,11 @@
 src/main/webapp/WEB-INF/classes/
 src/main/webapp/WEB-INF/lib/
 src/main/webapp/WEB-INF/logs/
+src/main/resources/generator.properties
+src/main/java/com/lj/app/core/common/generator
+src/main/resources/template/
 
 target/
-
-
-#保证核心代码的安全性,取消注释
-
-
-core/src/main/webapp/WEB-INF/classes/
-core/src/main/webapp/WEB-INF/lib/
-core/src/main/webapp/WEB-INF/logs/
-core/src/main/resources/generator.properties
-
-core/target/
-core/template/
-core/src/main/java/com/lj/app/core/common/generator
-core/src/main/resources/template/
-
 
 #取消注释
 pom.xml

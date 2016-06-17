@@ -149,24 +149,6 @@ public class PasswordCoder {
 		return codeChars;
 	}
 
-	public static void main(String[] args) {
-		PasswordCoder pc = new PasswordCoder();
-		pc.setHasLowercase(false);
-		pc.setHasUppercase(false);
-		// pc.setHasNumber(true);
-		pc.setHasSpecial(false);
-		// pc.setSpecialChars("!@#$%^");
-		pc.setMaxLen(4);
-		pc.setMinLen(4);
-
-		// String code = "se2edEfd";
-
-		// System.out.println("validate:"+pc.validateCode(code));
-
-		System.out.println(pc.generateCode());
-
-	}
-
 	public boolean isHasLowercase() {
 		return hasLowercase;
 	}
