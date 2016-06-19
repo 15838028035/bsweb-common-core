@@ -13,7 +13,7 @@ import net.sf.json.JSONObject;
 
 import com.lj.app.core.common.properties.PropertiesUtil;
 import com.lj.app.core.common.security.CMSecurityContext;
-import com.lj.app.core.common.util.ValidateUtil;
+import com.lj.app.core.common.util.StringUtil;
 
 public  class UpmPermissionActionApi {
 
@@ -54,7 +54,7 @@ public  class UpmPermissionActionApi {
 		          //设置菜单，按钮对应的code
 					codeSet.add(code);
 					
-					if(ValidateUtil.isNotEmpty(url)) {
+					if(StringUtil.isNotBlank(url)) {
 						if(url.indexOf(",") != -1) {
 							String[] splitUrls = url.split(",");
 							for (int i = 0; i < splitUrls.length; i++) {

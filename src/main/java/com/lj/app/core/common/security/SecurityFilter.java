@@ -23,8 +23,7 @@ import com.lj.app.core.common.listener.IStatStore;
 import com.lj.app.core.common.listener.StoreFactory;
 import com.lj.app.core.common.properties.PropertiesUtil;
 import com.lj.app.core.common.util.SessionCode;
-import com.lj.app.core.common.util.ValidateUtil;
-import com.lj.app.core.common.web.Struts2Utils;
+import com.lj.app.core.common.util.StringUtil;
 
 public class SecurityFilter implements Filter {
 	
@@ -48,21 +47,21 @@ public class SecurityFilter implements Filter {
 		
 		String skipPrivilegeValidatePage = filterConfig.getInitParameter("skipPrivilegeValidatePage");
 		
-		if(ValidateUtil.isNotEmpty(skipPrivilegeValidatePage)) {
+		if(StringUtil.isNotBlank(skipPrivilegeValidatePage)) {
 			String[] urls = skipPrivilegeValidatePage.split(",");
 			for (int i = 0; i < urls.length; i++) {
 				skipValidatePageSet.add(contextPath + urls[i].trim());
 			}
 		}
 		String skipPrivilegeValidateDir = filterConfig.getInitParameter("skipPrivilegeValidateDir");
-		if(ValidateUtil.isNotEmpty(skipPrivilegeValidateDir)) {
+		if(StringUtil.isNotBlank(skipPrivilegeValidateDir)) {
 			String[] dirs = skipPrivilegeValidateDir.split(",");
 			for (int i = 0; i < dirs.length; i++) {
 				skipValidateDirSet.add(contextPath + dirs[i].trim());
 			}
 		}
 		String skipSessionValidate = filterConfig.getInitParameter("skipSessionValidate");
-		if(ValidateUtil.isNotEmpty(skipSessionValidate)) {
+		if(StringUtil.isNotBlank(skipSessionValidate)) {
 			String[] pages = skipSessionValidate.split(",");
 			for (int i = 0; i < pages.length; i++) {
 				skipSessionValidateDirSet.add(contextPath + pages[i].trim());
