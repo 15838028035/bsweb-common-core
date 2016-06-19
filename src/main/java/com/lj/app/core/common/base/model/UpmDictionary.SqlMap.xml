@@ -7,10 +7,10 @@
     <typeAlias alias="upmDictionary" type="com.lj.app.core.common.base.model.UpmDictionary"/>
 
     <resultMap id="upmDictionaryResult" class="upmDictionary">
-   	  	<result property="typeCode" column="typeCode"/>
-   	  	<result property="dataCode" column="dataCode"/>
-   	  	<result property="dataDesc" column="dataDesc"/>
-   	  	<result property="sortNo" column="sortNo"/>
+   	  	<result property="typeCode" column="type_code"/>
+   	  	<result property="dataCode" column="data_code"/>
+   	  	<result property="dataDesc" column="data_desc"/>
+   	  	<result property="sortNo" column="sort_no"/>
    	  	<result property="id" column="id"/>
    	  	<result property="nodeId" column="node_id"/>
     </resultMap>
@@ -18,16 +18,16 @@
 	<sql id="dynamicWhere">
 	    <dynamic prepend="WHERE">
 	       <isNotEmpty prepend="AND" property="typeCode">
-	             typeCode = #typeCode#
+	             type_code = #typeCode#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="dataCode">
-	             dataCode = #dataCode#
+	             data_code = #dataCode#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="dataDesc">
-	             dataDesc = #dataDesc#
+	             data_desc = #dataDesc#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="sortNo">
-	             sortNo = #sortNo#
+	             sort_no = #sortNo#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="id">
 	             id = #id#
@@ -41,10 +41,10 @@
 	<sql id="commonSelectColumnsPrefix">
 	    <![CDATA[
 	    select
-        	typeCode ,
-        	dataCode ,
-        	dataDesc ,
-        	sortNo ,
+        	type_code ,
+        	data_code ,
+        	data_desc ,
+        	sort_no ,
         	id,
         	node_id
 	    ]]>
@@ -58,10 +58,10 @@
 	    <![CDATA[
 	        INSERT INTO
 	        upm_dictionary (
-	        	typeCode ,
-	        	dataCode ,
-	        	dataDesc ,
-	        	sortNo ,
+	        	type_code ,
+	        	data_code ,
+	        	data_desc ,
+	        	sort_no ,
 	        	id,
 	        	node_id
 	        ) VALUES (
@@ -78,10 +78,10 @@
     <update id="update" parameterClass="upmDictionary">
     <![CDATA[
         UPDATE upm_dictionary SET
-			typeCode = #typeCode# ,
-			dataCode = #dataCode# ,
-			dataDesc = #dataDesc# ,
-			sortNo = #sortNo# ,
+			type_code = #typeCode# ,
+			data_code = #dataCode# ,
+			data_desc = #dataDesc# ,
+			sort_no = #sortNo# ,
 			id = #id#,
 			node_Id = #nodeId# 
 			
