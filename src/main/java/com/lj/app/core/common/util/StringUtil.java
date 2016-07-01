@@ -5,8 +5,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
+import java.util.StringTokenizer;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -335,6 +339,17 @@ public class StringUtil {
         } else {
             return false;
         }
+    }
+    
+    
+    /**
+     * 判断字符串非空
+     */
+    public static boolean isNotBlank(String [] str) {
+    	if(str==null || str.length==0) {
+    		return false;
+    	}
+    	return true;
     }
     
     /**
@@ -693,7 +708,7 @@ public class StringUtil {
 	 * @param str
 	 * @return
 	 */
-	public static List<String> toStringList(String str) {
+	public static List<String> splitStringToStringList(String str) {
 		str = trimBlank(str);
 		String []strArray =  str.split(",");
 		
@@ -712,4 +727,632 @@ public class StringUtil {
 	public static String trimBlank(String str) {
 		return str == null ?"":str.trim();
 	}
+	
+	public static String toString(Object o) {
+		return o == null ? "" : o.toString();
+	}
+	
+	public static String convertArrayToSplitString(Object[] array,
+			String splitStr) {
+		String toString = "";
+		for (int i = 0; i < array.length; i++) {
+			if (i > 0) {
+				toString += splitStr;
+			}
+			toString += array[i].toString();
+		}
+		return toString;
+	}
+
+	public static String convertArrayToSplitString2(Object[] array,
+			String splitStr) {
+		String toString = "";
+		for (int i = 0; i < array.length; i++) {
+			if (i > 0) {
+				toString += splitStr;
+			}
+			toString += "'" + array[i].toString() + "'";
+		}
+		return toString;
+	}
+
+	public static String[] divideString(String source, String divideFlag) {
+		if (source == null) {
+			return null;
+		}
+		if (source.equals("")) {
+			return new String[] { "" };
+		}
+		if (source == null || source.equals("")) {
+			return new String[] { source };
+		}
+		StringTokenizer st = new StringTokenizer(source, divideFlag);
+		int count = st.countTokens();
+		String apple[] = new String[count];
+		for (int ii = 0; ii < count; ii++) {
+			apple[ii] = st.nextToken();
+		}
+		return apple;
+	}
+
+	public static final String[] stringToArray(String str, String separators) {
+		StringTokenizer tokenizer;
+		String[] array = null;
+		int count = 0;
+		if (str == null) {
+			return array;
+		}
+		if (separators == null) {
+			separators = ",";
+		}
+		tokenizer = new StringTokenizer(str, separators);
+		if ((count = tokenizer.countTokens()) <= 0) {
+			return array;
+		}
+		array = new String[count];
+		int ix = 0;
+		while (tokenizer.hasMoreTokens()) {
+			array[ix] = tokenizer.nextToken();
+			ix++;
+		}
+		return array;
+	}
+	
+	public final static String getStringByArray(String[] values) {
+		StringBuffer valueStr = new StringBuffer();
+		if (StringUtil.isNotBlank(values)) {
+			for (int i = 0; i < values.length; i++) {
+				valueStr.append(values[i]);
+			}
+		}
+		return valueStr.toString();
+	}
+
+	public static String delEnter(String str) {
+		String finalStr = "";
+		if (str == null || str.equals("")) {
+			return str;
+		}
+		for (int ii = 0; ii < str.length(); ii++) {
+			if ((str.charAt(ii) != 13) && (str.charAt(ii) != 10)) {
+				finalStr += str.charAt(ii);
+			}
+		} // end for
+		return finalStr;
+	}
+
+	/**
+	 * 判断字符串childStr是否包含在字符串allStr中
+	 * 
+	 * @param allStr
+	 * @param childStr
+	 * @return
+	 */
+	public static  boolean isInclude(String allStr, String childStr) {
+		if (isBlank(allStr) || isBlank(childStr))
+			return false;
+		String[] arr = allStr.split(",");
+		for (int i = 0; i < arr.length; i++) {
+			if (childStr.equals(arr[i])) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	 /**
+     * 将字符串转换为 int.
+     * @param input 输入的字串
+
+     * @param defautlInt :           
+     * @return 结果数字
+     */
+    public static int parseInt(String input, int defaultInt) {
+        try {
+            return Integer.parseInt(input);
+        } catch (Exception e) {
+        }
+        return defaultInt;
+    }
+    
+    /**
+     * 将字符串转换为 int.
+     * @param input 输入的字串
+
+     * @param defautlInt :           
+     * @return 结果数字
+     */
+    public static int parseInt(Object input, int defaultInt) {
+        try {
+        	if(null == input){
+        		return 0;
+        	}else{
+        		 return Integer.parseInt(input.toString());
+        	}
+        } catch (Exception e) {
+        }
+        return defaultInt;
+    }
+
+    /**
+     * 将字符串转换为 float.
+     * @param input 输入的字串
+
+     * @return 结果数字
+     */
+    public static float parseFloat(String input, float defaultFloat) {
+        try {
+            return Float.parseFloat(input);
+        } catch (Exception e) {
+        }
+        return defaultFloat;
+    }
+    
+	public static float parseFloat(Object input, float defaultFloat){
+    	if(null == input){
+    		return defaultFloat;
+    	}
+    	try{
+    		return Float.parseFloat(input.toString());
+    	}catch(Exception ex){}
+    	return defaultFloat;
+    }
+	
+	/**
+	 * 判断字符串是否全是数字字符.
+	 * 
+	 * @param input
+	 *            输入的字符串
+	 * @return 判断结果, true 为全数字, false 为还有非数字字符
+	 */
+	public static boolean isInteger(String input) {
+		if (isBlank(input)) {
+			return false;
+		}
+
+		for (int i = 0; i < input.length(); i++) {
+			char charAt = input.charAt(i);
+
+			if (!Character.isDigit(charAt)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * 功能描述：浮点数字判断
+	 * 
+	 * @param str
+	 * @return
+	 */
+	public static boolean isNumeric(String str) {
+		if (str == null)
+			return false;
+		Pattern p1 = Pattern.compile("(-|[0-9])?[0-9]*(\\.?)[0-9]+"); // 非數字
+		Matcher m = p1.matcher(str);
+		boolean b = m.matches(); // matches() 尝试将整个区域与模式匹配
+		return b;
+	}
+	
+	
+	 /**
+     * 转换由表单读取的数据的内码(从 ISO8859 转换到 gb2312).
+     * 
+     * @param input
+     *            输入的字符串
+     * @return 转换结果, 如果有错误发生, 则返回原来的值
+
+     */
+    public static String toChi(String input) {
+        try {
+            byte[] bytes = input.getBytes("ISO8859-1");
+            return new String(bytes, "GBK");
+        } catch (Exception ex) {
+        }
+        return input;
+    }
+
+    /**
+     * 转换由表单读取的数据的内码到 ISO(从 GBK 转换到ISO8859-1).
+     * 
+     * @param input
+     *            输入的字符串
+     * @return 转换结果, 如果有错误发生, 则返回原来的值
+
+     */
+    public static String toISO(String input) {
+        return changeEncoding(input, "GBK", "ISO8859-1");
+    }
+
+    /**
+     * 转换字符串的内码.
+     * 
+     * @param input
+     *            输入的字符串
+     * @param sourceEncoding
+     *            源字符集名称
+     * @param targetEncoding
+     *            目标字符集名称
+
+     * @return 转换结果, 如果有错误发生, 则返回原来的值
+
+     */
+    public static String changeEncoding(String input, String sourceEncoding, String targetEncoding) {
+        if (input == null || input.equals("")) {
+            return input;
+        }
+
+        try {
+            byte[] bytes = input.getBytes(sourceEncoding);
+            return new String(bytes, targetEncoding);
+        } catch (Exception ex) {
+        }
+        return input;
+    }
+
+    /**
+     * 将字符串 source 中的 oldStr 替换为 newStr, 并以大小写敏感方式进行查找
+
+     * 
+     * @param source
+     *            需要替换的源字符串
+     * @param oldStr
+     *            需要被替换的老字符串
+     * @param newStr
+     *            替换为的新字符串
+     */
+    public static String replace(String source, String oldStr, String newStr) {
+        return replace(source, oldStr, newStr, true);
+    }
+
+    /**
+     * 将字符串 source 中的 oldStr 替换为 newStr, matchCase 为是否设置大小写敏感查找
+     * 
+     * @param source
+     *            需要替换的源字符串
+     * @param oldStr
+     *            需要被替换的老字符串
+     * @param newStr
+     *            替换为的新字符串
+     * @param matchCase
+     *            是否需要按照大小写敏感方式查找
+     */
+    public static String replace(String source, String oldStr, String newStr, boolean matchCase) {
+        if (source == null) {
+            return null;
+        }
+        // 首先检查旧字符串是否存在, 不存在就不进行替换
+
+        if (source.toLowerCase().indexOf(oldStr.toLowerCase()) == -1) {
+            return source;
+        }
+        int findStartPos = 0;
+        int a = 0;
+        while (a > -1) {
+            int b = 0;
+            String str1, str2, str3, str4, strA, strB;
+            str1 = source;
+            str2 = str1.toLowerCase();
+            str3 = oldStr;
+            str4 = str3.toLowerCase();
+            if (matchCase) {
+                strA = str1;
+                strB = str3;
+            }
+            else {
+                strA = str2;
+                strB = str4;
+            }
+            a = strA.indexOf(strB, findStartPos);
+            if (a > -1) {
+                b = oldStr.length();
+                findStartPos = a + b;
+                StringBuffer bbuf = new StringBuffer(source);
+                source = bbuf.replace(a, a + b, newStr) + "";
+                // 新的查找开始点位于替换后的字符串的结尾
+                findStartPos = findStartPos + newStr.length() - b;
+            }
+        }
+        return source;
+    }
+    
+    
+    /**
+     * 得到文件的扩展名.
+     * 
+     * @param fileName
+     *            需要处理的文件的名字.
+     * @return the extension portion of the file's name.
+     */
+    public static String getExtension(String fileName) {
+        if (fileName != null) {
+            int i = fileName.lastIndexOf('.');
+            if (i > 0 && i < fileName.length() - 1) {
+                return fileName.substring(i + 1).toLowerCase();
+            }
+        }
+        return "";
+    }
+    
+    /**
+     * 得到文件的前缀名.
+     * 
+     * @param fileName
+     *            需要处理的文件的名字.
+     * @return the prefix portion of the file's name.
+     */
+    public static String getPrefix(String fileName) {
+        if (fileName != null) {
+            fileName = fileName.replace('\\', '/');
+
+            if (fileName.lastIndexOf("/") > 0) {
+                fileName = fileName.substring(fileName.lastIndexOf("/") + 1, fileName.length());
+            }
+
+            int i = fileName.lastIndexOf('.');
+            if (i > 0 && i < fileName.length() - 1) {
+                return fileName.substring(0, i);
+            }
+        }
+        return "";
+    }
+    
+    /**
+     * 得到文件的短路径, 不保护目录.
+     * 
+     * @param fileName
+     *            需要处理的文件的名字.
+     * @return the short version of the file's name.
+     */
+    public static String getShortFileName(String fileName) {
+        if (fileName != null) {
+            String oldFileName = new String(fileName);
+
+            fileName = fileName.replace('\\', '/');
+
+            // Handle dir
+            if (fileName.endsWith("/")) {
+                int idx = fileName.indexOf('/');
+                if (idx == -1 || idx == fileName.length() - 1) {
+                    return oldFileName;
+                }
+                else {
+                    return oldFileName.substring(idx + 1, fileName.length() - 1);
+                }
+
+            }
+            if (fileName.lastIndexOf("/") > 0) {
+                fileName = fileName.substring(fileName.lastIndexOf("/") + 1, fileName.length());
+            }
+
+            return fileName;
+        }
+        return "";
+    }
+
+    /**
+     * 
+     *@功能描述：将list中的字符串组合成以str为分隔符的形式，例如xxx,fsd,erwr
+     * @param list	字符串集合
+
+     * @param str 要分隔的符号
+     * @return xxx,fsd,erwr形式的字符串
+     */
+    public static String getStrSplitWithChar(List<String> list, String str){
+    	String result = "";
+    	if (list == null)
+    		return result;
+    	for (int i = 0; i < list.size(); i++){
+    		result += list.get(i) + str;
+    	}
+    	if (result.endsWith(str)){
+    		int pos = result.lastIndexOf(str);
+    		if (pos > -1)
+    			result = result.substring(0, pos );
+    	}
+    	return result;	
+    } 
+    
+    /**
+   	 *截取字符串
+
+   	 *@param input : 传入字符串
+
+   	 *@param regex : 切割字符串的字符串，或者正则表达式
+   	 *@param index : 切割字符串后的字符串数组，返回改数组的对应下标的字符串
+
+   	 */
+       public static String splitStr(String input, String regex, int index){
+       	if(isBlank(input)){
+   			return "";
+   		}else{
+   			if(isBlank(regex))
+   				regex = "=";
+   			if(isBlank(index+""))
+   				index = 1;
+   			String[] temp = input.split(regex);
+   			if(temp.length == 1)
+   				return input;
+   			else
+   				return temp[index];
+   		}
+       }
+       
+       public static String spliptListToString(List<Map<String, Object>> list, String column) {
+   		if(null == list || list.size() == 0){
+   			return "";
+   		}
+   		StringBuffer sb = new StringBuffer();
+   		Map<String, Object> map = null;
+   		for(int i=0; i<list.size(); i++){
+   			map = list.get(i);
+   			if(null == map.get(column))
+   				continue;
+   			sb.append(map.get(column));
+   			sb.append(",");
+   		}
+   		int index = sb.lastIndexOf(",");
+       	if(index != -1){
+       		sb.delete(index, sb.length());
+       	}
+       	return sb.toString();
+   		
+   	}
+       
+   /**
+    * 去除Map中value的空格
+
+    * @param map
+    * @return
+    */
+   public static Map<String,Object> toTrim(Map<String,Object> map){
+   	if(map == null){
+   		return null;
+   	}
+   	Map<String,Object> m = map;
+   	Iterator i = m.entrySet().iterator();
+   	while(i.hasNext()){
+   		Map.Entry entry =  (Entry) i.next();
+   		entry.setValue(StringUtil.trimBlank(String.valueOf(entry.getValue())));
+   	}
+   	return m;
+   }
+     
+   /**
+    * 将list元素转换成“col1,col2”形式
+
+    * @return
+    */
+   public static String arrayToString(List<String> s){
+   	StringBuffer sb = new StringBuffer();
+   	for(int i=0;i<s.size();i++){
+   		if(i != s.size() - 1){
+   			sb.append("'"+s.get(i)+"',");
+   		}else{
+   			sb.append("'"+s.get(i)+"'");
+   		}
+   	}
+   	return sb.toString();
+   }
+   
+   /**
+    * 将list元素转换成“col1,col2”形式，剔除空串的情况
+
+    * @return
+    */
+   public static String arrayToString2(List<String> s){
+   	StringBuffer sb = new StringBuffer();
+   	for(int i=0;i<s.size();i++){
+   		if (s.get(i).equals(""))
+   			continue;
+   		if(i != s.size() - 1){
+   			sb.append("'"+s.get(i)+"',");
+   		}else{
+   			sb.append("'"+s.get(i)+"'");
+   		}
+   	}
+   	return sb.toString();
+   }
+   
+   /**
+    * 去除List中Map的value的空格
+
+    * @param map
+    * @return
+    */
+   public static List<Map<String,Object>> toTrim(List<Map<String,Object>> map){
+   	List<Map<String,Object>> list = map;
+   	for(int i=0;i<list.size();i++){
+   		toTrim(list.get(i));
+   	}
+   	return list;
+   }
+   
+   /**
+	 * 功能描述：补0操作
+	 * @param srcStr
+	 * @param insertStr
+	 * @param len
+	 * @return
+	 */
+	public static String insertStr(String srcStr,String insertStr,int len){
+		String tmp = srcStr;
+		int srcLen = StringUtil.trimBlank(tmp).length();//原串长
+
+		int insertLen = len - srcLen;
+		if(insertLen > 0){
+			for(int i = 0; i < insertLen; i++){
+				tmp = insertStr + tmp;
+			}
+		}     
+		return tmp;
+	}
+	
+	/**
+	 * 功能描述：清除字符串中所有的空格
+	 * @param srcStr
+	 * @return
+	 */          	
+	public static String clearSpace(String srcStr){
+		if(srcStr == null) return "";
+		Pattern p = Pattern.compile("\\s*|\t|\r|\n"); 
+	    Matcher m = p.matcher(srcStr); 
+	    String after = m.replaceAll(""); 
+	    return after;
+
+	}
+	
+	/**
+	 * 功能描述：清楚回车换行
+
+	 * @param srcStr
+	 * @return
+	 */
+	public static String clearWrap(String srcStr){
+		if(srcStr == null) return "";
+		Pattern p = Pattern.compile("\\t|\r|\n"); 
+	    Matcher m = p.matcher(srcStr); 
+	    String after = m.replaceAll(""); 
+	    return after;
+	}
+	
+	public static String replaceHtmlEdit(String inputStr){
+		return clearSpace(inputStr.replace("\"", "\\\""));
+	}
+	
+	/**
+	 * 判断字符串是否为浮点型
+
+	 * @param String str	要判断的字符串
+
+	 * @return	true 浮点型,false 非浮点型
+	 */
+	 public static boolean isDecimal(String str) {
+		 if(str==null || "".equals(str))
+	     return false;  
+	     Pattern pattern = Pattern.compile("[0-9]*(\\.?)[0-9]*");
+	     return pattern.matcher(str).matches();
+	 }
+	 
+	 /**
+	  * 查找字符串数组中是否有匹配值
+
+	  * @param String[] array	字符串数组
+
+	  * @param String str	要匹配的值
+
+	  * @return	是否存在匹配值
+
+	  */
+	 public static boolean findMatchArray(String[] array, String str){
+		 boolean isMatch = false;
+		 for (int i = 0; i < array.length; i++) {
+			if(str.equals(array[i])){
+				isMatch = true;
+			}
+		 }
+		 return isMatch;
+	 }
+	
 }

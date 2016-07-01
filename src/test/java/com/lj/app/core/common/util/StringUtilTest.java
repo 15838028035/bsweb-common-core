@@ -167,10 +167,10 @@ public class StringUtilTest {
 	}
 	
 	@Test
-	public void toStringListTest() {
-		assertTrue(StringUtil.toStringList(null).size()==0);
-		assertTrue(StringUtil.toStringList("a").size()==1);
-		assertTrue(StringUtil.toStringList("a,b").size()==2);
+	public void splitStringToStringListTest() {
+		assertTrue(StringUtil.splitStringToStringList(null).size()==0);
+		assertTrue(StringUtil.splitStringToStringList("a").size()==1);
+		assertTrue(StringUtil.splitStringToStringList("a,b").size()==2);
 	}
 	
 	@Test
@@ -184,4 +184,10 @@ public class StringUtilTest {
 		assertEquals("a",StringUtil.trimBlank(" a "));
 	}
 
+	@Test
+	public void toStringTest() {
+		assertEquals("",StringUtil.toString(null));
+		assertEquals("",StringUtil.toString(" "));
+		assertEquals("abc",StringUtil.toString(" abc"));
+	}
 }

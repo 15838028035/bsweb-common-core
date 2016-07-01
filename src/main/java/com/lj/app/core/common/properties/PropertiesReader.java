@@ -290,6 +290,6 @@ public class PropertiesReader {
 	 */
 	public static List<String> getPropertyList(String key) {
 		String value = StringUtil.trimBlank(getProperty(key));
-		return StringUtil.toStringList(value);
+		return StringUtil.splitStringToStringList(value);
 	}
 }
