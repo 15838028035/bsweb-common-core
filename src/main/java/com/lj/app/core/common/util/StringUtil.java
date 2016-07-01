@@ -688,4 +688,28 @@ public class StringUtil {
 	    return stringBuffer.toString();
 	}
 
+	/**
+	 * 转换成list数组
+	 * @param str
+	 * @return
+	 */
+	public static List<String> toStringList(String str) {
+		str = trimBlank(str);
+		String []strArray =  str.split(",");
+		
+		List<String> strList = new ArrayList<String>();
+		for(String strObj: strArray) {
+			strList.add(strObj);
+		}
+		return strList;
+	}
+	
+	/**
+	 * 去除空格
+	 * @param str
+	 * @return
+	 */
+	public static String trimBlank(String str) {
+		return str == null ?"":str.trim();
+	}
 }

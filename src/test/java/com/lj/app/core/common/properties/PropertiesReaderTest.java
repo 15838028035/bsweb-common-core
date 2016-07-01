@@ -317,4 +317,17 @@ public class PropertiesReaderTest {
 		assertNull(PropertiesReader.getRequiredProperty("keyNotFound"));
 	}
 
+	@Test
+	public void getPropertyArrayTest() {
+		PropertiesReader.setProperty("keyA", "a,b");
+		assertEquals("a",PropertiesReader.getPropertyArray("keyA")[0]);
+		assertEquals("b",PropertiesReader.getPropertyArray("keyA")[1]);
+	}
+	
+	@Test
+	public void getPropertyListTest() {
+		PropertiesReader.setProperty("keyA", "a,b");
+		assertEquals("a",PropertiesReader.getPropertyList("keyA").get(0));
+		assertEquals("b",PropertiesReader.getPropertyList("keyA").get(1));
+	}
 }

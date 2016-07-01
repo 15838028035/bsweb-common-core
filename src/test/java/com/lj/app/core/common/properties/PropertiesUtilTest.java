@@ -296,4 +296,18 @@ public class PropertiesUtilTest {
 		String msg = PropertiesUtil.getMessage("fileName", "key");
 		assertEquals("key",msg);
 	}
+	
+	@Test
+	public void getPropertyArrayTest() {
+		PropertiesUtil.setProperty("keyA", "a,b");
+		assertEquals("a",PropertiesUtil.getPropertyArray("keyA")[0]);
+		assertEquals("b",PropertiesUtil.getPropertyArray("keyA")[1]);
+	}
+	
+	@Test
+	public void getPropertyListTest() {
+		PropertiesUtil.setProperty("keyA", "a,b");
+		assertEquals("a",PropertiesUtil.getPropertyList("keyA").get(0));
+		assertEquals("b",PropertiesUtil.getPropertyList("keyA").get(1));
+	}
 }

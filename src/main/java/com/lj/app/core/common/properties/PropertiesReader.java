@@ -2,6 +2,7 @@ package com.lj.app.core.common.properties;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -272,4 +273,23 @@ public class PropertiesReader {
 		return value;
 	}
 
+	/**
+	 * 获得字符串数组
+	 * @param key 
+	 * @return
+	 */
+	public  static String[] getPropertyArray(String key) {
+		String value = StringUtil.trimBlank(getProperty(key));
+		return value.split(",");
+	}
+	
+	/**
+	 * 获得属性列表list
+	 * @param key
+	 * @return
+	 */
+	public static List<String> getPropertyList(String key) {
+		String value = StringUtil.trimBlank(getProperty(key));
+		return StringUtil.toStringList(value);
+	}
 }

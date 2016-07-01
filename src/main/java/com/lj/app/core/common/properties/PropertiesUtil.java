@@ -98,7 +98,6 @@ public class PropertiesUtil {
 	    return  PropertiesReader.setProperty(key, String.valueOf(value));
 	}
 	
-	
 	public static boolean contains(Object value) {
 		return PropertiesReader.contains(value);
 	}
@@ -196,4 +195,21 @@ public class PropertiesUtil {
 		return PropertiesReader.getRequiredProperty(key);
 	}
 
+	/**
+	 * 获得字符串数组
+	 * @param key 
+	 * @return
+	 */
+	public  static String[] getPropertyArray(String key) {
+		return PropertiesReader.getPropertyArray(key);
+	}
+	
+	/**
+	 * 获得属性列表list
+	 * @param key
+	 * @return
+	 */
+	public static List<String> getPropertyList(String key) {
+		return PropertiesReader.getPropertyList(key);
+	}
 }

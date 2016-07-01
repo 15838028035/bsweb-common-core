@@ -1,5 +1,6 @@
 package com.lj.app.core.common.util;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -163,6 +164,24 @@ public class StringUtilTest {
 
 	@Test
 	public void toStringListOfStringStringTest() {
+	}
+	
+	@Test
+	public void toStringListTest() {
+		assertTrue(StringUtil.toStringList(null).size()==0);
+		assertTrue(StringUtil.toStringList("a").size()==1);
+		assertTrue(StringUtil.toStringList("a,b").size()==2);
+	}
+	
+	@Test
+	public void trimBlankTest() {
+		assertEquals("",StringUtil.trimBlank(null));
+		assertEquals("",StringUtil.trimBlank(""));
+		assertEquals("",StringUtil.trimBlank(" "));
+		assertEquals("a",StringUtil.trimBlank("a"));
+		assertEquals("a",StringUtil.trimBlank(" a"));
+		assertEquals("a",StringUtil.trimBlank("a "));
+		assertEquals("a",StringUtil.trimBlank(" a "));
 	}
 
 }
