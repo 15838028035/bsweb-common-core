@@ -61,5 +61,10 @@ public class BaseModelTest {
 		baseModel.setSord("sord");
 		assertEquals("sord must be sord","sord", baseModel.getSord());
 	}
+	
+	@Test
+	public void toStringTest() {
+		System.out.println(baseModel);
+	}
 
 }
