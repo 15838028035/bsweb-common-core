@@ -3,6 +3,7 @@ package com.lj.app.core.common.util;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -10,43 +11,88 @@ import org.junit.Test;
 public class StringUtilTest {
 
 	@Test
-	public void testStrToDate() {
+	public void strToDateTest() throws Exception {
+		assertNull(StringUtil.strToDate(null, null));
+		assertNotNull(StringUtil.strToDate("2016-01-02", "yyyy-MM-dd"));
+		assertNotNull(StringUtil.strToDate("2016-01-02 10:00:00", "yyyy-MM-dd HH:mm:ss"));
+		assertNotNull(StringUtil.strToDate("20160102", "yyyyMMdd"));
+		assertNotNull(StringUtil.strToDate("10:00:00", "HH:mm:ss"));
+	}
+	
+	@Test(expected = Exception.class)
+	public void strToDateExceptionTest() throws Exception {
+		assertNull(StringUtil.strToDate("2016-01-02", "bad format"));
+		assertNull(StringUtil.strToDate("2016-01-02 10:00:00", "bad format"));
+		assertNull(StringUtil.strToDate("20160102", "bad format"));
+		assertNull(StringUtil.strToDate("10:00:00", "bad format"));
 	}
 
 	@Test
-	public void testMinute2Hour() {
+	public void minute2HourTest() {
+		assertEquals("0.00",StringUtil.minute2Hour("0"));
+		assertEquals("0.25",StringUtil.minute2Hour("15"));
+		assertEquals("0.50",StringUtil.minute2Hour("30"));
+		assertEquals("0.75",StringUtil.minute2Hour("45"));
+		assertEquals("1.00",StringUtil.minute2Hour("60"));
+		assertEquals("2.00",StringUtil.minute2Hour("120"));
 	}
 
 	@Test
-	public void testUnescape() {
+	public void unescape() {
+		//TODO:test me
 	}
 
 	@Test
-	public void testGetRound() {
+	public void getRoundTest() {
+		//TODO: test me
+	}
+
+	@Test(expected = IllegalStateException.class)
+	public void strTosqlDateTest() {
+		assertNull(StringUtil.strTosqlDate(null, "yyyy-MM-dd"));
+		assertNull(StringUtil.strTosqlDate("", "yyyy-MM-dd"));
+		
+		assertNotNull(StringUtil.strTosqlDate("2016-06-10", "yyyy-MM-dd"));
+		assertNotNull(StringUtil.strTosqlDate("2016-06-10 10:00:00", "yyyy-MM-dd HH:mm:ss"));
+		
+		assertNull(StringUtil.strTosqlDate("2016-06-10", "bad format"));
+		assertNull(StringUtil.strTosqlDate("bad date", "yyyy-MM-dd"));
 	}
 
 	@Test
-	public void testStrTosqlDate() {
+	public void transArrayTest() {
+		assertEquals("a,b,c",StringUtil.transArray(("a,b,c").split(",")));
 	}
 
 	@Test
-	public void testTransArray() {
+	public void zero_StrExTest() {
+		assertEquals("00001",StringUtil.Zero_StrEx("1", 5));
+		assertEquals("00002",StringUtil.Zero_StrEx("2", 5));
+		assertEquals("00010",StringUtil.Zero_StrEx("10", 5));
+		assertEquals("00100",StringUtil.Zero_StrEx("100", 5));
+		assertEquals("01000",StringUtil.Zero_StrEx("1000", 5));
+		assertEquals("10000",StringUtil.Zero_StrEx("10000", 5));
 	}
 
 	@Test
-	public void testZero_StrEx() {
+	public void subStringFrontZeroTest() {
+		assertNull(StringUtil.subStringFrontZero(null));
+		assertEquals("",StringUtil.subStringFrontZero(""));
+		assertEquals("123",StringUtil.subStringFrontZero("12301000"));
+		assertEquals("123456",StringUtil.subStringFrontZero("123456"));
 	}
 
 	@Test
-	public void testSubStringFrontZero() {
+	public void dateRandomTest() {
+		assertTrue(StringUtil.dateRandom().length()>0);
 	}
 
 	@Test
-	public void testDateRandom() {
-	}
-
-	@Test
-	public void testJavaScriptEscape() {
+	public void javaScriptEscapeTest() {
+		assertTrue(StringUtil.javaScriptEscape("\t").contains("\\t"));
+		assertTrue(StringUtil.javaScriptEscape("\n").contains("\\n"));
+		assertTrue(StringUtil.javaScriptEscape("\t").contains("\\t"));
+		assertTrue(StringUtil.javaScriptEscape("/").contains("\\/"));
 	}
 
 	@Test
@@ -169,19 +215,50 @@ public class StringUtilTest {
 	}
 	
 	@Test
-	public void testIsInt() {
+	public void isIntTest() {
+		assertTrue(StringUtil.isInt("1"));
+		assertFalse(StringUtil.isInt("1a"));
+		assertFalse(StringUtil.isInt(null));
+		assertFalse(StringUtil.isInt(""));
+		assertFalse(StringUtil.isInt(" "));
+		assertFalse(StringUtil.isInt("1 "));
 	}
 
 	@Test
-	public void testVerifyEmail() {
+	public void verifyEmailTest() {
+		assertTrue(StringUtil.verifyEmail("zhangsan@126.com"));
+		assertTrue(StringUtil.verifyEmail("zhangsan@163.com"));
+		
+		assertTrue(StringUtil.verifyEmail(null));
+		assertTrue(StringUtil.verifyEmail(""));
+		assertFalse(StringUtil.verifyEmail(" "));
+		assertFalse(StringUtil.verifyEmail("bad email "));
 	}
 
 	@Test
-	public void testIsDate() {
+	public void isDateTest() {
+		assertTrue(StringUtil.isDate("2016-06-10", "yyyy-MM-dd"));
+		assertTrue(StringUtil.isDate("20160610", "yyyyMMdd"));
+		assertTrue(StringUtil.isDate("2016-06-10 10:00:00", "yyyy-MM-dd HH:mm:ss"));
+		assertTrue(StringUtil.isDate("2016-06-10", "bad format"));
+		
+		assertFalse(StringUtil.isDate(null, "yyyy-MM-dd"));
+		assertFalse(StringUtil.isDate("", "yyyy-MM-dd"));
+		assertFalse(StringUtil.isDate("", "yyyy-MM-dd"));
+		assertFalse(StringUtil.isDate("bad date", "yyyy-MM-dd"));
 	}
 
 	@Test
-	public void testIsNumber() {
+	public void isNumberTest() {
+		assertTrue(StringUtil.isNumber("1"));
+		assertTrue(StringUtil.isNumber("1.0f"));
+		
+		assertFalse(StringUtil.isNumber(null));
+		assertFalse(StringUtil.isNumber(""));
+		assertFalse(StringUtil.isNumber(" "));
+		assertFalse(StringUtil.isNumber("a"));
+		assertFalse(StringUtil.isNumber(" a "));
+		assertFalse(StringUtil.isNumber("1.0 "));
 	}
 
 	@Test

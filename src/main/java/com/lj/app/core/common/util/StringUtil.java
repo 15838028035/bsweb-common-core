@@ -92,7 +92,7 @@ public class StringUtil {
 
     /**
      * 
-     * 方法描述：四舍五入计算，scale为保留小数位数 ；创建人：靖永安 ； 创建日期：2012-5-7
+     * 方法描述：四舍五入计算，scale为保留小数位数 
      * 
      * @param dividend
      * @param divisor
@@ -468,8 +468,8 @@ public class StringUtil {
 	}
     
     public static  boolean isDate(String s,String format){
-		SimpleDateFormat fmt = new SimpleDateFormat(format);
 		try {
+			SimpleDateFormat fmt = new SimpleDateFormat(format);
 			fmt.parse(s);
 		} catch (ParseException e) {
 			return false;
