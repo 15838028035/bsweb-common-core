@@ -40,7 +40,7 @@ public class AppAuthorOptionOperateTest {
 
 	@Test
 	public void setTypeTest() {
-		appAuthorOptionOperate.setUrl("setType");
+		appAuthorOptionOperate.setType("setType");
 		assertEquals("setType",appAuthorOptionOperate.getType());
 	}
 

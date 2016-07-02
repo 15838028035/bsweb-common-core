@@ -1,5 +1,6 @@
 package com.lj.app.core.common.notify.email;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -12,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lj.app.bsweb.upm.user.model.UpmUser;
 import com.lj.app.core.common.util.AbstractBaseSpringTransactionTestCase;
-
-import freemarker.template.TemplateException;
 
 public class MailSenderTest extends AbstractBaseSpringTransactionTestCase{
 
@@ -57,7 +56,7 @@ public class MailSenderTest extends AbstractBaseSpringTransactionTestCase{
 		mailSender.sendMail(toAddress, subject, info, ftlName, isAsync);
 	}
 	
-	@Test(expected= Exception.class)
+	@Test
 	public void sendMailTemplateNotFoundTest() throws Exception {
 		String toAddress = "liujie09_24@163.com";
 		String subject = "testSubject";
@@ -73,6 +72,7 @@ public class MailSenderTest extends AbstractBaseSpringTransactionTestCase{
 		
 		String ftlName = "mailTestNotFound.ftl";
 		boolean isAsync = false;
+		
 		mailSender.sendMail(toAddress, subject, info, ftlName, isAsync);
 	}
 	
@@ -105,10 +105,10 @@ public class MailSenderTest extends AbstractBaseSpringTransactionTestCase{
 		assertTrue(text.contains("userName1"));
 	}
 	
-	@Test(expected= TemplateException.class)
+	@Test
 	public void getMailTextExceptionTest() {
 		Map<String, Object> info = new HashMap<String,Object>();
 		info.put("ftlName","mailExceptionTest.ftl");
-		mailSender.getMailText(info);
+		assertEquals("Mail template not found ,content must be null","",mailSender.getMailText(info));
 	}
 }

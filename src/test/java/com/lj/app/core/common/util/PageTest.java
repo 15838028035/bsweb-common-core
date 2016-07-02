@@ -80,7 +80,7 @@ public class PageTest {
 		Map<String,String> mapObj = new HashMap<String,String>();
 		
 		String pageJsonStr = page.toJsonString(mapObj);
-		String expectedPageJsonStr = "[{}]";
+		String expectedPageJsonStr = "{}";
 		assertEquals(expectedPageJsonStr, pageJsonStr);
 	}
 

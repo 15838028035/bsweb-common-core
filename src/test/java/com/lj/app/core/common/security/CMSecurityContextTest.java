@@ -3,7 +3,6 @@ package com.lj.app.core.common.security;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -23,7 +22,7 @@ public class CMSecurityContextTest {
 	@Test
 	public void setTestLoginTime() {
 		cMSecurityContext.setLoginTime("2015-10-10 10:00:00");
-		assertEquals("LoginTime must be 2015-10-10 10:00:00",cMSecurityContext.getLoginTime());
+		assertEquals("LoginTime must be 2015-10-10 10:00:00","2015-10-10 10:00:00",cMSecurityContext.getLoginTime());
 	}
 
 	@Test

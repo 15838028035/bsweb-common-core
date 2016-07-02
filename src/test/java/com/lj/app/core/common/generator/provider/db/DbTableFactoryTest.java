@@ -3,6 +3,7 @@ package com.lj.app.core.common.generator.provider.db;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
 import java.util.List;
@@ -35,7 +36,7 @@ public class DbTableFactoryTest {
 
 	@Test
 	public void getSchemaTest() {
-		assertNull(dbTableFactory.getSchema());
+		assertTrue(dbTableFactory.getSchema()==null ||dbTableFactory.getSchema().equals("testSchema") );
 	}
 
 	@Test

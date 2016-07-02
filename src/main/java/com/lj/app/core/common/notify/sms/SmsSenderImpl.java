@@ -28,6 +28,11 @@ public class SmsSenderImpl implements ISmsSender {// client
 				logger.warn("======phone number is null,not send sms======");
 				return false;
 			}
+			
+			if(StringUtil.trimBlank(content).length()>5000){
+				logger.warn("======content is to lang ,not send sms======");
+				return false;
+			}
 			//FIXME
 		} catch (Exception e) {
 			e.printStackTrace();
