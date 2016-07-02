@@ -79,9 +79,10 @@ public class DictionaryUtil {
 		
 		for (UpmDictionaryNote uapNote : entityNoteList) {
 			String typeCode = uapNote.getTypeCode();
-			UpmDictionary entity = new UpmDictionary();
-			entity.setTypeCode(typeCode);
-			List<UpmDictionary> entityList = upmDictionaryService.queryForList("select",entity);
+			Map<String,String> upmDictionaryMap = new HashMap<String,String>();
+			upmDictionaryMap.put("typeCode", typeCode);
+			
+			List<UpmDictionary> entityList = upmDictionaryService.queryForList("select",upmDictionaryMap);
 			dictionaryMap.put(typeCode, entityList);
 		}
 	}

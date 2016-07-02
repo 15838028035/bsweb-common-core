@@ -17,7 +17,7 @@ public class FieldConfigBeanTest {
 	@Test
 	public void setResultColumnTest() {
 		fieldConfigBean.setResultColumn("resultColumn");
-		assertEquals("fieldConfigBean",fieldConfigBean.getResultColumn());
+		assertEquals("resultColumn",fieldConfigBean.getResultColumn());
 	}
 
 	@Test

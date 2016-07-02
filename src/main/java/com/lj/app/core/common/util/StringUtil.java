@@ -167,24 +167,6 @@ public class StringUtil {
 
     /**
      * 
-     * 方法描述：字符串转换成long ；创建人：靖永安 ； 创建日期：2012-8-9
-     * 
-     * @param str
-     * @return
-     */
-    public static long str2Long(String str) {
-        if (str == null || "".equals(str)) {
-            return 0l;
-        }
-        try {
-            return Long.valueOf(str).longValue();
-        } catch (Exception e) {
-            return 0l;
-        }
-    }
-
-    /**
-     * 
      * 方法描述：截取字符串前面的0 ；创建人：靖永安 ； 创建日期：2012-8-9
      * 
      * @param str
@@ -331,27 +313,18 @@ public class StringUtil {
     }
 
     /**
-     * 判断字符串非空
-     */
-    public static boolean isNotBlank(String str) {
-        if (str != null && !str.trim().equals("")) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    
-    /**
-     * 判断字符串非空
-     */
-    public static boolean isNotBlank(String [] str) {
-    	if(str==null || str.length==0) {
-    		return false;
-    	}
-    	return true;
-    }
-    
+	 * 去除空格
+	 * @param str
+	 * @return
+	 */
+	public static String trimBlank(String str) {
+		return str == null ?"":str.trim();
+	}
+	
+	public static String toString(Object o) {
+		return o == null ? "" : o.toString();
+	}
+	
     /**
      * 判断字符串非空
      */
@@ -362,7 +335,108 @@ public class StringUtil {
         	 return true;
         }
     }
+    
+    /**
+     * 判断字符串数组空
+     */
+    public static boolean isBlank(String [] str) {
+    	if(str==null || str.length==0) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    /**
+     * 判断字符串非空
+     */
+    public static boolean isNotBlank(String str) {
+        if (str != null && !str.trim().equals("")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    /**
+     * 判断字符串非空
+     */
+    public static boolean isNotBlank(String [] str) {
+    	if(str==null || str.length==0) {
+    		return false;
+    	}
+    	return true;
+    }
+	
+	/**
+	 * 判断字符串是否为空
+	 * 
+	 * @param value
+	 *            字符串
+	 * @return 为空时返回true,否则返回false
+	 */
+	public static boolean isNull(String value) {
+		return (value == null || value.trim().equals(""));
+	}
 
+	/**
+	 * 判断字符串是否非空
+	 * 
+	 * @param value
+	 *            字符串
+	 * @return 非空返回true,否则返回false
+	 */
+	public static boolean isNotNull(String value) {
+		return (value != null && !value.trim().equals(""));
+	}
+
+	/**
+	 * 区分大小写判断两个字符串是否相等
+	 * 
+	 * @param value
+	 *            原字符串
+	 * @param compareValue
+	 *            被比较字符串
+	 * @return 相等返回true,否则返回false
+	 */
+	public static boolean isEqual(String value, String compareValue) {
+		return (value != null && value.equals(compareValue));
+	}
+
+	/**
+	 * 不区分大小写判断两个字符串是否相等
+	 * 
+	 * @param value
+	 *            原字符串
+	 * @param compareValue
+	 *            被比较字符串
+	 * @return 相等返回true,否则返回false
+	 */
+	public static boolean isEqualsIgnoreCase(String value, String compareValue) {
+		return (value != null && value.equalsIgnoreCase(compareValue));
+	}
+
+	/**
+	 * 判断字符串是否等于Y，不区分大小写
+	 * 
+	 * @param value
+	 *            被比较字符串
+	 * @return 等于y，返回true,否则false
+	 */
+	public static boolean isEqualsY(String value) {
+		return isEqualsIgnoreCase(value, "y");
+	}
+
+	/**
+	 * 判断字符串是否等于true，不区分大小写
+	 * 
+	 * @param value
+	 *            被比较字符串
+	 * @return 等于true，返回true,否则false
+	 */
+	public static boolean isEqualsTrue(String value) {
+		return isEqualsIgnoreCase(value, "true");
+	}
+   
     /**
      * 
      * 方法描述：判断是否是int类型 ；创建人：靖永安 ； 创建日期：2012-8-7
@@ -519,76 +593,7 @@ public class StringUtil {
 		else
 			return string;
 	}
-	
-	/**
-	 * 判断字符串是否为空
-	 * 
-	 * @param value
-	 *            字符串
-	 * @return 为空时返回true,否则返回false
-	 */
-	public static boolean isNull(String value) {
-		return (value == null || value.trim().equals(""));
-	}
 
-	/**
-	 * 判断字符串是否非空
-	 * 
-	 * @param value
-	 *            字符串
-	 * @return 非空返回true,否则返回false
-	 */
-	public static boolean isNotNull(String value) {
-		return (value != null && !value.trim().equals(""));
-	}
-
-	/**
-	 * 区分大小写判断两个字符串是否相等
-	 * 
-	 * @param value
-	 *            原字符串
-	 * @param compareValue
-	 *            被比较字符串
-	 * @return 相等返回true,否则返回false
-	 */
-	public static boolean isEqual(String value, String compareValue) {
-		return (value != null && value.equals(compareValue));
-	}
-
-	/**
-	 * 不区分大小写判断两个字符串是否相等
-	 * 
-	 * @param value
-	 *            原字符串
-	 * @param compareValue
-	 *            被比较字符串
-	 * @return 相等返回true,否则返回false
-	 */
-	public static boolean isEqualsIgnoreCase(String value, String compareValue) {
-		return (value != null && value.equalsIgnoreCase(compareValue));
-	}
-
-	/**
-	 * 判断字符串是否等于Y，不区分大小写
-	 * 
-	 * @param value
-	 *            被比较字符串
-	 * @return 等于y，返回true,否则false
-	 */
-	public static boolean isEqualsY(String value) {
-		return isEqualsIgnoreCase(value, "y");
-	}
-
-	/**
-	 * 判断字符串是否等于true，不区分大小写
-	 * 
-	 * @param value
-	 *            被比较字符串
-	 * @return 等于true，返回true,否则false
-	 */
-	public static boolean isEqualsTrue(String value) {
-		return isEqualsIgnoreCase(value, "true");
-	}
 	
 	/**
 	 * 动态添加表前缀，对没有前缀的表增加前缀
@@ -719,19 +724,6 @@ public class StringUtil {
 		return strList;
 	}
 	
-	/**
-	 * 去除空格
-	 * @param str
-	 * @return
-	 */
-	public static String trimBlank(String str) {
-		return str == null ?"":str.trim();
-	}
-	
-	public static String toString(Object o) {
-		return o == null ? "" : o.toString();
-	}
-	
 	public static String convertArrayToSplitString(Object[] array,
 			String splitStr) {
 		String toString = "";
@@ -839,7 +831,7 @@ public class StringUtil {
 		}
 		return false;
 	}
-	
+    
 	 /**
      * 将字符串转换为 int.
      * @param input 输入的字串
@@ -888,6 +880,12 @@ public class StringUtil {
         return defaultFloat;
     }
     
+    /**
+     * 将字符串转换为 float.
+     * @param input 输入的字串
+
+     * @return 结果数字
+     */
 	public static float parseFloat(Object input, float defaultFloat){
     	if(null == input){
     		return defaultFloat;
@@ -898,46 +896,8 @@ public class StringUtil {
     	return defaultFloat;
     }
 	
-	/**
-	 * 判断字符串是否全是数字字符.
-	 * 
-	 * @param input
-	 *            输入的字符串
-	 * @return 判断结果, true 为全数字, false 为还有非数字字符
-	 */
-	public static boolean isInteger(String input) {
-		if (isBlank(input)) {
-			return false;
-		}
-
-		for (int i = 0; i < input.length(); i++) {
-			char charAt = input.charAt(i);
-
-			if (!Character.isDigit(charAt)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	/**
-	 * 功能描述：浮点数字判断
-	 * 
-	 * @param str
-	 * @return
-	 */
-	public static boolean isNumeric(String str) {
-		if (str == null)
-			return false;
-		Pattern p1 = Pattern.compile("(-|[0-9])?[0-9]*(\\.?)[0-9]+"); // 非數字
-		Matcher m = p1.matcher(str);
-		boolean b = m.matches(); // matches() 尝试将整个区域与模式匹配
-		return b;
-	}
-	
-	
 	 /**
-     * 转换由表单读取的数据的内码(从 ISO8859 转换到 gb2312).
+     * 转换由表单读取的数据的内码(从 ISO8859 转换到 UTF-8).
      * 
      * @param input
      *            输入的字符串
@@ -947,14 +907,14 @@ public class StringUtil {
     public static String toChi(String input) {
         try {
             byte[] bytes = input.getBytes("ISO8859-1");
-            return new String(bytes, "GBK");
+            return new String(bytes, "UTF-8");
         } catch (Exception ex) {
         }
         return input;
     }
 
     /**
-     * 转换由表单读取的数据的内码到 ISO(从 GBK 转换到ISO8859-1).
+     * 转换由表单读取的数据的内码到 ISO(从 UTF-8 转换到ISO8859-1).
      * 
      * @param input
      *            输入的字符串
@@ -962,7 +922,7 @@ public class StringUtil {
 
      */
     public static String toISO(String input) {
-        return changeEncoding(input, "GBK", "ISO8859-1");
+        return changeEncoding(input, "UTF-8", "ISO8859-1");
     }
 
     /**

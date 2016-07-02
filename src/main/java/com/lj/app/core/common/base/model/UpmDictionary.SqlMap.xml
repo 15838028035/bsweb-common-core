@@ -103,7 +103,7 @@
 	        from upm_dictionary 
 	    ]]>
 		<include refid="dynamicWhere"/>
-		order by sortNo asc
+		order by sort_no asc
     </select>
     
     <select id="getInfoByKey" resultMap="upmDictionaryResult">

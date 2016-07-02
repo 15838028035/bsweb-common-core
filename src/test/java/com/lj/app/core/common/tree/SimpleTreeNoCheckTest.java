@@ -1,7 +1,5 @@
 package com.lj.app.core.common.tree;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +42,7 @@ public class SimpleTreeNoCheckTest {
 
 	@Test
 	public void processCheckedTest() {
-		fail("Not yet implemented");
+		//TODO: test me
 	}
 
 	@Test

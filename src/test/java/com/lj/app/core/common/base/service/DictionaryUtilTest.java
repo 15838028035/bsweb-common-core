@@ -8,8 +8,9 @@ import java.util.List;
 import org.junit.Test;
 
 import com.lj.app.core.common.base.model.UpmDictionary;
+import com.lj.app.core.common.util.AbstractBaseSpringTransactionTestCase;
 
-public class DictionaryUtilTest {
+public class DictionaryUtilTest extends AbstractBaseSpringTransactionTestCase{
 
 	@Test
 	public void getInstanceTest() {
@@ -20,19 +21,19 @@ public class DictionaryUtilTest {
 
 	@Test
 	public void typeAndDateCodeToNameTest() {
-		String typeName= DictionaryUtil.typeAndDateCodeToName("typeCode", "dataCode");
+		String typeName= DictionaryUtil.typeAndDateCodeToName("powerState", "powerState");
 		assertNotNull(typeName);
 	}
 
 	@Test
 	public void findByTypeCodeTest() {
-		UpmDictionary upmDictionary = DictionaryUtil.findDicData("typeCode", "dataCode");
+		UpmDictionary upmDictionary = DictionaryUtil.findDicData("powerState", "1");
 		assertNotNull(upmDictionary);
 	}
 
 	@Test
 	public void findDicDataTest() {
-		List<UpmDictionary> upmDictionaryList = DictionaryUtil.findByTypeCode("typeCode");
+		List<UpmDictionary> upmDictionaryList = DictionaryUtil.findByTypeCode("powerState");
 		assertNotNull(upmDictionaryList);
 	}
 

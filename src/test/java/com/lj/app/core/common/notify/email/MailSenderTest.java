@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.lj.app.bsweb.upm.user.model.UpmUser;
 import com.lj.app.core.common.util.AbstractBaseSpringTransactionTestCase;
 
+import freemarker.template.TemplateException;
+
 public class MailSenderTest extends AbstractBaseSpringTransactionTestCase{
 
 	@Autowired
@@ -65,6 +67,7 @@ public class MailSenderTest extends AbstractBaseSpringTransactionTestCase{
 		info.put("fromAddress","fromAddress");
 		info.put("sendTime","sendTime");
 		info.put("checkcode","checkcode");
+		info.put("ftlName","mailTestNotFound.ftl");
 		
 		info.put("id", "20");
 		
@@ -102,7 +105,7 @@ public class MailSenderTest extends AbstractBaseSpringTransactionTestCase{
 		assertTrue(text.contains("userName1"));
 	}
 	
-	@Test(expected= Exception.class)
+	@Test(expected= TemplateException.class)
 	public void getMailTextExceptionTest() {
 		Map<String, Object> info = new HashMap<String,Object>();
 		info.put("ftlName","mailExceptionTest.ftl");

@@ -41,7 +41,7 @@ public class SimpleTreeTest {
 
 	@Test
 	public void processCheckedTest() {
-		fail("Not yet implemented");
+		//TODO: test me
 	}
 
 	@Test

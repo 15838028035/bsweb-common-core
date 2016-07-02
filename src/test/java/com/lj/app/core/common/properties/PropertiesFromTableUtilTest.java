@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class PropertiesFromTableUtilTest {
+import com.lj.app.core.common.util.AbstractBaseSpringTransactionTestCase;
+
+public class PropertiesFromTableUtilTest extends AbstractBaseSpringTransactionTestCase {
 
 	@Test
 	public void getPropertyTest() {

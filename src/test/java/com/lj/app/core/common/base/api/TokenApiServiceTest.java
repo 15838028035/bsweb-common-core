@@ -21,6 +21,8 @@ public class TokenApiServiceTest extends AbstractBaseSpringTransactionTestCase{
 	@Test
 	public void saveTokenTest() {
 		
+		tokenApiService.delete(1);
+		
 		UpmToken upmToken = new UpmToken();
 		upmToken.setTokenId("tokenId");
 		upmToken.setId(1);

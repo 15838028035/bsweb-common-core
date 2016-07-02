@@ -23,7 +23,7 @@ public class AppConfigBeanTest {
 	@Test
 	public void setAcctTypeTest() {
 		appConfigBean.setAcctType("setAcctType");
-		assertEquals("setBatchfunc",appConfigBean.getAcctType());
+		assertEquals("setAcctType",appConfigBean.getAcctType());
 	}
 
 
@@ -131,7 +131,7 @@ public class AppConfigBeanTest {
 
 	@Test
 	public void setSubAttrIdTest() {
-		appConfigBean.setParentApp("setSubAttrId");
+		appConfigBean.setSubAttrId("setSubAttrId");
 		assertEquals("setSubAttrId",appConfigBean.getSubAttrId());
 	}
 
@@ -143,7 +143,7 @@ public class AppConfigBeanTest {
 
 	@Test
 	public void setAcctExtTest() {
-		appConfigBean.setBrotherApp("setAcctExt");
+		appConfigBean.setAcctExt("setAcctExt");
 		assertEquals("setAcctExt",appConfigBean.getAcctExt());
 	}
 
@@ -173,7 +173,7 @@ public class AppConfigBeanTest {
 
 	@Test
 	public void setAuthorServiceTest() {
-		appConfigBean.setAuthorUpdateServiceGetter("setAuthorService");
+		appConfigBean.setAuthorService("setAuthorService");
 		assertEquals("setAuthorService",appConfigBean.getAuthorService());
 	}
 

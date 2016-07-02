@@ -21,7 +21,7 @@ public class FreeMarkerTemplateUtilsTest {
 	
 	@Test
 	public void getDirectoryForTemplateLoadingTest() throws Exception {
-		File file = ResourceUtils.getFile("classpath:mailTemplate/mailTest1.ftl");
+		File file = ResourceUtils.getFile("classpath:mailTemplate");
 	    freeMarkerTemplateUtils.getDirectoryForTemplateLoading(file);
 	}
 

@@ -79,6 +79,9 @@ public class MailSender {
 		} catch (TemplateException e) {
 			e.printStackTrace();
 		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		return htmlText;
 	}
 

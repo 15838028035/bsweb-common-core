@@ -10,6 +10,7 @@
       <sqlMap resource="com/lj/app/core/common/base/model/UpmToken.SqlMap.xml"/>
       <sqlMap resource="com/lj/app/core/common/notify/model/UpmNotice.SqlMap.xml"/>
       
+      <sqlMap resource="com/lj/app/core/common/base/model/UpmConfiguration.SqlMap.xml"/>
       <sqlMap resource="com/lj/app/core/common/base/model/UpmDictionary.SqlMap.xml"/>
       <sqlMap resource="com/lj/app/core/common/base/model/UpmDictionaryNote.SqlMap.xml"/>
       

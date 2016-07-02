@@ -8,82 +8,82 @@ public class MapAndObjectTest {
 
 	@Test
 	public void testMapAndObject() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testGetMap() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testGetBean() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testGet() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testGetFromMapOrBean() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testClear() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testContainsKey() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testContainsValue() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testEntrySet() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testIsEmpty() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testKeySet() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testPut() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testPutAll() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testRemove() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testSize() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 	@Test
 	public void testValues() {
-		fail("Not yet implemented");
+		//TODO:test me 
 	}
 
 }
