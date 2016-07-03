@@ -29,13 +29,13 @@ public class PasswordCoder {
 		if (code.length() < minLen || code.length() > maxLen)
 			return false;
 
-		if (hasLowercase && !CodeUtil.containsLowercase(code))
+		if (hasLowercase && !StringUtil.containsLowercase(code))
 			return false;
-		if (hasUppercase && !CodeUtil.containsUppercase(code))
+		if (hasUppercase && !StringUtil.containsUppercase(code))
 			return false;
-		if (hasNumber && !CodeUtil.containsNumber(code))
+		if (hasNumber && !StringUtil.containsNumber(code))
 			return false;
-		if (hasSpecial && !CodeUtil.containsChar(code, specialChars))
+		if (hasSpecial && !StringUtil.containsChar(code, specialChars))
 			return false;
 
 		return true;
@@ -51,7 +51,7 @@ public class PasswordCoder {
 		List codeChars = createCodeChars();
 
 		// 2.字符集重新排序
-		codeChars = CodeUtil.randomOrder(codeChars);
+		codeChars = StringUtil.randomOrder(codeChars);
 
 		// 3.按顺序确定字符集数量
 		codeChars = calculateCodeCharQuantity(codeChars, codeLen);
@@ -64,19 +64,19 @@ public class PasswordCoder {
 		while (it.hasNext()) {
 			cc = (CodeChar) it.next();
 			if (cc.name.equals("lowercase"))
-				sb.append(CodeUtil.generateRandomLowercase(cc.quantity));
+				sb.append(StringUtil.generateRandomLowercase(cc.quantity));
 			if (cc.name.equals("uppercase"))
-				sb.append(CodeUtil.generateRandomUppercase(cc.quantity));
+				sb.append(StringUtil.generateRandomUppercase(cc.quantity));
 			if (cc.name.equals("number"))
-				sb.append(CodeUtil.generateRandomNumber(cc.quantity));
+				sb.append(StringUtil.generateRandomNumber(cc.quantity));
 			if (cc.name.equals("specialChars"))
-				sb.append(CodeUtil.generateRandomChars(specialChars,
+				sb.append(StringUtil.generateRandomChars(specialChars,
 						cc.quantity));
 		}
 		String code = sb.toString();
 
 		// 对编码重新排序
-		code = CodeUtil.randomOrder(code);
+		code = StringUtil.randomOrder(code);
 
 		return code;
 	}
@@ -138,7 +138,7 @@ public class PasswordCoder {
 				cc.quantity = codeLen - usedLen;
 				break;
 			}
-			quantity = CodeUtil.randomInt(codeLen - usedLen
+			quantity = StringUtil.randomInt(codeLen - usedLen
 					- (codeChars.size() - (i + 1)));
 			if (quantity == 0)
 				quantity = 1;

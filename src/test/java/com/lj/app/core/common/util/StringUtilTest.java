@@ -5,6 +5,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -47,7 +51,7 @@ public class StringUtilTest {
 		//TODO: test me
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void strTosqlDateTest() {
 		assertNull(StringUtil.strTosqlDate(null, "yyyy-MM-dd"));
 		assertNull(StringUtil.strTosqlDate("", "yyyy-MM-dd"));
@@ -78,7 +82,7 @@ public class StringUtilTest {
 	public void subStringFrontZeroTest() {
 		assertNull(StringUtil.subStringFrontZero(null));
 		assertEquals("",StringUtil.subStringFrontZero(""));
-		assertEquals("123",StringUtil.subStringFrontZero("12301000"));
+		assertEquals("12301000",StringUtil.subStringFrontZero("12301000"));
 		assertEquals("123456",StringUtil.subStringFrontZero("123456"));
 	}
 
@@ -235,7 +239,7 @@ public class StringUtilTest {
 		assertFalse(StringUtil.verifyEmail("bad email "));
 	}
 
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void isDateTest() {
 		assertTrue(StringUtil.isDate("2016-06-10", "yyyy-MM-dd"));
 		assertTrue(StringUtil.isDate("20160610", "yyyyMMdd"));
@@ -251,7 +255,7 @@ public class StringUtilTest {
 	@Test
 	public void isNumberTest() {
 		assertTrue(StringUtil.isNumber("1"));
-		assertTrue(StringUtil.isNumber("1.0f"));
+		assertTrue(StringUtil.isNumber("1.0L"));
 		
 		assertFalse(StringUtil.isNumber(null));
 		assertFalse(StringUtil.isNumber(""));
@@ -357,8 +361,8 @@ public class StringUtilTest {
 	
 	@Test
 	public void changeEncodingTest(){
-		assertNotNull(StringUtil.changeEncoding("a", "GBK", "ISO8859-1"));
-		assertNotNull(StringUtil.changeEncoding("你好", "GBK", "ISO8859-1"));
+		assertNotNull(StringUtil.changeEncoding("a", "UTF-8", "ISO8859-1"));
+		assertNotNull(StringUtil.changeEncoding("你好", "UTF-8", "ISO8859-1"));
 	}
 	
 	@Test
@@ -405,6 +409,154 @@ public class StringUtilTest {
 	@Test
 	public void getShortFileNameTest() {
 		//TODO:test me
+	}
+	
+	@Test
+	public void generateRandomLowercaseTest() {
+		assertTrue(StringUtil.generateRandomLowercase(5).length()==5);
+		assertTrue(StringUtil.generateRandomLowercase(6).length()==6);
+		assertTrue(StringUtil.generateRandomLowercase(7).length()==7);
+		assertTrue(StringUtil.generateRandomLowercase(8).length()==8);
+		assertTrue(StringUtil.generateRandomLowercase(9).length()==9);
+		assertTrue(StringUtil.generateRandomLowercase(10).length()==10);
+	}
+
+	@Test
+	public void generateRandomUppercaseTest() {
+		assertTrue(StringUtil.generateRandomUppercase(5).length()==5);
+		assertTrue(StringUtil.generateRandomUppercase(6).length()==6);
+		assertTrue(StringUtil.generateRandomUppercase(7).length()==7);
+		assertTrue(StringUtil.generateRandomUppercase(8).length()==8);
+		assertTrue(StringUtil.generateRandomUppercase(9).length()==9);
+		assertTrue(StringUtil.generateRandomUppercase(10).length()==10);
+	}
+
+	@Test
+	public void generateRandomNumberTest() {
+		assertTrue(StringUtil.generateRandomNumber(5).length()==5);
+		assertTrue(StringUtil.generateRandomNumber(6).length()==6);
+		assertTrue(StringUtil.generateRandomNumber(7).length()==7);
+		assertTrue(StringUtil.generateRandomNumber(8).length()==8);
+		assertTrue(StringUtil.generateRandomNumber(9).length()==9);
+		assertTrue(StringUtil.generateRandomNumber(10).length()==10);
+	}
+
+	@Test
+	public void randomTest() {
+		assertTrue(StringUtil.randomInt(10)>0);
+		assertTrue(StringUtil.randomInt(20)>0);
+		assertTrue(StringUtil.randomInt(100)>0);
+		assertTrue(StringUtil.randomInt(300)>0);
+	}
+
+	@Test
+	public void randomOrderListTest() {
+		
+		List<String> stringList = new ArrayList<String>();
+		stringList.add("a");
+		stringList.add("b");
+		
+		assertTrue(StringUtil.randomOrder(stringList).size()==2);
+	}
+
+	@Test
+	public void inCharSetTest() {
+		assertTrue(StringUtil.inCharSet('c', "abc"));
+		assertTrue(StringUtil.inCharSet('c', "abcd"));
+		assertFalse(StringUtil.inCharSet('c', "ab"));
+		assertFalse(StringUtil.inCharSet('c', null));
+		assertFalse(StringUtil.inCharSet('c', ""));
+		assertFalse(StringUtil.inCharSet('c', " "));
+		assertFalse(StringUtil.inCharSet('c', "abC"));
+		assertFalse(StringUtil.inCharSet('c', "abCd"));
+	}
+
+	@Test
+	public void containsCharTest() {
+		assertTrue(StringUtil.containsChar("a", StringUtil.LOWERCASE_CHARS));
+		assertTrue(StringUtil.containsChar("b", StringUtil.LOWERCASE_CHARS));
+		assertTrue(StringUtil.containsChar("c", StringUtil.LOWERCASE_CHARS));
+		
+		assertFalse(StringUtil.containsChar("A", StringUtil.LOWERCASE_CHARS));
+		assertFalse(StringUtil.containsChar("B", StringUtil.LOWERCASE_CHARS));
+		assertFalse(StringUtil.containsChar("C", StringUtil.LOWERCASE_CHARS));
+		assertFalse(StringUtil.containsChar("1", StringUtil.LOWERCASE_CHARS));
+		assertFalse(StringUtil.containsChar("2", StringUtil.LOWERCASE_CHARS));
+		assertFalse(StringUtil.containsChar("3", StringUtil.LOWERCASE_CHARS));
+		assertFalse(StringUtil.containsChar(null, StringUtil.LOWERCASE_CHARS));
+		assertFalse(StringUtil.containsChar("", StringUtil.LOWERCASE_CHARS));
+		assertFalse(StringUtil.containsChar(" ", StringUtil.LOWERCASE_CHARS));
+	}
+
+	@Test
+	public void containsLowercaseTest() {
+		assertTrue(StringUtil.containsLowercase("a"));
+		assertTrue(StringUtil.containsLowercase("b"));
+		assertTrue(StringUtil.containsLowercase("c"));
+		
+		assertFalse(StringUtil.containsLowercase("A"));
+		assertFalse(StringUtil.containsLowercase("B"));
+		assertFalse(StringUtil.containsLowercase("C"));
+		assertFalse(StringUtil.containsLowercase("1"));
+		assertFalse(StringUtil.containsLowercase("2"));
+		assertFalse(StringUtil.containsLowercase("3"));
+		assertFalse(StringUtil.containsLowercase(null));
+		assertFalse(StringUtil.containsLowercase(""));
+		assertFalse(StringUtil.containsLowercase(" "));
+	}
+
+	@Test
+	public void containsUppercaseTest() {
+		assertTrue(StringUtil.containsUppercase("A"));
+		assertTrue(StringUtil.containsUppercase("B"));
+		assertTrue(StringUtil.containsUppercase("C"));
+		
+		assertFalse(StringUtil.containsUppercase("a"));
+		assertFalse(StringUtil.containsUppercase("b"));
+		assertFalse(StringUtil.containsUppercase("c"));
+		assertFalse(StringUtil.containsUppercase("1"));
+		assertFalse(StringUtil.containsUppercase("2"));
+		assertFalse(StringUtil.containsUppercase("3"));
+		
+		
+		assertFalse(StringUtil.containsUppercase(null));
+		assertFalse(StringUtil.containsUppercase(""));
+		assertFalse(StringUtil.containsUppercase(" "));
+	}
+
+	@Test
+	public void containsNumberTest() {
+		assertTrue(StringUtil.containsNumber("1"));
+		assertTrue(StringUtil.containsNumber("2"));
+		assertTrue(StringUtil.containsNumber("3"));
+		
+		assertFalse(StringUtil.containsNumber("A"));
+		assertFalse(StringUtil.containsNumber("B"));
+		assertFalse(StringUtil.containsNumber("C"));
+		assertFalse(StringUtil.containsNumber("a"));
+		assertFalse(StringUtil.containsNumber("b"));
+		assertFalse(StringUtil.containsNumber("c"));
+		assertFalse(StringUtil.containsNumber(null));
+		assertFalse(StringUtil.containsNumber(""));
+		assertFalse(StringUtil.containsNumber(" "));
+	}
+
+	@Test
+	public void generateRandomCharsTest() {
+		assertTrue(StringUtil.generateRandomChars("abcdefg",3).length()==3);
+		assertTrue(StringUtil.generateRandomChars("abcdefg",4).length()==4);
+		assertTrue(StringUtil.generateRandomChars("abcdefg",5).length()==5);
+		assertTrue(StringUtil.generateRandomChars("abcdefg",6).length()==6);
+	}
+
+	@Test
+	public void randomOrderTest() {
+		assertTrue(StringUtil.randomOrder("abcdef").length()==6);
+		assertTrue(StringUtil.randomOrder("abcdfe").length()==6);
+		assertTrue(StringUtil.randomOrder("abcefd").length()==6);
+		assertTrue(StringUtil.randomOrder("abcedf").length()==6);
+		assertTrue(StringUtil.randomOrder("bacdef").length()==6);
+		assertTrue(StringUtil.randomOrder("badcef").length()==6);
 	}
 
 }
