@@ -1,5 +1,7 @@
 package com.lj.app.core.common.util;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -1424,5 +1426,42 @@ public class StringUtil {
 
 	public static String generateRandomNumber(int n) {
 		return generateRandomChars(NUMBER_CHARS, n);
+	}
+	
+	/**
+	 * 显示实体类的属性和方法
+	 * @param o
+	 * @return
+	 */
+	public static String props(Object o) {
+		String toString = "";
+		Class cls = o.getClass();
+		String className = "";
+		className = cls.getName();
+		toString = "**** " + className + " attribute list begin **\r\n";
+		while (cls != null) {
+			Method[] mth = cls.getDeclaredMethods();
+			Field[] fd = cls.getDeclaredFields();
+			try {
+				for (int i = 0; i < mth.length; i++) {
+					String str = mth[i].getName();
+					if (str.startsWith("g")) {
+						for (int k = 0; k < fd.length; k++) {
+							String st = fd[k].getName();
+							if (str.toLowerCase().indexOf(st.toLowerCase()) > 0) {
+								toString = toString + st + "==="
+										+ mth[i].invoke(o, null) + "\r\n";
+							}
+						}
+					}
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			cls = cls.getSuperclass();
+		}
+		toString = toString + "** " + className
+				+ " attribute list end *****\r\n";
+		return toString;
 	}
 }

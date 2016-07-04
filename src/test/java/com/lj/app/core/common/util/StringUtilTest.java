@@ -5,12 +5,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import com.lj.app.core.common.base.model.BaseModel;
 
 public class StringUtilTest {
 
@@ -559,4 +560,8 @@ public class StringUtilTest {
 		assertTrue(StringUtil.randomOrder("badcef").length()==6);
 	}
 
+	@Test
+	public void propsTest() {
+		System.out.println(StringUtil.props(new BaseModel()));
+	}
 }
