@@ -77,6 +77,8 @@ public class StringUtilTest {
 		assertEquals("00100",StringUtil.Zero_StrEx("100", 5));
 		assertEquals("01000",StringUtil.Zero_StrEx("1000", 5));
 		assertEquals("10000",StringUtil.Zero_StrEx("10000", 5));
+		
+		assertEquals("50000",StringUtil.Zero_StrEx("10000", 4));
 	}
 
 	@Test
@@ -101,15 +103,23 @@ public class StringUtilTest {
 	}
 
 	@Test
-	public void testGetStrLength() {
+	public void getStrLengthTest() {
+		assertTrue(StringUtil.getStrLength(null)==0);
+		assertTrue(StringUtil.getStrLength("")==0);
+		assertTrue(StringUtil.getStrLength(" ")==1);
+		assertTrue(StringUtil.getStrLength("a")==1);
+		assertTrue(StringUtil.getStrLength("ab")==2);
+		assertTrue(StringUtil.getStrLength("abc")==3);
+		assertTrue(StringUtil.getStrLength("Ab")==2);
+		assertTrue(StringUtil.getStrLength("a中")==3);
+		assertTrue(StringUtil.getStrLength("a中 ")==4);
 	}
 
 	@Test
-	public void testGetRow() {
-	}
-
-	@Test
-	public void testGetLengthString() {
+	public void getRowTest() {
+		assertTrue(StringUtil.getRow(10, 5)==2);
+		assertTrue(StringUtil.getRow(10, 10)==1);
+		assertTrue(StringUtil.getRow(10, 3)==4);
 	}
 
 	@Test
@@ -287,10 +297,13 @@ public class StringUtilTest {
 	}
 
 	@Test
-	public void testToUpper() {
+	public void toUpperTest() {
+		assertEquals("A",StringUtil.toUpper("a"));
+		assertEquals("A",StringUtil.toUpper("A"));
+		assertEquals("",StringUtil.toUpper(""));
+		assertEquals(" ",StringUtil.toUpper(" "));
+		assertEquals(null,StringUtil.toUpper(null));
 	}
-	
-	
 
 	@Test
 	public void testAddPrefix() {

@@ -260,9 +260,8 @@ public class StringUtil {
      * @return int int
      */
     public static int getStrLength(String str) {
-        // String str = "中国chinese";
         int length = 0;
-        for (int i = 0; i < str.length(); i++) {
+        for (int i = 0; str!=null && i < str.length(); i++) {
             if (str.substring(i, i + 1).matches("[\\u4e00-\\u9fa5]+")) {
                 length = length + 2;
             } else {
