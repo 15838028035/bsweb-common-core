@@ -12,7 +12,7 @@ public class CurrentDb {
 	public String getCurrentDb() {
 		String db = "";
 		if (this.driverClass.contains("oracle")) {
-			db = "";
+			db = "oracle";
 		}
 		if (this.driverClass.contains("sybase")) {
 			db = "sybase";

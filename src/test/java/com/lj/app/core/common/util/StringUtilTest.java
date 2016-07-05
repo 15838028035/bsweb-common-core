@@ -78,7 +78,7 @@ public class StringUtilTest {
 		assertEquals("01000",StringUtil.Zero_StrEx("1000", 5));
 		assertEquals("10000",StringUtil.Zero_StrEx("10000", 5));
 		
-		assertEquals("50000",StringUtil.Zero_StrEx("10000", 4));
+		assertEquals("10000",StringUtil.Zero_StrEx("10000", 4));
 	}
 
 	@Test
@@ -152,6 +152,12 @@ public class StringUtilTest {
 	}
 	
 	@Test
+	public void isBlankArrayTest() {
+		assertTrue(StringUtil.isBlank(new String[0]));
+		assertFalse(StringUtil.isBlank(("a,b,c").split(",")));
+	}
+	
+	@Test
 	public void isNotBlankTest() {
 		assertFalse(StringUtil.isNotBlank(""));
 		assertFalse(StringUtil.isNotBlank(" "));
@@ -159,6 +165,12 @@ public class StringUtilTest {
 		assertTrue(StringUtil.isNotBlank("t"));
 		
 		assertTrue(StringUtil.isNotBlank(("a,b,c").split(",")));
+	}
+	
+	@Test
+	public void isNotBlankArrayTest() {
+		assertFalse(StringUtil.isNotBlank(new String[0]));
+		assertTrue(StringUtil.isBlank(("a,b,c").split(",")));
 	}
 
 	@Test
