@@ -17,16 +17,6 @@ public class FileUtil {
 
 	}
 
-	public static String getFileExt(File f) {
-		String ext = null;
-		String s = f.getName();
-		int i = s.lastIndexOf('.');
-		if (i > 0 && i < s.length() - 1) {
-			ext = s.substring(i + 1).toLowerCase();
-		}
-		return ext;
-	}
-
 	public static void createFile(InputStream in, String filePath) {
 		if (in == null)
 			throw new RuntimeException("create file error: inputstream is null");
@@ -173,19 +163,6 @@ public class FileUtil {
 	}
 
 	/**
-	 * 得到文件的扩展名
-	 * 
-	 * @param fileName
-	 * @return
-	 */
-	public static String getFileExt(String fileName) {
-
-		int potPos = fileName.lastIndexOf('.') + 1;
-		String type = fileName.substring(potPos, fileName.length());
-		return type;
-	}
-
-	/**
 	 * 通过File对象创建文件
 	 * 
 	 * @param file
@@ -224,7 +201,6 @@ public class FileUtil {
 		InputStream stream = getResourceAsStream(resource);
 		String content = readStreamToString(stream);
 		return content;
-
 	}
 
 	public static InputStream getResourceAsStream(String resource) {
