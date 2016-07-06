@@ -1,6 +1,7 @@
 package com.lj.app.core.common.util;
 
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -32,13 +33,28 @@ public class DateUtilTest {
 	}
 
 	@Test
-	public void formatDateStringStringTest() {
+	public void formatDateTest() {
+		assertEquals("2015-10-01",(DateUtil.formatDate(DateUtil.formatDate("2015-10-01", "yyyy-MM-dd"), "yyyy-MM-dd")));
+		assertEquals("2015-10-01 00:00:00",(DateUtil.formatDate(DateUtil.formatDate("2015-10-01", "yyyy-MM-dd"), "yyyy-MM-dd HH:mm:ss")));
+		assertEquals("00:00:00",(DateUtil.formatDate(DateUtil.formatDate("2015-10-01", "yyyy-MM-dd"), "HH:mm:ss")));
+		
+		assertEquals(null,(DateUtil.formatDate(DateUtil.formatDate("2015-10-01", "yyyy-MM-dd"), "bad format")));
 	}
 
 	@Test
 	public void formatDateDateTest() {
-		Date date = DateUtil.formatDate("2015-10-01 10:00:00", "yyyy-MM-dd HH:mm:ss");
-		assertNotNull(date);
+		assertNotNull(DateUtil.formatDate("2015-10-01", "yyyy-MM-dd"));
+		assertNotNull(DateUtil.formatDate("2015-10-01 10:00:00", "yyyy-MM-dd HH:mm:ss"));
+		assertNotNull(DateUtil.formatDate("10:00:00", "HH:mm:ss"));
+		
+		assertNull(DateUtil.formatDate("", "yyyy-MM-dd"));
+		assertNull(DateUtil.formatDate(" ", "yyyy-MM-dd"));
+		assertNull(DateUtil.formatDate("bad date", "yyyy-MM-dd"));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void formatDateDateExceptionTest() {
+		assertNull(DateUtil.formatDate("2015-10-01 10:00:00", "bad format"));
 	}
 	
 	@Test(expected = IllegalArgumentException.class)

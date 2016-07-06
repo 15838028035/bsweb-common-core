@@ -48,9 +48,9 @@ public class DateUtil {
 	 * @return
 	 */
 	public static Date formatDate(String date, String format) {
-		SimpleDateFormat sd = new SimpleDateFormat(format);
 		Date d = null;
 		try {
+			SimpleDateFormat sd = new SimpleDateFormat(format);
 			d = sd.parse(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -67,8 +67,13 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String formatDate(Date date, String format) {
+		try{
 		SimpleDateFormat sDateFormat = new SimpleDateFormat(format);
 		return sDateFormat.format(date);
+		}catch(Exception e) {
+			
+		}
+		return null;
 	}
 
 	public static int getIntervalDays(Date fDate, Date oDate) {
