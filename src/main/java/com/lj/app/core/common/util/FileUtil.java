@@ -3,6 +3,7 @@ package com.lj.app.core.common.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,19 +49,15 @@ public class FileUtil {
 
 	/**
 	 * 是否是允许上传文件
+	 * 允许上传文件格式是GIF,JPG,BMP,SWF,JPEG,PNG
 	 * 
 	 * @param ex
 	 * @return
 	 */
-	public static boolean isAllowUp(String logoFileName) {
+	public static boolean isAllowUp(String fileName) {
 		String allowTYpe = "GIF,JPG,BMP,SWF,JPEG,PNG";
-		if (!logoFileName.trim().equals("") && logoFileName.length() > 0) {
-			String ex = logoFileName.substring(
-					logoFileName.lastIndexOf(".") + 1, logoFileName.length());
-			// return allowTYpe.toString().indexOf(ex) >= 0;
-			// lzf edit 20110717
-			// 解决只认小写问题
-			// 同时加入jpeg扩展名/png扩展名
+		if (StringUtil.isNotBlank(fileName)) {
+			String ex = StringUtil.getExtension(fileName).toUpperCase();
 			return allowTYpe.indexOf(ex.toUpperCase()) >= 0;
 		} else {
 			return false;
@@ -82,9 +79,14 @@ public class FileUtil {
 			out.write(fileContent);
 
 			out.close();
-		} catch (IOException ex) {
-
-			System.err.println("Create File Error!");
+		} catch (FileNotFoundException ex) {
+			System.err.println("FileNotFoundException File Error!");
+			ex.printStackTrace();
+		}catch (IOException ex) {
+			System.err.println("IOException File Error!");
+			ex.printStackTrace();
+		}catch (Exception ex) {
+			System.err.println("Exception File Error!");
 			ex.printStackTrace();
 		}
 	}
@@ -140,9 +142,13 @@ public class FileUtil {
 		}
 	}
 
+	/**
+	 * 判断文件是否存在
+	 * @param filepath
+	 * @return
+	 */
 	public static boolean exist(String filepath) {
 		File file = new File(filepath);
-
 		return file.exists();
 	}
 
@@ -251,6 +257,8 @@ public class FileUtil {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+		}else {
+			FileUtil.delete(path.getAbsolutePath());
 		}
 
 	}
