@@ -1,6 +1,9 @@
 package com.lj.app.core.common.util;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,12 +11,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.URLEncoder;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 
 public class FileUtil {
 
+	private static final int BUFFER_SIZE = 16 * 1024;
+	
 	private FileUtil() {
 
 	}
@@ -274,6 +282,32 @@ public class FileUtil {
 		}
 	}
 
+	public static void copyFile(File src, File dst) {  
+        try {  
+            InputStream in = null;  
+            OutputStream out = null;  
+            try {  
+                in = new BufferedInputStream(new FileInputStream(src),  
+                        BUFFER_SIZE);  
+                out = new BufferedOutputStream(new FileOutputStream(dst),  
+                        BUFFER_SIZE);  
+                byte[] buffer = new byte[BUFFER_SIZE];  
+                while (in.read(buffer) > 0) {  
+                    out.write(buffer);  
+                }  
+            } finally {  
+                if (null != in) {  
+                    in.close();  
+                }  
+                if (null != out) {  
+                    out.close();  
+                }  
+            }  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+ }
+	
 	public static void copyFolder(String sourceFolder, String destinationFolder) {
 		try {
 			File sourceF = new File(sourceFolder);
@@ -287,4 +321,39 @@ public class FileUtil {
 
 	}
 
+	/**
+	 * 下载文件
+	 * @param filename  文件名称
+	 * @param filepath 文件路径
+	 * @throws Exception 异常信息
+	 */
+	public static void downloadFile(String filename,String filepath) throws Exception {
+		 download(filepath,  filename,  ServletActionContext.getResponse().getOutputStream());
+	}
+
+	/**
+	 * 下载文件
+	 * @param filepath  文件路径
+	 * @param filedisplay 文件显示名称
+	 * @param out  输出流
+	 * @throws IOException IO异常
+	 */
+	public static  void download(String filepath, String filedisplay, OutputStream out)
+			throws IOException {
+		File f = new File(filepath);
+		FileInputStream in = new FileInputStream(f);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] b = new byte[MagicNumber.INT_2048];
+		int i = 0;
+		while ((i = in.read(b)) != -1) {
+			baos.write(b, 0, i);
+		}
+
+		ServletActionContext.getResponse().setContentType("bin");
+		filedisplay = URLEncoder.encode(filedisplay, "UTF-8");
+		ServletActionContext.getResponse().addHeader("Content-Disposition",
+				"attachment;filename=" + filedisplay);
+		baos.writeTo(out);
+		out.flush();
+	}
 }

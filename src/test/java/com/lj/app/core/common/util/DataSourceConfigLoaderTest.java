@@ -10,6 +10,8 @@ public class DataSourceConfigLoaderTest {
 	public void getPropertiesConfigTest() throws Exception {
 		assertEquals("dev",DataSourceConfigLoader.getPropertiesConfig(false, "devMode"));
 		assertEquals("sysadmin",DataSourceConfigLoader.getPropertiesConfig(true, "password"));
+		assertEquals(null,DataSourceConfigLoader.getPropertiesConfig(false, "keyNotFound"));
+		assertEquals(null,DataSourceConfigLoader.getPropertiesConfig(true, "keyNotFound"));
 	}
-
+	
 }
