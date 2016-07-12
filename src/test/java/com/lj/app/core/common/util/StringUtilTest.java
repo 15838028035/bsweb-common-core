@@ -17,7 +17,6 @@ public class StringUtilTest {
 
 	@Test
 	public void strToDateTest() throws Exception {
-		assertNull(StringUtil.strToDate(null, null));
 		assertNotNull(StringUtil.strToDate("2016-01-02", "yyyy-MM-dd"));
 		assertNotNull(StringUtil.strToDate("2016-01-02 10:00:00", "yyyy-MM-dd HH:mm:ss"));
 		assertNotNull(StringUtil.strToDate("20160102", "yyyyMMdd"));
@@ -147,8 +146,6 @@ public class StringUtilTest {
 		assertTrue(StringUtil.isBlank(" "));
 		assertFalse(StringUtil.isBlank(" a"));
 		assertFalse(StringUtil.isBlank("t"));
-		
-		assertFalse(StringUtil.isBlank(("a,b,c").split(",")));
 	}
 	
 	@Test
@@ -163,8 +160,6 @@ public class StringUtilTest {
 		assertFalse(StringUtil.isNotBlank(" "));
 		assertTrue(StringUtil.isNotBlank(" a"));
 		assertTrue(StringUtil.isNotBlank("t"));
-		
-		assertTrue(StringUtil.isNotBlank(("a,b,c").split(",")));
 	}
 	
 	@Test
@@ -179,6 +174,26 @@ public class StringUtilTest {
 		assertTrue(StringUtil.isNull(" "));
 		assertFalse(StringUtil.isNull(" a"));
 		assertFalse(StringUtil.isNull("t"));
+	}
+	
+	@Test
+	public void isNullObjectTest() {
+		assertTrue(StringUtil.isNullObject(null));
+		assertFalse(StringUtil.isNullObject(""));
+		assertFalse(StringUtil.isNullObject(" "));
+		assertFalse(StringUtil.isNullObject("a"));
+		assertFalse(StringUtil.isNullObject("a "));
+		assertFalse(StringUtil.isNullObject("A "));
+	}
+	
+	@Test
+	public void isNotNullObjectTest() {
+		assertTrue(StringUtil.isNotNullObject(""));
+		assertTrue(StringUtil.isNotNullObject(" "));
+		assertTrue(StringUtil.isNotNullObject("a"));
+		assertTrue(StringUtil.isNotNullObject("a "));
+		assertTrue(StringUtil.isNotNullObject("A "));
+		assertFalse(StringUtil.isNotNullObject(null));
 	}
 
 	@Test
@@ -262,23 +277,36 @@ public class StringUtilTest {
 		assertFalse(StringUtil.verifyEmail("bad email "));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test
 	public void isDateTest() {
 		assertTrue(StringUtil.isDate("2016-06-10", "yyyy-MM-dd"));
 		assertTrue(StringUtil.isDate("20160610", "yyyyMMdd"));
 		assertTrue(StringUtil.isDate("2016-06-10 10:00:00", "yyyy-MM-dd HH:mm:ss"));
-		assertTrue(StringUtil.isDate("2016-06-10", "bad format"));
-		
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void isDateException1Test() {
 		assertFalse(StringUtil.isDate(null, "yyyy-MM-dd"));
 		assertFalse(StringUtil.isDate("", "yyyy-MM-dd"));
-		assertFalse(StringUtil.isDate("", "yyyy-MM-dd"));
+		assertFalse(StringUtil.isDate(" ", "yyyy-MM-dd"));
 		assertFalse(StringUtil.isDate("bad date", "yyyy-MM-dd"));
+		
+		assertTrue(StringUtil.isDate("2016-06-10", "bad format"));
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void isDateException2Test() {
+		assertFalse(StringUtil.isDate("", "yyyy-MM-dd"));
+		assertFalse(StringUtil.isDate(" ", "yyyy-MM-dd"));
+		assertFalse(StringUtil.isDate("bad date", "yyyy-MM-dd"));
+		
+		assertTrue(StringUtil.isDate("2016-06-10", "bad format"));
 	}
 
 	@Test
 	public void isNumberTest() {
 		assertTrue(StringUtil.isNumber("1"));
-		assertTrue(StringUtil.isNumber("1.0L"));
+		assertFalse(StringUtil.isNumber("1.0L"));
 		
 		assertFalse(StringUtil.isNumber(null));
 		assertFalse(StringUtil.isNumber(""));
@@ -289,7 +317,13 @@ public class StringUtilTest {
 	}
 
 	@Test
-	public void testVerifyIdCardNo() {
+	public void verifyIdCardNoTest() {
+		assertFalse(StringUtil.verifyIdCardNo(null));
+		assertFalse(StringUtil.verifyIdCardNo(""));
+		assertFalse(StringUtil.verifyIdCardNo(" "));
+		assertFalse(StringUtil.verifyIdCardNo("abc"));
+		assertFalse(StringUtil.verifyIdCardNo("abcdef"));
+		assertTrue(StringUtil.verifyIdCardNo("411224198608786717"));
 	}
 
 	@Test
@@ -297,11 +331,42 @@ public class StringUtilTest {
 	}
 
 	@Test
-	public void testVerifyLoginName() {
+	public void verifyLoginNameTest() {
+		assertTrue(StringUtil.verifyLoginName("zhan"));
+		assertTrue(StringUtil.verifyLoginName("zhansan"));
+		assertTrue(StringUtil.verifyLoginName("lisi"));
+		assertTrue(StringUtil.verifyLoginName("12345678123456781234567812345678"));
+		
+		assertTrue(StringUtil.verifyLoginName("敏捷开发"));
+		assertTrue(StringUtil.verifyLoginName("设计模式"));
+		
+		assertFalse(StringUtil.verifyLoginName(null));
+		assertFalse(StringUtil.verifyLoginName(""));
+		assertFalse(StringUtil.verifyLoginName(" "));
+		assertFalse(StringUtil.verifyLoginName("123"));
+		assertFalse(StringUtil.verifyLoginName("abc"));
+		assertFalse(StringUtil.verifyLoginName("张三"));
+		assertFalse(StringUtil.verifyLoginName("李四"));
+		assertFalse(StringUtil.verifyLoginName("张三三"));
 	}
 
 	@Test
-	public void testVerifyMobile() {
+	public void verifyMobileTest() {
+		assertFalse(StringUtil.verifyMobile(null));
+		assertFalse(StringUtil.verifyMobile(""));
+		assertFalse(StringUtil.verifyMobile(" "));
+		assertFalse(StringUtil.verifyMobile("abc"));
+		assertFalse(StringUtil.verifyMobile("abcdef"));
+		assertFalse(StringUtil.verifyMobile("1234567891a"));
+		assertFalse(StringUtil.verifyMobile("02345678912"));
+		assertFalse(StringUtil.verifyMobile("03345678912"));
+		assertFalse(StringUtil.verifyMobile("033456789abc"));
+		
+		assertTrue(StringUtil.verifyMobile("15838028035"));
+		assertTrue(StringUtil.verifyMobile("13466788891"));
+		assertTrue(StringUtil.verifyMobile("14233456789"));
+		assertTrue(StringUtil.verifyMobile("14233456788"));
+		assertTrue(StringUtil.verifyMobile("14233456786"));
 	}
 
 	@Test
@@ -322,7 +387,9 @@ public class StringUtilTest {
 	}
 
 	@Test
-	public void testDelSqlComment() {
+	public void delSqlCommentTest() {
+		assertEquals("select * from talbe1", StringUtil.delSqlComment("select * from talbe1"));
+		assertEquals("select *  from talbe2", StringUtil.delSqlComment("select * /*this is a comment*/ from talbe2"));
 	}
 
 	@Test
@@ -347,16 +414,71 @@ public class StringUtilTest {
 		String splitString ="abcdefgh";
 		assertTrue(StringUtil.splitString(splitString, 2).size()>0);
 	}
-
-	@Test
-	public void toStringListOfStringStringTest() {
-	}
 	
 	@Test
 	public void splitStringToStringListTest() {
 		assertTrue(StringUtil.splitStringToStringList(null).size()==1);
 		assertTrue(StringUtil.splitStringToStringList("a").size()==1);
 		assertTrue(StringUtil.splitStringToStringList("a,b").size()==2);
+		
+		assertEquals("a",StringUtil.splitStringToStringList("a,b,c").get(0));
+		assertEquals("b",StringUtil.splitStringToStringList("a,b,c").get(1));
+		assertEquals("c",StringUtil.splitStringToStringList("a,b,c").get(2));
+		
+		assertEquals("",StringUtil.splitStringToStringList(",a,b,c").get(0));
+		assertEquals("a",StringUtil.splitStringToStringList(",a,b,c").get(1));
+		assertEquals("b",StringUtil.splitStringToStringList(",a,b,c").get(2));
+		assertEquals("c",StringUtil.splitStringToStringList(",a,b,c").get(3));
+	}
+	
+	@Test
+	public void convertArrayToSplitStringTest() {
+		assertEquals("a",StringUtil.stringToArray("a,b,c", ",")[0]);
+		assertEquals("b",StringUtil.stringToArray("a,b,c", ",")[1]);
+		assertEquals("c",StringUtil.stringToArray("a,b,c", ",")[2]);
+		
+		assertEquals("a",StringUtil.stringToArray(",a,b,c", ",")[0]);
+		assertEquals("b",StringUtil.stringToArray(",a,b,c", ",")[1]);
+		assertEquals("c",StringUtil.stringToArray(",a,b,c", ",")[2]);
+		
+		assertEquals("a,b,c",StringUtil.convertArrayToSplitString(StringUtil.stringToArray("a,b,c", ","), ","));
+		assertEquals("a,b,c",StringUtil.convertArrayToSplitString(StringUtil.stringToArray(",a,b,c", ","), ","));
+	}
+	
+	@Test
+	public void convertArrayToSplitString2Test() {
+		assertEquals("a",StringUtil.stringToArray("a,b,c", ",")[0]);
+		assertEquals("b",StringUtil.stringToArray("a,b,c", ",")[1]);
+		assertEquals("c",StringUtil.stringToArray("a,b,c", ",")[2]);
+		
+		assertEquals("a",StringUtil.stringToArray(",a,b,c", ",")[0]);
+		assertEquals("b",StringUtil.stringToArray(",a,b,c", ",")[1]);
+		assertEquals("c",StringUtil.stringToArray(",a,b,c", ",")[2]);
+		
+		assertEquals("'a','b','c'",StringUtil.convertArrayToSplitString2(StringUtil.stringToArray("a,b,c", ","), ","));
+		assertEquals("'a','b','c'",StringUtil.convertArrayToSplitString2(StringUtil.stringToArray(",a,b,c", ","), ","));
+	}
+	
+	@Test
+	public void stringToArrayTest(){
+		assertEquals("a",StringUtil.stringToArray("a,b,c", ",")[0]);
+		assertEquals("b",StringUtil.stringToArray("a,b,c", ",")[1]);
+		assertEquals("c",StringUtil.stringToArray("a,b,c", ",")[2]);
+		
+		assertEquals("a",StringUtil.stringToArray(",a,b,c", ",")[0]);
+		assertEquals("b",StringUtil.stringToArray(",a,b,c", ",")[1]);
+		assertEquals("c",StringUtil.stringToArray(",a,b,c", ",")[2]);
+	}
+	
+	@Test
+	public void getStringByArrayTest() {
+		assertEquals("abc",StringUtil.getStringByArray(StringUtil.stringToArray("a,b,c", ",")));
+		assertEquals("abc",StringUtil.getStringByArray(StringUtil.stringToArray(",a,b,c", ",")));
+		assertEquals("abc",StringUtil.getStringByArray(StringUtil.stringToArray("a,b,c,", ",")));
+		assertEquals("abc",StringUtil.getStringByArray(StringUtil.stringToArray(",a,b,c,", ",")));
+		
+		assertEquals("",StringUtil.getStringByArray(null));
+		assertEquals(",a,b,c,",StringUtil.getStringByArray(StringUtil.stringToArray(",a,b,c,", ";")));
 	}
 	
 	@Test
@@ -364,6 +486,11 @@ public class StringUtilTest {
 		assertEquals(1,StringUtil.parseInt("1", 3));
 		assertEquals(3,StringUtil.parseInt("1a", 3));
 		assertEquals(3,StringUtil.parseInt(" 1 ", 3));
+		
+		assertEquals(3,StringUtil.parseInt(null, 3));
+		assertEquals(3,StringUtil.parseInt("", 3));
+		assertEquals(3,StringUtil.parseInt(" ", 3));
+		assertEquals(3,StringUtil.parseInt("a ", 3));
 	}
 	
 	@Test
@@ -412,6 +539,26 @@ public class StringUtilTest {
 		assertEquals("java",StringUtil.getExtension("1.java"));
 		assertEquals("js",StringUtil.getExtension("1.js"));
 		assertEquals("jsp",StringUtil.getExtension("1.jsp"));
+		
+		assertEquals("xls",StringUtil.getExtension("e://test//1.xls"));
+		assertEquals("xlsx",StringUtil.getExtension("e://test////1.xlsx"));
+		assertEquals("doc",StringUtil.getExtension("1.doc"));
+		assertEquals("docx",StringUtil.getExtension("e://test//1.docx"));
+		assertEquals("pdf",StringUtil.getExtension("e://test//1.pdf"));
+		assertEquals("jpg",StringUtil.getExtension("e://test//1.jpg"));
+		assertEquals("gif",StringUtil.getExtension("e://test//1.gif"));
+		assertEquals("png",StringUtil.getExtension("e://test//1.png"));
+		assertEquals("text",StringUtil.getExtension("e://test//1.text"));
+		assertEquals("txt",StringUtil.getExtension("e://test//1.txt"));
+		assertEquals("sql",StringUtil.getExtension("e://test//1.sql"));
+		assertEquals("java",StringUtil.getExtension("e://test//1.java"));
+		assertEquals("js",StringUtil.getExtension("e://test//1.js"));
+		assertEquals("jsp",StringUtil.getExtension("e://test//1.jsp"));
+		
+		assertEquals("",StringUtil.getExtension(null));
+		assertEquals("",StringUtil.getExtension(""));
+		assertEquals("",StringUtil.getExtension(" "));
+		assertEquals("",StringUtil.getExtension("a"));
 	}
 	
 	@Test
@@ -588,5 +735,11 @@ public class StringUtilTest {
 	@Test
 	public void propsTest() {
 		System.out.println(StringUtil.props(new BaseModel()));
+	}
+	
+	
+	@Test
+	public void getStrSplitWithCharTest() {
+		//TODO:test me
 	}
 }

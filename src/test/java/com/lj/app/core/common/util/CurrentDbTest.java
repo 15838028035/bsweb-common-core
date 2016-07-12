@@ -13,6 +13,7 @@ public class CurrentDbTest {
 	public void setUp()  {
 		currentDb = new CurrentDb();
 	}
+	
 	@Test
 	public void setDriverClassTest() {
 		currentDb.setDriverClass(CurrentDb.ORACLE);
@@ -25,6 +26,20 @@ public class CurrentDbTest {
 		assertEquals(CurrentDb.SQLSERVER,currentDb.getCurrentDb());
 		currentDb.setDriverClass(CurrentDb.MYSQL);
 		assertEquals(CurrentDb.MYSQL,currentDb.getCurrentDb());
+	}
+	
+	@Test
+	public void getDriverClassTest() {
+		currentDb.setDriverClass(CurrentDb.ORACLE);
+		assertEquals(CurrentDb.ORACLE,currentDb.getDriverClass());
+		currentDb.setDriverClass(CurrentDb.SYBASE);
+		assertEquals(CurrentDb.SYBASE,currentDb.getDriverClass());
+		currentDb.setDriverClass(CurrentDb.DB2);
+		assertEquals(CurrentDb.DB2,currentDb.getDriverClass());
+		currentDb.setDriverClass(CurrentDb.SQLSERVER);
+		assertEquals(CurrentDb.SQLSERVER,currentDb.getDriverClass());
+		currentDb.setDriverClass(CurrentDb.MYSQL);
+		assertEquals(CurrentDb.MYSQL,currentDb.getDriverClass());
 	}
 
 }

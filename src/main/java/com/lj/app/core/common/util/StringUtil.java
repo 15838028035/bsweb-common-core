@@ -17,6 +17,8 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.lj.app.core.common.properties.PropertiesUtil;
 
 /**
@@ -29,12 +31,15 @@ public class StringUtil {
 	public static final String LOWERCASE_CHARS = "abcdefghijklmnopqrstuvwxyz";
 	public static final String NUMBER_CHARS = "0123456789";
 	
-    public static Date strToDate(String s_DateStr, String s_FormatStr) throws Exception {
-        if (null == s_DateStr) {
-            return null;
-        }
-        SimpleDateFormat vDf = new SimpleDateFormat(s_FormatStr);
-        return vDf.parse(s_DateStr);
+	/**
+	 * 格式化日期字符串为日期
+	 * @param dateStr
+	 * @param dateFormat
+	 * @return
+	 * @throws Exception
+	 */
+    public static Date strToDate(String dateStr, String dateFormat) throws Exception {
+        return DateUtil.formatDate(dateStr, dateFormat);
     }
 
     /**
@@ -110,14 +115,13 @@ public class StringUtil {
     }
 
     public static java.sql.Date strTosqlDate(String s_DateStr, String s_FormatStr) {
-        if (null == s_DateStr || "".equals(s_DateStr)) {
+        if (StringUtil.isBlank(s_DateStr)) {
             return null;
         }
-
-        SimpleDateFormat vDf = new SimpleDateFormat(s_FormatStr);
         Date rl;
         try {
-            rl = vDf.parse(s_DateStr);
+        	SimpleDateFormat sdf = new SimpleDateFormat(s_FormatStr);
+            rl = sdf.parse(s_DateStr);
         } catch (ParseException e) {
             return null;
         }
@@ -372,6 +376,28 @@ public class StringUtil {
     	return true;
     }
 	
+    /**
+	 * 判断对象是否为空
+	 * 
+	 * @param value
+	 *            字符串
+	 * @return 为空时返回true,否则返回false
+	 */
+	public static boolean isNullObject(Object value) {
+		return (value == null);
+	}
+	
+	 /** 
+	  * 判断对象是否为空
+	 * 
+	 * @param value
+	 *            字符串
+	 * @return 为空时返回true,否则返回false
+	 */
+	public static boolean isNotNullObject(Object value) {
+		return (value != null);
+	}
+	
 	/**
 	 * 判断字符串是否为空
 	 * 
@@ -499,13 +525,12 @@ public class StringUtil {
 	 * @return
 	 */
 	public static  boolean verifyIdCardNo(String idCardNo){
-		if(null == idCardNo || idCardNo.equals("")){
+		if(StringUtil.isBlank(idCardNo)){
 			return false;
 		}else{
 			String idcard  = "^\\d{15}(\\d{2}[0-9xX])?$";   
 			Pattern pattern = Pattern.compile(idcard);   
-			boolean tf = pattern.matcher(idCardNo).matches();
-			return tf;
+			return  pattern.matcher(idCardNo).matches();
 		}
 	}
 	
@@ -538,7 +563,7 @@ public class StringUtil {
 	 */
 	public static  boolean verifyLoginName(String loginName){
 		int length = 32;
-		if(loginName==null ||"".equals(loginName)){
+		if(StringUtil.isBlank(loginName)){
 			return false;
 		}else if(loginName.length()>length ||loginName.length()<4){
 			return false;
@@ -555,7 +580,7 @@ public class StringUtil {
 	 * @return
 	 */
 	public static boolean verifyMobile(String mobile){
-		if(mobile==null || mobile.length()!=11){
+		if(StringUtils.isBlank(mobile)|| mobile.length()!=11){
 			return false;
 		}else if(!isNumber(mobile)){
 			return false;
@@ -729,6 +754,12 @@ public class StringUtil {
 		return strList;
 	}
 	
+	/**
+	 * 将数组键转为为字符串,以分隔符分割开来,分割后的字符串不加单引号
+	 * @param array
+	 * @param splitStr
+	 * @return
+	 */
 	public static String convertArrayToSplitString(Object[] array,
 			String splitStr) {
 		String toString = "";
@@ -741,6 +772,12 @@ public class StringUtil {
 		return toString;
 	}
 
+	/**
+	 * 将数组键转为为字符串,以分隔符分割开来,分割后的字符串加单引号
+	 * @param array
+	 * @param splitStr
+	 * @return
+	 */
 	public static String convertArrayToSplitString2(Object[] array,
 			String splitStr) {
 		String toString = "";
@@ -753,25 +790,19 @@ public class StringUtil {
 		return toString;
 	}
 
-	public static String[] divideString(String source, String divideFlag) {
-		if (source == null) {
-			return null;
-		}
-		if (source.equals("")) {
-			return new String[] { "" };
-		}
-		if (source == null || source.equals("")) {
-			return new String[] { source };
-		}
-		StringTokenizer st = new StringTokenizer(source, divideFlag);
-		int count = st.countTokens();
-		String apple[] = new String[count];
-		for (int ii = 0; ii < count; ii++) {
-			apple[ii] = st.nextToken();
-		}
-		return apple;
-	}
-
+	/**
+	 * 将字符串分割为字符串数组
+	 * 
+	 * 	assertEquals("b",StringUtil.stringToArray("a,b,c", ",")[1]);
+		assertEquals("c",StringUtil.stringToArray("a,b,c", ",")[2]);
+		
+		assertEquals("a",StringUtil.stringToArray(",a,b,c", ",")[0]);
+		assertEquals("b",StringUtil.stringToArray(",a,b,c", ",")[1]);
+		assertEquals("c",StringUtil.stringToArray(",a,b,c", ",")[2]);
+	 * @param str
+	 * @param separators
+	 * @return
+	 */
 	public static final String[] stringToArray(String str, String separators) {
 		StringTokenizer tokenizer;
 		String[] array = null;
@@ -795,6 +826,11 @@ public class StringUtil {
 		return array;
 	}
 	
+	/**
+	 * 获得字符串数组的字符形式
+	 * @param values
+	 * @return
+	 */
 	public final static String getStringByArray(String[] values) {
 		StringBuffer valueStr = new StringBuffer();
 		if (StringUtil.isNotBlank(values)) {
@@ -837,21 +873,6 @@ public class StringUtil {
 		return false;
 	}
     
-	 /**
-     * 将字符串转换为 int.
-     * @param input 输入的字串
-
-     * @param defautlInt :           
-     * @return 结果数字
-     */
-    public static int parseInt(String input, int defaultInt) {
-        try {
-            return Integer.parseInt(input);
-        } catch (Exception e) {
-        }
-        return defaultInt;
-    }
-    
     /**
      * 将字符串转换为 int.
      * @param input 输入的字串
@@ -860,29 +881,14 @@ public class StringUtil {
      * @return 结果数字
      */
     public static int parseInt(Object input, int defaultInt) {
+    	
         try {
-        	if(null == input){
-        		return 0;
-        	}else{
-        		 return Integer.parseInt(input.toString());
-        	}
+    		if(StringUtil.isNotNullObject(input)){
+    			return Integer.parseInt(input.toString());
+    		}
         } catch (Exception e) {
         }
         return defaultInt;
-    }
-
-    /**
-     * 将字符串转换为 float.
-     * @param input 输入的字串
-
-     * @return 结果数字
-     */
-    public static float parseFloat(String input, float defaultFloat) {
-        try {
-            return Float.parseFloat(input);
-        } catch (Exception e) {
-        }
-        return defaultFloat;
     }
     
     /**
@@ -892,12 +898,13 @@ public class StringUtil {
      * @return 结果数字
      */
 	public static float parseFloat(Object input, float defaultFloat){
-    	if(null == input){
-    		return defaultFloat;
-    	}
     	try{
-    		return Float.parseFloat(input.toString());
-    	}catch(Exception ex){}
+    		if(StringUtil.isNotNullObject(input)){
+    			return Float.parseFloat(input.toString());
+    		}
+    	}catch(Exception ex){
+    		
+    	}
     	return defaultFloat;
     }
 	
