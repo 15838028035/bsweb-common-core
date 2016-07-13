@@ -42,11 +42,6 @@ public class StringUtilTest {
 	}
 
 	@Test
-	public void unescape() {
-		//TODO:test me
-	}
-
-	@Test
 	public void getRoundTest() {
 		//TODO: test me
 	}
@@ -61,11 +56,6 @@ public class StringUtilTest {
 		
 		assertNull(StringUtil.strTosqlDate("2016-06-10", "bad format"));
 		assertNull(StringUtil.strTosqlDate("bad date", "yyyy-MM-dd"));
-	}
-
-	@Test
-	public void transArrayTest() {
-		assertEquals("a,b,c",StringUtil.transArray(("a,b,c").split(",")));
 	}
 
 	@Test
@@ -91,14 +81,6 @@ public class StringUtilTest {
 	@Test
 	public void dateRandomTest() {
 		assertTrue(StringUtil.dateRandom().length()>0);
-	}
-
-	@Test
-	public void javaScriptEscapeTest() {
-		assertTrue(StringUtil.javaScriptEscape("\t").contains("\\t"));
-		assertTrue(StringUtil.javaScriptEscape("\n").contains("\\n"));
-		assertTrue(StringUtil.javaScriptEscape("\t").contains("\\t"));
-		assertTrue(StringUtil.javaScriptEscape("/").contains("\\/"));
 	}
 
 	@Test
@@ -370,10 +352,6 @@ public class StringUtilTest {
 	}
 
 	@Test
-	public void testIncreaseWithout4() {
-	}
-
-	@Test
 	public void toUpperTest() {
 		assertEquals("A",StringUtil.toUpper("a"));
 		assertEquals("A",StringUtil.toUpper("A"));
@@ -384,12 +362,6 @@ public class StringUtilTest {
 
 	@Test
 	public void testAddPrefix() {
-	}
-
-	@Test
-	public void delSqlCommentTest() {
-		assertEquals("select * from talbe1", StringUtil.delSqlComment("select * from talbe1"));
-		assertEquals("select *  from talbe2", StringUtil.delSqlComment("select * /*this is a comment*/ from talbe2"));
 	}
 
 	@Test
@@ -498,6 +470,8 @@ public class StringUtilTest {
 		assertTrue(Float.parseFloat("1")==StringUtil.parseFloat("1", 3.0f));
 		assertTrue(Float.parseFloat("3.0")==StringUtil.parseFloat("1a", 3.0f));
 		assertTrue(Float.parseFloat("1.0")==StringUtil.parseFloat(" 1 ", 3.0f));
+		
+		assertTrue(3.0==StringUtil.parseFloat(null, 3.0f));
 	}
 	
 	@Test
@@ -514,13 +488,26 @@ public class StringUtilTest {
 	
 	@Test
 	public void changeEncodingTest(){
+		assertEquals(null,StringUtil.changeEncoding(null, "UTF-8", "ISO8859-1"));
+		assertEquals("",StringUtil.changeEncoding("", "UTF-8", "ISO8859-1"));
+		assertEquals(" ",StringUtil.changeEncoding(" ", "UTF-8", "ISO8859-1"));
+		assertEquals("  ",StringUtil.changeEncoding("  ", "UTF-8", "ISO8859-1"));
+		
 		assertNotNull(StringUtil.changeEncoding("a", "UTF-8", "ISO8859-1"));
 		assertNotNull(StringUtil.changeEncoding("你好", "UTF-8", "ISO8859-1"));
+		
+		assertNotNull(StringUtil.changeEncoding("你好", "UTF-8", "bad encoding"));
 	}
 	
 	@Test
 	public void replaceTest() {
+		assertEquals("ABcdefABAd",StringUtil.replace("abcdefABAd", "ab", "AB"));
+		assertEquals("abCDefABAd",StringUtil.replace("abcdefABAd", "cd", "CD"));
+		assertEquals("abcdEEABAd",StringUtil.replace("abcdefABAd", "ef", "EE"));
+		assertEquals("abcdefABAd",StringUtil.replace("abcdefABAd", "Ab", "fg"));
+		assertEquals("abcfgfABAd",StringUtil.replace("abcdefABAd", "de", "fg"));
 		
+		assertEquals(null,StringUtil.replace(null, "de", "fg"));
 	}
 	
 	@Test
@@ -559,6 +546,7 @@ public class StringUtilTest {
 		assertEquals("",StringUtil.getExtension(""));
 		assertEquals("",StringUtil.getExtension(" "));
 		assertEquals("",StringUtil.getExtension("a"));
+		assertEquals("",StringUtil.getExtension("a."));
 	}
 	
 	@Test
@@ -577,6 +565,25 @@ public class StringUtilTest {
 		assertEquals("12",StringUtil.getPrefix("12.java"));
 		assertEquals("13",StringUtil.getPrefix("13.js"));
 		assertEquals("14",StringUtil.getPrefix("14.jsp"));
+		
+		assertEquals("1",StringUtil.getPrefix("e://test//1.xls"));
+		assertEquals("2",StringUtil.getPrefix("e://test//2.xlsx"));
+		assertEquals("3",StringUtil.getPrefix("e://test//3.doc"));
+		assertEquals("4",StringUtil.getPrefix("e://test//4.docx"));
+		assertEquals("5",StringUtil.getPrefix("e://test//5.pdf"));
+		assertEquals("6",StringUtil.getPrefix("e://test//6.jpg"));
+		assertEquals("7",StringUtil.getPrefix("e://test//7.gif"));
+		assertEquals("8",StringUtil.getPrefix("e://test//8.png"));
+		assertEquals("9",StringUtil.getPrefix("e://test//9.text"));
+		assertEquals("10",StringUtil.getPrefix("e://test//10.txt"));
+		assertEquals("11",StringUtil.getPrefix("e://test//11.sql"));
+		assertEquals("12",StringUtil.getPrefix("e://test//12.java"));
+		assertEquals("13",StringUtil.getPrefix("e://test//13.js"));
+		assertEquals("14",StringUtil.getPrefix("e://test//14.jsp"));
+		
+		assertEquals("",StringUtil.getPrefix(null));
+		assertEquals("1",StringUtil.getPrefix("e://test//test1//"));
+		
 	}
 	
 	@Test
@@ -733,13 +740,23 @@ public class StringUtilTest {
 	}
 
 	@Test
+	public void htmlEscapeTest(){
+		assertEquals("a&lt;br/&gt;",StringUtil.htmlEscape("a<br/>"));
+	}
+	
+	@Test
+	public void escapeSqlTest(){
+		assertEquals("SELECT * FROM TABLE1",StringUtil.escapeSql("SELECT * FROM TABLE1"));
+	}
+	
+	@Test
+	public void escapeJavaScriptTest(){
+		assertEquals("<script>a<\\/script>",StringUtil.escapeJavaScript("<script>a</script>"));
+	}
+	
+	@Test
 	public void propsTest() {
 		System.out.println(StringUtil.props(new BaseModel()));
 	}
 	
-	
-	@Test
-	public void getStrSplitWithCharTest() {
-		//TODO:test me
-	}
 }

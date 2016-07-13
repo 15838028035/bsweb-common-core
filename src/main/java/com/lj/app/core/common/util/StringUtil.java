@@ -7,19 +7,16 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
-
-import com.lj.app.core.common.properties.PropertiesUtil;
+import org.springframework.web.util.HtmlUtils;
 
 /**
  * 
@@ -55,53 +52,6 @@ public class StringUtil {
     }
 
     /**
-     * 把汉字转成16进制
-     * 
-     * @param src
-     * @return
-     */
-    public static String unescape(String src) {
-        if (src == null)
-            return null;
-
-        // src.replaceAll("(", "%u0178j");
-        // src.replaceAll(")", "%CA%BA");
-        try {
-            StringBuffer tmp = new StringBuffer();
-            tmp.ensureCapacity(src.length());
-            int lastPos = 0, pos = 0;
-            char ch;
-            while (lastPos < src.length()) {
-                pos = src.indexOf("%", lastPos);
-                if (pos == lastPos) {
-                    if (src.charAt(pos + 1) == 'u') {
-                        ch = (char) Integer.parseInt(src.substring(pos + 2, pos + 6), 16);
-                        tmp.append(ch);
-                        lastPos = pos + 6;
-                    } else {
-                        ch = (char) Integer.parseInt(src.substring(pos + 1, pos + 3), 16);
-                        tmp.append(ch);
-                        lastPos = pos + 3;
-                    }
-                } else {
-                    if (pos == -1) {
-                        tmp.append(src.substring(lastPos));
-                        lastPos = src.length();
-                    } else {
-                        tmp.append(src.substring(lastPos, pos));
-                        lastPos = pos;
-                    }
-                }
-            }
-            return tmp.toString();
-        }
-
-        catch (Exception e) {
-            return src;
-        }
-    }
-
-    /**
      * 
      * 方法描述：四舍五入计算，scale为保留小数位数 
      * 
@@ -127,30 +77,6 @@ public class StringUtil {
         }
         return new java.sql.Date(rl.getTime());
 
-    }
-
-    /**
-     * 把数组中数据转换为字符串用逗号分开.
-     * 
-     * @param orderId
-     *            String[]
-     * @return String
-     */
-    public static String transArray(String[] orderId) {
-        String orderIds = "";
-        int size = 0;
-        if (null != orderId && orderId.length > 0) {
-            size = orderId.length;
-            System.err.println("orderId=" + orderId.length);
-            for (int i = 0; i < orderId.length; i++) {
-                orderIds += orderId[i];
-                if (i + 1 != size) {
-                    orderIds += ',';
-                }
-            }
-        }
-        System.err.println("orderIds==" + orderIds);
-        return orderIds;
     }
 
     /**
@@ -212,48 +138,6 @@ public class StringUtil {
         random.setSeed(999L);
         String randomStr = String.valueOf(Math.abs(random.nextInt()));
         return timeStr + randomStr;
-    }
-
-    /**
-     * javascript字符转义.
-     * 
-     * @param input
-     *            input
-     * @return String String
-     */
-    public static String javaScriptEscape(String input) {
-        if (input == null) {
-            return input;
-        }
-        StringBuffer filtered = new StringBuffer(input.length());
-        char prevChar = '\u0000';
-        char c;
-        for (int i = 0; i < input.length(); i++) {
-            c = input.charAt(i);
-            if (c == '"') {
-                filtered.append("\\\"");
-            } else if (c == '\'') {
-                filtered.append("\\'");
-            } else if (c == '\\') {
-                filtered.append("\\\\");
-            } else if (c == '\t') {
-                filtered.append("\\t");
-            } else if (c == '\n') {
-                if (prevChar != '\r') {
-                    filtered.append("\\n");
-                }
-            } else if (c == '\r') {
-                filtered.append("\\n");
-            } else if (c == '\f') {
-                filtered.append("\\f");
-            } else if (c == '/') {
-                filtered.append("\\/");
-            } else {
-                filtered.append(c);
-            }
-            prevChar = c;
-        }
-        return filtered.toString();
     }
 
     /**
@@ -595,27 +479,6 @@ public class StringUtil {
 			return tag;
 		}
 	}
-	
-	/**
-	 * 过滤带4的自增序列
-	 * 
-	 * @param index
-	 * @return
-	 */
-	public static  int increaseWithout4(int index) {
-		if (PropertiesUtil.getProperty("increasewithout4") != null
-				&& PropertiesUtil.getProperty("increasewithout4").equals("1")
-				&& String.valueOf(index).indexOf("4") != -1) {
-			int length = String.valueOf(index).length();
-			int index4 = String.valueOf(index).indexOf("4");
-			int inc = 1;
-			for (int i = 0; i < length - (index4 + 1); i++) {
-				inc = inc * 10;
-			}
-			index = index + inc;
-		}
-		return index;
-	}
 
 	public static String toUpper(String string){
 		if(isNotBlank(string))
@@ -644,19 +507,6 @@ public class StringUtil {
 			result = prefix + table;
 
 		return result;
-	}
-	
-	/**
-	 * 去掉sql的注释
-	 */
-	public static String delSqlComment(String content) {
-		String pattern = "/\\*(.|[\r\n])*?\\*/";
-		Pattern p = Pattern.compile(pattern, 2 | Pattern.DOTALL);
-		Matcher m = p.matcher(content);
-		if (m.find()) {
-			content = m.replaceAll("");
-		}
-		return content;
 	}
 
 	/**
@@ -840,38 +690,6 @@ public class StringUtil {
 		}
 		return valueStr.toString();
 	}
-
-	public static String delEnter(String str) {
-		String finalStr = "";
-		if (str == null || str.equals("")) {
-			return str;
-		}
-		for (int ii = 0; ii < str.length(); ii++) {
-			if ((str.charAt(ii) != 13) && (str.charAt(ii) != 10)) {
-				finalStr += str.charAt(ii);
-			}
-		} // end for
-		return finalStr;
-	}
-
-	/**
-	 * 判断字符串childStr是否包含在字符串allStr中
-	 * 
-	 * @param allStr
-	 * @param childStr
-	 * @return
-	 */
-	public static  boolean isInclude(String allStr, String childStr) {
-		if (isBlank(allStr) || isBlank(childStr))
-			return false;
-		String[] arr = allStr.split(",");
-		for (int i = 0; i < arr.length; i++) {
-			if (childStr.equals(arr[i])) {
-				return true;
-			}
-		}
-		return false;
-	}
     
     /**
      * 将字符串转换为 int.
@@ -951,7 +769,7 @@ public class StringUtil {
 
      */
     public static String changeEncoding(String input, String sourceEncoding, String targetEncoding) {
-        if (input == null || input.equals("")) {
+        if (StringUtil.isBlank(input)) {
             return input;
         }
 
@@ -1125,71 +943,6 @@ public class StringUtil {
     	}
     	return result;	
     } 
-    
-    /**
-   	 *截取字符串
-
-   	 *@param input : 传入字符串
-
-   	 *@param regex : 切割字符串的字符串，或者正则表达式
-   	 *@param index : 切割字符串后的字符串数组，返回改数组的对应下标的字符串
-
-   	 */
-       public static String splitStr(String input, String regex, int index){
-       	if(isBlank(input)){
-   			return "";
-   		}else{
-   			if(isBlank(regex))
-   				regex = "=";
-   			if(isBlank(index+""))
-   				index = 1;
-   			String[] temp = input.split(regex);
-   			if(temp.length == 1)
-   				return input;
-   			else
-   				return temp[index];
-   		}
-       }
-       
-       public static String spliptListToString(List<Map<String, Object>> list, String column) {
-   		if(null == list || list.size() == 0){
-   			return "";
-   		}
-   		StringBuffer sb = new StringBuffer();
-   		Map<String, Object> map = null;
-   		for(int i=0; i<list.size(); i++){
-   			map = list.get(i);
-   			if(null == map.get(column))
-   				continue;
-   			sb.append(map.get(column));
-   			sb.append(",");
-   		}
-   		int index = sb.lastIndexOf(",");
-       	if(index != -1){
-       		sb.delete(index, sb.length());
-       	}
-       	return sb.toString();
-   		
-   	}
-       
-   /**
-    * 去除Map中value的空格
-
-    * @param map
-    * @return
-    */
-   public static Map<String,Object> toTrim(Map<String,Object> map){
-   	if(map == null){
-   		return null;
-   	}
-   	Map<String,Object> m = map;
-   	Iterator i = m.entrySet().iterator();
-   	while(i.hasNext()){
-   		Map.Entry entry =  (Entry) i.next();
-   		entry.setValue(StringUtil.trimBlank(String.valueOf(entry.getValue())));
-   	}
-   	return m;
-   }
      
    /**
     * 将list元素转换成“col1,col2”形式
@@ -1225,20 +978,6 @@ public class StringUtil {
    		}
    	}
    	return sb.toString();
-   }
-   
-   /**
-    * 去除List中Map的value的空格
-
-    * @param map
-    * @return
-    */
-   public static List<Map<String,Object>> toTrim(List<Map<String,Object>> map){
-   	List<Map<String,Object>> list = map;
-   	for(int i=0;i<list.size();i++){
-   		toTrim(list.get(i));
-   	}
-   	return list;
    }
    
    /**
@@ -1432,6 +1171,18 @@ public class StringUtil {
 
 	public static String generateRandomNumber(int n) {
 		return generateRandomChars(NUMBER_CHARS, n);
+	}
+	
+	public static String htmlEscape(String str) {
+		return HtmlUtils.htmlEscape(str);
+	}
+	
+	public static String escapeSql(String str) {
+		return StringEscapeUtils.escapeSql(str);
+	}
+	
+	public static String escapeJavaScript(String str) {
+		return StringEscapeUtils.escapeJavaScript(str);
 	}
 	
 	/**
