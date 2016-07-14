@@ -2,6 +2,7 @@ package com.lj.app.core.common.generator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,8 @@ import com.lj.app.core.common.generator.provider.db.DbTableFactory;
 import com.lj.app.core.common.generator.provider.db.model.Table;
 import com.lj.app.core.common.generator.provider.java.model.JavaClass;
 import com.lj.app.core.common.generator.util.BeanHelper;
+import com.lj.app.core.common.generator.util.ClassHelper;
+import com.lj.app.core.common.generator.util.GLogger;
 import com.lj.app.core.common.generator.util.StringHelper;
 
 public class GeneratorFacade {
@@ -133,6 +136,7 @@ public class GeneratorFacade {
 			Map filePathModel = new HashMap();
 			filePathModel.putAll(GeneratorProperties.getProperties());
 			filePathModel.putAll(BeanHelper.describe(table));
+			filePathModel.putAll(getShareVars());
 			return new GeneratorModel(templateModel, filePathModel);
 		}
 
@@ -144,7 +148,37 @@ public class GeneratorFacade {
 			Map filePathModel = new HashMap();
 			filePathModel.putAll(GeneratorProperties.getProperties());
 			filePathModel.putAll(BeanHelper.describe(clazz));
+			filePathModel.putAll(getShareVars());
 			return new GeneratorModel(templateModel, filePathModel);
 		}
 	}
+	
+	public static Map getShareVars() {
+		Map templateModel = new HashMap();
+		templateModel.putAll(System.getProperties());
+		templateModel.putAll(GeneratorProperties.getProperties());
+		templateModel.put("env", System.getenv());
+		templateModel.put("now", new Date());
+		templateModel.put(GeneratorConstants.DATABASE_TYPE.code, GeneratorProperties.getDatabaseType(GeneratorConstants.DATABASE_TYPE.code));
+		templateModel.putAll(GeneratorContext.getContext());
+		templateModel.putAll(getToolsMap());
+		return templateModel;
+		}
+
+		/** 得到模板可以引用的工具类  */
+		private static Map getToolsMap() {
+		    Map toolsMap = new HashMap();
+		    String[] tools = GeneratorProperties.getStringArray(GeneratorConstants.GENERATOR_TOOLS_CLASS);
+		    for(String className : tools) {
+		        try {
+		            Object instance = ClassHelper.newInstance(className);
+		            toolsMap.put(Class.forName(className).getSimpleName(), instance);
+		            GLogger.debug("put tools class:"+className+" with key:"+Class.forName(className).getSimpleName());
+		        }catch(Exception e) {
+		            GLogger.error("cannot load tools by className:"+className+" cause:"+e);
+		        }
+		    }
+		    return toolsMap;
+		}
+
 }
