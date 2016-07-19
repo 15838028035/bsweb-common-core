@@ -1,7 +1,6 @@
 package com.lj.app.core.common.util;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
@@ -76,7 +75,7 @@ public class EncodeUtilTest {
 
 	@Test
 	public void xmlUnescapeTest() {
-		String xmlUnescape = EncodeUtil.htmlUnescape("xmlUnescape");
+		String xmlUnescape = EncodeUtil.xmlUnescape("xmlUnescape");
 		assertEquals("xmlUnescape",xmlUnescape);
 	}
 

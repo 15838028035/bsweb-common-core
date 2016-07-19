@@ -2,8 +2,6 @@ package com.lj.app.core.common.notify.email;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.mail.MessagingException;
@@ -17,13 +15,12 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.util.ResourceUtils;
 
+import com.lj.app.core.common.freeMarker.FreeMarkerTemplateUtils;
 import com.lj.app.core.common.notify.model.UpmNotice;
 import com.lj.app.core.common.notify.service.UpmNoticeService;
 import com.lj.app.core.common.properties.PropertiesUtil;
-import com.lj.app.core.common.util.ClassUtil;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -65,6 +62,7 @@ public class MailSender {
 
 		Template template = null;
 		try {
+			info.putAll(FreeMarkerTemplateUtils.getShareVars());
 			
 			File file = ResourceUtils.getFile("classpath:" +(info.get(MAILT_EMPLATE_DIR)==null?MAILT_EMPLATE_DIR:info.get(MAILT_EMPLATE_DIR)));
 			
@@ -94,6 +92,8 @@ public class MailSender {
 	 */
 	protected void sendMailBySynchronizationMode(Map<String, Object> info)
 			throws MessagingException {
+		info.putAll(FreeMarkerTemplateUtils.getShareVars());
+		
 		MimeMessage msg = javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(msg, false, "UTF-8");
 		helper.setSubject(String.valueOf(info.get("subject")));
@@ -140,6 +140,7 @@ public class MailSender {
 	public void sendMail(String toAddress, String subject,
 			Map<String, Object> info, String ftlName, boolean isAsync)
 			throws MessagingException {
+		info.putAll(FreeMarkerTemplateUtils.getShareVars());
 		info.put("toAddress", toAddress);
 		info.put("subject", subject);
 		info.put("ftlName", ftlName);
@@ -151,30 +152,4 @@ public class MailSender {
 		}
 
 	}
-	
-	public static Map getShareVars() {
-		Map templateModel = new HashMap();
-		templateModel.putAll(System.getProperties());
-		templateModel.put("env", System.getenv());
-		templateModel.put("now", new Date());
-		templateModel.putAll(getToolsMap());
-		return templateModel;
-	}
-
-	/** 得到模板可以引用的工具类  */
-	private static Map getToolsMap() {
-	    Map toolsMap = new HashMap();
-	    String[] tools = PropertiesUtil.getPropertyArray("template_tools_class");
-	    for(String className : tools) {
-	        try {
-	            Object instance = ClassUtil.newInstance(className);
-	            toolsMap.put(Class.forName(className).getSimpleName(), instance);
-	            log.debug("put tools class:"+className+" with key:"+Class.forName(className).getSimpleName());
-	        }catch(Exception e) {
-	        	log.error("cannot load tools by className:"+className+" cause:"+e);
-	        }
-	    }
-	    return toolsMap;
-	}
-
 }

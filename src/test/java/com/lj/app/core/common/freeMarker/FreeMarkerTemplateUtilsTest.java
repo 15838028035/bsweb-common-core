@@ -1,5 +1,8 @@
 package com.lj.app.core.common.freeMarker;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +39,23 @@ public class FreeMarkerTemplateUtilsTest {
         map.put("userName","user1");
         
 		freeMarkerTemplateUtils.processTemplateIntoString(template, map);
+	}
+	
+	@Test
+	public void getShareVarsTest(){
+		Map shareMap = FreeMarkerTemplateUtils.getShareVars();
+		assertNotNull(shareMap);
+		assertTrue(shareMap.keySet().contains("now"));
+		assertTrue(shareMap.keySet().contains("StringUtil"));
+		assertTrue(shareMap.keySet().contains("PropertiesUtil"));
+	}
+	
+	@Test
+	public void getToolsMapTest() {
+		Map toolMap = FreeMarkerTemplateUtils.getToolsMap();
+		assertNotNull(toolMap);
+		assertTrue(toolMap.keySet().contains("StringUtil"));
+		assertTrue(toolMap.keySet().contains("PropertiesUtil"));
 	}
 
 }
