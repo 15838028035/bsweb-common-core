@@ -4,26 +4,24 @@ package com.lj.app.core.common.base.model;
 public class UpmConfiguration extends BaseModel{
 	
 	/**
-	 * ID
+	 * ID 
 	 */
 	private Integer configId;
 	
 	/**
-	 * 置配项KEY
+	 * 置配项KEY cfg_key
 	 */
 	private String cfgKey;
 	
 	/**
-	 * 置配项值
+	 * 置配项值 cfg_value
 	 */
 	private String cfgValue;
 	
 	/**
-	 * 置配项描述
+	 * 置配项描述 cfg_desc
 	 */
 	private String cfgDesc;
-	
-
 
 	public void setConfigId(Integer value) {
 		this.configId = value;

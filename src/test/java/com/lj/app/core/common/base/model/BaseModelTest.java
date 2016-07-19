@@ -17,7 +17,7 @@ public class BaseModelTest {
 	@Test
 	public void setGetCreateByTest() {
 		baseModel.setCreateBy(1);
-		assertEquals("CreateBy must be 1",1, baseModel.getCreateBy());
+		assertEquals("CreateBy must be 1","1", baseModel.getCreateBy().toString());
 	}
 
 	@Test
@@ -29,7 +29,7 @@ public class BaseModelTest {
 	@Test
 	public void setGetUpdateByTest() {
 		baseModel.setUpdateBy(2);
-		assertEquals("UpdateBy must be 2",2, baseModel.getUpdateBy());
+		assertEquals("UpdateBy must be 2","2", baseModel.getUpdateBy().toString());
 	}
 
 	@Test

@@ -13,7 +13,7 @@ public class ${className} extends BaseModel{
 <#list table.columns as column>
 	<#if !column.fk>
 	/**
-	 * ${column.remarks}
+	 * ${column.remarks}  ${column.sqlName}
 	 */
 	private ${column.javaType} ${column.columnNameLower};
 	

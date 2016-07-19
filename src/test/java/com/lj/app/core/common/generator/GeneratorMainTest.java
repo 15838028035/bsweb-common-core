@@ -18,7 +18,7 @@ public class GeneratorMainTest {
 		g.getGenerator().addTemplateRootDir(FileHelper.getFile("classpath:template"));
 		
 		 
-		g.generateByTable("UPM_USER");
+		g.generateByTable("Upm_Dictionary");
 
 		System.out.println("");
 		System.out

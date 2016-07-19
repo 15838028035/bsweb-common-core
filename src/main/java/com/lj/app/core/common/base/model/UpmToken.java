@@ -3,37 +3,37 @@ package com.lj.app.core.common.base.model;
 public class UpmToken extends BaseModel{
 	
 	/**
-	 * ID
+	 * ID id
 	 */
 	private Integer id;
 	
 	/**
-	 * token
+	 * token token_id
 	 */
 	private String tokenId;
 	
 	/**
-	 * 源资id
+	 * 源资id res_id
 	 */
 	private String resId;
 	
 	/**
-	 * 从账号
+	 * 从账号 subAcctId
 	 */
 	private String subAcctId;
 	
 	/**
-	 * 客户端IP
+	 * 客户端IP client_ip
 	 */
 	private String clientIp;
 	
 	/**
-	 * 建创时间
+	 * 建创时间 create_time
 	 */
 	private java.util.Date createTime;
 	
 	/**
-	 * 主账号
+	 * 主账号 mainAcct_id
 	 */
 	private Integer mainAcctId;
 

@@ -8,34 +8,34 @@ import com.lj.app.core.common.util.StringUtil;
 public class BaseModel implements Serializable {
 
 	/**
-	 * 创建人
+	 * 创建人 create_by
 	 */
-	private int createBy;
+	private Integer createBy;
 	/**
-	 * 创建日期
+	 * 创建日期 create_date
 	 */
 	private String createDate;
 	/**
-	 * 更新人
+	 * 更新人 update_by
 	 */
-	private int updateBy;
+	private Integer updateBy;
 	/**
-	 * 更新日期
+	 * 更新日期 update_date
 	 */
 	private String updateDate;
 
 	/**
-	 * 是否有效
+	 * 是否有效 enable_flag
 	 */
 	private String enableFlag = "T";
 
 	/**
-	 * 加载状态
+	 * 加载状态 lock_status
 	 */
 	private String lockStatus = "0";
 
 	/**
-	 * 应用ID
+	 * 应用ID app_id
 	 */
 	private String appId;
 
@@ -56,11 +56,11 @@ public class BaseModel implements Serializable {
 		return StringUtil.props(this);
 	}
 
-	public int getCreateBy() {
+	public Integer getCreateBy() {
 		return createBy;
 	}
 
-	public void setCreateBy(int createBy) {
+	public void setCreateBy(Integer createBy) {
 		this.createBy = createBy;
 	}
 
@@ -72,11 +72,11 @@ public class BaseModel implements Serializable {
 		this.createDate = createDate;
 	}
 
-	public int getUpdateBy() {
+	public Integer getUpdateBy() {
 		return updateBy;
 	}
 
-	public void setUpdateBy(int updateBy) {
+	public void setUpdateBy(Integer updateBy) {
 		this.updateBy = updateBy;
 	}
 
