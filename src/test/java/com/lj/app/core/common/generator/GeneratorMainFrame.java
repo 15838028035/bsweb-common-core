@@ -13,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import com.lj.app.core.common.generator.util.FileHelper;
-
 public class GeneratorMainFrame extends JFrame implements ActionListener{
 
 	/**
@@ -232,8 +230,8 @@ public class GeneratorMainFrame extends JFrame implements ActionListener{
 
 			GeneratorFacade g = new GeneratorFacade();
 			g.clean();
-			g.getGenerator().setTemplateRootDir(
-					FileHelper.getFile(templateDirStr));
+			g.getGenerator().setTemplateRootDir(templateDirStr);
+					
 			g.generateByTable(tableStr);
 
 			Runtime.getRuntime().exec("cmd.exe /c start " + outRootStr);

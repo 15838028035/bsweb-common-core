@@ -10,6 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
+import com.lj.app.core.common.util.ClassUtil;
 import com.lj.app.core.common.util.StringUtil;
 
 
@@ -291,5 +292,10 @@ public class PropertiesReader {
 	public static List<String> getPropertyList(String key) {
 		String value = StringUtil.trimBlank(getProperty(key));
 		return StringUtil.splitStringToStringList(value);
+	}
+	
+	public Object getClassInstance(String key, Object defaultinstance)
+	        throws IllegalArgumentException {
+	    return (containsKey(key) ? ClassUtil.newInstance(key) : defaultinstance);
 	}
 }

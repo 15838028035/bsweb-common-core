@@ -83,10 +83,11 @@ public class Table {
 	}
 
 	public String getClassName() {
-		String defaultValue = StringHelper
-				.makeAllWordFirstLetterUpperCase(StringHelper
-						.toUnderscoreName(getSqlName()));
-		return StringHelper.emptyIf(this.customClassName, defaultValue);
+		if(StringHelper.isBlank(customClassName)) {
+			return StringHelper.toJavaClassName(getSqlName());
+		}else {
+			return customClassName;
+		}
 	}
 
 	public String getTableAlias() {

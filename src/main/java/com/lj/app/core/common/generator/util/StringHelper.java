@@ -7,6 +7,9 @@ import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.lj.app.core.common.generator.GeneratorConstants;
+import com.lj.app.core.common.generator.GeneratorProperties;
+
 public class StringHelper {
 	private static final Random RANDOM = new Random();
 
@@ -231,6 +234,47 @@ public class StringHelper {
 			return clazz.substring(clazz.lastIndexOf(".") + 1);
 		}
 		return clazz;
+	}
+	
+	/**
+	 * 将一个数据库名称转换为 Java 变量名称,如 user_info => userInfo
+	 * @param sqlName
+	 * @param singularize
+	 * @return
+	 */
+	public static String toJavaClassName(String sqlName) {
+	    String processedSqlName = removeTableSqlNamePrefix(sqlName);
+	    return makeAllWordFirstLetterUpperCase(StringHelper.toUnderscoreName(processedSqlName));
+	}
+
+	public static String removeTableSqlNamePrefix(String sqlName) {
+	    String[] prefixs = GeneratorProperties.getStringArray(GeneratorConstants.TABLE_REMOVE_PREFIXES);
+	    for(String prefix : prefixs) {
+	        String removedPrefixSqlName = StringHelper.removePrefix(sqlName, prefix,true);
+	        if(!removedPrefixSqlName.equals(sqlName)) {
+	            return removedPrefixSqlName;
+	        }
+	    }
+	    return sqlName;
+	}
+
+	public static String removePrefix(String str,String prefix) {
+	    return removePrefix(str,prefix,false);
+	}
+
+	public static String removePrefix(String str,String prefix,boolean ignoreCase) {
+	    if(str == null) return null;
+	    if(prefix == null) return str;
+	    if(ignoreCase) {
+	        if(str.toLowerCase().startsWith(prefix.toLowerCase())) {
+	            return str.substring(prefix.length());
+	        }
+	    }else {
+	        if(str.startsWith(prefix)) {
+	            return str.substring(prefix.length());
+	        }
+	    }
+	    return str;
 	}
 	
 	public static String removeCrlf(String str) {

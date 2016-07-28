@@ -2,8 +2,6 @@ package com.lj.app.core.common.generator;
 
 import org.junit.Test;
 
-import com.lj.app.core.common.generator.util.FileHelper;
-
 public class GeneratorMainTest {
 
 	@Test
@@ -15,9 +13,8 @@ public class GeneratorMainTest {
 		
 		GeneratorFacade g = new GeneratorFacade();
 		g.clean();
-		g.getGenerator().addTemplateRootDir(FileHelper.getFile("classpath:template"));
+		g.getGenerator().setTemplateRootDir("classpath:template");
 		
-		 
 		g.generateByTable("Upm_Dictionary");
 
 		System.out.println("");

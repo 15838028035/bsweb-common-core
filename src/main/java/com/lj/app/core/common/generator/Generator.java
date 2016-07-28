@@ -46,13 +46,28 @@ public class Generator {
 		setTemplateRootDirs(new File[] { templateRootDir });
 	}
 
-	public void setTemplateRootDirs(File[] templateRootDirs) {
-		this.templateRootDirs = Arrays.asList(templateRootDirs);
+	public void setTemplateRootDirs(File... templateRootDirs) {
+		this.templateRootDirs = new ArrayList<File>(Arrays.asList(templateRootDirs));
 	}
-
+	
 	public void addTemplateRootDir(File f) {
 		this.templateRootDirs.add(f);
 	}
+	
+	/**
+	 * 设置模板目录，支持用逗号分隔多个模板目录
+	 */
+	public void setTemplateRootDir(String templateRootDir) {
+	        setTemplateRootDirs(StringHelper.tokenizeToStringArray(templateRootDir,","));
+	}
+	
+	 public void setTemplateRootDirs(String... templateRootDirs) {
+	        ArrayList<File> tempDirs = new ArrayList<File>();
+	        for(String dir : templateRootDirs) {
+	            tempDirs.add(FileHelper.getFile(dir));
+	        }
+	        this.templateRootDirs = tempDirs;
+	 }
 
 	public boolean isIgnoreTemplateGenerateException() {
 		return this.ignoreTemplateGenerateException;
@@ -193,7 +208,6 @@ public class Generator {
 					}
 					
 				}
-				
 				
 				for(String removeExtension : removeExtensions.split(",")) {
 					if(outputFilePath.endsWith(removeExtension)) {
