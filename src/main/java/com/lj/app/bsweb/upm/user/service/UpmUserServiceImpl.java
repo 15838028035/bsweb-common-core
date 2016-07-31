@@ -4,27 +4,25 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import jxl.Cell;
 import jxl.JXLException;
+import jxl.Sheet;
 import jxl.Workbook;
 import jxl.WorkbookSettings;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import com.lj.app.core.common.base.LoginInfoUtil;
-import com.lj.app.core.common.base.service.BaseServiceImpl;
+import com.lj.app.core.common.base.service.BatchOptBaseService;
+import com.lj.app.core.common.base.service.BatchOptBaseServiceImpl;
+import com.lj.app.core.common.exception.BusinessException;
 
 @Service("upmUserService")
-public class UpmUserServiceImpl<UpmUser> extends BaseServiceImpl<UpmUser> implements UpmUserService<UpmUser>{
+public class UpmUserServiceImpl extends BatchOptBaseServiceImpl implements UpmUserService{
 	
-private static final WorkbookSettings WorkbookSetting = new WorkbookSettings();
+	private static final WorkbookSettings WorkbookSetting = new WorkbookSettings();
 	
 	static {
 		WorkbookSetting.setIgnoreBlanks(true);
@@ -125,43 +123,89 @@ private static final WorkbookSettings WorkbookSetting = new WorkbookSettings();
 	 * @throws JXLException
 	 * @throws IOException
 	 */
-	public String verifyCreateExcel(File f,String initfilename,String templateFileContentType) throws JXLException, IOException{
-		WritableWorkbook workbook = null;		
-		Map<String,String> phoneMap = new HashMap<String,String>();
-		try{
-			Workbook in= Workbook.getWorkbook(f,WorkbookSetting); 
-			//workbook = Workbook.createWorkbook(new File(batch.getPath()), in);
-			WritableSheet sheet = workbook.getSheet("sheet1");
-			int rowsCount = sheet.getRows();
-			int colsCount = sheet.getColumns();
-			
-			
-			Set<String> set = new HashSet<String>();
-			List<String> usedLoginName = new ArrayList<String>();
-			for(int i=2;i<rowsCount;i++){
-//				init set
-				Cell[] cells = sheet.getRow(i);
-				String loginName = cells[3].getContents();
-				if(loginName!=null && !"".equals(loginName.trim())){
-					set.add(loginName);
-				}
+	public void  importAndCheck(File f,String initfilename,String templateFileContentType) throws Exception{
+		checkAndImportExcelData(f, "批量导入Excel", 0l, 0l,
+				0l, "0");
+	}
+	
+	/**
+	 * 检查并导入EXCEL数据，需要事务的支持
+	 */
+	public void checkAndImportExcelData(File template, String batchOperType,
+			Long operMainAcctId, Long appId, Long adminAcctSeq,
+			String loginOrgId) throws Exception {
+		BusinessException businessException = null;
+		try {
+
+			String excelName = "";
+			HashMap<String, String> loginAcctMap = new HashMap<String, String>();
+			int startRow = 11;
+			Workbook wb = Workbook.getWorkbook(template);
+			Sheet sheet = wb.getSheet(0);
+			int column = sheet.getColumns(); // 列数
+			int row = sheet.getRows(); // 行数
+			int total = row - startRow + 1; // 一共导入的条数
+			if (startRow > row) {// 开始行数不能大于最大行数
+				throw new BusinessException("tooLong");
 			}
-			Long actid = LoginInfoUtil.getLoginMainAcctId();
-		
-			for(int i=2;i<rowsCount;i++){
-				int lt = (sheet.getRow(1)).length;
-				Cell[] cells = new Cell[lt];
-				for (int j = 0; j < lt; j++) {
-					cells[j] = sheet.getCell(j,i);
+			int endRow = 0;
+			// 根据输入的起使行，确定创建的最后行
+			endRow = (startRow + batchProcessCount - 1) <= row ? (startRow
+					+ batchProcessCount - 1) : row;
+			List excelFieldList = new ArrayList();
+					
+			checkBatchExcelData(appId, adminAcctSeq, loginOrgId,
+						 null,
+					 excelFieldList, startRow,
+						sheet, column, row, endRow);
+			
+			this.insertBatch(excelFieldList);
+			
+			wb.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw ex;
+		}
+	}
+	
+	public void checkBatchExcelData(Long appId, Long adminAcctSeq,
+			String loginOrgId, 
+			BatchOptBaseService batchOptBaseService,
+			List excelFieldList,
+		 int startRow, Sheet sheet,
+			int column, int row, int endRow) throws Exception {
+		// 批量错误信息提示
+		List<String> exceptionMsgList = new ArrayList<String>();
+		List<String> warnMsgList = new ArrayList<String>();
+		for (int i = (startRow - 1); i < endRow; i++) {
+			if (!validateRow(sheet, i, column, excelFieldList.size())) {
+				continue;
+			}
+			Cell loginAcctCell = sheet.getCell(0, i);
+			String loginAcct = loginAcctCell.getContents().trim();
+
+			try {
+				
+				if(StringUtils.isBlank(loginAcct)){
+					exceptionMsgList.add( "第" + i + "行不能为空");
+					continue;
 				}
 				
+			} catch (Exception e) {
+				exceptionMsgList.add(e.getMessage() + "行数" +i);
 			}
-		}finally{
-			if(workbook!=null){
-				workbook.write();
-				workbook.close();
-			}
+
 		}
-		return null;
+
+		// 根据抛出异常判断是否通过，或者是警告
+		if (exceptionMsgList.size() > 0 || warnMsgList.size() > 0) {
+			StringBuffer sb = new StringBuffer();
+			sb.append("<html><body><p>");
+			for (String msg : exceptionMsgList)
+				sb.append(msg + "</br>");
+			sb.append("</p></body></html>");
+			logger.info("exceptionMsgList>>>>>>" + sb.toString());
+			throw  new BusinessException(sb.toString());
+		}
 	}
 }

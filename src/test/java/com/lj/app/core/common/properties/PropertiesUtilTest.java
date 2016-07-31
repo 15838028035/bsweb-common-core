@@ -279,6 +279,56 @@ public class PropertiesUtilTest {
 	}
 	
 	@Test
+	public void getPropertyLowerTest() {
+		PropertiesUtil.setProperty("key", " value ");
+		assertEquals("value",PropertiesUtil.getPropertyLower("key"));
+	}
+	
+	@Test
+	public void getPropertyLowerNullTest() {
+		assertEquals("",PropertiesUtil.getPropertyLower("keyNotFound"));
+	}
+	
+	@Test
+	public void getPropertyLowerDefaultTest() {
+		PropertiesUtil.setProperty("key", "value2 ");
+		assertEquals("value",PropertiesUtil.getPropertyLower("key", " value2"));
+		assertEquals("expectedvalue",PropertiesUtil.getPropertyLower("keyNotFound","expectedValue"));
+	}
+	
+	@Test
+	public void getPropertyLowerDefaultValueNullTest() {
+		PropertiesUtil.setProperty("key", " value ");
+		assertEquals("value2",PropertiesUtil.getPropertyLower("key2", " Value2"));
+		assertEquals("expectedvalue",PropertiesUtil.getPropertyLower("keyNotFound","expectedValue"));
+	}
+	
+	@Test
+	public void getPropertyUpperTest() {
+		PropertiesUtil.setProperty("key", " value ");
+		assertEquals("VALUE",PropertiesUtil.getPropertyUpper("key"));
+	}
+	
+	@Test
+	public void getPropertyUpperNullTest() {
+		assertEquals("",PropertiesUtil.getPropertyUpper("keyNotFound"));
+	}
+	
+	@Test
+	public void getPropertyUpperDefaultTest() {
+		PropertiesUtil.setProperty("key", "value ");
+		assertEquals("VALUE",PropertiesUtil.getPropertyUpper("key", " value2"));
+		assertEquals("expectedValue",PropertiesUtil.getPropertyUpper("keyNotFound","expectedValue"));
+	}
+	
+	@Test
+	public void getPropertyUpperDefaultValueNullTest() {
+		PropertiesUtil.setProperty("key", " value ");
+		assertEquals("VALUE2",PropertiesUtil.getPropertyUpper("key2", " value2"));
+		assertEquals("EXPECTEDVALUE",PropertiesUtil.getPropertyUpper("keyNotFound","expectedValue"));
+	}
+	
+	@Test
 	public void getBooleanTrueOrFalseTest() {
 		PropertiesUtil.setProperty("key", true);
 		assertTrue(PropertiesUtil.getBooleanTrueOrFalse("key"));

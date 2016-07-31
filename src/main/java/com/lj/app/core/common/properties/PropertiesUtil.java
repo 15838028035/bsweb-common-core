@@ -40,6 +40,22 @@ public class PropertiesUtil {
 		return (value == null) ? defaultValue : value.trim();
 	}
 
+	public static String getPropertyUpper(String name) {
+		return getPropertyTrim(name).toUpperCase();
+	}
+
+	public static String getPropertyUpper(String name, String defaultValue) {
+		return getPropertyTrim(name,defaultValue).toUpperCase();
+	}
+	
+	public static String getPropertyLower(String name) {
+		return getPropertyTrim(name).toLowerCase();
+	}
+
+	public static String getPropertyLower(String name, String defaultValue) {
+		return getPropertyTrim(name,defaultValue).toUpperCase();
+	}
+	
 	public static boolean getBooleanTrueOrFalse(String name, boolean defaultValue) {
 		String value = getPropertyTrim(name, String.valueOf(defaultValue));
 		return (value.equals("true"));
