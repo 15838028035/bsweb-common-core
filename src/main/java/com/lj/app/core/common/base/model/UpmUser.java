@@ -1,4 +1,4 @@
-package com.lj.app.bsweb.upm.user.model;
+package com.lj.app.core.common.base.model;
 
 import com.lj.app.core.common.base.model.BaseModel;
 

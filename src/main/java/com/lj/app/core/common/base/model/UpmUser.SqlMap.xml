@@ -4,7 +4,7 @@
 
 <sqlMap namespace="upmUser">
 
-    <typeAlias alias="upmUser" type="com.lj.app.bsweb.upm.user.model.UpmUser"/>
+    <typeAlias alias="upmUser" type="com.lj.app.core.common.base.model.UpmUser"/>
 
     <resultMap id="upmUserResult" class="upmUser">
    	  	<result property="id" column="id"/>

@@ -57,6 +57,8 @@ public abstract class AbstractBaseAction<T> extends ActionSupport implements Mod
 	public static final String OPT_FAILURE = "操作失败";
 	
 	public static final String BATCH_IMPORT = "batchimport";
+	public static final String BATCH_IMPORT_SUCCESS = "批量导入成功";
+	public static final String BATCH_IMPORT_FALIRUE = "批量导入失败";
 	
 	public static final String OK = "ok";
 	public static final String ERROR = "error";

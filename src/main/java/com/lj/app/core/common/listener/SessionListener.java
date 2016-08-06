@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSessionListener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.lj.app.bsweb.upm.user.model.UpmUser;
+import com.lj.app.core.common.base.model.UpmUser;
 import com.lj.app.core.common.util.SessionCode;
 
 /**

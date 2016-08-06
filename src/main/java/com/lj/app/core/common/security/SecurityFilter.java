@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.lj.app.bsweb.upm.user.model.UpmUser;
+import com.lj.app.core.common.base.model.UpmUser;
 import com.lj.app.core.common.listener.IStatStore;
 import com.lj.app.core.common.listener.StoreFactory;
 import com.lj.app.core.common.properties.PropertiesUtil;
