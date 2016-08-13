@@ -11,6 +11,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 
 import com.lj.app.core.common.util.ClassUtil;
+import com.lj.app.core.common.util.PropertyPlaceholderUtil;
+import com.lj.app.core.common.util.PropertyPlaceholderUtil.PropertyPlaceholderConfigurerResolver;
 import com.lj.app.core.common.util.StringUtil;
 
 
@@ -24,6 +26,8 @@ public class PropertiesReader {
 	private static final String RULE_CONFIG_FILE_NAME = "rule.properties";
 	
 	private static final String CORE_URL="";
+	
+	private static PropertyPlaceholderUtil propertyPlaceholderUtil = new PropertyPlaceholderUtil("${", "}", ":", false);
 	
 	private static Properties properties = new Properties();
 
@@ -48,6 +52,7 @@ public class PropertiesReader {
 		String properFile = properPath + configName;
 		logger.warn("Now,Loading prov file=== " + properFile);
 		Properties provProperties = PropertiesLoaderUtils.loadAllProperties(properFile, PropertiesReader.class.getClassLoader());
+		//provProperties = resolveProperties(provProperties);
 		properties.putAll(provProperties);
 	}
 
@@ -298,4 +303,21 @@ public class PropertiesReader {
 	        throws IllegalArgumentException {
 	    return (containsKey(key) ? ClassUtil.newInstance(key) : defaultinstance);
 	}
+	
+	public static Properties resolveProperties(Properties props) {
+	    Properties result = new Properties();
+	    for(Object s : props.keySet()) {
+	        String sourceKey = s.toString();
+	        String key  = resolveProperty(sourceKey,props);
+	        String value = resolveProperty(props.getProperty(sourceKey),props);
+	        result.setProperty(key, value);
+	    }
+	    return result;
+	}
+
+	public static String resolveProperty(String v,Properties props) {
+	    PropertyPlaceholderConfigurerResolver propertyPlaceholderConfigurerResolver = new PropertyPlaceholderConfigurerResolver(props);
+	    return propertyPlaceholderUtil.replacePlaceholders(v, propertyPlaceholderConfigurerResolver);
+	}
+	
 }

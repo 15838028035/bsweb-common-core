@@ -91,7 +91,7 @@ public class Table {
 	}
 
 	public String getTableAlias() {
-		return StringHelper.emptyIf(getRemarks(), getClassName());
+		return StringHelper.removeCrlf(StringHelper.defaultIfEmpty(getRemarks(), getClassName()));
 	}
 
 	public String getClassNameLowerCase() {

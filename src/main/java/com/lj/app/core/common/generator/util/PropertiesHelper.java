@@ -14,7 +14,8 @@ import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
 
-import com.lj.app.core.common.generator.util.PropertyPlaceholderHelper.PropertyPlaceholderConfigurerResolver;
+import com.lj.app.core.common.util.PropertyPlaceholderUtil;
+import com.lj.app.core.common.util.PropertyPlaceholderUtil.PropertyPlaceholderConfigurerResolver;
 
 
 public class PropertiesHelper {
@@ -182,6 +183,6 @@ public class PropertiesHelper {
 	PropertyPlaceholderConfigurerResolver propertyPlaceholderConfigurerResolver = new PropertyPlaceholderConfigurerResolver(props);
 	return propertyPlaceholderHelper.replacePlaceholders(v, propertyPlaceholderConfigurerResolver);
 	}
-	static PropertyPlaceholderHelper propertyPlaceholderHelper = new PropertyPlaceholderHelper("${", "}", ":", false);
+	static PropertyPlaceholderUtil propertyPlaceholderHelper = new PropertyPlaceholderUtil("${", "}", ":", false);
 
 }

@@ -49,6 +49,11 @@
   <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
  </listener>
  
+ <!-- Spring 刷新Introspector防止内存泄露    -->
+<listener>
+    <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+</listener>
+
  <listener>
 	<listener-class>
 		 com.lj.app.core.common.listener.SessionListener

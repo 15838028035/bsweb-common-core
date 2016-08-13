@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import com.lj.app.core.common.generator.GeneratorProperties;
 import com.lj.app.core.common.generator.provider.db.model.Column;
@@ -54,10 +55,13 @@ public class DbTableFactory {
 
 	public Connection getConnection() throws SQLException {
 		if ((this.connection == null) || (this.connection.isClosed())) {
-			this.connection = DriverManager.getConnection(
-					GeneratorProperties.getRequiredProperty("jdbc.url"),
-					GeneratorProperties.getRequiredProperty("jdbc.username"),
-					GeneratorProperties.getProperty("jdbc.password"));
+			 	Properties properties = new Properties();
+		        properties.setProperty("user", GeneratorProperties.getRequiredProperty("jdbc.username"));
+		        properties.setProperty("password",GeneratorProperties.getProperty("jdbc.password"));
+		        properties.setProperty("remarks", "true");
+		        properties.setProperty("useInformationSchema", "true");
+		        this.connection = DriverManager.getConnection(GeneratorProperties.getRequiredProperty("jdbc.url"),
+		                properties);
 		}
 		return this.connection;
 	}

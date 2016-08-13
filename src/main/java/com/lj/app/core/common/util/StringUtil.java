@@ -28,6 +28,42 @@ public class StringUtil {
 	public static final String LOWERCASE_CHARS = "abcdefghijklmnopqrstuvwxyz";
 	public static final String NUMBER_CHARS = "0123456789";
 	
+	public static boolean hasLength(CharSequence str){
+	    return (str != null) && (str.length() > 0);
+	}
+
+	public static boolean hasLength(String str){
+	    return hasLength(str);
+	}
+	
+	public static boolean hasText(CharSequence str) {
+		if (!hasLength(str)) {
+			return false;
+		}
+		int strLen = str.length();
+		for (int i = 0; i < strLen; i++) {
+			if (!Character.isWhitespace(str.charAt(i))) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean hasText(String str) {
+		return hasText(str);
+	}
+	
+	public static boolean substringMatch(CharSequence str, int index,
+			CharSequence substring) {
+		for (int j = 0; j < substring.length(); j++) {
+			int i = index + j;
+			if ((i >= str.length()) || (str.charAt(i) != substring.charAt(j))) {
+				return false;
+			}
+		}
+		return true;
+	}
+	  
 	/**
 	 * 格式化日期字符串为日期
 	 * @param dateStr

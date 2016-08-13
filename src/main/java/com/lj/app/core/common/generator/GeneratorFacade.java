@@ -104,9 +104,7 @@ public class GeneratorFacade {
 	}
 	
 	public Generator createGeneratorForDbTable() {
-		Generator g = new Generator();
-		g.setTemplateRootDir(new File(GeneratorProperties.getProperty("template")));
-		g.setOutRootDir(GeneratorProperties.getRequiredProperty("outRoot"));
+		Generator g = getGenerator();
 		g.setRemoveExtensions(GeneratorProperties.getProperty("generator_removeExtensions"));
 		return g;
 	}

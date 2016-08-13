@@ -330,4 +330,14 @@ public class PropertiesReaderTest {
 		assertEquals("a",PropertiesReader.getPropertyList("keyA").get(0));
 		assertEquals("b",PropertiesReader.getPropertyList("keyA").get(1));
 	}
+	
+	@Test
+	public void resolvePropertiesTest() {
+		Properties props = new Properties();
+		props.put("basePath", "basePath");
+		props.put("imgPath", "${basePath}/img");
+		Properties prop = PropertiesReader.resolveProperties(props);
+		String imgPath = (String)prop.get("imgPath");
+		assertEquals("basePath/img",imgPath);
+	}
 }

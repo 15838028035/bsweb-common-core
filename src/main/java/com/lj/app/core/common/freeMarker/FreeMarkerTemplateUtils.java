@@ -77,5 +77,34 @@ public class FreeMarkerTemplateUtils {
 	    return toolsMap;
 	}
 
+	/**
+	 * 读取模板文件内容
+	 * 
+	 * @return 模板文件内容
+	 */
+	public static String readTemplateFileContent(String templatePath) {
+	    File templateFile = new File(templatePath);
+	    String templateFileContent = null;
+	    try {
+	        templateFileContent = org.apache.commons.io.FileUtils.readFileToString(templateFile, "UTF-8");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    return templateFileContent;
+	}
+
+	/**
+	 * 写入模板文件内容
+	 * 
+	 */
+	public static String writeTemplateFileContent(String templatePath, String templateFileContent) {
+	    File templateFile = new File(templatePath);
+	    try {
+	        org.apache.commons.io.FileUtils.writeStringToFile(templateFile, templateFileContent, "UTF-8");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	    return templateFileContent;
+	}
 	
 }

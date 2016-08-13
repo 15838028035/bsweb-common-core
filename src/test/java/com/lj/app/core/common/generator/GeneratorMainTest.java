@@ -12,8 +12,9 @@ public class GeneratorMainTest {
 		GeneratorProperties.setProperty("outRoot", "e:\\generator-output");
 		
 		GeneratorFacade g = new GeneratorFacade();
-		g.clean();
 		g.getGenerator().setTemplateRootDir("classpath:template");
+		
+		g.clean();
 		
 		g.generateByTable("Upm_Dictionary");
 
