@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.lj.app.core.common.generator.util.FileHelper;
+import com.lj.app.core.common.generator.util.FreemarkerHelper;
 import com.lj.app.core.common.generator.util.GLogger;
 import com.lj.app.core.common.generator.util.IOHelper;
 import com.lj.app.core.common.generator.util.StringHelper;
@@ -223,9 +224,11 @@ public class Generator {
 					
 					targetFilename = getTargetFilename(filePathModel,
 							outputFilePath);
-					generateNewFileOrInsertIntoFile(templateModel,
-							targetFilename, newFreeMarkerConfiguration(),
-							templateRelativePath, outputFilePath);
+					Configuration conf = newFreeMarkerConfiguration(templateRootDirs, encoding, templateFile.getName());
+
+	                generateNewFileOrInsertIntoFile(templateModel, targetFilename, conf,
+	                        templateRelativePath, outputFilePath);
+	                
 				} catch (Exception e) {
 					if (this.ignoreTemplateGenerateException) {
 						GLogger.warn("iggnore generate error,template is:"
@@ -260,6 +263,40 @@ public class Generator {
 		config.setBooleanFormat("true,false");
 		config.setDefaultEncoding(this.encoding);
 		return config;
+	}
+	
+	public static Configuration newFreeMarkerConfiguration(List<File> templateRootDirs,String defaultEncoding,String templateName) throws IOException {
+	    Configuration conf = new Configuration();
+
+	    FileTemplateLoader[] templateLoaders = new FileTemplateLoader[templateRootDirs.size()];
+	    for(int i = 0; i < templateRootDirs.size(); i++) {
+	        templateLoaders[i] = new FileTemplateLoader((File)templateRootDirs.get(i));
+	    }
+	    MultiTemplateLoader multiTemplateLoader = new MultiTemplateLoader(templateLoaders);
+
+	    conf.setTemplateLoader(multiTemplateLoader);
+	    conf.setNumberFormat("###############");
+	    conf.setBooleanFormat("true,false");
+	    conf.setDefaultEncoding(defaultEncoding);
+
+	     List<String> autoIncludes = getParentPaths(templateName,"macro.include");
+	     List<String> availableAutoInclude = FreemarkerHelper.getAvailableAutoInclude(conf,autoIncludes);
+	     conf.setAutoIncludes(availableAutoInclude);
+	     GLogger.info("set Freemarker.autoIncludes:"+availableAutoInclude+" for templateName:"+templateName+" autoIncludes:"+autoIncludes);
+	     return conf;
+	 }
+	
+	public static List<String> getParentPaths(String templateName,String suffix) {
+	    String array[] = StringHelper.tokenizeToStringArray(templateName, "\\/");
+	    List<String> list = new ArrayList<String>();
+	    list.add(suffix);
+	    list.add(File.separator+suffix);
+	    String path = "";
+	    for(int i = 0; i < array.length; i++){
+	        path = path + File.separator + array[i];
+	        list.add(path + File.separator+suffix);
+	    }
+	    return list;
 	}
 
 	private void generateNewFileOrInsertIntoFile(Map templateModel,
