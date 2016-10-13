@@ -26,7 +26,7 @@
 	jQuery(document).ready(function(){ 
 		var lastsel;
 		jQuery("#list").jqGrid({
-			url:'${r"${ctx}"}/jsp/${classNameLower}/${classNameLower}Action!list.action',
+			url:'${r"${ctx}"}/jsp/${classNameLower}/${classNameLower}Action!jqGridList.action',
 			datatype: 'json',
 			mtype: 'POST',
 			colNames:[
@@ -139,7 +139,7 @@
 	       	</#list>
 	    	
 			jQuery("#list").jqGrid('setGridParam',{
-			    url:'${r"${ctx}"}/jsp/${classNameLower}/${classNameLower}Action!list.action',
+			    url:'${r"${ctx}"}/jsp/${classNameLower}/${classNameLower}Action!jqGridList.action',
 				postData : {
 							<#list table.columns as column>
 							<#if column.isDateTimeColumn>
@@ -196,7 +196,7 @@
         
       	function refreshGrid(){
 			jQuery("#list").jqGrid('setGridParam',{
-			    url:'${r"${ctx}"}/jsp/${classNameLower}/${classNameLower}Action!list.action',
+			    url:'${r"${ctx}"}/jsp/${classNameLower}/${classNameLower}Action!jqGridList.action',
 			 	page:1
 			 }).trigger("reloadGrid");
       	}

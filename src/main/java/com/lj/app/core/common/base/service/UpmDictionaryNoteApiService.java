@@ -3,7 +3,7 @@ package com.lj.app.core.common.base.service;
 import java.util.List;
 import java.util.Map;
 
-import com.lj.app.core.common.base.model.UpmDictionary;
+import com.lj.app.core.common.base.entity.UpmDictionary;
 
 public interface UpmDictionaryNoteApiService {
 

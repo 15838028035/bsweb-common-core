@@ -10,7 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.lj.app.core.common.base.dao.BaseDao;
-import com.lj.app.core.common.base.model.BaseModel;
+import com.lj.app.core.common.base.entity.BaseModel;
 import com.lj.app.core.common.pagination.Page;
 import com.lj.app.core.common.util.MapAndObject;
 import com.lj.app.core.common.util.StringUtil;

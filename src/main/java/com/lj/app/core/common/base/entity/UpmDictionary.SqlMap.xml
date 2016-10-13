@@ -4,7 +4,7 @@
 
 <sqlMap namespace="upmDictionary">
 
-    <typeAlias alias="upmDictionary" type="com.lj.app.core.common.base.model.UpmDictionary"/>
+    <typeAlias alias="upmDictionary" type="com.lj.app.core.common.base.entity.UpmDictionary"/>
 
     <resultMap id="upmDictionaryResult" class="upmDictionary">
    	  	<result property="typeCode" column="type_code"/>

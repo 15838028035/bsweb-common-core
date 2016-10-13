@@ -4,7 +4,7 @@
 
 <sqlMap namespace="upmToken">
 
-    <typeAlias alias="upmToken" type="com.lj.app.core.common.base.model.UpmToken"/>
+    <typeAlias alias="upmToken" type="com.lj.app.core.common.base.entity.UpmToken"/>
 
     <resultMap id="upmTokenResult" class="upmToken">
    	  	<result property="id" column="id"   />

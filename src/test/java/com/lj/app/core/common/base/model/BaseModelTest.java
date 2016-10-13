@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.lj.app.core.common.base.entity.BaseModel;
+
 public class BaseModelTest {
 
 	private BaseModel baseModel;

@@ -7,8 +7,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lj.app.core.common.base.model.UpmToken;
-import com.lj.app.core.common.base.model.UpmUser;
+import com.lj.app.core.common.base.entity.UpmToken;
+import com.lj.app.core.common.base.entity.UpmUser;
 import com.lj.app.core.common.base.service.UpmTokenService;
 import com.lj.app.core.common.base.service.UpmUserService;
 import com.lj.app.core.common.security.CMSecurityContext;

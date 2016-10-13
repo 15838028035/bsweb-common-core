@@ -26,7 +26,7 @@
 	</script>
 </head>
 <body>
-<form action="${classNameLower}Action!save.action" method="post" name="${classNameLower}Form" id="${classNameLower}Form">
+<form action="${classNameLower}Action!commonSaveOrUpdate.action" method="post" name="${classNameLower}Form" id="${classNameLower}Form">
 <input type="hidden" name="id" id="id" value="${r"${id}"}"/>
 <input type="hidden" name="operate" id="operate" value="${r"${operate}"}" />
     <table>

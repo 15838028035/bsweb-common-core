@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.lj.app.core.common.base.model.UpmUser;
+import com.lj.app.core.common.base.entity.UpmUser;
 import com.lj.app.core.common.security.CMSecurityContext;
 import com.lj.app.core.common.security.SecurityConstants;
 import com.lj.app.core.common.web.Struts2Utils;

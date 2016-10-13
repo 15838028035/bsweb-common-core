@@ -11,7 +11,7 @@ import net.sf.json.JsonConfig;
 
 import org.junit.Test;
 
-import com.lj.app.core.common.base.model.BaseModel;
+import com.lj.app.core.common.base.entity.BaseModel;
 
 public class DateJsonFormatTest {
 

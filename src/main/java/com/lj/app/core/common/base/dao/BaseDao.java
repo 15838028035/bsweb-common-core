@@ -7,7 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.lj.app.core.common.base.model.BaseModel;
+import com.lj.app.core.common.base.entity.BaseModel;
 
 public interface BaseDao<T>{
 

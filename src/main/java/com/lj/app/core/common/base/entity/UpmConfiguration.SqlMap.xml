@@ -4,7 +4,7 @@
 
 <sqlMap namespace="upmConfiguration">
 
-    <typeAlias alias="upmConfiguration" type="com.lj.app.core.common.base.model.UpmConfiguration"/>
+    <typeAlias alias="upmConfiguration" type="com.lj.app.core.common.base.entity.UpmConfiguration"/>
 
     <resultMap id="upmConfigurationResult" class="upmConfiguration">
    	  	<result property="configId" column="config_id"   />

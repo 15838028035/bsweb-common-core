@@ -1,4 +1,4 @@
-package com.lj.app.core.common.base.model;
+package com.lj.app.core.common.base.entity;
 
 
 

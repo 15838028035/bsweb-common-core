@@ -10,7 +10,7 @@ import java.util.Map;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.lj.app.core.common.base.model.UpmToken;
+import com.lj.app.core.common.base.entity.UpmToken;
 import com.lj.app.core.common.util.AbstractBaseSpringTransactionTestCase;
 
 public class TokenApiServiceTest extends AbstractBaseSpringTransactionTestCase{

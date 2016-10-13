@@ -1,6 +1,6 @@
-package com.lj.app.core.common.base.model;
+package com.lj.app.core.common.base.entity;
 
-import com.lj.app.core.common.base.model.BaseModel;
+import com.lj.app.core.common.base.entity.BaseModel;
 
 /**
  * 用户信息

@@ -1,6 +1,7 @@
 package com.lj.app.core.common.freeMarker;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Date;
@@ -20,6 +21,9 @@ import freemarker.template.TemplateException;
 public class FreeMarkerTemplateUtils {
 
 	private static Log log = LogFactory.getLog(FreeMarkerTemplateUtils.class);
+	
+	public static final String TEST_TEMPLATE_ROOT_DIR = PropertiesUtil.getProperty("TEST_TEMPLATE_ROOT_DIR", "d:\\TEST_TEMPLATE_ROOT_DIR");
+	public static final String TEST_CLASSPATH_TEMPLATE_ROOT_DIR = PropertiesUtil.getProperty("TEST_CLASSPATH_TEMPLATE_ROOT_DIR", "classpath:\\TEST_TEMPLATE_ROOT_DIR");
 	
 	private Configuration configuration = null;
 	
@@ -82,28 +86,20 @@ public class FreeMarkerTemplateUtils {
 	 * 
 	 * @return 模板文件内容
 	 */
-	public static String readTemplateFileContent(String templatePath) {
-	    File templateFile = new File(templatePath);
-	    String templateFileContent = null;
-	    try {
-	        templateFileContent = org.apache.commons.io.FileUtils.readFileToString(templateFile, "UTF-8");
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
-	    return templateFileContent;
+	public static String readTemplateFileContent(String templatePath) throws FileNotFoundException, IOException,Exception {
+		String templateFileContent = null;
+		File templateFile = new File(templatePath);
+		templateFileContent = org.apache.commons.io.FileUtils.readFileToString(templateFile, "UTF-8");
+		return templateFileContent;
 	}
 
 	/**
 	 * 写入模板文件内容
 	 * 
 	 */
-	public static String writeTemplateFileContent(String templatePath, String templateFileContent) {
+	public static String writeTemplateFileContent(String templatePath, String templateFileContent)throws FileNotFoundException, IOException,Exception {
 	    File templateFile = new File(templatePath);
-	    try {
-	        org.apache.commons.io.FileUtils.writeStringToFile(templateFile, templateFileContent, "UTF-8");
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+	    org.apache.commons.io.FileUtils.writeStringToFile(templateFile, templateFileContent, "UTF-8");
 	    return templateFileContent;
 	}
 	

@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lj.app.core.common.base.api.TokenApiService;
-import com.lj.app.core.common.base.model.UpmToken;
+import com.lj.app.core.common.base.entity.UpmToken;
 import com.lj.app.core.common.properties.PropertiesUtil;
 
 @Service("createTokenService")

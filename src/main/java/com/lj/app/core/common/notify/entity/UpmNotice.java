@@ -1,6 +1,6 @@
-package com.lj.app.core.common.notify.model;
+package com.lj.app.core.common.notify.entity;
 
-import com.lj.app.core.common.base.model.BaseModel;
+import com.lj.app.core.common.base.entity.BaseModel;
 
 public class UpmNotice extends BaseModel{
 	

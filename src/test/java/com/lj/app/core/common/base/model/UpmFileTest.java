@@ -9,6 +9,8 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.lj.app.core.common.base.entity.UpmFile;
+
 public class UpmFileTest {
 
 	private UpmFile upmFile;

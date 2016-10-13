@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import com.lj.app.core.common.base.model.BaseModel;
+import com.lj.app.core.common.base.entity.BaseModel;
 import com.lj.app.core.common.pagination.Page;
 
 @SuppressWarnings("all")

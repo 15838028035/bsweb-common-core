@@ -2,7 +2,7 @@
 <#assign classNameLower = className?uncap_first> 
 package ${basepackage}.web;
 
-import ${basepackage}.model.${className};
+import ${basepackage}.entity.${className};
 import ${basepackage}.service.${className}Service;
 
 import java.util.HashMap;
@@ -28,9 +28,9 @@ import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
 /**
- * @title :${className}Action.java
+ * @title :${table.remarks}
  * @description :${className}Action
- * @author: userName
+ * @author: author
  * @date: date
  */
 @SuppressWarnings("serial")

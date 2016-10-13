@@ -4,7 +4,7 @@
 
 <sqlMap namespace="upmOrganization">
 
-    <typeAlias alias="upmOrganization" type="com.lj.app.core.common.base.model.UpmOrganization"/>
+    <typeAlias alias="upmOrganization" type="com.lj.app.core.common.base.entity.UpmOrganization"/>
 
     <resultMap id="upmOrganizationResult" class="upmOrganization">
    	  	<result property="orgId" column="org_id"   />

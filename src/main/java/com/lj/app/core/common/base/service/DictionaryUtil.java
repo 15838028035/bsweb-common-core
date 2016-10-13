@@ -8,8 +8,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.lj.app.core.common.base.model.UpmDictionary;
-import com.lj.app.core.common.base.model.UpmDictionaryNote;
+import com.lj.app.core.common.base.entity.UpmDictionary;
+import com.lj.app.core.common.base.entity.UpmDictionaryNote;
 import com.lj.app.core.common.util.SpringContextHolder;
 
 public class DictionaryUtil {

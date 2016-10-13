@@ -2,7 +2,7 @@
 <#assign classNameLower = className?uncap_first> 
 package ${basepackage}.web;
 
-import ${basepackage}.model.${className};
+import ${basepackage}.entity.${className};
 import ${basepackage}.service.${className}Service;
 
 import java.util.HashMap;

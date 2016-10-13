@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.lj.app.core.common.notify.model.UpmNotice;
+import com.lj.app.core.common.notify.entity.UpmNotice;
 import com.lj.app.core.common.notify.service.UpmNoticeService;
 import com.lj.app.core.common.util.DateUtil;
 

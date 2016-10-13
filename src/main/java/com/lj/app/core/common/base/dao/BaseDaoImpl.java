@@ -12,7 +12,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import org.springframework.stereotype.Component;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.lj.app.core.common.base.model.BaseModel;
+import com.lj.app.core.common.base.entity.BaseModel;
 
 
 @Component("baseDao")

@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.lj.app.core.common.notify.entity.UpmNotice;
+
 public class UpmNoticeTest {
 
 	private UpmNotice upmNotice;

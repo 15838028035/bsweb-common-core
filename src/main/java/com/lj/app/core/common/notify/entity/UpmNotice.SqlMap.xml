@@ -4,7 +4,7 @@
 
 <sqlMap namespace="upmNotice">
 
-    <typeAlias alias="upmNotice" type="com.lj.app.core.common.notify.model.UpmNotice"/>
+    <typeAlias alias="upmNotice" type="com.lj.app.core.common.notify.entity.UpmNotice"/>
 
     <resultMap id="upmNoticeResult" class="upmNotice">
    	  	<result property="id" column="id" />

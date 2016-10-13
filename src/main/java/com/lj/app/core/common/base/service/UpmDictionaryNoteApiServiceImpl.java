@@ -8,8 +8,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lj.app.core.common.base.model.UpmDictionary;
-import com.lj.app.core.common.base.model.UpmDictionaryNote;
+import com.lj.app.core.common.base.entity.UpmDictionary;
+import com.lj.app.core.common.base.entity.UpmDictionaryNote;
 import com.lj.app.core.common.util.SpringContextHolder;
 
 @Service("upmDictionaryNoteApiService")

@@ -5,7 +5,7 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.lj.app.core.common.notify.model.UpmNotice;
+import com.lj.app.core.common.notify.entity.UpmNotice;
 import com.lj.app.core.common.notify.service.UpmNoticeService;
 import com.lj.app.core.common.util.SpringContextHolder;
 import com.lj.app.core.common.util.StringUtil;

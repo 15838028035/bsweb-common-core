@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lj.app.core.common.base.model.UpmDictionary;
+import com.lj.app.core.common.base.entity.UpmDictionary;
 
 @Service("dictionaryApiService")
 public class DictionaryApiService {

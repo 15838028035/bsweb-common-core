@@ -1,6 +1,6 @@
 package com.lj.app.core.common.properties;
 
-import com.lj.app.core.common.base.model.UpmConfiguration;
+import com.lj.app.core.common.base.entity.UpmConfiguration;
 import com.lj.app.core.common.base.service.UpmConfigurationService;
 import com.lj.app.core.common.util.SpringContextHolder;
 

@@ -4,7 +4,7 @@
 
 <sqlMap namespace="upmDictionaryNote">
 
-    <typeAlias alias="upmDictionaryNote" type="com.lj.app.core.common.base.model.UpmDictionaryNote"/>
+    <typeAlias alias="upmDictionaryNote" type="com.lj.app.core.common.base.entity.UpmDictionaryNote"/>
 
     <resultMap id="upmDictionaryNoteResult" class="upmDictionaryNote">
    	  	<result property="id" column="id"   />

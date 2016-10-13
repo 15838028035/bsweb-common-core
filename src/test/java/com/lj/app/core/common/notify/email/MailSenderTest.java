@@ -11,7 +11,7 @@ import java.util.Map;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.lj.app.core.common.base.model.UpmUser;
+import com.lj.app.core.common.base.entity.UpmUser;
 import com.lj.app.core.common.util.AbstractBaseSpringTransactionTestCase;
 
 public class MailSenderTest extends AbstractBaseSpringTransactionTestCase{

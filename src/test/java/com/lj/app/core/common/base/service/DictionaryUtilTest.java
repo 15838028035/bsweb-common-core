@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.lj.app.core.common.base.model.UpmDictionary;
+import com.lj.app.core.common.base.entity.UpmDictionary;
 import com.lj.app.core.common.util.AbstractBaseSpringTransactionTestCase;
 
 public class DictionaryUtilTest extends AbstractBaseSpringTransactionTestCase{

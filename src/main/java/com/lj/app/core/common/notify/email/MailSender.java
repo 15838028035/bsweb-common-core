@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
 import com.lj.app.core.common.freeMarker.FreeMarkerTemplateUtils;
-import com.lj.app.core.common.notify.model.UpmNotice;
+import com.lj.app.core.common.notify.entity.UpmNotice;
 import com.lj.app.core.common.notify.service.UpmNoticeService;
 import com.lj.app.core.common.properties.PropertiesUtil;
 

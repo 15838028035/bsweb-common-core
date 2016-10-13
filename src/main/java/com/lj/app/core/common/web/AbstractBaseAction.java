@@ -6,14 +6,20 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.beans.BeanUtils;
 
 import com.lj.app.core.common.base.service.BaseService;
 import com.lj.app.core.common.pagination.Page;
+import com.lj.app.core.common.pagination.PageTool;
 import com.lj.app.core.common.util.AjaxResult;
+import com.lj.app.core.common.util.DateUtil;
 import com.lj.app.core.common.util.SessionCode;
+import com.lj.app.core.common.util.StringUtil;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
@@ -256,6 +262,57 @@ public abstract class AbstractBaseAction<T> extends ActionSupport implements Mod
 	 * 等同于prepare()的内部函数,供prepardMethodName()函数调用. 
 	 */
 	protected abstract void prepareModel() throws Exception;
+	
+	/**
+	 * 公共jgGrid查询方法
+	 * @return
+	 * @throws Exception
+	 */
+	public String jqGridList() throws Exception {
+		try {
+			Map<String,Object> condition = new HashMap<String,Object>();
+			page.setFilters(getModel());
+			
+			if (StringUtil.isNotBlank(this.getSidx())) {
+				String orderBy = PageTool.convert(this.getSidx()) + " "+ this.getSord();
+				page.setSortColumns(orderBy);
+			}
+			
+			getBaseService().findPageList(page, condition);
+			Struts2Utils.renderText(PageTool.pageToJsonJQGrid(this.page),new String[0]);
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	/**
+	 * 公共保存或者更新方法
+	 * @return
+	 * @throws Exception
+	 */
+	public String commonSaveOrUpdate() throws Exception {
+		
+	try{
+			if (StringUtil.isEqualsIgnoreCase(operate, AbstractBaseAction.EDIT)) {
+				BeanUtils.copyProperties(getModel(), new String[]{"updateBy","updateDate"},new String[]{String.valueOf(getLoginUserId()),DateUtil.getNowDateYYYYMMddHHMMSS()});
+				getBaseService().updateObject(getModel());
+				returnMessage = UPDATE_SUCCESS;
+			}else{
+				BeanUtils.copyProperties(getModel(), new String[]{"createBy","createDate"},new String[]{String.valueOf(getLoginUserId()),DateUtil.getNowDateYYYYMMddHHMMSS()});
+				getBaseService().insertObject(getModel());
+				returnMessage = CREATE_SUCCESS;
+			}
+			
+			return LIST;
+		}catch(Exception e){
+			returnMessage = CREATE_FAILURE;
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
 	
 	public String multidelete() throws Exception {
 		String returnMessage = "";
