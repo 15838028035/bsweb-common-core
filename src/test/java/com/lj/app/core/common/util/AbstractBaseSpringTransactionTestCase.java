@@ -7,6 +7,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.lj.app.core.common.properties.PropertiesUtil;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-base.xml")
 @Transactional  
@@ -15,8 +17,6 @@ public class AbstractBaseSpringTransactionTestCase {
 
 	@BeforeClass 
 	public static void setUpRunEnv() {
-		//TODO:设置单元测试运行环境
-		//IDataBaseCreater dataBaseCreater = new MysqlDataBaseCreater();
-		//dataBaseCreater.create();
+		PropertiesUtil.setProperty("TEST_CLASSPATH_TEMPLATE_ROOT_DIR", "d:\\TEST_TEMPLATE_ROOT_DIR");
 	}
 }
