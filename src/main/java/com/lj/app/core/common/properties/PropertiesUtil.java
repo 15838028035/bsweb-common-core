@@ -53,7 +53,7 @@ public class PropertiesUtil {
 	}
 
 	public static String getPropertyLower(String name, String defaultValue) {
-		return getPropertyTrim(name,defaultValue).toUpperCase();
+		return getPropertyTrim(name,defaultValue).toLowerCase();
 	}
 	
 	public static boolean getBooleanTrueOrFalse(String name, boolean defaultValue) {

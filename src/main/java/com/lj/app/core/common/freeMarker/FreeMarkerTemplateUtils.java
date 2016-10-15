@@ -4,13 +4,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.lj.app.core.common.exception.FreemarkerTemplateException;
 import com.lj.app.core.common.properties.PropertiesUtil;
 import com.lj.app.core.common.util.ClassUtil;
 
@@ -32,18 +36,89 @@ public class FreeMarkerTemplateUtils {
          configuration.setDefaultEncoding("UTF-8");  
      }  
 	 
-	public Configuration getDirectoryForTemplateLoading(File file) throws Exception {
+	public Configuration setDirectoryForTemplateLoading(File file) throws Exception {
 		configuration.setDirectoryForTemplateLoading(file);
 		return configuration;
 	}
-	
-	public static String processTemplateIntoString(Template template, Object model)
-			throws IOException, TemplateException {
+
+	/**
+	 * 获得模板编码
+	 * @return String
+	 */
+	public static String getFremarkerTemplateEncoding() {
+	    return PropertiesUtil.getProperty("FREEMARKER_TEMPLATE_CODING", "UTF-8");
+	}
+	public String processTemplate(String templateName, Object model) throws FreemarkerTemplateException ,Exception{
+	    Template template = getTemplate(configuration,templateName);
+	    return processTemplateIntoString(template, model);
+	}
+
+	public void processTemplate(String templateName, Object model,Writer out) throws FreemarkerTemplateException{
+	    Template template = getTemplate(configuration,templateName);
+	    processTemplate(template, model, out);
+	}
+
+	public String processTemplate(String templateName, Object model,String encoding) throws FreemarkerTemplateException ,Exception{
+	    Template template = getTemplate(configuration,templateName,encoding);
+	    return processTemplateIntoString(template, model);
+	}
+
+	public String processTemplate(String templateName, Object model,Locale locale,String encoding) throws FreemarkerTemplateException ,Exception{
+	    Template template = getTemplate(configuration,templateName,locale,encoding);
+	    return processTemplateIntoString(template, model);
+	}
+
+	public static String processTemplateIntoString(Template template,Object model) throws FreemarkerTemplateException,Exception {
 		StringWriter result = new StringWriter();
 		template.process(model, result);
 		return result.toString();
 	}
 
+	public static void processTemplate(Template template,Object model,Writer out) throws FreemarkerTemplateException {
+	    try {
+	        template.process(model, out);
+	    } catch (IOException e) {
+	        throw new FreemarkerTemplateException("process template occer IOException,templateName:"+template.getName(),e);
+	    } catch (TemplateException e) {
+	        throw new FreemarkerTemplateException("process template occer TemplateException,templateName:"+template.getName(),e);
+	    }
+	}
+
+	public static Template getTemplate(Configuration conf,String templateName) throws FreemarkerTemplateException {
+	    try {
+	        return conf.getTemplate(templateName);
+	    } catch (IOException e) {
+	        throw new FreemarkerTemplateException("load template error,templateName:"+templateName,e);
+	    }
+	}
+
+	public static Template getTemplate(Configuration conf,String templateName,String encoding) throws FreemarkerTemplateException {
+	    try {
+	        return conf.getTemplate(templateName,encoding);
+	    } catch (IOException e) {
+	        throw new FreemarkerTemplateException("load template error,templateName:"+templateName,e);
+	    }
+	}
+
+	public static Template getTemplate(Configuration conf,String templateName,Locale locale,String encoding) throws FreemarkerTemplateException {
+	    try {
+	        return conf.getTemplate(templateName,locale,encoding);
+	    } catch (IOException e) {
+	        throw new FreemarkerTemplateException("load template error,templateName:"+templateName,e);
+	    }
+	}
+	
+	/**
+	 * 获得测试模版目录
+	 * @return
+	 */
+	public static Configuration getTestConfiguration() throws Exception{
+		Configuration conf = new Configuration();
+		File file = FileUtils.getFile(FreeMarkerTemplateUtils.TEST_TEMPLATE_ROOT_DIR);
+		conf.setDirectoryForTemplateLoading(file);
+		return conf;
+	}
+	
 	public Configuration getConfiguration() {
 		return configuration;
 	}

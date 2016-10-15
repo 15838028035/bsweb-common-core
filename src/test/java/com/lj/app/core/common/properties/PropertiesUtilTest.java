@@ -292,14 +292,14 @@ public class PropertiesUtilTest {
 	@Test
 	public void getPropertyLowerDefaultTest() {
 		PropertiesUtil.setProperty("key", "value2 ");
-		assertEquals("value",PropertiesUtil.getPropertyLower("key", " value2"));
+		assertEquals("value2",PropertiesUtil.getPropertyLower("key", " value2"));
 		assertEquals("expectedvalue",PropertiesUtil.getPropertyLower("keyNotFound","expectedValue"));
 	}
 	
 	@Test
 	public void getPropertyLowerDefaultValueNullTest() {
 		PropertiesUtil.setProperty("key", " value ");
-		assertEquals("value2",PropertiesUtil.getPropertyLower("key2", " Value2"));
+		assertEquals("value2",PropertiesUtil.getPropertyLower("key2", " value2"));
 		assertEquals("expectedvalue",PropertiesUtil.getPropertyLower("keyNotFound","expectedValue"));
 	}
 	
@@ -318,7 +318,7 @@ public class PropertiesUtilTest {
 	public void getPropertyUpperDefaultTest() {
 		PropertiesUtil.setProperty("key", "value ");
 		assertEquals("VALUE",PropertiesUtil.getPropertyUpper("key", " value2"));
-		assertEquals("expectedValue",PropertiesUtil.getPropertyUpper("keyNotFound","expectedValue"));
+		assertEquals("EXPECTEDVALUE",PropertiesUtil.getPropertyUpper("keyNotFound","expectedValue"));
 	}
 	
 	@Test

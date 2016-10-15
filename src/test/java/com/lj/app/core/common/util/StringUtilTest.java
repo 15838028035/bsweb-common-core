@@ -147,7 +147,7 @@ public class StringUtilTest {
 	@Test
 	public void isNotBlankArrayTest() {
 		assertFalse(StringUtil.isNotBlank(new String[0]));
-		assertTrue(StringUtil.isBlank(("a,b,c").split(",")));
+		assertTrue(StringUtil.isNotBlank(("a,b,c").split(",")));
 	}
 
 	@Test
@@ -582,7 +582,7 @@ public class StringUtilTest {
 		assertEquals("14",StringUtil.getPrefix("e://test//14.jsp"));
 		
 		assertEquals("",StringUtil.getPrefix(null));
-		assertEquals("1",StringUtil.getPrefix("e://test//test1//"));
+		assertEquals("",StringUtil.getPrefix("e://test//test1//"));
 		
 	}
 	
