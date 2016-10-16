@@ -38,7 +38,8 @@
 			  <#if column.isDateTimeColumn>
 				<input type="text" name="${classNameLower}.${column.columnNameLower}" id = "${column.columnNameLower}" value="<s:date name='${column.columnNameLower}' format='yyyy-MM-dd' />" class="Wdate" onClick="WdatePicker()" readonly="readonly"/>
 		 	 <#else>
-		 	  <input type="text"  name="${classNameLower}.${column.columnNameLower}" id="${column.columnNameLower}"value="${classNameLower}.${column.columnNameLower}" />
+		 	  <input type="text"  name="${classNameLower}.${column.columnNameLower}" id="${column.columnNameLower}" value="${r"${"}${classNameLower}.${column.columnNameLower}}" />
+		 	  
 		 	 </#if>
 		 	 </td>
 		 </tr>
