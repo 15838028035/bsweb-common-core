@@ -11,7 +11,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.lj.app.core.common.base.entity.BaseModel;
+import com.lj.app.core.common.base.entity.BaseEntity;
 
 public class StringUtilTest {
 
@@ -756,7 +756,7 @@ public class StringUtilTest {
 	
 	@Test
 	public void propsTest() {
-		System.out.println(StringUtil.props(new BaseModel()));
+		System.out.println(StringUtil.props(new BaseEntity()));
 	}
 	
 }

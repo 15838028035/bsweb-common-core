@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import com.lj.app.core.common.base.entity.BaseModel;
+import com.lj.app.core.common.base.entity.BaseEntity;
 import com.lj.app.core.common.pagination.Page;
 
 @SuppressWarnings("all")
@@ -26,11 +26,11 @@ public interface BaseService<T> {
 	public void saveOrUpdate(Object obj,Object id);
 	public void saveOrUpdate(String sqlId, Object obj, Object id);
 
-	public BaseModel findObject(String sqlId, Object obj);
+	public BaseEntity findObject(String sqlId, Object obj);
 
-	public BaseModel getInfoByKey(String sqlId, Object obj);
+	public BaseEntity getInfoByKey(String sqlId, Object obj);
 
-	public BaseModel getInfoByKey(Object obj);
+	public BaseEntity getInfoByKey(Object obj);
 	
 	public Object queryObject(String sqlId, Object obj);
 	

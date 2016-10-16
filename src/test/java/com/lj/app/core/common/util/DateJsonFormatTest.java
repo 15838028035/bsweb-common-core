@@ -11,7 +11,7 @@ import net.sf.json.JsonConfig;
 
 import org.junit.Test;
 
-import com.lj.app.core.common.base.entity.BaseModel;
+import com.lj.app.core.common.base.entity.BaseEntity;
 
 public class DateJsonFormatTest {
 
@@ -66,7 +66,7 @@ public class DateJsonFormatTest {
 	@Test
 	public void processObjectValuePoObjectTest() {
 		
-		BaseModel baseModel =new BaseModel();
+		BaseEntity baseModel =new BaseEntity();
 		baseModel.setAppId("appId");
 		
 		JsonConfig cfg = new JsonConfig();		
@@ -85,7 +85,7 @@ public class DateJsonFormatTest {
 	@Test
 	public void processObjectValuePoObjectConfigNullTest() {
 		
-		BaseModel baseModel =new BaseModel();
+		BaseEntity baseModel =new BaseEntity();
 		baseModel.setAppId("appId");
 		
 		JsonConfig cfg = new JsonConfig();		

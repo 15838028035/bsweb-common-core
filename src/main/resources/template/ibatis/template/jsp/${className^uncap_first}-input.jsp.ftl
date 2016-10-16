@@ -36,9 +36,9 @@
 			 <td align="right">${column.remarks}<font color="red">*</font></td>
 			 <td>
 			  <#if column.isDateTimeColumn>
-				<input type="text" name="${column.columnNameLower}" id = "${column.columnNameLower}" value="<s:date name='${column.columnNameLower}' format='yyyy-MM-dd' />" class="Wdate" onClick="WdatePicker()" readonly="readonly"/>
+				<input type="text" name="${classNameLower}.${column.columnNameLower}" id = "${column.columnNameLower}" value="<s:date name='${column.columnNameLower}' format='yyyy-MM-dd' />" class="Wdate" onClick="WdatePicker()" readonly="readonly"/>
 		 	 <#else>
-		 	  <input type="text" id="${column.columnNameLower}" name="${column.columnNameLower}" value="${column.columnNameLower}" />
+		 	  <input type="text"  name="${classNameLower}.${column.columnNameLower}" id="${column.columnNameLower}"value="${classNameLower}.${column.columnNameLower}" />
 		 	 </#if>
 		 	 </td>
 		 </tr>
@@ -66,7 +66,7 @@
 			},
 			rules: {
 		       <#list table.columns as column>
-		 		 "${column.columnNameLower}": {
+		 		 "${classNameLower}.${column.columnNameLower}": {
 					required: true,
 					minlength:1,
 					maxlength:50

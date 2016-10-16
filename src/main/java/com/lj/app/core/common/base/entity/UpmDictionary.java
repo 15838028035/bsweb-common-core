@@ -1,6 +1,6 @@
 package com.lj.app.core.common.base.entity;
 
-public class UpmDictionary extends BaseModel{
+public class UpmDictionary extends BaseEntity{
 	
 	/**
 	 *  编号 id

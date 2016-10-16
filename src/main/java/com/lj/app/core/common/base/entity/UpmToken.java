@@ -1,6 +1,6 @@
 package com.lj.app.core.common.base.entity;
 
-public class UpmToken extends BaseModel{
+public class UpmToken extends BaseEntity{
 	
 	/**
 	 * ID id

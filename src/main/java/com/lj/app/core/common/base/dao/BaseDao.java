@@ -7,7 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.lj.app.core.common.base.entity.BaseModel;
+import com.lj.app.core.common.base.entity.BaseEntity;
 
 public interface BaseDao<T>{
 
@@ -24,15 +24,15 @@ public interface BaseDao<T>{
 
 	 public void deleteObject(String sqlId, Object obj);
 
-	 public BaseModel findObject(String sqlId, Object obj);
+	 public BaseEntity findObject(String sqlId, Object obj);
 	
 	 public Object queryForObject(String sqlId, Object obj);
 
-	 public BaseModel getInfoByKey(String sqlId, Object obj);
+	 public BaseEntity getInfoByKey(String sqlId, Object obj);
 
-	 public List<BaseModel> findBaseModeList(String sqlId, Object obj);
+	 public List<BaseEntity> findBaseModeList(String sqlId, Object obj);
 
-	 public List<BaseModel> findBaseModePageList(String sqlId, Object obj);
+	 public List<BaseEntity> findBaseModePageList(String sqlId, Object obj);
 	
     public List queryForList(String statementName) throws DataAccessException ;
     public List queryForList(String statementName, Object parameterObject);

@@ -12,7 +12,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 import org.springframework.stereotype.Component;
 
 import com.ibatis.sqlmap.client.SqlMapClient;
-import com.lj.app.core.common.base.entity.BaseModel;
+import com.lj.app.core.common.base.entity.BaseEntity;
 
 
 @Component("baseDao")
@@ -61,8 +61,8 @@ public class BaseDaoImpl<T> extends SqlMapClientDaoSupport implements BaseDao{
 	}
 
 	@Override
-	public BaseModel findObject(String sqlId, Object obj) {
-		return (BaseModel)getSqlMapClientTemplate().queryForObject(sqlId, obj);
+	public BaseEntity findObject(String sqlId, Object obj) {
+		return (BaseEntity)getSqlMapClientTemplate().queryForObject(sqlId, obj);
 	}
 	
 	@Override
@@ -72,17 +72,17 @@ public class BaseDaoImpl<T> extends SqlMapClientDaoSupport implements BaseDao{
 	
 
 	@Override
-	public BaseModel getInfoByKey(String sqlId, Object obj) {
-		return (BaseModel)getSqlMapClientTemplate().queryForObject(sqlId, obj);
+	public BaseEntity getInfoByKey(String sqlId, Object obj) {
+		return (BaseEntity)getSqlMapClientTemplate().queryForObject(sqlId, obj);
 	}
 
 	@Override
-	public List<BaseModel> findBaseModeList(String sqlId, Object obj) {
+	public List<BaseEntity> findBaseModeList(String sqlId, Object obj) {
 		return getSqlMapClientTemplate().queryForList(sqlId,obj);
 	}
 
 	@Override
-	public List<BaseModel> findBaseModePageList(String sqlId, Object obj) {
+	public List<BaseEntity> findBaseModePageList(String sqlId, Object obj) {
 		return getSqlMapClientTemplate().queryForList(sqlId,obj);
 	}
 

@@ -1,7 +1,7 @@
 package com.lj.app.core.common.base.entity;
 
 
-public class UpmFile extends BaseModel{
+public class UpmFile extends BaseEntity{
 	
 	/**
 	 * ID

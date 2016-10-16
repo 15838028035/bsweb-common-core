@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 /**
  * @title :${table.remarks}
  * @description :${className}Service
- * @author: author
- * @date: date
+ * @author: ${author}
+ * @date: ${now?string("yyyy-MM-dd HH:mm:ss")}
  */
 @Service("${classNameLower}Service")
 public class ${className}ServiceImpl<${className}> extends BaseServiceImpl<${className}> implements ${className}Service<${className}>{

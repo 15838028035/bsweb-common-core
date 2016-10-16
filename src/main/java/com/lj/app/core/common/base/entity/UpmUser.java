@@ -1,12 +1,12 @@
 package com.lj.app.core.common.base.entity;
 
-import com.lj.app.core.common.base.entity.BaseModel;
+import com.lj.app.core.common.base.entity.BaseEntity;
 
 /**
  * 用户信息
  *
  */
-public class UpmUser extends BaseModel{
+public class UpmUser extends BaseEntity{
 	/**
 	 * ID
 	 */

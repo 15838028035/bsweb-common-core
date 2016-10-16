@@ -9,12 +9,12 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.lj.app.core.common.base.entity.BaseModel;
+import com.lj.app.core.common.base.entity.BaseEntity;
 
 public class MapAndObjectTest {
 
 	private Map<Object,Object> map = new HashMap<Object,Object>();
-	private BaseModel baseModel = new BaseModel();
+	private BaseEntity baseModel = new BaseEntity();
 	
 	@Before
 	public void setUp() {

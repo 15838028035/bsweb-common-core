@@ -13,6 +13,15 @@ import com.lj.app.core.common.generator.GeneratorProperties;
 public class StringHelper {
 	private static final Random RANDOM = new Random();
 
+	/**
+	 * 去除空格
+	 * @param str
+	 * @return
+	 */
+	public static String trimBlank(String str) {
+		return str == null ?"":str.trim();
+	}
+	
 	public static boolean isBlank(String str) {
 		return str == null || str.trim().length() == 0;
 	}

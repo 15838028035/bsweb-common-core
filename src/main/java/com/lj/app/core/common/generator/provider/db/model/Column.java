@@ -4,10 +4,10 @@ import com.lj.app.core.common.generator.GeneratorProperties;
 import com.lj.app.core.common.generator.util.ActionScriptDataTypesUtils;
 import com.lj.app.core.common.generator.util.DatabaseDataTypesUtils;
 import com.lj.app.core.common.generator.util.GLogger;
+import com.lj.app.core.common.generator.util.JavaPrimitiveTypeMapping;
 import com.lj.app.core.common.generator.util.JdbcType;
 import com.lj.app.core.common.generator.util.StringHelper;
 import com.lj.app.core.common.generator.util.TestDataGenerator;
-import com.lj.app.core.common.generator.util.JavaPrimitiveTypeMapping;
 
 public class Column {
 	private final Table _table;
@@ -103,7 +103,7 @@ public class Column {
 	}
 
 	public final String getRemarks() {
-		return this._remarks;
+		return StringHelper.trimBlank(this._remarks);
 	}
 
 	public int hashCode() {
@@ -141,6 +141,10 @@ public class Column {
 
 	public String getColumnNameFirstLower() {
 		return StringHelper.uncapitalize(getColumnName());
+	}
+	
+	public String getColumnNameFirstUpper() {
+		return StringHelper.capitalize(getColumnName());
 	}
 
 	public String getColumnNameLowerCase() {

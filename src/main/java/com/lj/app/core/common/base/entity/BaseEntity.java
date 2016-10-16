@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.lj.app.core.common.util.StringUtil;
 
 @SuppressWarnings("serial")
-public class BaseModel implements Serializable {
+public class BaseEntity implements Serializable {
 
 	/**
 	 * 创建人 create_by

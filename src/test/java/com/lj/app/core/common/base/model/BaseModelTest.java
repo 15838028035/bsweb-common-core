@@ -5,15 +5,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.lj.app.core.common.base.entity.BaseModel;
+import com.lj.app.core.common.base.entity.BaseEntity;
 
 public class BaseModelTest {
 
-	private BaseModel baseModel;
+	private BaseEntity baseModel;
 	
 	@Before
 	public void setUp() {
-		baseModel = new BaseModel();
+		baseModel = new BaseEntity();
 	}
 
 	@Test

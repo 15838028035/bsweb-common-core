@@ -30,8 +30,8 @@ import com.opensymphony.xwork2.util.logging.LoggerFactory;
 /**
  * @title :${className}Action.java
  * @description :${className}Action
- * @author: userName
- * @date: date
+ * @author: ${author}
+ * @date: ${now?string("yyyy-MM-dd HH:mm:ss")}
  */
 @SuppressWarnings("serial")
 @Controller

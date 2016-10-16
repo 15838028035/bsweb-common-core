@@ -1,8 +1,8 @@
 package com.lj.app.core.common.notify.entity;
 
-import com.lj.app.core.common.base.entity.BaseModel;
+import com.lj.app.core.common.base.entity.BaseEntity;
 
-public class UpmNotice extends BaseModel{
+public class UpmNotice extends BaseEntity{
 	
 	/**
 	 * ID

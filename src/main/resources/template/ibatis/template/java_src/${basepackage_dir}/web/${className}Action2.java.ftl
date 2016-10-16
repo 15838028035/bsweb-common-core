@@ -30,8 +30,8 @@ import com.opensymphony.xwork2.util.logging.LoggerFactory;
 /**
  * @title :${table.remarks}
  * @description :${className}Action
- * @author: author
- * @date: date
+ * @author: ${author}
+ * @date: ${now?string("yyyy-MM-dd HH:mm:ss")}
  */
 @SuppressWarnings("serial")
 @Controller
@@ -53,6 +53,8 @@ public class ${className}Action extends AbstractBaseAction<${className}> {
 	
 	private ${className} ${classNameLower};
 	
+	private ${table.idColumn.javaType} ${table.idColumn.columnNameFirstLower};
+	
 	public   BaseService getBaseService(){
 		return ${classNameLower}Service;
 	}
@@ -69,85 +71,30 @@ public class ${className}Action extends AbstractBaseAction<${className}> {
 			${classNameLower} = new ${className}();
 		}
 	}
-	
-	@Override
-	public String list() throws Exception {
-		try {
-			Map<String,Object> condition = new HashMap<String,Object>();
-			page.setFilters(${classNameLower});
-			
-			if (ValidateUtil.isNotEmpty(this.getSidx())) {
-				String orderBy = PageTool.convert(this.getSidx()) + " "+ this.getSord();
-				page.setSortColumns(orderBy);
-			}
-			
-			<#list table.columns as column>
-			<#if column.isDateTimeColumn>
-			condition.put("${column.columnNameLower}Begin",  Struts2Utils.getParameter("${column.columnNameLower}Begin"));
-			condition.put("${column.columnNameLower}End",  Struts2Utils.getParameter("${column.columnNameLower}End"));
-			</#if>
-			</#list>
-			condition.put(CREATE_BY, getLoginUserId());
-			
-			${classNameLower}Service.findPageList(page, condition);
-			Struts2Utils.renderText(PageTool.pageToJsonJQGrid(this.page),new String[0]);
-			return null;
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
+
+	public void set${className}Service(${className}Service ${classNameLower}Service){
+		this.${classNameLower}Service = ${classNameLower}Service;
 	}
 	
-	@Override
-	public String input() throws Exception {
-		return INPUT;
+	public void set${className}(${className} ${classNameLower}){
+		this.${classNameLower} = ${classNameLower};
 	}
 	
-	@Override
-	public String save() throws Exception {
-		
-	try{
-			if (operate != null && operate.equals("edit")) {
-				${classNameLower}.setUpdateBy(getLoginUserId());
-				${classNameLower}.setUpdateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
-				${classNameLower}Service.updateObject(${classNameLower});
-				
-				returnMessage = UPDATE_SUCCESS;
-			}else{
-				${classNameLower}.setCreateBy(getLoginUserId());
-				${classNameLower}.setCreateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
-				${classNameLower}Service.insertObject(${classNameLower});
-				returnMessage = CREATE_SUCCESS;
-			}
-			
-			return LIST;
-		}catch(Exception e){
-			returnMessage = CREATE_FAILURE;
-			e.printStackTrace();
-			throw e;
-		}finally{
-		}
-		
-	}
-
-	@Override
-	public String delete() throws Exception {
-		return null;
-	}
-
-	<@generateJavaColumns/>
-
-<#macro generateJavaColumns>
-	<#list table.columns as column>
-	public void set${column.columnName}(${column.javaType} value) {
-		this.${column.columnNameLower} = value;
+	public void set${table.idColumn.columnNameFirstUpper}(${table.idColumn.javaType} ${table.idColumn.columnNameFirstLower}){
+		this.${table.idColumn.columnNameFirstLower} =  ${table.idColumn.columnNameFirstLower};
 	}
 	
-	public ${column.javaType} get${column.columnName}() {
-		return this.${column.columnNameLower};
+	
+	public ${className}Service get${className}Service(){
+		return ${classNameLower}Service;
 	}
-	</#list>
-</#macro>
-
+	
+	public ${className} get${className}(){
+		return ${classNameLower};
+	}
+	
+	public ${table.idColumn.javaType}  get${table.idColumn.columnNameFirstUpper}(){
+		return ${table.idColumn.columnNameFirstLower};
+	}
 }
 

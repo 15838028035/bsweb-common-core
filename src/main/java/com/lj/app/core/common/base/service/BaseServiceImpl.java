@@ -10,7 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.lj.app.core.common.base.dao.BaseDao;
-import com.lj.app.core.common.base.entity.BaseModel;
+import com.lj.app.core.common.base.entity.BaseEntity;
 import com.lj.app.core.common.pagination.Page;
 import com.lj.app.core.common.util.MapAndObject;
 import com.lj.app.core.common.util.StringUtil;
@@ -72,17 +72,17 @@ public abstract class BaseServiceImpl<T> implements BaseService {
 	}
 	
 	@Override
-	public BaseModel findObject(String sqlId, Object obj) {
+	public BaseEntity findObject(String sqlId, Object obj) {
 		return baseDao.findObject(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId,obj);
 	}
 
 	@Override
-	public BaseModel getInfoByKey(String sqlId, Object obj) {
+	public BaseEntity getInfoByKey(String sqlId, Object obj) {
 		return baseDao.getInfoByKey(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId,obj);
 	}
 
 	@Override
-	public BaseModel getInfoByKey(Object obj) {
+	public BaseEntity getInfoByKey(Object obj) {
 		return baseDao.getInfoByKey(getSqlMapNameSpace()+NAMESPACE_SPLIT+"getInfoByKey",obj);
 	}
 
@@ -97,22 +97,22 @@ public abstract class BaseServiceImpl<T> implements BaseService {
 	}
 	
 	@Override
-	public List<BaseModel> findBaseModeList(Object obj) {
+	public List<BaseEntity> findBaseModeList(Object obj) {
 		return findBaseModeList("select",obj);
 	}
 
 	@Override
-	public List<BaseModel> findBaseModeList(String sqlId, Object obj) {
+	public List<BaseEntity> findBaseModeList(String sqlId, Object obj) {
 		return baseDao.findBaseModeList(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId, obj);
 	}
 
 	@Override
-	public List<BaseModel> findBaseModePageList(Object obj) {
+	public List<BaseEntity> findBaseModePageList(Object obj) {
 		return findBaseModePageList("select", obj);
 	}
 
 	@Override
-	public List<BaseModel> findBaseModePageList(String sqlId, Object obj) {
+	public List<BaseEntity> findBaseModePageList(String sqlId, Object obj) {
 		return baseDao.findBaseModePageList(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId, obj);
 	}
 

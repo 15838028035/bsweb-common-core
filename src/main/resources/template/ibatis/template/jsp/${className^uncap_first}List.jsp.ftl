@@ -56,7 +56,7 @@
 			autowidth:true,
 			shrinkToFit:true,
 			height: '100%',
-			sortname:'loginNo',
+			sortname:'${table.idColumn.columnNameFirstLower}',
 			sortorder:'asc',
 			hidegrid: false,
 			gridComplete:function(){},
@@ -101,11 +101,11 @@
 						<#list table.columns as column>
 			 			<td>${column.remarks}</td>
 			 			<#if column.isDateTimeColumn>
-						<td><input type="text" name="${column.columnNameLower}Begin" id = "${column.columnNameLower}Begin"  class="Wdate" onClick="WdatePicker()" readonly="readonly"/>
-							<input type="text" name="${column.columnNameLower}End" id = "${column.columnNameLower}End"  class="Wdate" onClick="WdatePicker()" readonly="readonly"/>
+						<td><input type="text" name="${classNameLower}.${column.columnNameLower}Begin" id = "${column.columnNameLower}Begin"  class="Wdate" onClick="WdatePicker()" readonly="readonly"/>
+							<input type="text" name="${classNameLower}.${column.columnNameLower}End" id = "${column.columnNameLower}End"  class="Wdate" onClick="WdatePicker()" readonly="readonly"/>
 						</td>
 						<#else>
-						<td><input name="${column.columnNameLower}" id = "${column.columnNameLower}" type="text"/></td>
+						<td><input name="${classNameLower}.${column.columnNameLower}" id = "${column.columnNameLower}" type="text"/></td>
 						</#if>
 	       				</#list>
 						<td>		
@@ -143,10 +143,10 @@
 				postData : {
 							<#list table.columns as column>
 							<#if column.isDateTimeColumn>
-							"${column.columnNameLower}Begin":${column.columnNameLower}Begin,
-							"${column.columnNameLower}End":${column.columnNameLower}End<#if column_has_next>,</#if>
+							"${classNameLower}.${column.columnNameLower}Begin":${column.columnNameLower}Begin,
+							"${classNameLower}.${column.columnNameLower}End":${column.columnNameLower}End<#if column_has_next>,</#if>
 							<#else>
-			 			 	"${column.columnNameLower}":${column.columnNameLower}<#if column_has_next>,</#if>
+			 			 	"${classNameLower}.${column.columnNameLower}":${column.columnNameLower}<#if column_has_next>,</#if>
 			 			 	</#if>
 	       				</#list>
 				}, 

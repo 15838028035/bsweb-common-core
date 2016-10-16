@@ -67,7 +67,7 @@ public class Table {
 	}
 
 	public String getRemarks() {
-		return this.remarks;
+		return StringHelper.trimBlank(this.remarks);
 	}
 
 	public void setRemarks(String remarks) {
