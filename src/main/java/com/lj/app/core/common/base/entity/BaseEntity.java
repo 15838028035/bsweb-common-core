@@ -15,6 +15,16 @@ public class BaseEntity implements Serializable {
 	 * 创建日期 create_date
 	 */
 	private String createDate;
+	
+	/**
+	 * 创建时间查询
+	 */
+	private String createDateBegin;
+	
+	/**
+	 * 创建时间查询
+	 */
+	private String createDateEnd;
 	/**
 	 * 更新人 update_by
 	 */
@@ -23,6 +33,16 @@ public class BaseEntity implements Serializable {
 	 * 更新日期 update_date
 	 */
 	private String updateDate;
+	
+	/**
+	 * 更新日期 查询
+	 */
+	private String updateDatebegin;
+	
+	/**
+	 * 更新日期 查询
+	 */
+	private String updateDateEnd;
 
 	/**
 	 * 是否有效 enable_flag
@@ -126,6 +146,38 @@ public class BaseEntity implements Serializable {
 
 	public void setSord(String sord) {
 		this.sord = sord;
+	}
+
+	public String getCreateDateBegin() {
+		return createDateBegin;
+	}
+
+	public void setCreateDateBegin(String createDateBegin) {
+		this.createDateBegin = createDateBegin;
+	}
+
+	public String getCreateDateEnd() {
+		return createDateEnd;
+	}
+
+	public void setCreateDateEnd(String createDateEnd) {
+		this.createDateEnd = createDateEnd;
+	}
+
+	public String getUpdateDatebegin() {
+		return updateDatebegin;
+	}
+
+	public void setUpdateDatebegin(String updateDatebegin) {
+		this.updateDatebegin = updateDatebegin;
+	}
+
+	public String getUpdateDateEnd() {
+		return updateDateEnd;
+	}
+
+	public void setUpdateDateEnd(String updateDateEnd) {
+		this.updateDateEnd = updateDateEnd;
 	}
 
 }
