@@ -1,6 +1,7 @@
 package com.lj.app.core.common.flows.entity;
 
 import com.lj.app.core.common.base.entity.BaseEntity;
+import com.lj.app.core.common.flows.model.ProcessModel;
 
 /**
 *流程定义表
@@ -41,6 +42,11 @@ public class FlowProcess extends BaseEntity{
 	 * 流程内容  FLOW_CONTENT
 	 */
 	private String flowContent;
+
+	/**
+	 * 流程定义模型
+	 */
+	private ProcessModel model;
 
 	public java.lang.Integer getId() {
 		return id;
@@ -97,4 +103,13 @@ public class FlowProcess extends BaseEntity{
 	public void setFlowContent(String flowContent) {
 		this.flowContent = flowContent;
 	}
+
+	public ProcessModel getModel() {
+		return model;
+	}
+
+	public void setModel(ProcessModel model) {
+		this.model = model;
+	}
+	
 }

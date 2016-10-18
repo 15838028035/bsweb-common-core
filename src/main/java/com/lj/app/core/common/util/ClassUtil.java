@@ -1,6 +1,7 @@
 package com.lj.app.core.common.util;
 
 
+
 public class ClassUtil {
 	public static Object newInstance(Class<?> c) {
 		try {
@@ -47,5 +48,45 @@ public class ClassUtil {
 			cl = ClassUtil.class.getClassLoader();
 		}
 		return cl;
+	}
+   
+   /**
+    * 根据指定的类名称加载类
+    * @param className
+    * @return
+    * @throws ClassNotFoundException
+    */
+   public static Class<?> loadClass(String className) throws ClassNotFoundException {
+       try {
+           return Thread.currentThread().getContextClassLoader().loadClass(className);
+       } catch (ClassNotFoundException e) {
+           try {
+               return Class.forName(className);
+           } catch (ClassNotFoundException ex) {
+               try {
+                   return ClassLoader.class.getClassLoader().loadClass(className);
+               } catch (ClassNotFoundException exc) {
+                   throw exc;
+               }
+           }
+       }
+   }
+   
+   /**
+    * 根据类的class实例化对象
+    * @param clazz
+    * @return
+    */
+	public static <T> T instantiate(Class<T> clazz) {
+		if (clazz.isInterface()) {
+			//log.error("所传递的class类型参数为接口，无法实例化");
+			return null;
+		}
+		try {
+			return clazz.newInstance();
+		} catch (Exception ex) {
+			//log.error("检查传递的class类型参数是否为抽象类?", ex.getCause());
+		}
+		return null;
 	}
 }

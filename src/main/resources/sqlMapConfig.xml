@@ -18,6 +18,8 @@
       <sqlMap resource="com/lj/app/core/common/base/entity/UpmUser.SqlMap.xml"/>
       
       <sqlMap resource="com/lj/app/core/common/flows/entity/FlowProcess.SqlMap.xml"/>
+      <sqlMap resource="com/lj/app/core/common/flows/entity/FlowOrder.SqlMap.xml"/>
+      <sqlMap resource="com/lj/app/core/common/flows/entity/FlowTask.SqlMap.xml"/>
       
       
 </sqlMapConfig>
