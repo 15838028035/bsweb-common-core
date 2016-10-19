@@ -48,6 +48,16 @@ public abstract class BaseServiceImpl<T> implements BaseService {
 	}
 	
 	@Override
+	public Object insertObjectReturn(String sqlid, Object obj) {
+		return baseDao.insertObjectReturn(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlid,obj);
+	}
+	
+	@Override
+	public Object insertObjectReturn(Object obj) {
+		return baseDao.insertObjectReturn(getSqlMapNameSpace()+NAMESPACE_SPLIT+"insert",obj);
+	}
+	
+	@Override
 	public void updateObject(Object obj) {
 		updateObject("update",obj);
 	}

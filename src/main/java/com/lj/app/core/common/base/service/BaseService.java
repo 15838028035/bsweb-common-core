@@ -18,6 +18,9 @@ public interface BaseService<T> {
 	
 	 public int insertObjectReturnKey(String sqlid, Object obj);
 	 public int insertObjectReturnKey(Object obj);
+	 
+	 public Object insertObjectReturn(String sqlid, Object obj);
+	 public Object insertObjectReturn(Object obj);
 
 	public void updateObject(Object obj);
 

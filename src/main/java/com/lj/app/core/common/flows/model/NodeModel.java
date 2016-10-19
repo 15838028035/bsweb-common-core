@@ -9,6 +9,8 @@ import com.lj.app.core.common.flows.SnakerInterceptor;
 import com.lj.app.core.common.flows.core.Execution;
 import com.lj.app.core.common.generator.util.ClassHelper;
 import com.lj.app.core.common.generator.util.StringHelper;
+import com.opensymphony.xwork2.util.logging.Logger;
+import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
 /**
  * 节点元素（存在输入输出的变迁）
@@ -18,7 +20,7 @@ public abstract class NodeModel extends BaseModel implements Action {
 	 * 
 	 */
 	private static final long serialVersionUID = -2377317472320109317L;
-	//private static final Logger log = LoggerFactory.getLogger(NodeModel.class);
+	private static final Logger log = LoggerFactory.getLogger(NodeModel.class);
 	/**
 	 * 输入变迁集合
 	 */
@@ -86,7 +88,7 @@ public abstract class NodeModel extends BaseModel implements Action {
 				interceptor.intercept(execution);
 			}
 		} catch(Exception e) {
-			//log.error("拦截器执行失败=" + e.getMessage());
+			log.error("拦截器执行失败=" + e.getMessage());
             throw new FlowException(e);
 		}
 	}

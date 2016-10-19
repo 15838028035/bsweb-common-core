@@ -3,7 +3,7 @@ package com.lj.app.core.common.flows.core;
 import java.util.List;
 
 import com.lj.app.core.common.flows.Context;
-import com.lj.app.core.common.flows.SnakerEngine;
+import com.lj.app.core.common.flows.service.FlowEngine;
 import com.lj.app.core.common.util.Assert;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
@@ -22,7 +22,7 @@ public abstract class ServiceContext {
 	/**
 	 * 流程引擎的引用
 	 */
-	private static SnakerEngine engine;
+	private static FlowEngine engine;
 	
 	/**
 	 * 获取Context实现类
@@ -44,10 +44,10 @@ public abstract class ServiceContext {
 	 * 获取注册的引擎实例
 	 * @return
 	 */
-	public static SnakerEngine getEngine() {
+	public static FlowEngine getEngine() {
 		Assert.notNull(context, "未注册服务上下文");
 		if(engine == null) {
-			engine = context.find(SnakerEngine.class);
+			engine = context.find(FlowEngine.class);
 		}
 		return engine;
 	}

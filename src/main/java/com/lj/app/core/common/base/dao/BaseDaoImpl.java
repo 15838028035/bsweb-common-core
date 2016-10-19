@@ -48,6 +48,16 @@ public class BaseDaoImpl<T> extends SqlMapClientDaoSupport implements BaseDao{
 	 public int insertObjectReturnKey(Object obj){
 			return  insertObjectReturnKey("insert",obj);
 	}
+	
+	@Override
+	 public Object insertObjectReturn(String sqlId, Object obj){
+		return  (Object)getSqlMapClientTemplate().insert(sqlId, obj);
+	 }
+	 
+	@Override
+	 public Object insertObjectReturn(Object obj){
+		return  insertObjectReturn("insert",obj);
+	}
 	 
 	@Override
 	public void updateObject(String sqlId, Object obj) {

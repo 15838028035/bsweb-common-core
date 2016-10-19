@@ -612,7 +612,7 @@
                 
 						<execution>
 							<id>copy-dependencies</id>
-							<phase>install</phase>
+							<phase>package</phase>
 							<goals>
 								<goal>copy-dependencies</goal>
 							</goals>
@@ -622,7 +622,9 @@
 						<excludeScope>provided</excludeScope>
 						<excludeArtifactIds>jsp-api,servlet-api</excludeArtifactIds>
 						<includeScope>compile</includeScope>
+						<overWriteReleases>false</overWriteReleases>
                     	<overWriteSnapshots>true</overWriteSnapshots>
+                    	<overWriteIfNewer>true</overWriteIfNewer>
 						<outputDirectory>${project.basedir}/src/main/webapp/WEB-INF/lib</outputDirectory>
 					</configuration>
 				</plugin>

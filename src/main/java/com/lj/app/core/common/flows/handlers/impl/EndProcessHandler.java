@@ -12,24 +12,19 @@ public class EndProcessHandler implements IHandler {
 	 */
 	public void handle(Execution execution) {
 	/*	SnakerEngine engine = execution.getEngine();
-		Order order = execution.getOrder();
+		FlowOrder order = execution.getFlowOrder();
 		List<FlowTask> tasks = engine.query().getActiveTasks(new QueryFilter().setOrderId(order.getId()));
 		for(FlowTask task : tasks) {
 			if(task.isMajor()) throw new FlowException("存在未完成的主办任务,请确认.");
 			engine.task().complete(task.getId(), SnakerEngine.AUTO);
 		}
-		*//**
-		 * 结束当前流程实例
-		 *//*
 		engine.order().complete(order.getId());
 		
-		*//**
-		 * 如果存在父流程，则重新构造Execution执行对象，交给父流程的SubProcessModel模型execute
-		 *//*
-		if(StringHelper.isNotEmpty(order.getParentId())) {
-			Order parentOrder = engine.query().getOrder(order.getParentId());
+		
+		if(StringUtil.isNotBlank(order.getParentId())) {
+			Order parentOrder = engine.query().getFlowOrder(order.getParentId());
 			if(parentOrder == null) return;
-			Process process = engine.process().getProcessById(parentOrder.getProcessId());
+			FlowProcess process = engine.process().getProcessById(parentOrder.getProcessId());
 			ProcessModel pm = process.getModel();
 			if(pm == null) return;
 			SubProcessModel spm = (SubProcessModel)pm.getNode(order.getParentNodeName());
@@ -37,11 +32,9 @@ public class EndProcessHandler implements IHandler {
             newExecution.setChildOrderId(order.getId());
             newExecution.setTask(execution.getTask());
 			spm.execute(newExecution);
-			*//**
-			 * SubProcessModel执行结果的tasks合并到当前执行对象execution的tasks列表中
-			 *//*
+			
+			//SubProcessModel执行结果的tasks合并到当前执行对象execution的tasks列表中
 			execution.addTasks(newExecution.getTasks());
-		}
-	}*/
+		}*/
 	}
 }

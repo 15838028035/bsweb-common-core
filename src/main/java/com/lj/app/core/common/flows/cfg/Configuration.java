@@ -17,13 +17,15 @@ import org.w3c.dom.NodeList;
 import com.lj.app.core.common.exception.FlowException;
 import com.lj.app.core.common.flows.Context;
 import com.lj.app.core.common.flows.SimpleContext;
-import com.lj.app.core.common.flows.SnakerEngine;
 import com.lj.app.core.common.flows.core.ServiceContext;
 import com.lj.app.core.common.flows.helper.ConfigHelper;
 import com.lj.app.core.common.flows.helper.XmlHelper;
+import com.lj.app.core.common.flows.service.FlowEngine;
 import com.lj.app.core.common.generator.util.StringHelper;
 import com.lj.app.core.common.util.ClassUtil;
 import com.lj.app.core.common.util.FileUtil;
+import com.lj.app.core.common.util.SpringContextHolder;
+import com.lj.app.core.common.util.StringUtil;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
@@ -39,13 +41,6 @@ public class Configuration {
 	private static final String BASE_CONFIG_FILE = "base.config.xml";
 	private final static String EXT_CONFIG_FILE = "ext.config.xml";
 	private final static String USER_CONFIG_FILE = "snaker.xml";
-	/**
-	 * 访问数据库的对象，根据使用的orm框架进行设置。如果未提供此项设置，则按照默认orm加载方式初始化
-	 * jdbc:DataSource
-	 * hibernate:SessionFactory
-	 * mybatis:SqlSessionFactory
-	 */
-	private Object accessDBObject;
 	/**
 	 * 事务拦截器抽象类
 	 */
@@ -76,22 +71,20 @@ public class Configuration {
 	 * @return SnakerEngine
 	 * @throws FlowException
 	 */
-	public SnakerEngine buildSnakerEngine() throws FlowException {
+	public FlowEngine buildSnakerEngine() throws FlowException {
 		if(log.isInfoEnabled()) {
 			log.info("SnakerEngine start......");
 		}
 		parser();
-		/**
-		 * 由服务上下文返回流程引擎
-		 */
-		SnakerEngine configEngine = ServiceContext.getEngine();
-		if(configEngine == null) {
+		FlowEngine flowEngine = (FlowEngine)SpringContextHolder.getBean("flowEngine");
+		
+		if(flowEngine == null) {
 			throw new FlowException("配置无法发现SnakerEngine的实现类");
 		}
 		if(log.isInfoEnabled()) {
-			log.info("SnakerEngine be found:" + configEngine.getClass());
+			log.info("SnakerEngine be found:" + flowEngine.getClass());
 		}
-		return configEngine.configure(this);
+		return flowEngine.configure(this);
 	}
 	
 	/**
@@ -112,16 +105,14 @@ public class Configuration {
 		}
 		parser(config);
 		parser(BASE_CONFIG_FILE);
-		if (!isCMB()) {
-		    parser(EXT_CONFIG_FILE);
-			for(Entry<String, Class<?>> entry : txClass.entrySet()) {
-				/*if(interceptor != null) {
-                    Object instance = interceptor.getProxy(entry.getValue());
-                    ServiceContext.put(entry.getKey(), instance);
-				} else {
-                    ServiceContext.put(entry.getKey(), entry.getValue());
-				}*/
-			}
+	    parser(EXT_CONFIG_FILE);
+		for(Entry<String, Class<?>> entry : txClass.entrySet()) {
+			/*if(interceptor != null) {
+                Object instance = interceptor.getProxy(entry.getValue());
+                ServiceContext.put(entry.getKey(), instance);
+			} else {
+                ServiceContext.put(entry.getKey(), entry.getValue());
+			}*/
 		}
 		
 		if(log.isDebugEnabled()) {
@@ -151,7 +142,7 @@ public class Configuration {
 						String name = element.getAttribute("name");
 						String className = element.getAttribute("class");
 						String proxy = element.getAttribute("proxy");
-						if(StringHelper.isEmpty(name)) {
+						if(StringUtil.isBlank(name)) {
 							name = className;
 						}
 						if(ServiceContext.exist(name)) {
@@ -177,16 +168,6 @@ public class Configuration {
 			throw new FlowException("资源解析失败，请检查配置文件[" + resource + "]", e.getCause());
 		}
 	}
-	
-	/**
-	 * 初始化DBAccess的数据库访问对象
-	 * @param dbObject 数据访问对象
-	 * @return Configuration
-	 */
-	public Configuration initAccessDBObject(Object dbObject) {
-		this.accessDBObject = dbObject;
-		return this;
-	}
 
     /**
      * 可装载自定义的属性配置文件
@@ -207,20 +188,4 @@ public class Configuration {
         ConfigHelper.loadProperties(properties);
         return this;
     }
-	
-	/**
-	 * 返回DBAccess的数据库访问对象
-	 * @return 数据访问对象
-	 */
-	public Object getAccessDBObject() {
-		return accessDBObject;
-	}
-
-	/**
-	 * 返回是否容器托管的bean
-	 * @return 是否容器托管
-	 */
-	public boolean isCMB() {
-		return false;
-	}
 }

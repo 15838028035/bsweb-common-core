@@ -6,8 +6,9 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import org.apache.commons.lang.math.NumberUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.opensymphony.xwork2.util.logging.Logger;
+import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
 
 /**
@@ -22,7 +23,7 @@ public class ConfigHelper
     /**
      * 常用配置属性文件名称.
      */
-    private final static String PROPERTIES_FILENAME = "snaker.properties";
+    private final static String PROPERTIES_FILENAME = "flow_config.properties";
     /**
      * 配置属性对象静态化
      */

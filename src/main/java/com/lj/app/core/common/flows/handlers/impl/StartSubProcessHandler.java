@@ -2,12 +2,12 @@ package com.lj.app.core.common.flows.handlers.impl;
 
 import java.util.concurrent.Callable;
 
-import com.lj.app.core.common.flows.SnakerEngine;
 import com.lj.app.core.common.flows.core.Execution;
 import com.lj.app.core.common.flows.entity.FlowOrder;
 import com.lj.app.core.common.flows.entity.FlowProcess;
 import com.lj.app.core.common.flows.handlers.IHandler;
 import com.lj.app.core.common.flows.model.SubProcessModel;
+import com.lj.app.core.common.flows.service.FlowEngine;
 
 /**
  * 启动子流程的处理器
@@ -63,7 +63,7 @@ public class StartSubProcessHandler implements IHandler {
 	 * @since 1.0
 	 */
 	class ExecuteTask implements Callable<FlowOrder> {
-		private SnakerEngine engine;
+		private FlowEngine engine;
 		private Execution child;
 		/**
 		 * 构造函数

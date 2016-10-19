@@ -1,9 +1,7 @@
-package com.lj.app.core.common.flows;
+package com.lj.app.core.common.flows.service;
 
 import java.util.List;
 import java.util.Map;
-
-import org.springframework.core.annotation.Order;
 
 import com.lj.app.core.common.flows.cfg.Configuration;
 import com.lj.app.core.common.flows.core.Execution;
@@ -18,10 +16,8 @@ import com.lj.app.core.common.flows.service.FlowTaskService;
 
 /**
  * 流程引擎接口
- * @author yuqs
- * @since 1.0
  */
-public interface SnakerEngine {
+public interface FlowEngine {
 	public static final String ADMIN = "snaker.admin";
 	public static final String AUTO = "snaker.auto";
     public static final String ID = "snaker.orderNo";
@@ -30,37 +26,37 @@ public interface SnakerEngine {
 	 * @param config 全局配置对象
 	 * @return SnakerEngine 流程引擎
 	 */
-	public SnakerEngine configure(Configuration config);
+	public FlowEngine configure(Configuration config);
 	
 	/**
 	 * 获取process服务
 	 * @return IProcessService 流程定义服务
 	 */
-	public FlowProcessService process();
+	public FlowProcessService flowProcessService();
 	
 	/**
 	 * 获取查询服务
 	 * @return IQueryService 常用查询服务
 	 */
-	public FlowQueryService query();
+	public FlowQueryService flowQueryService();
 	
 	/**
 	 * 获取实例服务
 	 * @return IQueryService 流程实例服务
 	 */
-	public FlowOrderService order();
+	public FlowOrderService flowOrderService();
 	
 	/**
 	 * 获取任务服务
 	 * @return ITaskService 任务服务
 	 */
-	public FlowTaskService task();
+	public FlowTaskService flowTaskService();
 	
 	/**
 	 * 获取管理服务
 	 * @return IManagerService 管理服务
 	 */
-	public FlowManagerService manager();
+	public FlowManagerService flowManagerService();
 	
 	/**
 	 * 根据流程定义ID启动流程实例
@@ -68,7 +64,7 @@ public interface SnakerEngine {
 	 * @return Order 流程实例
 	 * @see #startInstanceById(String, String, Map)
 	 */
-	public Order startInstanceById(String id);
+	public FlowOrder startInstanceById(String id);
 	
 	/**
 	 * 根据流程定义ID，操作人ID启动流程实例
@@ -110,7 +106,7 @@ public interface SnakerEngine {
 	 * @param operator 操作人
 	 * @return Order 流程实例
 	 */
-	public Order startInstanceByName(String name, Integer version, String operator);
+	public FlowOrder startInstanceByName(String name, Integer version, String operator);
 	
 	/**
 	 * 根据流程名称、版本号、操作人、参数列表启动流程实例

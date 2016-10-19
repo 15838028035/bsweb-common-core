@@ -546,6 +546,14 @@ public class StringUtil {
 	}
 
 	/**
+	 * 获取uuid类型的字符串
+	 * @return uuid字符串
+	 */
+	public static String getUUIDKey() {
+		return java.util.UUID.randomUUID().toString().replace("-", "");
+	}
+	
+	/**
 	* 随机获取UUID字符串(无中划线)
 	*
 	* @return UUID字符串

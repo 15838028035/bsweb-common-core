@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.lj.app.core.common.exception.FlowException;
-import com.lj.app.core.common.flows.SnakerEngine;
 import com.lj.app.core.common.flows.entity.FlowOrder;
 import com.lj.app.core.common.flows.entity.FlowProcess;
 import com.lj.app.core.common.flows.entity.FlowTask;
 import com.lj.app.core.common.flows.model.ProcessModel;
+import com.lj.app.core.common.flows.service.FlowEngine;
 
 /**
  * 流程执行过程中所传递的执行对象，其中包含流程定义、流程模型、流程实例对象、执行参数、返回的任务列表
@@ -23,7 +23,7 @@ public class Execution implements Serializable {
 	/**
 	 * SnakerEngine holder
 	 */
-	private SnakerEngine engine;
+	private FlowEngine engine;
 	/**
 	 * 流程定义对象
 	 */
@@ -90,7 +90,7 @@ public class Execution implements Serializable {
 	 * @param order
 	 * @param args
 	 */
-	public Execution(SnakerEngine engine, FlowProcess process, FlowOrder flowOrder, Map<String, Object> args) {
+	public Execution(FlowEngine engine, FlowProcess process, FlowOrder flowOrder, Map<String, Object> args) {
 		if(process == null || flowOrder == null) {
 			throw new FlowException("构造Execution对象失败，请检查process、order是否为空");
 		}
@@ -219,7 +219,7 @@ public class Execution implements Serializable {
 	 * 获取引擎
 	 * @return
 	 */
-	public SnakerEngine getEngine() {
+	public FlowEngine getEngine() {
 		return engine;
 	}
 

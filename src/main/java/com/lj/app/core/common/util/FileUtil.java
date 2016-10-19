@@ -226,9 +226,7 @@ public class FileUtil {
 	}
 
 	public static InputStream getResourceAsStream(String resource) {
-		String stripped = resource.startsWith("/") ? resource.substring(1)
-				: resource;
-
+		String stripped = resource.startsWith("/") ? resource.substring(1): resource;
 		InputStream stream = null;
 		ClassLoader classLoader = Thread.currentThread()
 				.getContextClassLoader();
@@ -236,7 +234,6 @@ public class FileUtil {
 			stream = classLoader.getResourceAsStream(stripped);
 
 		}
-
 		return stream;
 	}
 
@@ -488,6 +485,14 @@ public class FileUtil {
 		return copy( reader, writer, DEFAULT_CHUNK_SIZE );
 	}
 
+	/**
+	 * 文件复制
+	 * @param reader
+	 * @param writer
+	 * @param bufferSize
+	 * @return
+	 * @throws IOException
+	 */
 	public static long copy(Reader reader, Writer writer, int bufferSize) throws IOException {
 		char[] buffer = new char[bufferSize];
 		long count = 0;
