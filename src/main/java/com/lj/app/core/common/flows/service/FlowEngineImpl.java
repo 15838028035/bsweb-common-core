@@ -70,14 +70,14 @@ public class FlowEngineImpl implements FlowEngine {
 	/**
 	 * 根据流程定义ID启动流程实例
 	 */
-	public FlowOrder startInstanceById(String id) {
+	public FlowOrder startInstanceById(String id) throws Exception {
 		return startInstanceById(id, null, null);
 	}
 
 	/**
 	 * 根据流程定义ID，操作人ID启动流程实例
 	 */
-	public FlowOrder startInstanceById(String id, String operator) {
+	public FlowOrder startInstanceById(String id, String operator) throws Exception {
 		return startInstanceById(id, operator, null);
 	}
 
@@ -85,7 +85,7 @@ public class FlowEngineImpl implements FlowEngine {
 	 * 根据流程定义ID，操作人ID，参数列表启动流程实例
 	 */
 	public FlowOrder startInstanceById(String id, String operator,
-			Map<String, Object> args) {
+			Map<String, Object> args)throws Exception {
 		if (args == null)
 			args = new HashMap<String, Object>();
 		FlowProcess process = (FlowProcess)flowProcessService().getProcessById(id);
@@ -96,14 +96,14 @@ public class FlowEngineImpl implements FlowEngine {
 	/**
 	 * 根据流程名称启动流程实例
 	 */
-	public FlowOrder startInstanceByName(String name) {
+	public FlowOrder startInstanceByName(String name) throws Exception {
 		return startInstanceByName(name, null, null, null);
 	}
 
 	/**
 	 * 根据流程名称、版本号启动流程实例
 	 */
-	public FlowOrder startInstanceByName(String name, Integer version) {
+	public FlowOrder startInstanceByName(String name, Integer version) throws Exception {
 		return startInstanceByName(name, version, null, null);
 	}
 
@@ -111,7 +111,7 @@ public class FlowEngineImpl implements FlowEngine {
 	 * 根据流程名称、版本号、操作人启动流程实例
 	 */
 	public FlowOrder startInstanceByName(String name, Integer version,
-			String operator) {
+			String operator) throws Exception {
 		return startInstanceByName(name, version, operator, null);
 	}
 
@@ -119,7 +119,7 @@ public class FlowEngineImpl implements FlowEngine {
 	 * 根据流程名称、版本号、操作人、参数列表启动流程实例
 	 */
 	public FlowOrder startInstanceByName(String name, Integer version,
-			String operator, Map<String, Object> args) {
+			String operator, Map<String, Object> args) throws Exception {
 		if (args == null)
 			args = new HashMap<String, Object>();
 		FlowProcess process = (FlowProcess) flowProcessService().getProcessByVersion(name, version);
@@ -128,7 +128,7 @@ public class FlowEngineImpl implements FlowEngine {
 	}
 
 	private FlowOrder startProcess(FlowProcess process, String operator,
-			Map<String, Object> args) {
+			Map<String, Object> args) throws Exception {
 		Execution execution = execute(process, operator, args, null, null);
 		if (process.getModel() != null) {
 			StartModel start = process.getModel().getStart();
@@ -143,7 +143,7 @@ public class FlowEngineImpl implements FlowEngine {
 	/**
 	 * 根据父执行对象启动子流程实例（用于启动子流程）
 	 */
-	public FlowOrder startInstanceByExecution(Execution execution) {
+	public FlowOrder startInstanceByExecution(Execution execution) throws Exception {
 		FlowProcess process = execution.getProcess();
 		StartModel start = process.getModel().getStart();
 		Assert.notNull(start, "流程定义[id=" + process.getId() + "]没有开始节点");
@@ -171,7 +171,7 @@ public class FlowEngineImpl implements FlowEngine {
 	 * @return Execution
 	 */
 	private Execution execute(FlowProcess process, String operator,
-			Map<String, Object> args, String parentId, String parentNodeName) {
+			Map<String, Object> args, String parentId, String parentNodeName)throws Exception {
 		FlowOrder order =(FlowOrder) flowOrderService().createFlowOrder(process, operator, args, parentId,
 				parentNodeName);
 		if (log.isDebugEnabled()) {

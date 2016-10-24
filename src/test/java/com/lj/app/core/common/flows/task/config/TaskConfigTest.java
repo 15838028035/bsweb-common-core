@@ -15,7 +15,7 @@ public class TaskConfigTest extends FlowBaseTest {
 	}
 	
 	@Test
-	public void  generatorTest() {
+	public void taskTest()  throws Exception {
 		FlowOrder order = engine.startInstanceByName("config", 0, "2", null);
 		System.out.println("order=" + order);
 	}

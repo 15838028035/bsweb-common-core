@@ -19,7 +19,7 @@ public class TokenApiServiceTest extends AbstractBaseSpringTransactionTestCase{
 	private TokenApiService tokenApiService;
 	
 	@Test
-	public void saveTokenTest() {
+	public void saveTokenTest()  throws Exception {
 		
 		tokenApiService.delete(1);
 		

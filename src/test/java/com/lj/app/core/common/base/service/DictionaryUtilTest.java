@@ -20,30 +20,30 @@ public class DictionaryUtilTest extends AbstractBaseSpringTransactionTestCase{
 	}
 
 	@Test
-	public void typeAndDateCodeToNameTest() {
+	public void typeAndDateCodeToNameTest() throws Exception {
 		String typeName= DictionaryUtil.typeAndDateCodeToName("powerState", "powerState");
 		assertNotNull(typeName);
 	}
 
 	@Test
-	public void findByTypeCodeTest() {
+	public void findByTypeCodeTest()  throws Exception {
 		UpmDictionary upmDictionary = DictionaryUtil.findDicData("powerState", "1");
 		assertNotNull(upmDictionary);
 	}
 
 	@Test
-	public void findDicDataTest() {
+	public void findDicDataTest()  throws Exception {
 		List<UpmDictionary> upmDictionaryList = DictionaryUtil.findByTypeCode("powerState");
 		assertNotNull(upmDictionaryList);
 	}
 
 	@Test
-	public void refreshDataNotStaticTest() {
+	public void refreshDataNotStaticTest()  throws Exception {
 		DictionaryUtil.getInstance().refreshDataNotStatic();
 	}
 
 	@Test
-	public void initDataTest() {
+	public void initDataTest()  throws Exception {
 		DictionaryUtil.initData();
 	}
 

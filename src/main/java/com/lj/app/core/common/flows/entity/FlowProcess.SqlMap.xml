@@ -144,7 +144,7 @@
 	    ]]>
     </insert>
    
-     <update id="update" parameterClass="flowProcess">
+     <update id="update">
     <![CDATA[
         UPDATE flow_process 
       ]]>

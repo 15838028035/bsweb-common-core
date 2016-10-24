@@ -21,7 +21,7 @@ public class TokenApiService {
 	@Autowired
 	private UpmTokenService<UpmToken> upmTokenService;
 
-	public void saveToken(UpmToken upmToken) {
+	public void saveToken(UpmToken upmToken) throws Exception {
 		upmTokenService.insertObject("insert",upmToken);
 	}
 	

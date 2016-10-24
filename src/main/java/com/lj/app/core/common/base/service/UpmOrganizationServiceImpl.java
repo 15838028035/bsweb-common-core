@@ -16,10 +16,10 @@ public class UpmOrganizationServiceImpl<UpmOrganization> extends BaseServiceImpl
 	private Logger log = Logger.getLogger(UpmOrganizationServiceImpl.class);
 
 	public UpmOrganization saveServiceOrg(UpmOrganization UpmOrganization,
-			Integer createMainacct, Integer parentOrgid) {
+			Integer createMainacct, Integer parentOrgid)  throws Exception{
 		//UpmOrganization uapParent = this.findOrganizationById(parentOrgid);
 		//setParentOrg(uapParent);//FIXME
-		this.insertObject(UpmOrganization);
+		insertObject(UpmOrganization);
 		return UpmOrganization;
 	}
 
@@ -140,7 +140,7 @@ public class UpmOrganizationServiceImpl<UpmOrganization> extends BaseServiceImpl
 		return null;
 	}
 
-	public String findOrgFullDir(Integer orgId) {
+	public String findOrgFullDir(Integer orgId) throws Exception{
 		String findOrgFullDirQuery = "findOrgFullDir";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("orgId", orgId);

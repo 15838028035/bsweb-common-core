@@ -17,13 +17,13 @@ public interface FlowProcessService<FlowProcess> extends BaseService {
 	 * @param process 流程定义对象
 	 * @param idOrName 流程定义id/name
 	 */
-	public void check(FlowProcess process, String idOrName);
+	public void check(FlowProcess process, String idOrName) throws Exception;
 	
 	/**
 	 * 保存流程定义
 	 * @param process 流程定义对象
 	 */
-	public void saveFlowProcess(FlowProcess process);
+	public void saveFlowProcess(FlowProcess process) throws Exception;
 	
 	/**
 	 * 更新流程定义的类别
@@ -31,21 +31,21 @@ public interface FlowProcessService<FlowProcess> extends BaseService {
 	 * @param type 类别
 	 * @since 1.5
 	 */
-	public void updateType(String id, String type);
+	public void updateType(String id, String type)  throws Exception;
 	
 	/**
 	 * 根据主键ID获取流程定义对象
 	 * @param id 流程定义id
 	 * @return Process 流程定义对象
 	 */
-	public FlowProcess getProcessById(String id);
+	public FlowProcess getProcessById(String id)  throws Exception;
 	
 	/**
 	 * 根据流程name获取流程定义对象
 	 * @param name 流程定义名称
 	 * @return Process 流程定义对象
 	 */
-	public FlowProcess getProcessByName(String name);
+	public FlowProcess getProcessByName(String name)  throws Exception;
 	
 	/**
 	 * 根据流程name、version获取流程定义对象
@@ -53,7 +53,7 @@ public interface FlowProcessService<FlowProcess> extends BaseService {
 	 * @param version 版本号
 	 * @return Process 流程定义对象
 	 */
-	public FlowProcess getProcessByVersion(String name, Integer version);
+	public FlowProcess getProcessByVersion(String name, Integer version)  throws Exception;
 	
 	/**
 	 * 根據InputStream輸入流，部署流程定义
@@ -81,7 +81,7 @@ public interface FlowProcessService<FlowProcess> extends BaseService {
 	 * 卸载指定的流程定义，只更新状态
 	 * @param id 流程定义id
 	 */
-	public void undeploy(String id);
+	public void undeploy(String id)  throws Exception;
 	
 	/**
 	 * 谨慎使用.数据恢复非常痛苦，你懂得~~
@@ -93,12 +93,12 @@ public interface FlowProcessService<FlowProcess> extends BaseService {
 	 * 5.wf_cc_order
 	 * @param id
 	 */
-	public void cascadeRemove(String id);
+	public void cascadeRemove(String id)  throws Exception;
 	
 	/**
 	 * 获得流程最新版本
 	 * @param flowName
 	 * @return
 	 */
-	public int getLatestProcessVersion(String flowName);
+	public int getLatestProcessVersion(String flowName) throws Exception;
 }

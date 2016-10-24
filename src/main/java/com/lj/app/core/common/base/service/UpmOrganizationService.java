@@ -10,7 +10,7 @@ public interface UpmOrganizationService<UpmOrganization> extends BaseService {
 	 * @param parentOrgid
 	 * @return
 	 */
-	public UpmOrganization saveServiceOrg(UpmOrganization UpmOrganization,Long createMainacct,Long parentOrgid);
+	public UpmOrganization saveServiceOrg(UpmOrganization UpmOrganization,Long createMainacct,Long parentOrgid)throws Exception;
 
 	/**根据父结点查找子结点列表
 	 * @param treeNodeId
@@ -83,7 +83,7 @@ public interface UpmOrganizationService<UpmOrganization> extends BaseService {
 	 *  @return 全路径
 	 *
 	 */
-	public String findOrgFullDir(Integer orgId);
+	public String findOrgFullDir(Integer orgId) throws Exception;
 	
 	/**
 	 * 根据组织名称查询组织及其所有上层组织

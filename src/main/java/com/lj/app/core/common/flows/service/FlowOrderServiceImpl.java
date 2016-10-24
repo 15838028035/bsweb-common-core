@@ -26,7 +26,8 @@ public class FlowOrderServiceImpl<FlowOrder> extends BaseServiceImpl<FlowOrder> 
 	 * @param parentNodeName
 	 * @return
 	 */
-	public com.lj.app.core.common.flows.entity.FlowOrder createFlowOrder(FlowProcess process, String operator,Map<String, Object> args, String parentId, String parentNodeName){
+	public com.lj.app.core.common.flows.entity.FlowOrder createFlowOrder(FlowProcess process, String operator,Map<String, Object> args, String parentId, String parentNodeName)
+	throws Exception{
 		 com.lj.app.core.common.flows.entity.FlowOrder flowOrder = new  com.lj.app.core.common.flows.entity.FlowOrder();
 		 
 		 flowOrder.setFlowProcessId(process.getId().toString());

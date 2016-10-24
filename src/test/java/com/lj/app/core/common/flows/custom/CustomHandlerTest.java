@@ -20,7 +20,7 @@ public class CustomHandlerTest extends FlowBaseTest {
 	}
 	
 	@Test
-	public void test() {
+	public void taskTest()  throws Exception {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("msg", "custom test");
 		FlowOrder order = engine.startInstanceById(processId, null, args);

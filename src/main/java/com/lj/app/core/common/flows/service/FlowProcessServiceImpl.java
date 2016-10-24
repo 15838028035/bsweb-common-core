@@ -39,7 +39,7 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 	 * 保存流程定义
 	 * @param process 流程定义对象
 	 */
-	public void saveFlowProcess(FlowProcess process){
+	public void saveFlowProcess(FlowProcess process) throws Exception{
 		this.insertObject(process);
 	}
 	
@@ -49,7 +49,7 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 	 * @param type 类别
 	 * @since 1.5
 	 */
-	public void updateType(String id, String type){
+	public void updateType(String id, String type)throws Exception{
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("id", id);
 		map.put("flowType", type);
@@ -61,7 +61,7 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 	 * @param id 流程定义id
 	 * @return Process 流程定义对象
 	 */
-	public FlowProcess getProcessById(String id){
+	public FlowProcess getProcessById(String id) throws Exception{
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("id", id);
 		return (FlowProcess)this.getInfoByKey(id);
@@ -72,7 +72,7 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 	 * @param name 流程定义名称
 	 * @return Process 流程定义对象
 	 */
-	public FlowProcess getProcessByName(String name){
+	public FlowProcess getProcessByName(String name) throws Exception{
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("flowName", name);
 		List list = this.queryForList("select",map);
@@ -88,7 +88,7 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 	 * @param version 版本号
 	 * @return Process 流程定义对象
 	 */
-	public FlowProcess getProcessByVersion(String name, Integer version){
+	public FlowProcess getProcessByVersion(String name, Integer version)throws Exception{
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("flowName", name);
 		map.put("flowVersion", version);
@@ -194,7 +194,7 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 	 * @param flowName
 	 * @return
 	 */
-	public int getLatestProcessVersion(String flowName){
+	public int getLatestProcessVersion(String flowName)throws Exception{
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("flowName", flowName);
 		List list = this.queryForList("select",map);

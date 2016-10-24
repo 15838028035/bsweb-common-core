@@ -8,11 +8,6 @@ import com.lj.app.core.common.flows.core.Execution;
 import com.lj.app.core.common.flows.entity.FlowOrder;
 import com.lj.app.core.common.flows.entity.FlowTask;
 import com.lj.app.core.common.flows.model.TaskModel;
-import com.lj.app.core.common.flows.service.FlowManagerService;
-import com.lj.app.core.common.flows.service.FlowOrderService;
-import com.lj.app.core.common.flows.service.FlowProcessService;
-import com.lj.app.core.common.flows.service.FlowQueryService;
-import com.lj.app.core.common.flows.service.FlowTaskService;
 
 /**
  * 流程引擎接口
@@ -64,7 +59,7 @@ public interface FlowEngine {
 	 * @return Order 流程实例
 	 * @see #startInstanceById(String, String, Map)
 	 */
-	public FlowOrder startInstanceById(String id);
+	public FlowOrder startInstanceById(String id)throws Exception ;
 	
 	/**
 	 * 根据流程定义ID，操作人ID启动流程实例
@@ -73,7 +68,7 @@ public interface FlowEngine {
 	 * @return Order 流程实例
 	 * @see #startInstanceById(String, String, Map)
 	 */
-	public FlowOrder startInstanceById(String id, String operator);
+	public FlowOrder startInstanceById(String id, String operator) throws Exception ;
 	
 	/**
 	 * 根据流程定义ID，操作人ID，参数列表启动流程实例
@@ -82,14 +77,14 @@ public interface FlowEngine {
 	 * @param args 参数列表
 	 * @return Order 流程实例
 	 */
-	public FlowOrder startInstanceById(String id, String operator, Map<String, Object> args);
+	public FlowOrder startInstanceById(String id, String operator, Map<String, Object> args)throws Exception ;
 	
 	/**
 	 * 根据流程名称启动流程实例
 	 * @param name 流程定义名称
 	 * @return Order 流程实例
 	 */
-	public FlowOrder startInstanceByName(String name);
+	public FlowOrder startInstanceByName(String name)throws Exception ;
 	
 	/**
 	 * 根据流程名称、版本号启动流程实例
@@ -97,7 +92,7 @@ public interface FlowEngine {
 	 * @param version 版本号
 	 * @return Order 流程实例
 	 */
-	public FlowOrder startInstanceByName(String name, Integer version);
+	public FlowOrder startInstanceByName(String name, Integer version)throws Exception ;
 	
 	/**
 	 * 根据流程名称、版本号、操作人启动流程实例
@@ -106,7 +101,7 @@ public interface FlowEngine {
 	 * @param operator 操作人
 	 * @return Order 流程实例
 	 */
-	public FlowOrder startInstanceByName(String name, Integer version, String operator);
+	public FlowOrder startInstanceByName(String name, Integer version, String operator)throws Exception ;
 	
 	/**
 	 * 根据流程名称、版本号、操作人、参数列表启动流程实例
@@ -116,14 +111,14 @@ public interface FlowEngine {
 	 * @param args 参数列表
 	 * @return Order 流程实例
 	 */
-	public FlowOrder startInstanceByName(String name, Integer version, String operator, Map<String, Object> args);
+	public FlowOrder startInstanceByName(String name, Integer version, String operator, Map<String, Object> args)throws Exception ;
 	
 	/**
 	 * 根据父执行对象启动子流程实例
 	 * @param execution 执行对象
 	 * @return Order 流程实例
 	 */
-	public FlowOrder startInstanceByExecution(Execution execution);
+	public FlowOrder startInstanceByExecution(Execution execution) throws Exception ;
 	
 	/**
 	 * 根据任务主键ID执行任务

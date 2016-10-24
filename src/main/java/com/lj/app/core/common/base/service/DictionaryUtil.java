@@ -31,7 +31,7 @@ public class DictionaryUtil {
 		return dictionaryUtil;
 	}
 
-	public static String typeAndDateCodeToName(String typeCode, String dataCode) {
+	public static String typeAndDateCodeToName(String typeCode, String dataCode) throws Exception{
 		initData();
 		List<UpmDictionary> uList = (List<UpmDictionary>) dictionaryMap.get(typeCode);
 		String dataDesc = null;
@@ -46,12 +46,12 @@ public class DictionaryUtil {
 		return dataDesc;
 	}
 
-	public static List<UpmDictionary> findByTypeCode(String typeCode) {
+	public static List<UpmDictionary> findByTypeCode(String typeCode) throws Exception{
 		initData();
 		return (List<UpmDictionary>) dictionaryMap.get(typeCode);
 	}
 
-	public static UpmDictionary findDicData(String typeCode, String dataCode) {
+	public static UpmDictionary findDicData(String typeCode, String dataCode)  throws Exception{
 		initData();
 		List<UpmDictionary> uList = (List<UpmDictionary>) dictionaryMap.get(typeCode);
 		if (uList == null)
@@ -66,7 +66,7 @@ public class DictionaryUtil {
 		return uu;
 	}
 
-	public  void refreshDataNotStatic() {
+	public  void refreshDataNotStatic() throws Exception {
 		dictionaryMap.clear();
 		logger.warn("====Refreshing data====");
 		
@@ -87,14 +87,18 @@ public class DictionaryUtil {
 		}
 	}
 	
-	public static  void initData() {
+	public static  void initData() throws Exception {
 		if(dictionaryMap==null|| dictionaryMap.size()==0){
 			DictionaryUtil.getInstance().refreshDataNotStatic();
 		}
 	}
 	
-	public static  void refreshData() {
-		initData();
+	public static  void refreshData()  {
+		try {
+			initData();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

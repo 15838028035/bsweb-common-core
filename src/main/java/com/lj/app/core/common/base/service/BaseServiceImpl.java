@@ -28,52 +28,52 @@ public abstract class BaseServiceImpl<T> implements BaseService {
 	private BaseDao<T> baseDao;
 
 	@Override
-	public void insertObject(Object obj) {
+	public void insertObject(Object obj)throws Exception {
 		insertObject("insert",obj);
 	}
 	
 	@Override
-	public void insertObject(String sqlid, Object obj) {
+	public void insertObject(String sqlid, Object obj) throws Exception {
 		baseDao.insertObject(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlid,obj);
 	}
 	
 	@Override
-	public int insertObjectReturnKey(String sqlid, Object obj) {
+	public int insertObjectReturnKey(String sqlid, Object obj)throws Exception {
 		return baseDao.insertObjectReturnKey(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlid,obj);
 	}
 	
 	@Override
-	public int insertObjectReturnKey(Object obj) {
+	public int insertObjectReturnKey(Object obj) throws Exception {
 		return baseDao.insertObjectReturnKey(getSqlMapNameSpace()+NAMESPACE_SPLIT+"insert",obj);
 	}
 	
 	@Override
-	public Object insertObjectReturn(String sqlid, Object obj) {
+	public Object insertObjectReturn(String sqlid, Object obj) throws Exception {
 		return baseDao.insertObjectReturn(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlid,obj);
 	}
 	
 	@Override
-	public Object insertObjectReturn(Object obj) {
+	public Object insertObjectReturn(Object obj) throws Exception {
 		return baseDao.insertObjectReturn(getSqlMapNameSpace()+NAMESPACE_SPLIT+"insert",obj);
 	}
 	
 	@Override
-	public void updateObject(Object obj) {
+	public void updateObject(Object obj) throws Exception {
 		updateObject("update",obj);
 	}
 
 	@Override
-	public void updateObject(String sqlId, Object obj) {
+	public void updateObject(String sqlId, Object obj) throws Exception {
 		baseDao.updateObject(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId,obj);
 	}
 
 	@Override
-	public void saveOrUpdate(Object obj,Object id){
+	public void saveOrUpdate(Object obj,Object id)throws Exception {
 		saveOrUpdate(obj,id);
 	}
 	
 	@Override
-	public void saveOrUpdate(String sqlId, Object obj, Object id){
+	public void saveOrUpdate(String sqlId, Object obj, Object id)throws Exception {
 		if(id!=null) {
 			baseDao.updateObject(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId,obj);
 		}else {
@@ -82,47 +82,47 @@ public abstract class BaseServiceImpl<T> implements BaseService {
 	}
 	
 	@Override
-	public BaseEntity findObject(String sqlId, Object obj) {
+	public BaseEntity findObject(String sqlId, Object obj) throws Exception {
 		return baseDao.findObject(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId,obj);
 	}
 
 	@Override
-	public BaseEntity getInfoByKey(String sqlId, Object obj) {
+	public BaseEntity getInfoByKey(String sqlId, Object obj) throws Exception {
 		return baseDao.getInfoByKey(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId,obj);
 	}
 
 	@Override
-	public BaseEntity getInfoByKey(Object obj) {
+	public BaseEntity getInfoByKey(Object obj) throws Exception {
 		return baseDao.getInfoByKey(getSqlMapNameSpace()+NAMESPACE_SPLIT+"getInfoByKey",obj);
 	}
 
 	@Override
-	public Object queryObject(String sqlId, Object obj){
+	public Object queryObject(String sqlId, Object obj)throws Exception {
 		return baseDao.findObject(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId,obj);
 	}
 	
 	@Override
-	public Object  queryForObject(String sqlId, Object obj){
+	public Object  queryForObject(String sqlId, Object obj)throws Exception {
 		return baseDao.queryForObject(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId,obj);
 	}
 	
 	@Override
-	public List<BaseEntity> findBaseModeList(Object obj) {
+	public List<BaseEntity> findBaseModeList(Object obj) throws Exception {
 		return findBaseModeList("select",obj);
 	}
 
 	@Override
-	public List<BaseEntity> findBaseModeList(String sqlId, Object obj) {
+	public List<BaseEntity> findBaseModeList(String sqlId, Object obj) throws Exception {
 		return baseDao.findBaseModeList(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId, obj);
 	}
 
 	@Override
-	public List<BaseEntity> findBaseModePageList(Object obj) {
+	public List<BaseEntity> findBaseModePageList(Object obj) throws Exception {
 		return findBaseModePageList("select", obj);
 	}
 
 	@Override
-	public List<BaseEntity> findBaseModePageList(String sqlId, Object obj) {
+	public List<BaseEntity> findBaseModePageList(String sqlId, Object obj) throws Exception {
 		return baseDao.findBaseModePageList(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId, obj);
 	}
 
@@ -132,7 +132,7 @@ public abstract class BaseServiceImpl<T> implements BaseService {
 	}
 
 	@Override
-	public void delete(String sqlId, Object obj) {
+	public void delete(String sqlId, Object obj){
 		baseDao.deleteObject(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId, obj);
 	}
 
@@ -171,13 +171,13 @@ public abstract class BaseServiceImpl<T> implements BaseService {
 	 
 	@Override
 	@SuppressWarnings("all")
-	public List queryForList(Object parameterObject) throws DataAccessException {
+	public List queryForList(Object parameterObject){
 		return queryForList("select",parameterObject);
 	}
 
 	@Override
 	@SuppressWarnings("all")
-	public List queryForList(String statementName, Object parameterObject) {
+	public List queryForList(String statementName, Object parameterObject){
 		return baseDao.queryForList(getSqlMapNameSpace()+NAMESPACE_SPLIT+statementName,parameterObject);
 	}
 
@@ -197,7 +197,7 @@ public abstract class BaseServiceImpl<T> implements BaseService {
 
 	@Override
 	@SuppressWarnings("all")
-	public Page findPageList(Page page, Map condition, String sqlId) {
+	public Page findPageList(Page page, Map condition, String sqlId) throws Exception {
 		String countQuery = getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId+PAGE_QUERY_SUBFIX;
 		String findQuery = getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId;
 		
@@ -220,12 +220,12 @@ public abstract class BaseServiceImpl<T> implements BaseService {
 
 	@Override
 	@SuppressWarnings("all")
-	public Page findPageList(Page page, Map condition) {
+	public Page findPageList(Page page, Map condition) throws Exception {
 		return findPageList(page,condition,DEFAULT_PAGENATION_NAME);
 	}
 
 	@Override
-	public int countObject(String sqlId, Object obj) {
+	public int countObject(String sqlId, Object obj) throws Exception {
 		return baseDao.countObject(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId,obj);
 	}
 

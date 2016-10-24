@@ -18,7 +18,7 @@ public class Decision1Test extends FlowBaseTest {
 	}
 	
 	@Test
-	public void  generatorTest() {
+	public void  taskTest()  throws Exception {
 		Map<String, Object> args = new HashMap<String, Object>();
 		//args.put("task1.operator", new String[]{"1","2"});
 		args.put("task2.operator", new String[]{"1"});

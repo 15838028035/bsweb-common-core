@@ -27,82 +27,82 @@ public class BaseDaoImpl<T> extends SqlMapClientDaoSupport implements BaseDao{
 		super.setSqlMapClient(sqlMapClient);   
 	} 
 	
-	public SqlMapClient getSqlMapClientProfile() {
+	public SqlMapClient getSqlMapClientProfile() throws Exception{
 		return sqlMapClient;
 	}
-	public SqlMapClientTemplate getSqlMapClientTemplateProfile(){
+	public SqlMapClientTemplate getSqlMapClientTemplateProfile()throws Exception{
 		return getSqlMapClientTemplate();
 	}
 	
 	@Override
-	public void insertObject(String sqlId, Object obj) {
+	public void insertObject(String sqlId, Object obj) throws Exception{
 		getSqlMapClientTemplate().insert(sqlId, obj);
 	}
 
 	@Override
-	 public int insertObjectReturnKey(String sqlId, Object obj){
+	 public int insertObjectReturnKey(String sqlId, Object obj) throws Exception{
 		return  (Integer)getSqlMapClientTemplate().insert(sqlId, obj);
 	 }
 	 
 	@Override
-	 public int insertObjectReturnKey(Object obj){
+	 public int insertObjectReturnKey(Object obj)throws Exception{
 			return  insertObjectReturnKey("insert",obj);
 	}
 	
 	@Override
-	 public Object insertObjectReturn(String sqlId, Object obj){
+	 public Object insertObjectReturn(String sqlId, Object obj)throws Exception{
 		return  (Object)getSqlMapClientTemplate().insert(sqlId, obj);
 	 }
 	 
 	@Override
-	 public Object insertObjectReturn(Object obj){
+	 public Object insertObjectReturn(Object obj)throws Exception{
 		return  insertObjectReturn("insert",obj);
 	}
 	 
 	@Override
-	public void updateObject(String sqlId, Object obj) {
+	public void updateObject(String sqlId, Object obj) throws Exception{
 		getSqlMapClientTemplate().update(sqlId,obj);
 		
 	}
 
 	@Override
-	public void deleteObject(String sqlId, Object obj) {
+	public void deleteObject(String sqlId, Object obj){
 		getSqlMapClientTemplate().delete(sqlId, obj);
 	}
 
 	@Override
-	public BaseEntity findObject(String sqlId, Object obj) {
+	public BaseEntity findObject(String sqlId, Object obj) throws Exception{
 		return (BaseEntity)getSqlMapClientTemplate().queryForObject(sqlId, obj);
 	}
 	
 	@Override
-	public Object queryForObject(String sqlId, Object obj) {
+	public Object queryForObject(String sqlId, Object obj) throws Exception{
 		return getSqlMapClientTemplate().queryForObject(sqlId, obj);
 	}
 	
 
 	@Override
-	public BaseEntity getInfoByKey(String sqlId, Object obj) {
+	public BaseEntity getInfoByKey(String sqlId, Object obj) throws Exception{
 		return (BaseEntity)getSqlMapClientTemplate().queryForObject(sqlId, obj);
 	}
 
 	@Override
-	public List<BaseEntity> findBaseModeList(String sqlId, Object obj) {
+	public List<BaseEntity> findBaseModeList(String sqlId, Object obj) throws Exception{
 		return getSqlMapClientTemplate().queryForList(sqlId,obj);
 	}
 
 	@Override
-	public List<BaseEntity> findBaseModePageList(String sqlId, Object obj) {
+	public List<BaseEntity> findBaseModePageList(String sqlId, Object obj) throws Exception{
 		return getSqlMapClientTemplate().queryForList(sqlId,obj);
 	}
 
 	@Override
-	public List queryForList(String statementName) throws DataAccessException {
+	public List queryForList(String statementName) throws DataAccessException{
 		return getSqlMapClientTemplate().queryForList(statementName);
 	}
 
 	@Override
-	public List queryForList(String statementName, Object parameterObject) {
+	public List queryForList(String statementName, Object parameterObject){
 		return getSqlMapClientTemplate().queryForList(statementName,parameterObject);
 	}
 
@@ -117,7 +117,7 @@ public class BaseDaoImpl<T> extends SqlMapClientDaoSupport implements BaseDao{
 	}
 
 	@Override
-	public int countObject(String sqlId, Object obj) {
+	public int countObject(String sqlId, Object obj) throws Exception{
 		int count  = (Integer)getSqlMapClientTemplate().queryForObject(sqlId, obj);
 		return count;
 	}

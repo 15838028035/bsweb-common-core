@@ -17,7 +17,7 @@ public class DictionaryApiService {
 		return this.upmDictionaryService.queryForList("select",upmDictionary);
 	}
 
-	public void saveUpmDictionary(UpmDictionary upmDictionary) {
+	public void saveUpmDictionary(UpmDictionary upmDictionary) throws Exception {
 		this.upmDictionaryService.insertObject(upmDictionary);
 	}
 
@@ -25,19 +25,19 @@ public class DictionaryApiService {
 		return this.upmDictionaryService.queryForList("select");
 	}
 	
-	public String typeAndDateCodeToName(String typeCode, String dataCode) {
+	public String typeAndDateCodeToName(String typeCode, String dataCode)  throws Exception{
 		return DictionaryUtil.typeAndDateCodeToName(typeCode, dataCode);
 	}
 
-	public List<UpmDictionary> findByTypeCode(String typeCode) {
+	public List<UpmDictionary> findByTypeCode(String typeCode)  throws Exception{
 		return DictionaryUtil.findByTypeCode(typeCode);
 	}
 
-	public List<UpmDictionary> getDicData(String typeCode) {
+	public List<UpmDictionary> getDicData(String typeCode)  throws Exception{
 		return DictionaryUtil.findByTypeCode(typeCode);
 	}
 
-	public UpmDictionary findDicData(String typeCode, String dataCode) {
+	public UpmDictionary findDicData(String typeCode, String dataCode)  throws Exception{
 		return DictionaryUtil.findDicData(typeCode, dataCode);
 	}
 
@@ -49,11 +49,11 @@ public class DictionaryApiService {
 	}
 
 	public List<UpmDictionary> listAllUpmDictionary() {
-		return this.upmDictionaryService.queryForList("select");
+		return upmDictionaryService.queryForList("select");
 	}
 
 	public List<UpmDictionary> listUpmDictionaryByExample(UpmDictionary entity) {
-		return this.upmDictionaryService.queryForList("select",entity);
+		return upmDictionaryService.queryForList("select",entity);
 	}
 
 	public void deleteByNoteCode(String typeCode) {

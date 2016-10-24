@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.lj.app.core.common.exception.FlowException;
 import com.lj.app.core.common.flows.Action;
-import com.lj.app.core.common.flows.SnakerInterceptor;
+import com.lj.app.core.common.flows.FlowInterceptor;
 import com.lj.app.core.common.flows.core.Execution;
 import com.lj.app.core.common.generator.util.ClassHelper;
 import com.lj.app.core.common.generator.util.StringHelper;
@@ -44,11 +44,11 @@ public abstract class NodeModel extends BaseModel implements Action {
 	/**
 	 * 前置局部拦截器实例集合
 	 */
-	private List<SnakerInterceptor> preInterceptorList = new ArrayList<SnakerInterceptor>();
+	private List<FlowInterceptor> preInterceptorList = new ArrayList<FlowInterceptor>();
 	/**
 	 * 后置局部拦截器实例集合
 	 */
-	private List<SnakerInterceptor> postInterceptorList = new ArrayList<SnakerInterceptor>();
+	private List<FlowInterceptor> postInterceptorList = new ArrayList<FlowInterceptor>();
 	
 	/**
 	 * 具体节点模型需要完成的执行逻辑
@@ -82,9 +82,9 @@ public abstract class NodeModel extends BaseModel implements Action {
 	 * @param interceptorList 拦截器列表
 	 * @param execution 执行对象
 	 */
-	private void intercept(List<SnakerInterceptor> interceptorList, Execution execution) {
+	private void intercept(List<FlowInterceptor> interceptorList, Execution execution) {
 		try {
-			for(SnakerInterceptor interceptor : interceptorList) {
+			for(FlowInterceptor interceptor : interceptorList) {
 				interceptor.intercept(execution);
 			}
 		} catch(Exception e) {
@@ -168,7 +168,7 @@ public abstract class NodeModel extends BaseModel implements Action {
 		this.preInterceptors = preInterceptors;
 		if(StringHelper.isNotEmpty(preInterceptors)) {
 			for(String interceptor : preInterceptors.split(",")) {
-				SnakerInterceptor instance = (SnakerInterceptor)ClassHelper.newInstance(interceptor);
+				FlowInterceptor instance = (FlowInterceptor)ClassHelper.newInstance(interceptor);
 				if(instance != null) this.preInterceptorList.add(instance);
 			}
 		}
@@ -182,7 +182,7 @@ public abstract class NodeModel extends BaseModel implements Action {
 		this.postInterceptors = postInterceptors;
 		if(StringHelper.isNotEmpty(postInterceptors)) {
 			for(String interceptor : postInterceptors.split(",")) {
-				SnakerInterceptor instance = (SnakerInterceptor)ClassHelper.newInstance(interceptor);
+				FlowInterceptor instance = (FlowInterceptor)ClassHelper.newInstance(interceptor);
 				if(instance != null) this.postInterceptorList.add(instance);
 			}
 		}
