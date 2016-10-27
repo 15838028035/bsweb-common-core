@@ -42,6 +42,11 @@ public class FlowProcess extends BaseEntity{
 	 * 流程内容  FLOW_CONTENT
 	 */
 	private String flowContent;
+	/**
+	 * 当前流程的实例url（一般为流程第一步的url）
+	 * 该字段可以直接打开流程申请的表单
+	 */
+	private String instanceUrl;
 
 	/**
 	 * 流程定义模型
@@ -111,5 +116,12 @@ public class FlowProcess extends BaseEntity{
 	public void setModel(ProcessModel model) {
 		this.model = model;
 	}
-	
+
+	public String getInstanceUrl() {
+		return instanceUrl;
+	}
+
+	public void setInstanceUrl(String instanceUrl) {
+		this.instanceUrl = instanceUrl;
+	}
 }

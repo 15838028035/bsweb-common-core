@@ -6,9 +6,9 @@ import java.util.Map;
 import com.lj.app.core.common.exception.FlowException;
 import com.lj.app.core.common.flows.core.Execution;
 import com.lj.app.core.common.flows.handlers.IHandler;
-import com.lj.app.core.common.flows.helper.ReflectHelper;
-import com.lj.app.core.common.generator.util.StringHelper;
 import com.lj.app.core.common.util.ClassUtil;
+import com.lj.app.core.common.util.ReflectUtil;
+import com.lj.app.core.common.util.StringUtil;
 
 
 /**
@@ -54,13 +54,13 @@ public class CustomModel extends WorkModel {
 			IHandler handler = (IHandler)invokeObject;
 			handler.handle(execution);
 		} else {
-			Method method = ReflectHelper.findMethod(invokeObject.getClass(), methodName);
+			Method method = ReflectUtil.findMethod(invokeObject.getClass(), methodName);
 			if(method == null) {
 				throw new FlowException("自定义模型[class=" + clazz + "]无法找到方法名称:" + methodName);
 			}
 			Object[] objects = getArgs(execution.getArgs(), args);
-			Object returnValue = ReflectHelper.invoke(method, invokeObject, objects);
-			if(StringHelper.isNotEmpty(var)) {
+			Object returnValue = ReflectUtil.invoke(method, invokeObject, objects);
+			if(StringUtil.isNotBlank(var)) {
 				execution.getArgs().put(var, returnValue);
 			}
 		}
@@ -76,7 +76,7 @@ public class CustomModel extends WorkModel {
 	 */
 	private Object[] getArgs(Map<String, Object> execArgs, String args) {
 		Object[] objects = null;
-		if(StringHelper.isNotEmpty(args)) {
+		if(StringUtil.isNotBlank(args)) {
 			String[] argArray = args.split(",");
 			objects = new Object[argArray.length];
 			for(int i = 0; i < argArray.length; i++) {

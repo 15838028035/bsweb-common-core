@@ -89,9 +89,17 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 	 * @return Process 流程定义对象
 	 */
 	public FlowProcess getProcessByVersion(String name, Integer version)throws Exception{
+		if(version == null) {
+			version = getLatestProcessVersion(name);
+		}
+		if(version == null) {
+			version = 0;
+		}
+		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("flowName", name);
 		map.put("flowVersion", version);
+		
 		List list = this.queryForList("select",map);
 		if(list!=null && list.size()>0) {
 			return (FlowProcess)list.get(0);
@@ -148,21 +156,21 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 	 * @param input 流程定义输入流
 	 */
 	public void redeploy(String id, InputStream input){
-		/*Assert.notNull(input);
-		FlowProcess entity = this.getProcessById(id);
-		Assert.notNull(entity);
+		Assert.notNull(input);
 		try {
+			com.lj.app.core.common.flows.entity.FlowProcess entity =(com.lj.app.core.common.flows.entity.FlowProcess) this.getProcessById(id);
+			Assert.notNull(entity);
 			byte[] bytes = FileUtil.readBytes(input);
 			ProcessModel model = ModelParser.parse(bytes);
-			String oldProcessName = entity.getName();
 			entity.setModel(model);
-			entity.setBytes(bytes);
+			String flowContent = FileUtil.readStreamToString(input);
+			entity.setFlowContent(flowContent);
 			this.updateObject(entity);
 		} catch(Exception e) {
 			e.printStackTrace();
 			log.error(e.getMessage());
 			throw new FlowException(e.getMessage(), e.getCause());
-		}*/
+		}
 	}
 	
 	/**

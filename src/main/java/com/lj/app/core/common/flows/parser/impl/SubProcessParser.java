@@ -3,10 +3,10 @@ package com.lj.app.core.common.flows.parser.impl;
 import org.apache.commons.lang.math.NumberUtils;
 import org.w3c.dom.Element;
 
-import com.lj.app.core.common.flows.helper.ConfigHelper;
 import com.lj.app.core.common.flows.model.NodeModel;
 import com.lj.app.core.common.flows.model.SubProcessModel;
 import com.lj.app.core.common.flows.parser.AbstractNodeParser;
+import com.lj.app.core.common.flows.util.ConfigHelper;
 import com.lj.app.core.common.generator.util.StringHelper;
 
 /**

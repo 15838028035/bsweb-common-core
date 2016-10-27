@@ -87,12 +87,12 @@ public abstract class BaseServiceImpl<T> implements BaseService {
 	}
 
 	@Override
-	public BaseEntity getInfoByKey(String sqlId, Object obj) throws Exception {
+	public BaseEntity getInfoByKey(String sqlId, Object obj) {
 		return baseDao.getInfoByKey(getSqlMapNameSpace()+NAMESPACE_SPLIT+sqlId,obj);
 	}
 
 	@Override
-	public BaseEntity getInfoByKey(Object obj) throws Exception {
+	public BaseEntity getInfoByKey(Object obj) {
 		return baseDao.getInfoByKey(getSqlMapNameSpace()+NAMESPACE_SPLIT+"getInfoByKey",obj);
 	}
 

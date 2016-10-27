@@ -10,14 +10,18 @@ import com.lj.app.core.common.util.SpringContextHolder;
  */
 public class PropertiesFromTableUtil{
 	static{
-		reloadConfigPro();
+		try {
+			reloadConfigPro();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static String getProperty(String key) {
 		return PropertiesReader.getProperty(key);
 	}
 	
-	public static void reloadConfigPro() {
+	public static void reloadConfigPro() throws Exception{
 		UpmConfigurationService<UpmConfiguration> upmConfigurationService = SpringContextHolder.getBean("upmConfigurationService");
 		upmConfigurationService.reloadConfigPro();
 	}

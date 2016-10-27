@@ -29,9 +29,9 @@ public interface BaseService<T> {
 
 	public BaseEntity findObject(String sqlId, Object obj) throws Exception;
 
-	public BaseEntity getInfoByKey(String sqlId, Object obj) throws Exception;
+	public BaseEntity getInfoByKey(String sqlId, Object obj);
 
-	public BaseEntity getInfoByKey(Object obj) throws Exception;
+	public BaseEntity getInfoByKey(Object obj);
 	
 	public Object queryObject(String sqlId, Object obj) throws Exception;
 	

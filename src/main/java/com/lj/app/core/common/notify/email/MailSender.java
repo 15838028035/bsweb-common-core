@@ -21,6 +21,7 @@ import com.lj.app.core.common.freeMarker.FreeMarkerTemplateUtils;
 import com.lj.app.core.common.notify.entity.UpmNotice;
 import com.lj.app.core.common.notify.service.UpmNoticeService;
 import com.lj.app.core.common.properties.PropertiesUtil;
+import com.lj.app.core.common.util.StringUtil;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -46,11 +47,17 @@ public class MailSender {
 	
 	public static final String MAILT_EMPLATE_DIR =  "mailTemplate";
 	
-	 public MailSender() {  
+	public static final String MAIL_TO_ADDRESS =  "toAddress";//邮件发送地址
+	public static final String MAIL_SUBJECT =  "subject";//邮件主题
+	public static final String MAIL_FTL_NAME =  "ftlName";//邮件模版名称
+	
+	 public MailSender()  throws Exception{  
          configuration = new Configuration();  
-         configuration.setDefaultEncoding("UTF-8");  
+         configuration.setDefaultEncoding("UTF-8"); 
+     	File file = ResourceUtils.getFile("classpath:" + MAILT_EMPLATE_DIR);
+		configuration.setDirectoryForTemplateLoading(file);
      }  
-	 
+	
 	/**
 	 * 添加模板内容
 	 * 
@@ -63,16 +70,8 @@ public class MailSender {
 		Template template = null;
 		try {
 			info.putAll(FreeMarkerTemplateUtils.getShareVars());
-			
-			File file = ResourceUtils.getFile("classpath:" +(info.get(MAILT_EMPLATE_DIR)==null?MAILT_EMPLATE_DIR:info.get(MAILT_EMPLATE_DIR)));
-			
-			configuration.setDirectoryForTemplateLoading(file);
-            try {  
-            	template = configuration.getTemplate((String)info.get("ftlName"));  
-            } catch (IOException e) {  
-                e.printStackTrace();  
-            }  
-            
+            String templateName = (String)info.get("ftlName");
+			template =  FreeMarkerTemplateUtils.getTemplate(configuration, templateName);
 			htmlText = FreeMarkerTemplateUtils.processTemplateIntoString(template,info);
 					
 		} catch (IOException e) {
@@ -85,7 +84,7 @@ public class MailSender {
 		}
 		return htmlText;
 	}
-
+	
 	/**
 	 * 同步发送
 	 * 
@@ -98,7 +97,10 @@ public class MailSender {
 		MimeMessageHelper helper = new MimeMessageHelper(msg, false, "UTF-8");
 		helper.setSubject(String.valueOf(info.get("subject")));
 		helper.setFrom(PropertiesUtil.getPropertyTrim("mail-server-address"));
-		helper.setTo(String.valueOf(info.get("toAddress")));
+		
+		String []toAddress = StringUtil.stringToArray(String.valueOf(info.get("toAddress")), ",");
+		
+		helper.setTo(toAddress);
 		helper.setText(this.getMailText(info), true);// 设置为true表示发送的是HTML
 		
 		try {
@@ -116,7 +118,7 @@ public class MailSender {
 	}
 
 	/**
-	 * 异步发送
+	 * 异步发送,无需等待
 	 * 
 	 */
 	protected void sendMailByAsynchronousMode(final Map<String, Object> info) {
@@ -144,7 +146,6 @@ public class MailSender {
 		info.put("toAddress", toAddress);
 		info.put("subject", subject);
 		info.put("ftlName", ftlName);
-		info.put(MAILT_EMPLATE_DIR, MAILT_EMPLATE_DIR);
 		if (isAsync) {
 			sendMailByAsynchronousMode(info);
 		} else {
@@ -152,4 +153,12 @@ public class MailSender {
 		}
 
 	}
+	public Configuration getConfiguration() {
+		return configuration;
+	}
+
+	public void setConfiguration(Configuration configuration) {
+		this.configuration = configuration;
+	}
+
 }

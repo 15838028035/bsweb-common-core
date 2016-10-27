@@ -13,10 +13,10 @@ import org.xml.sax.SAXException;
 
 import com.lj.app.core.common.exception.FlowException;
 import com.lj.app.core.common.flows.core.ServiceContext;
-import com.lj.app.core.common.flows.helper.XmlHelper;
 import com.lj.app.core.common.flows.model.NodeModel;
 import com.lj.app.core.common.flows.model.ProcessModel;
 import com.lj.app.core.common.flows.model.TransitionModel;
+import com.lj.app.core.common.flows.util.XmlHelper;
 
 /**
  * 流程定义xml文件的模型解析器

@@ -76,13 +76,13 @@ public class BaseDaoImpl<T> extends SqlMapClientDaoSupport implements BaseDao{
 	}
 	
 	@Override
-	public Object queryForObject(String sqlId, Object obj) throws Exception{
+	public Object queryForObject(String sqlId, Object obj){
 		return getSqlMapClientTemplate().queryForObject(sqlId, obj);
 	}
 	
 
 	@Override
-	public BaseEntity getInfoByKey(String sqlId, Object obj) throws Exception{
+	public BaseEntity getInfoByKey(String sqlId, Object obj){
 		return (BaseEntity)getSqlMapClientTemplate().queryForObject(sqlId, obj);
 	}
 

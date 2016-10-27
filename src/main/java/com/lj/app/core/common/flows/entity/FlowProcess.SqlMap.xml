@@ -20,6 +20,7 @@
    	  	<result property="updateDate" column="update_Date"   />
    	  	<result property="enableFlag" column="enable_Flag"   />
    	  	<result property="lockStatus" column="lock_Status"   />
+   	  	<result property="instanceUrl" column="instance_Url"   />
     </resultMap>
 
 	<sql id="dynamicWhere">
@@ -101,7 +102,8 @@
         	update_By ,
         	update_Date ,
         	enable_Flag ,
-        	lock_Status 
+        	lock_Status ,
+        	instance_Url
 	    ]]>
 	</sql>
 	
@@ -125,7 +127,8 @@
 	        	update_By ,
 	        	update_Date ,
 	        	enable_Flag ,
-	        	lock_Status 
+	        	lock_Status,
+	        	instance_Url
 	        ) VALUES (
 				#id# ,
 				#flowNo# ,
@@ -139,7 +142,8 @@
 				#updateBy# ,
 				#updateDate# ,
 				#enableFlag# ,
-				#lockStatus# 
+				#lockStatus# ,
+				#instanceUrl#
 	        )
 	    ]]>
     </insert>
@@ -188,6 +192,10 @@
 	        <isNotEmpty prepend="," property="lockStatus">
 				lock_Status = #lockStatus#
 			</isNotEmpty>
+			 <isNotEmpty prepend="," property="instanceUrl">
+				instance_Url = #instanceUrl#
+			</isNotEmpty>
+			
 	        
 	   </dynamic>
         WHERE 

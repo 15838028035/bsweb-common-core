@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.w3c.dom.Element;
 
-import com.lj.app.core.common.flows.helper.XmlHelper;
 import com.lj.app.core.common.flows.model.NodeModel;
 import com.lj.app.core.common.flows.model.TransitionModel;
+import com.lj.app.core.common.flows.util.XmlHelper;
 
 /**
  * 抽象dom节点解析类
