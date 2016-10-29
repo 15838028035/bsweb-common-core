@@ -1,10 +1,13 @@
 package com.lj.app.core.common.flows.task.config;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import com.lj.app.core.common.flows.FlowBaseTest;
 import com.lj.app.core.common.flows.entity.FlowOrder;
+import com.lj.app.core.common.flows.entity.FlowProcess;
 import com.lj.app.core.common.util.FileUtil;
 
 public class TaskConfigTest extends FlowBaseTest {
@@ -16,7 +19,12 @@ public class TaskConfigTest extends FlowBaseTest {
 	
 	@Test
 	public void taskTest()  throws Exception {
-		FlowOrder order = engine.startInstanceByName("config", 0, "2", null);
+		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getInfoByKey(processId);
+		
+		assertEquals("config",flowProcess.getFlowName());
+		assertEquals("测试预配置参与者",flowProcess.getDisplayName());
+		
+		FlowOrder order = engine.startInstanceByName("config", null, "2", null);
 		System.out.println("order=" + order);
 	}
 }

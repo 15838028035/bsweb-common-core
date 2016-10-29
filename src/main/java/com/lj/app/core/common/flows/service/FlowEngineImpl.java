@@ -1,6 +1,7 @@
 package com.lj.app.core.common.flows.service;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lj.app.core.common.flows.api.FlowTaskServiceApi;
 import com.lj.app.core.common.flows.cfg.Configuration;
 import com.lj.app.core.common.flows.core.Execution;
 import com.lj.app.core.common.flows.entity.FlowOrder;
@@ -17,7 +19,10 @@ import com.lj.app.core.common.flows.model.NodeModel;
 import com.lj.app.core.common.flows.model.ProcessModel;
 import com.lj.app.core.common.flows.model.StartModel;
 import com.lj.app.core.common.flows.model.TaskModel;
+import com.lj.app.core.common.flows.model.TransitionModel;
 import com.lj.app.core.common.util.Assert;
+import com.lj.app.core.common.util.DateUtil;
+import com.lj.app.core.common.util.StringUtil;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
@@ -48,6 +53,8 @@ public class FlowEngineImpl implements FlowEngine {
 	 */
 	@Autowired
 	protected FlowTaskService flowTaskService;
+	@Autowired
+	protected FlowTaskServiceApi flowTaskServiceApi;
 	/**
 	 * 查询业务类
 	 */
@@ -185,14 +192,14 @@ public class FlowEngineImpl implements FlowEngine {
 	/**
 	 * 根据任务主键ID执行任务
 	 */
-	public List<FlowTask> executeTask(String taskId) {
+	public List<FlowTask> executeTask(String taskId) throws Exception{
 		return executeTask(taskId, null);
 	}
 
 	/**
 	 * 根据任务主键ID，操作人ID执行任务
 	 */
-	public List<FlowTask> executeTask(String taskId, String operator) {
+	public List<FlowTask> executeTask(String taskId, String operator) throws Exception {
 		return executeTask(taskId, operator, null);
 	}
 
@@ -200,7 +207,7 @@ public class FlowEngineImpl implements FlowEngine {
 	 * 根据任务主键ID，操作人ID，参数列表执行任务
 	 */
 	public List<FlowTask> executeTask(String taskId, String operator,
-			Map<String, Object> args) {
+			Map<String, Object> args) throws Exception{
 		// 完成任务，并且构造执行对象
 		Execution execution = execute(taskId, operator, args);
 		if (execution == null)
@@ -220,14 +227,14 @@ public class FlowEngineImpl implements FlowEngine {
 	 * 2、nodeName不为null时，则任意跳转，即动态创建转移
 	 */
 	public List<FlowTask> executeAndJumpTask(String taskId, String operator,
-			Map<String, Object> args, String nodeName) {
-		/*Execution execution = execute(taskId, operator, args);
+			Map<String, Object> args, String nodeName) throws Exception {
+		Execution execution = execute(taskId, operator, args);
 		if (execution == null)
 			return Collections.emptyList();
 		ProcessModel model = execution.getProcess().getModel();
 		Assert.notNull(model, "当前任务未找到流程定义模型");
 		if (StringUtil.isBlank(nodeName)) {
-			FlowTask newTask = task().rejectTask(model, execution.getTask());
+			FlowTask newTask = flowTaskServiceApi.rejectTask(model, execution.getTask());
 			execution.addTask(newTask);
 		} else {
 			NodeModel nodeModel = model.getNode(nodeName);
@@ -239,8 +246,7 @@ public class FlowEngineImpl implements FlowEngine {
 			tm.execute(execution);
 		}
 
-		return execution.getTasks();*/
-		return null;
+		return execution.getTasks();
 	}
 
 	/**
@@ -271,19 +277,20 @@ public class FlowEngineImpl implements FlowEngine {
 	 * @return Execution
 	 */
 	private Execution execute(String taskId, String operator,
-			Map<String, Object> args) {
-		/*if (args == null)
+			Map<String, Object> args) throws Exception{
+		if (args == null)
 			args = new HashMap<String, Object>();
-		FlowTask task = task().complete(taskId, operator, args);
+		FlowTask task = flowTaskServiceApi.complete(taskId, operator, args);
 		if (log.isDebugEnabled()) {
 			log.debug("任务[taskId=" + taskId + "]已完成");
 		}
-		FlowOrder order = query().getOrder(task.getOrderId());
-		Assert.notNull(order, "指定的流程实例[id=" + task.getOrderId()
+		FlowOrder order = flowQueryService().getFlowOrder(task.getFlowOrderId().toString());
+		Assert.notNull(order, "指定的流程实例[id=" + task.getFlowOrderId()
 				+ "]已完成或不存在");
-		order.setLastUpdator(operator);
-		order.setLastUpdateTime(DateHelper.getTime());
-		order().updateOrder(order);
+		order.setCreateBy(Integer.parseInt(operator));
+		order.setUpdateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
+		
+		flowOrderService().updateObject(order);
 		// 协办任务完成不产生执行对象
 		if (!task.isMajor()) {
 			return null;
@@ -297,12 +304,11 @@ public class FlowEngineImpl implements FlowEngine {
 				args.put(entry.getKey(), entry.getValue());
 			}
 		}
-		Process process = process().getProcessById(order.getProcessId());
+		FlowProcess process = (FlowProcess)flowProcessService().getProcessById(order.getFlowProcessId());
 		Execution execution = new Execution(this, process, order, args);
 		execution.setOperator(operator);
 		execution.setTask(task);
-		return execution;*/
-		return null;
+		return execution;
 	}
 
 
@@ -379,6 +385,14 @@ public class FlowEngineImpl implements FlowEngine {
 	@Override
 	public FlowManagerService flowManagerService() {
 		return flowManagerService;
+	}
+
+	public FlowTaskServiceApi getFlowTaskServiceApi() {
+		return flowTaskServiceApi;
+	}
+
+	public void setFlowTaskServiceApi(FlowTaskServiceApi flowTaskServiceApi) {
+		this.flowTaskServiceApi = flowTaskServiceApi;
 	}
 
 }

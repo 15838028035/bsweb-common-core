@@ -9,5 +9,4 @@ public class TaskHandler  implements DecisionHandler {
 		return (String)execution.getArgs().get("content");
 	}
 
-
 }

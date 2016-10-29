@@ -1,5 +1,8 @@
 package com.lj.app.core.common.flows.custom;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +12,7 @@ import org.junit.Test;
 
 import com.lj.app.core.common.flows.FlowBaseTest;
 import com.lj.app.core.common.flows.entity.FlowOrder;
+import com.lj.app.core.common.flows.entity.FlowProcess;
 import com.lj.app.core.common.flows.entity.FlowTask;
 import com.lj.app.core.common.util.FileUtil;
 
@@ -21,6 +25,12 @@ public class CustomHandlerTest extends FlowBaseTest {
 	
 	@Test
 	public void taskTest()  throws Exception {
+		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getInfoByKey(processId);
+		
+		assertEquals("custom1",flowProcess.getFlowName());
+		assertEquals("custom1",flowProcess.getDisplayName());
+		assertNotNull(flowProcess.getFlowNo());
+		
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("msg", "custom test");
 		FlowOrder order = engine.startInstanceById(processId, null, args);

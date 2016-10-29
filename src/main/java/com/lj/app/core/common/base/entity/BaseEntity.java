@@ -68,6 +68,11 @@ public class BaseEntity implements Serializable {
 	 * 排序方式
 	 */
 	private String sord;
+	
+	/**
+	 * 状态
+	 */
+	private String status;
 
 	/**
 	 * 从写toString方法
@@ -178,6 +183,14 @@ public class BaseEntity implements Serializable {
 
 	public void setUpdateDateEnd(String updateDateEnd) {
 		this.updateDateEnd = updateDateEnd;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

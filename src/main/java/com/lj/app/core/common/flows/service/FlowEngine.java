@@ -126,7 +126,7 @@ public interface FlowEngine {
 	 * @return List<Task> 任务集合
 	 * @see #executeTask(String, String, Map)
 	 */
-	public List<FlowTask> executeTask(String taskId);
+	public List<FlowTask> executeTask(String taskId) throws Exception ;
 	
 	/**
 	 * 根据任务主键ID，操作人ID执行任务
@@ -135,7 +135,7 @@ public interface FlowEngine {
 	 * @return List<Task> 任务集合
 	 * @see #executeTask(String, String, Map)
 	 */
-	public List<FlowTask> executeTask(String taskId, String operator);
+	public List<FlowTask> executeTask(String taskId, String operator) throws Exception ;
 	
 	/**
 	 * 根据任务主键ID，操作人ID，参数列表执行任务
@@ -144,7 +144,7 @@ public interface FlowEngine {
 	 * @param args 参数列表
 	 * @return List<Task> 任务集合
 	 */
-	public List<FlowTask> executeTask(String taskId, String operator, Map<String, Object> args);
+	public List<FlowTask> executeTask(String taskId, String operator, Map<String, Object> args) throws Exception ;
 	
 	/**
 	 * 根据任务主键ID，操作人ID，参数列表执行任务，并且根据nodeName跳转到任意节点
@@ -156,7 +156,7 @@ public interface FlowEngine {
 	 * @param nodeName 跳转的节点名称
 	 * @return List<Task> 任务集合
 	 */
-	public List<FlowTask> executeAndJumpTask(String taskId, String operator, Map<String, Object> args, String nodeName);
+	public List<FlowTask> executeAndJumpTask(String taskId, String operator, Map<String, Object> args, String nodeName) throws Exception;
 	
 	/**
 	 * 根据流程实例ID，操作人ID，参数列表按照节点模型model创建新的自由任务

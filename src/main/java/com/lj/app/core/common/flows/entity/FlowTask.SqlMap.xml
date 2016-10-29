@@ -368,4 +368,11 @@
 		<include refid="dynamicWhere"/>    
     </select>
 
+	<select id="getNextActiveTasks" resultMap="flowTaskResult">
+    	<include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from flow_task 
+	    ]]>
+		where parent_task_id in ( select ht.id from flow_TASK_HIST ht where ht.flow_orderId=#flowOrderId# and ht.task_name=#taskName# and ht.parent_task_id=#parentTaskId# )
+    </select>
 </sqlMap>

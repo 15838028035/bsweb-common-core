@@ -3,9 +3,13 @@ package com.lj.app.core.common.flows.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.lj.app.core.common.flows.AssignmentHandler;
 import com.lj.app.core.common.flows.core.Execution;
 import com.lj.app.core.common.flows.handlers.impl.MergeActorHandler;
+import com.lj.app.core.common.generator.util.ClassHelper;
 import com.lj.app.core.common.generator.util.StringHelper;
+import com.lj.app.core.common.util.Assert;
+import com.lj.app.core.common.util.StringUtil;
 
 /**
  * 任务定义task元素
@@ -90,7 +94,7 @@ public class TaskModel extends WorkModel {
 	/**
 	 * 分配参与者处理对象
 	 */
-	//private AssignmentHandler assignmentHandlerObject;
+	private AssignmentHandler assignmentHandlerObject;
     /**
      * 字段模型集合
      */
@@ -181,18 +185,18 @@ public class TaskModel extends WorkModel {
 		this.autoExecute = autoExecute;
 	}
 
-/*	public AssignmentHandler getAssignmentHandlerObject() {
+	public AssignmentHandler getAssignmentHandlerObject() {
 		return assignmentHandlerObject;
 	}
 
 	public void setAssignmentHandler(String assignmentHandlerStr) {
-		if(StringHelper.isNotEmpty(assignmentHandlerStr)) {
+		if(StringUtil.isNotBlank(assignmentHandlerStr)) {
 			this.assignmentHandler = assignmentHandlerStr;
 			assignmentHandlerObject = (AssignmentHandler)ClassHelper.newInstance(assignmentHandlerStr);
-			AssertHelper.notNull(assignmentHandlerObject, "分配参与者处理类实例化失败");
+			Assert.notNull(assignmentHandlerObject, "分配参与者处理类实例化失败");
 		}
 	}
-*/
+
 	public String getAssignmentHandler() {
 		return assignmentHandler;
 	}

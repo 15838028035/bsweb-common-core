@@ -135,6 +135,9 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 			} else {
 				entity.setFlowVersion(version + 1);
 			}
+			entity.setFlowName(model.getName());
+			entity.setDisplayName(model.getDisplayName());
+			
 			entity.setLockStatus(FlowConstains.STATE_ACTIVE.toString());
 			entity.setModel(model);
 			entity.setFlowContent(bytes.toString());

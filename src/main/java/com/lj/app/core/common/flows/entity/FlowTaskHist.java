@@ -1,6 +1,7 @@
 package com.lj.app.core.common.flows.entity;
 
 import com.lj.app.core.common.base.entity.BaseEntity;
+import com.lj.app.core.common.flows.model.TaskModel.PerformType;
 
 /**
 *流程任务表
@@ -120,7 +121,7 @@ public class FlowTaskHist extends BaseEntity{
 	/**
 	 * 任务参与者列表  actorIds
 	 */
-	private String actorIds;
+	private String[] actorIds;
 	
 	/**
 	 * 父任务Id  parent_Task_Id
@@ -131,7 +132,44 @@ public class FlowTaskHist extends BaseEntity{
 	 * 任务附属变量  variable
 	 */
 	private String variable;
+	
+	public FlowTaskHist() {
+	}
+	
+	public FlowTaskHist(FlowTask task) {
+	    	this.id = task.getId();
+	    	this.flowOrderId = task.getFlowOrderId();
+	    	this.createTime = task.getCreateTime();
+	    	this.displayName = task.getDisplayName();
+	    	this.taskName = task.getTaskName();
+	    	this.taskType = task.getTaskType();
+	    	this.expireTime = task.getExpireTime();
+	    	this.actionUrl = task.getActionUrl();
+	    	this.actorIds = task.getActorIds();
+	    	this.parentTaskId = task.getParentTaskId();
+	    	this.variable = task.getVariable();
+	    	this.performType = task.getPerformType();
+	}
 
+	 /**
+     * 根据历史任务产生撤回的任务对象
+     * @return 任务对象
+     */
+    public FlowTask undoTask() {
+    	FlowTask task = new FlowTask();
+    	task.setFlowOrderId(this.getFlowOrderId());;
+    	task.setTaskName(this.getTaskName());
+    	task.setDisplayName(this.getDisplayName());
+    	task.setTaskType(this.getTaskType());
+    	task.setExpireTime(this.getExpireTime());
+    	task.setActionUrl(this.getActionUrl());
+    	task.setParentTaskId(this.getParentTaskId());
+    	task.setVariable(this.getVariable());
+    	task.setPerformType(this.getPerformType());
+    	task.setOperator(this.getOperator());
+    	return task;
+    }
+    
 	public java.lang.Integer getId() {
 		return id;
 	}
@@ -324,11 +362,11 @@ public class FlowTaskHist extends BaseEntity{
 		this.actionUrl = actionUrl;
 	}
 
-	public String getActorIds() {
+	public String[] getActorIds() {
 		return actorIds;
 	}
 
-	public void setActorIds(String actorIds) {
+	public void setActorIds(String[] actorIds) {
 		this.actorIds = actorIds;
 	}
 
@@ -348,5 +386,20 @@ public class FlowTaskHist extends BaseEntity{
 		this.variable = variable;
 	}
 	
+	 public boolean isPerformAny() {
+	    	return this.performType.intValue() == PerformType.ANY.ordinal();
+	}
+	 
+	 public String toString() {
+			StringBuilder sb = new StringBuilder();
+			sb.append("HistoryTask(id=").append(this.id);
+			sb.append(",flowOrderId=").append(this.flowOrderId);
+			sb.append(",taskName=").append(this.taskName);
+			sb.append(",displayName").append(this.displayName);
+			sb.append(",taskType=").append(this.taskType);
+			sb.append(",createTime").append(this.createTime);
+			sb.append(",performType=").append(this.performType).append(")");
+			return sb.toString();
+   }
 }
 

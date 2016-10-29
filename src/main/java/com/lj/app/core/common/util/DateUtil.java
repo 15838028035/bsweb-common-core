@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class DateUtil {
@@ -1407,4 +1408,28 @@ public class DateUtil {
 		return 2;
 	}
 
+	/**
+	 * 对时限数据进行处理
+	 * 1、运行时设置的date型数据直接返回
+	 * 2、模型设置的需要特殊转换成date类型
+	 * 3、运行时设置的转换为date型
+	 * @param args 运行时参数
+	 * @param parameter 模型参数
+	 * @return Date类型
+	 */
+	public static Date processTime(Map<String, Object> args, String parameter) {
+		if(StringUtil.isBlank(parameter)) return null;
+		Object data = args.get(parameter);
+		if(data == null) data = parameter;
+		
+		Date result = null;
+		if(data instanceof Date) {
+			return (Date)data;
+		} else if(data instanceof Long) {
+			return new Date((Long)data);
+		} else if(data instanceof String) {
+			//TODO 1.4-dev ignore
+		}
+		return result;
+	}
 }

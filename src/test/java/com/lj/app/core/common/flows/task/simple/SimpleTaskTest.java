@@ -1,5 +1,7 @@
 package com.lj.app.core.common.flows.task.simple;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +11,7 @@ import org.junit.Test;
 
 import com.lj.app.core.common.flows.FlowBaseTest;
 import com.lj.app.core.common.flows.entity.FlowOrder;
+import com.lj.app.core.common.flows.entity.FlowProcess;
 import com.lj.app.core.common.flows.entity.FlowTask;
 import com.lj.app.core.common.util.FileUtil;
 
@@ -22,9 +25,14 @@ public class SimpleTaskTest extends FlowBaseTest {
 	
 	@Test
 	public void taskTest()  throws Exception {
+		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getInfoByKey(processId);
+		
+		assertEquals("simple",flowProcess.getFlowName());
+		assertEquals("测试简单流程",flowProcess.getDisplayName());
+		
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("task1.operator", new String[]{"1"});
-		FlowOrder order = engine.startInstanceByName("simple", 0, "2", args);
+		FlowOrder order = engine.startInstanceByName("simple", null, "2", args);
 		System.out.println("order=" + order);
 		List<FlowTask> tasks = flowQueryService.getActiveTasks(order.getId());
 		for(FlowTask task : tasks) {

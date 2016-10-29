@@ -12,7 +12,7 @@ import com.lj.app.core.common.properties.PropertiesUtil;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-base.xml")
 @Transactional  
-@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
+@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
 public class AbstractBaseSpringTransactionTestCase {
 
 	@BeforeClass 

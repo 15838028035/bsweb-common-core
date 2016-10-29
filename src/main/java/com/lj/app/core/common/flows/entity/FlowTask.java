@@ -1,11 +1,20 @@
 package com.lj.app.core.common.flows.entity;
 
+import java.io.Serializable;
+import java.util.Collections;
+import java.util.Map;
+
 import com.lj.app.core.common.base.entity.BaseEntity;
+import com.lj.app.core.common.flows.model.TaskModel;
+import com.lj.app.core.common.flows.model.TaskModel.TaskType;
+import com.lj.app.core.common.util.JsonUtil;
 
 /**
 *流程任务表
 */
-public class FlowTask extends BaseEntity{
+public class FlowTask extends BaseEntity implements Serializable, Cloneable {
+	
+	public static final String KEY_ACTOR = "S-ACTOR";
 	
 	/**
 	 * ID  id
@@ -120,7 +129,7 @@ public class FlowTask extends BaseEntity{
 	/**
 	 * 任务参与者列表  actorIds
 	 */
-	private String actorIds;
+	private String[] actorIds;
 	
 	/**
 	 * 父任务Id  parent_Task_Id
@@ -131,6 +140,11 @@ public class FlowTask extends BaseEntity{
 	 * 任务附属变量  variable
 	 */
 	private String variable;
+
+	 /**
+     * 保持模型对象
+     */
+	private TaskModel model;
 
 	public java.lang.Integer getId() {
 		return id;
@@ -324,11 +338,11 @@ public class FlowTask extends BaseEntity{
 		this.actionUrl = actionUrl;
 	}
 
-	public String getActorIds() {
+	public String[] getActorIds() {
 		return actorIds;
 	}
 
-	public void setActorIds(String actorIds) {
+	public void setActorIds(String[] actorIds) {
 		this.actorIds = actorIds;
 	}
 
@@ -348,5 +362,38 @@ public class FlowTask extends BaseEntity{
 		this.variable = variable;
 	}
 	
+	 public TaskModel getModel() {
+		return model;
+	}
+
+	public void setModel(TaskModel model) {
+		this.model = model;
+	}
+
+	public boolean isMajor() {
+	    	return this.taskType == TaskType.Major.ordinal();
+	}
+	 
+	 public Map<String, Object> getVariableMap() {
+        Map<String, Object> map = JsonUtil.fromJson(this.variable, Map.class);
+        if(map == null) return Collections.emptyMap();
+        return map;
+	}
+	 
+	 public Object clone() throws CloneNotSupportedException {
+			return super.clone();
+	}
+	 
+	 public String toString() {
+			StringBuilder sb = new StringBuilder();
+			sb.append("Task(id=").append(this.id);
+			sb.append(",flowOrderId=").append(this.flowOrderId);
+			sb.append(",taskName=").append(this.taskName);
+			sb.append(",displayName").append(this.displayName);
+			sb.append(",taskType=").append(this.taskType);
+			sb.append(",createTime=").append(this.createTime);
+			sb.append(",performType=").append(this.performType).append(")");
+			return sb.toString();
+	}
 }
 

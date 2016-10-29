@@ -1,8 +1,8 @@
 package com.lj.app.core.common.flows.service;
 
-import com.lj.app.core.common.base.service.BaseServiceImpl;
-
 import org.springframework.stereotype.Service;
+
+import com.lj.app.core.common.base.service.BaseServiceImpl;
 
 /**
  * @title :
