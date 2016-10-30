@@ -17,13 +17,13 @@ public interface FlowProcessService<FlowProcess> extends BaseService {
 	 * @param process 流程定义对象
 	 * @param idOrName 流程定义id/name
 	 */
-	public void check(FlowProcess process, String idOrName) throws Exception;
+	public void check(com.lj.app.core.common.flows.entity.FlowProcess process, String idOrName) throws Exception;
 	
 	/**
 	 * 保存流程定义
 	 * @param process 流程定义对象
 	 */
-	public void saveFlowProcess(FlowProcess process) throws Exception;
+	public void saveFlowProcess(com.lj.app.core.common.flows.entity.FlowProcess process) throws Exception;
 	
 	/**
 	 * 更新流程定义的类别
@@ -38,14 +38,14 @@ public interface FlowProcessService<FlowProcess> extends BaseService {
 	 * @param id 流程定义id
 	 * @return Process 流程定义对象
 	 */
-	public FlowProcess getProcessById(String id)  throws Exception;
+	public com.lj.app.core.common.flows.entity.FlowProcess getProcessById(String id)  throws Exception;
 	
 	/**
 	 * 根据流程name获取流程定义对象
 	 * @param name 流程定义名称
 	 * @return Process 流程定义对象
 	 */
-	public FlowProcess getProcessByName(String name)  throws Exception;
+	public com.lj.app.core.common.flows.entity.FlowProcess getProcessByName(String name)  throws Exception;
 	
 	/**
 	 * 根据流程name、version获取流程定义对象
@@ -53,7 +53,7 @@ public interface FlowProcessService<FlowProcess> extends BaseService {
 	 * @param version 版本号
 	 * @return Process 流程定义对象
 	 */
-	public FlowProcess getProcessByVersion(String name, Integer version)  throws Exception;
+	public com.lj.app.core.common.flows.entity.FlowProcess getProcessByVersion(String name, Integer version)  throws Exception;
 	
 	/**
 	 * 根據InputStream輸入流，部署流程定义

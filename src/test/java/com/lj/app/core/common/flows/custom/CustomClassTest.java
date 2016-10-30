@@ -25,7 +25,7 @@ public class CustomClassTest extends FlowBaseTest {
 	
 	@Test
 	public void taskTest()  throws Exception {
-		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getInfoByKey(processId);
+		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getProcessById(processId);
 		
 		assertEquals("custom2",flowProcess.getFlowName());
 		assertEquals("custom2",flowProcess.getDisplayName());

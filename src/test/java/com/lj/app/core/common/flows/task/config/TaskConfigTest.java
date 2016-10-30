@@ -19,7 +19,7 @@ public class TaskConfigTest extends FlowBaseTest {
 	
 	@Test
 	public void taskTest()  throws Exception {
-		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getInfoByKey(processId);
+		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getProcessById(processId);
 		
 		assertEquals("config",flowProcess.getFlowName());
 		assertEquals("测试预配置参与者",flowProcess.getDisplayName());

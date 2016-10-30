@@ -24,7 +24,7 @@ public class GeneratorTest extends FlowBaseTest {
 	
 	@Test
 	public void  generatorTest()  throws Exception {
-		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getInfoByKey(processId);
+		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getProcessById(processId);
 		
 		assertEquals("generator",flowProcess.getFlowName());
 		assertEquals("测试实例编号自定义",flowProcess.getDisplayName());

@@ -23,7 +23,7 @@ public class Decision3Test extends FlowBaseTest {
 	
 	@Test
 	public void   taskTest()  throws Exception {
-		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getInfoByKey(processId);
+		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getProcessById(processId);
 		
 		assertEquals("decision3",flowProcess.getFlowName());
 		assertEquals("测试分支流程3",flowProcess.getDisplayName());
