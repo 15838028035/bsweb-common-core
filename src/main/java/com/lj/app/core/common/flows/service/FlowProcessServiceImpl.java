@@ -95,7 +95,7 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 		Cache<String, com.lj.app.core.common.flows.entity.FlowProcess> entityCache = ensureAvailableEntityCache();
 		
 		if(entity.getModel() == null && entity.getFlowContent() != null) {
-			entity.setModel(ModelParser.parse(entity.getFlowContent().getBytes()));
+			entity.setModel(ModelParser.parse(entity.getFlowContent()));
 		}
 		String processName = entity.getFlowName() + DEFAULT_SEPARATOR + entity.getFlowVersion();
 		if(nameCache != null && entityCache != null) {
@@ -229,7 +229,7 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 			
 			entity.setLockStatus(FlowConstains.STATE_ACTIVE.toString());
 			entity.setModel(model);
-			entity.setFlowContent(bytes.toString());
+			entity.setFlowContent(bytes);
 			entity.setCreateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
 			//entity.setCreateBy(creator);
 			insertObject(entity);
@@ -257,8 +257,7 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 			byte[] bytes = FileUtil.readBytes(input);
 			ProcessModel model = ModelParser.parse(bytes);
 			entity.setModel(model);
-			String flowContent = FileUtil.readStreamToString(input);
-			entity.setFlowContent(flowContent);
+			entity.setFlowContent(bytes);
 			this.updateObject(entity);
 			
 			if(!oldProcessName.equalsIgnoreCase(entity.getFlowName())) {

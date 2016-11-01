@@ -2,6 +2,7 @@ package com.lj.app.core.common.flows.entity;
 
 import com.lj.app.core.common.base.entity.BaseEntity;
 import com.lj.app.core.common.flows.model.ProcessModel;
+import com.lj.app.core.common.util.StringUtil;
 
 /**
 *流程定义表
@@ -41,7 +42,13 @@ public class FlowProcess extends BaseEntity{
 	/**
 	 * 流程内容  FLOW_CONTENT
 	 */
-	private String flowContent;
+	private byte[] flowContent;
+	
+	/**
+	 * 流程内容  FLOW_CONTENT
+	 */
+	private String  flowContentStr;
+	
 	/**
 	 * 当前流程的实例url（一般为流程第一步的url）
 	 * 该字段可以直接打开流程申请的表单
@@ -101,11 +108,11 @@ public class FlowProcess extends BaseEntity{
 		this.flowType = flowType;
 	}
 
-	public String getFlowContent() {
+	public byte[] getFlowContent() {
 		return flowContent;
 	}
 
-	public void setFlowContent(String flowContent) {
+	public void setFlowContent(byte[] flowContent) {
 		this.flowContent = flowContent;
 	}
 
@@ -123,5 +130,32 @@ public class FlowProcess extends BaseEntity{
 
 	public void setInstanceUrl(String instanceUrl) {
 		this.instanceUrl = instanceUrl;
+	}
+	
+	public String getFlowContentStr()  {
+		if(flowContent==null || flowContent.length==0){
+			return "";
+		}
+		try{
+			String flowContentStr = new String(flowContent,"UTF-8");
+			return flowContentStr;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	public void setFlowContentStr(String flowContentStr) {
+		this.flowContentStr = flowContentStr;
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Process(id=").append(this.id);
+		sb.append(",flowName=").append(this.flowName);
+		sb.append(",displayName=").append(this.displayName);
+		sb.append(",flowVersion=").append(this.flowVersion);
+		sb.append(",status=").append(this.getStatus()).append(")");
+		return sb.toString();
 	}
 }

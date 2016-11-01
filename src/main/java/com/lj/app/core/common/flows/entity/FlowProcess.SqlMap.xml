@@ -13,7 +13,7 @@
    	  	<result property="flowName" column="FLOW_NAME"   />
    	  	<result property="displayName" column="DISPLAY_NAME"   />
    	  	<result property="flowType" column="FLOW_TYPE"   />
-   	  	<result property="flowContent" column="FLOW_CONTENT"   />
+   	  	<result property="flowContent" column="FLOW_CONTENT"  jdbcType="BLOB"/>
    	  	<result property="createBy" column="create_By"   />
    	  	<result property="createDate" column="create_Date"   />
    	  	<result property="updateBy" column="update_By"   />
