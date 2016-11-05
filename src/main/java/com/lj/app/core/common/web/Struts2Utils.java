@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
@@ -158,6 +159,22 @@ public class Struts2Utils {
 		try {
 			JSONObject jsonObj =JSONObject.fromObject(data);
 			renderText(jsonObj.toString(), headers);
+		} catch (Exception e) {
+			throw new IllegalArgumentException(e);
+		}
+	}
+	
+	/**
+	 * 直接输出JSON,使用Jackson转换Java对象.
+	 * 
+	 * @param data 可以是List<POJO>, POJO[], POJO, 也可以Map名值对.
+	 * @see #render(String, String, String...)
+	 */
+	public static void renderJsonArray(final Object data, final String... headers) {
+		HttpServletResponse response = initResponseHeader(ServletUtils.JSON_TYPE, headers);
+		try {
+			JSONArray jSONArray =JSONArray.fromObject(data);
+			renderText(jSONArray.toString(), headers);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e);
 		}

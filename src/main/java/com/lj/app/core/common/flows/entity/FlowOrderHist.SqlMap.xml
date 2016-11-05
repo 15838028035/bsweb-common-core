@@ -20,6 +20,8 @@
    	  	<result property="createDate" column="create_Date"   />
    	  	<result property="updateBy" column="update_By"   />
    	  	<result property="updateDate" column="update_Date"   />
+   	  	<result property="endTime" column="end_Time"   />
+   	  	<result property="status" column="status"   />
     </resultMap>
 
 	<sql id="dynamicWhere">
@@ -93,6 +95,9 @@
 	             update_Date <= str_to_date('#updateDateEnd#','%Y-%m-%d')
 	             ]]>
 	       </isNotEmpty>
+	        <isNotEmpty prepend="AND" property="status">
+	             status = #status#
+	       </isNotEmpty>
 	    </dynamic>	
 	</sql>
 
@@ -111,15 +116,13 @@
         	create_By ,
         	create_Date ,
         	update_By ,
-        	update_Date 
+        	update_Date ,
+        	end_Time,
+        	status
 	    ]]>
 	</sql>
 	
     <insert id="insert" parameterClass="flowOrderHist">
-        <selectKey resultClass="int" keyProperty="id"  type="post">
-             SELECT LAST_INSERT_ID()
-        </selectKey>
-
 	    <![CDATA[
 	        INSERT INTO
 	        flow_order_hist (
@@ -135,7 +138,9 @@
 	        	create_By ,
 	        	create_Date ,
 	        	update_By ,
-	        	update_Date 
+	        	update_Date ,
+	        	end_Time,
+	        	status
 	        ) VALUES (
 				#id# ,
 				#orderNo# ,
@@ -149,7 +154,9 @@
 				#createBy# ,
 				#createDate# ,
 				#updateBy# ,
-				#updateDate# 
+				#updateDate# ,
+				#endTime#
+				#status#
 	        )
 	    ]]>
     </insert>
@@ -197,6 +204,12 @@
 			</isNotEmpty>
 	        <isNotEmpty prepend="," property="updateDate">
 				update_Date = #updateDate#
+			</isNotEmpty>
+			 <isNotEmpty prepend="," property="endTime">
+				end_Time = #endTime#
+			</isNotEmpty>
+			<isNotEmpty prepend="," property="status">
+				status = #status#
 			</isNotEmpty>
 	        
 	   </dynamic>

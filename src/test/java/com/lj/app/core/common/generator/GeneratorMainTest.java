@@ -17,7 +17,7 @@ public class GeneratorMainTest {
 		
 		g.clean();
 		
-		g.generateByTable("FLOW_TASK_ACTOR");
+		g.generateByTable("FLOW_LEAVE_TEST");
 
 		System.out.println("");
 		System.out

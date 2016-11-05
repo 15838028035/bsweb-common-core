@@ -10,4 +10,7 @@ import com.lj.app.core.common.base.service.BaseService;
  */
 public interface FlowOrderHistService<FlowOrderHist> extends BaseService {
 
+
+	 public com.lj.app.core.common.flows.entity.FlowOrderHist getHistOrder(String orderId);
+
 }

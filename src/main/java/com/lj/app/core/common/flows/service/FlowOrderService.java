@@ -24,4 +24,9 @@ public interface FlowOrderService<FlowOrder> extends BaseService {
 	 */
 	public  com.lj.app.core.common.flows.entity.FlowOrder createFlowOrder(FlowProcess process, String operator,Map<String, Object> args, String parentId, String parentNodeName) throws Exception;
 
+	/**
+	 * 流程实例正常完成
+	 * @param orderId 流程实例id
+	 */
+	public void complete(String orderId);
 }

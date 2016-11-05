@@ -32,7 +32,7 @@ public class TaskParser extends AbstractNodeParser {
 		task.setReminderRepeat(element.getAttribute(ATTR_REMINDERREPEAT));
 		task.setPerformType(element.getAttribute(ATTR_PERFORMTYPE));
 		task.setTaskType(element.getAttribute(ATTR_TASKTYPE));
-		//task.setAssignmentHandler(element.getAttribute(ATTR_ASSIGNEE_HANDLER));
+		task.setAssignmentHandler(element.getAttribute(ATTR_ASSIGNEE_HANDLER));
         NodeList fieldList = element.getElementsByTagName(ATTR_FIELD);
         List<FieldModel> fields = new ArrayList<FieldModel>();
         for(int i = 0; i < fieldList.getLength(); i++) {

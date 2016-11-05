@@ -3,6 +3,7 @@ package com.lj.app.core.common.flows.service;
 import java.util.List;
 import java.util.Map;
 
+import com.lj.app.core.common.flows.api.FlowTaskServiceApi;
 import com.lj.app.core.common.flows.cfg.Configuration;
 import com.lj.app.core.common.flows.core.Execution;
 import com.lj.app.core.common.flows.entity.FlowOrder;
@@ -46,6 +47,12 @@ public interface FlowEngine {
 	 * @return ITaskService 任务服务
 	 */
 	public FlowTaskService flowTaskService();
+	
+	/**
+	 * 获取任务服务
+	 * @return
+	 */
+	public FlowTaskServiceApi FlowTaskServiceApi();
 	
 	/**
 	 * 获取管理服务

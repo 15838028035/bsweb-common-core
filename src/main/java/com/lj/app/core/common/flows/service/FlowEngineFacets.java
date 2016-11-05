@@ -1,6 +1,7 @@
 package com.lj.app.core.common.flows.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.lj.app.core.common.flows.cfg.Configuration;
 import com.lj.app.core.common.flows.entity.FlowOrder;
 import com.lj.app.core.common.flows.entity.FlowTask;
+import com.lj.app.core.common.flows.entity.FlowTaskHist;
+import com.lj.app.core.common.util.StringUtil;
 
 @Service("flowEngineFacets")
 public class FlowEngineFacets {
@@ -73,5 +76,19 @@ public class FlowEngineFacets {
         return tasks;*/
     	return null;
     }
-    
+   
+    public Map<String, Object> flowData(String orderId, String taskName) {
+    	Map<String, Object> data = new HashMap<String, Object>();
+		if (StringUtil.isNotBlank(orderId) && StringUtil.isNotBlank(taskName)) {
+			List<FlowTaskHist> histTasks = flowEngine.flowQueryService().getHistoryTasks(orderId,taskName);
+									
+			List<Map<String, Object>> vars = new ArrayList<Map<String,Object>>();
+			for(FlowTaskHist hist : histTasks) {
+				vars.add(hist.getVariableMap());
+			}
+			data.put("vars", vars);
+			data.put("histTasks", histTasks);
+		}
+		return data;
+}
 }

@@ -1,8 +1,8 @@
 package com.lj.app.core.common.flows.service;
 
-import com.lj.app.core.common.base.service.BaseServiceImpl;
-
 import org.springframework.stereotype.Service;
+
+import com.lj.app.core.common.base.service.BaseServiceImpl;
 
 /**
  * @title :
@@ -12,5 +12,10 @@ import org.springframework.stereotype.Service;
  */
 @Service("flowOrderHistService")
 public class FlowOrderHistServiceImpl<FlowOrderHist> extends BaseServiceImpl<FlowOrderHist> implements FlowOrderHistService<FlowOrderHist>{
+
+	@Override
+	public com.lj.app.core.common.flows.entity.FlowOrderHist getHistOrder(String orderId) {
+		return (com.lj.app.core.common.flows.entity.FlowOrderHist) this.getInfoByKey(orderId);
+	}
 
 }

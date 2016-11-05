@@ -435,7 +435,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 		} else {
 			task.setTaskType(TaskType.Aidant.ordinal());
 		}
-		task.setParentTaskId( execution.getTask().getId());
+		task.setParentTaskId(execution.getTask()==null? null:execution.getTask().getId());
 		task.setModel(model);
 		return task;
 	

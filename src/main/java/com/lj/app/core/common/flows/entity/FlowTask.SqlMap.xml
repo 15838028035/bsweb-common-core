@@ -5,6 +5,7 @@
 <sqlMap namespace="flowTask">
 
     <typeAlias alias="flowTask" type="com.lj.app.core.common.flows.entity.FlowTask"/>
+     <typeAlias alias="flowWorkItem" type="com.lj.app.core.common.flows.entity.FlowWorkItem"/>
 
     <resultMap id="flowTaskResult" class="flowTask">
    	  	<result property="id" column="id"   />
@@ -21,7 +22,6 @@
    	  	<result property="expireDate" column="expire_Date"   />
    	  	<result property="remindDate" column="remind_Date"   />
    	  	<result property="actionUrl" column="action_Url"   />
-   	  	<result property="actorIds" column="actorIds"   />
    	  	<result property="parentTaskId" column="parent_Task_Id"   />
    	  	<result property="variable" column="variable"   />
    	  	<result property="createBy" column="create_by"   />
@@ -185,7 +185,6 @@
         	expire_Date ,
         	remind_Date ,
         	action_Url ,
-        	actorIds ,
         	parent_Task_Id ,
         	variable ,
         	create_by ,

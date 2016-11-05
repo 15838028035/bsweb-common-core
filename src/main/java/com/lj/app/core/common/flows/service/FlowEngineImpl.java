@@ -394,6 +394,14 @@ public class FlowEngineImpl implements FlowEngine {
 	public FlowTaskService flowTaskService() {
 		return flowTaskService;
 	}
+	
+	/**
+	 * 获取任务服务
+	 * @return
+	 */
+	public FlowTaskServiceApi FlowTaskServiceApi(){
+		return flowTaskServiceApi;
+	}
 
 	@Override
 	public FlowManagerService flowManagerService() {

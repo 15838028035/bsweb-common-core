@@ -1,10 +1,14 @@
 package com.lj.app.core.common.flows.service;
 
+import java.util.Date;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lj.app.core.common.base.service.BaseServiceImpl;
+import com.lj.app.core.common.flows.FlowConstains;
+import com.lj.app.core.common.flows.entity.FlowOrderHist;
 import com.lj.app.core.common.flows.entity.FlowProcess;
 import com.lj.app.core.common.util.JsonUtil;
 
@@ -17,6 +21,11 @@ import com.lj.app.core.common.util.JsonUtil;
 @Service("flowOrderService")
 public class FlowOrderServiceImpl<FlowOrder> extends BaseServiceImpl<FlowOrder> implements FlowOrderService<FlowOrder>{
 
+	@Autowired
+	private FlowOrderHistService flowOrderHistService;
+	@Autowired
+	private FlowCompletionService flowCompletionService;
+	
 	/**
 	 *
 	 * @param process
@@ -38,4 +47,43 @@ public class FlowOrderServiceImpl<FlowOrder> extends BaseServiceImpl<FlowOrder> 
 		 return (com.lj.app.core.common.flows.entity.FlowOrder)this.getInfoByKey(retKey);
 		
 	}
+	
+	/**
+	 * 流程实例正常完成
+	 * @param orderId 流程实例id
+	 */
+	public void complete(String orderId){
+		FlowOrderHist history = flowOrderHistService.getHistOrder(orderId);
+		history.setStatus(FlowConstains.STATE_FINISH);
+		history.setEndTime(new Date());
+		
+		try{
+		flowOrderHistService.updateObject(history);
+		}catch(Exception e)  {
+			e.printStackTrace();
+		}
+		this.delete(orderId);
+		FlowCompletionService completion = getFlowCompletionService();
+        if(completion != null) {
+            completion.complete(history);
+        }
+	}
+
+	public FlowOrderHistService getFlowOrderHistService() {
+		return flowOrderHistService;
+	}
+
+	public void setFlowOrderHistService(FlowOrderHistService flowOrderHistService) {
+		this.flowOrderHistService = flowOrderHistService;
+	}
+
+	public FlowCompletionService getFlowCompletionService() {
+		return flowCompletionService;
+	}
+
+	public void setFlowCompletionService(FlowCompletionService flowCompletionService) {
+		this.flowCompletionService = flowCompletionService;
+	}
+	
+	
 }

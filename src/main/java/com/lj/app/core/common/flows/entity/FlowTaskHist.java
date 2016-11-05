@@ -1,7 +1,11 @@
 package com.lj.app.core.common.flows.entity;
 
+import java.util.Collections;
+import java.util.Map;
+
 import com.lj.app.core.common.base.entity.BaseEntity;
 import com.lj.app.core.common.flows.model.TaskModel.PerformType;
+import com.lj.app.core.common.util.JsonUtil;
 
 /**
 *流程任务表
@@ -388,6 +392,12 @@ public class FlowTaskHist extends BaseEntity{
 	
 	 public boolean isPerformAny() {
 	    	return this.performType.intValue() == PerformType.ANY.ordinal();
+	}
+	
+	 public Map<String, Object> getVariableMap() {
+	        Map<String, Object> map = JsonUtil.fromJson(this.variable, Map.class);
+	        if(map == null) return Collections.emptyMap();
+	        return map;
 	}
 	 
 	 public String toString() {

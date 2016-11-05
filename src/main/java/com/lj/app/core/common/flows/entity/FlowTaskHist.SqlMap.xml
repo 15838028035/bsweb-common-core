@@ -155,16 +155,6 @@
 	       <isNotEmpty prepend="AND" property="updateDate">
 	             update_date = #updateDate#
 	       </isNotEmpty>
-	       <isNotEmpty prepend="AND" property="updateDateBegin">
-	             <![CDATA[
-	             update_date >= str_to_date('#updateDatebegin#','%Y-%m-%d') 
-	             ]]>
-	       </isNotEmpty>
-	       <isNotEmpty prepend="AND" property="updateDateEnd">
-	             <![CDATA[
-	             update_date <= str_to_date('#updateDateEnd#','%Y-%m-%d')
-	             ]]>
-	       </isNotEmpty>
 	    </dynamic>	
 	</sql>
 
