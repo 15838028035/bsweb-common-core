@@ -1265,4 +1265,17 @@ public class StringUtil {
 				+ " attribute list end *****\r\n";
 		return toString;
 	}
+	
+	public static String  byteToString(byte b[]){
+		if(b==null || b.length==0){
+			return "";
+		}
+		try{
+			String flowContentStr = new String(b,"UTF-8");
+			return flowContentStr;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "";
+	}
 }

@@ -68,6 +68,11 @@ public class FlowEngineImpl implements FlowEngine {
 	 */
 	@Autowired
 	protected FlowManagerService flowManagerService;
+	
+	/**
+	 * 任务参与
+	 */
+	private FlowTaskActorService flowTaskActorService;
 
 	/**
 	 * 根据serviceContext上下文，查找processService、orderService、taskService服务
@@ -300,7 +305,7 @@ public class FlowEngineImpl implements FlowEngine {
 		FlowOrder order = flowQueryService().getFlowOrder(task.getFlowOrderId().toString());
 		Assert.notNull(order, "指定的流程实例[id=" + task.getFlowOrderId()
 				+ "]已完成或不存在");
-		order.setCreateBy(Integer.parseInt(operator));
+		order.setUpdateByUname(operator);
 		order.setUpdateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
 		
 		flowOrderService().updateObject(order);
@@ -406,6 +411,15 @@ public class FlowEngineImpl implements FlowEngine {
 	@Override
 	public FlowManagerService flowManagerService() {
 		return flowManagerService;
+	}
+	
+	/**
+	 * 任务参与
+	 * @return
+	 */
+	@Override
+	public FlowTaskActorService flowTaskActorService(){
+		return  flowTaskActorService;
 	}
 
 	public FlowTaskServiceApi getFlowTaskServiceApi() {

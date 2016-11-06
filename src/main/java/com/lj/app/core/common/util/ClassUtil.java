@@ -1,7 +1,5 @@
 package com.lj.app.core.common.util;
 
-
-
 public class ClassUtil {
 	public static Object newInstance(Class<?> c) {
 		try {

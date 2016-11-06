@@ -133,16 +133,7 @@ public class FlowProcess extends BaseEntity{
 	}
 	
 	public String getFlowContentStr()  {
-		if(flowContent==null || flowContent.length==0){
-			return "";
-		}
-		try{
-			String flowContentStr = new String(flowContent,"UTF-8");
-			return flowContentStr;
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return "";
+		return flowContentStr;
 	}
 
 	public void setFlowContentStr(String flowContentStr) {
@@ -152,10 +143,10 @@ public class FlowProcess extends BaseEntity{
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Process(id=").append(this.id);
-		sb.append(",flowName=").append(this.flowName);
+		sb.append(",name=").append(this.flowName);
 		sb.append(",displayName=").append(this.displayName);
 		sb.append(",flowVersion=").append(this.flowVersion);
-		sb.append(",status=").append(this.getStatus()).append(")");
+		sb.append(",state=").append(this.getStatus()).append(")");
 		return sb.toString();
 	}
 }

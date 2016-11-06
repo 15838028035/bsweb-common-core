@@ -759,4 +759,11 @@ public class StringUtilTest {
 		System.out.println(StringUtil.props(new BaseEntity()));
 	}
 	
+	@Test
+	public void byteToStringTest() throws Exception {
+		String str = "123";
+		byte []b = str.getBytes("UTF-8");
+		String rest = StringUtil.byteToString(b);
+		assertEquals(str,rest);
+	}
 }

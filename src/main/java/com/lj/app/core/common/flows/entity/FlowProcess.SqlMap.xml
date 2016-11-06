@@ -15,8 +15,10 @@
    	  	<result property="flowType" column="FLOW_TYPE"   />
    	  	<result property="flowContent" column="FLOW_CONTENT"  jdbcType="BLOB"/>
    	  	<result property="createBy" column="create_By"   />
+   	  	<result property="createByUName" column="create_By_UName"   />
    	  	<result property="createDate" column="create_Date"   />
    	  	<result property="updateBy" column="update_By"   />
+   	  	<result property="updateByUname" column="update_By_Uname"   />
    	  	<result property="updateDate" column="update_Date"   />
    	  	<result property="enableFlag" column="enable_Flag"   />
    	  	<result property="lockStatus" column="lock_Status"   />
@@ -84,6 +86,12 @@
 	       <isNotEmpty prepend="AND" property="lockStatus">
 	             lock_Status = #lockStatus#
 	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createByUName">
+	             create_By_UName = #createByUName#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateByUname">
+	             update_By_Uname = #updateByUname#
+	       </isNotEmpty>
 	    </dynamic>	
 	</sql>
 
@@ -103,7 +111,9 @@
         	update_Date ,
         	enable_Flag ,
         	lock_Status ,
-        	instance_Url
+        	instance_Url,
+        	create_By_UName,
+        	update_By_Uname
 	    ]]>
 	</sql>
 	
@@ -128,7 +138,9 @@
 	        	update_Date ,
 	        	enable_Flag ,
 	        	lock_Status,
-	        	instance_Url
+	        	instance_Url,
+	        	create_By_UName,
+	        	update_By_Uname
 	        ) VALUES (
 				#id# ,
 				#flowNo# ,
@@ -143,7 +155,9 @@
 				#updateDate# ,
 				#enableFlag# ,
 				#lockStatus# ,
-				#instanceUrl#
+				#instanceUrl#,
+				#createByUName#,
+				#updateByUname#
 	        )
 	    ]]>
     </insert>
@@ -195,7 +209,9 @@
 			 <isNotEmpty prepend="," property="instanceUrl">
 				instance_Url = #instanceUrl#
 			</isNotEmpty>
-			
+			 <isNotEmpty prepend="," property="updateByUname">
+				update_By_Uname = #updateByUname#
+			</isNotEmpty>
 	        
 	   </dynamic>
         WHERE 

@@ -6,9 +6,8 @@ import java.util.List;
 import com.lj.app.core.common.flows.AssignmentHandler;
 import com.lj.app.core.common.flows.core.Execution;
 import com.lj.app.core.common.flows.handlers.impl.MergeActorHandler;
-import com.lj.app.core.common.generator.util.ClassHelper;
-import com.lj.app.core.common.generator.util.StringHelper;
 import com.lj.app.core.common.util.Assert;
+import com.lj.app.core.common.util.ClassUtil;
 import com.lj.app.core.common.util.StringUtil;
 
 /**
@@ -150,7 +149,7 @@ public class TaskModel extends WorkModel {
 	}
 
 	public void setTaskType(String taskType) {
-		this.taskType = (StringHelper.isEmpty(taskType) ? TASKTYPE_MAJOR : taskType);
+		this.taskType = (StringUtil.isBlank(taskType) ? TASKTYPE_MAJOR : taskType);
 	}
 
 	public String getPerformType() {
@@ -158,7 +157,7 @@ public class TaskModel extends WorkModel {
 	}
 
 	public void setPerformType(String performType) {
-		this.performType = (StringHelper.isEmpty(performType) ? PERFORMTYPE_ANY : performType);
+		this.performType = (StringUtil.isBlank(performType) ? PERFORMTYPE_ANY : performType);
 	}
 
 	public String getReminderTime() {
@@ -192,7 +191,7 @@ public class TaskModel extends WorkModel {
 	public void setAssignmentHandler(String assignmentHandlerStr) {
 		if(StringUtil.isNotBlank(assignmentHandlerStr)) {
 			this.assignmentHandler = assignmentHandlerStr;
-			assignmentHandlerObject = (AssignmentHandler)ClassHelper.newInstance(assignmentHandlerStr);
+			assignmentHandlerObject = (AssignmentHandler)ClassUtil.newInstance(assignmentHandlerStr);
 			Assert.notNull(assignmentHandlerObject, "分配参与者处理类实例化失败");
 		}
 	}
@@ -212,7 +211,7 @@ public class TaskModel extends WorkModel {
 	public void setCallback(String callbackStr) {
 		if(StringHelper.isNotEmpty(callbackStr)) {
 			this.callback = callbackStr;
-			callbackObject = (JobCallback)ClassHelper.newInstance(callbackStr);
+			callbackObject = (JobCallback)ClassUtil.newInstance(callbackStr);
 			AssertHelper.notNull(callbackObject, "回调处理类实例化失败");
 		}
 	}*/

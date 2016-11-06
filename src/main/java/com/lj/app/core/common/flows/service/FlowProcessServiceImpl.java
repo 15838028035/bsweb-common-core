@@ -16,7 +16,6 @@ import com.lj.app.core.common.exception.FlowException;
 import com.lj.app.core.common.flows.FlowConstains;
 import com.lj.app.core.common.flows.model.ProcessModel;
 import com.lj.app.core.common.flows.parser.ModelParser;
-import com.lj.app.core.common.generator.util.StringHelper;
 import com.lj.app.core.common.util.Assert;
 import com.lj.app.core.common.util.DateUtil;
 import com.lj.app.core.common.util.FileUtil;
@@ -124,7 +123,7 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 		Cache<String, com.lj.app.core.common.flows.entity.FlowProcess> entityCache = ensureAvailableEntityCache();
 		if(nameCache != null && entityCache != null) {
 			processName = nameCache.get(id);
-			if(StringHelper.isNotEmpty(processName)) {
+			if(StringUtil.isNotBlank(processName)) {
 				entity = entityCache.get(processName);
 			}
 		}
@@ -231,7 +230,7 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 			entity.setModel(model);
 			entity.setFlowContent(bytes);
 			entity.setCreateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
-			//entity.setCreateBy(creator);
+			entity.setCreateByUName(creator);
 			insertObject(entity);
 			cache(entity);
 			return entity.getId().toString();

@@ -21,17 +21,14 @@ import com.lj.app.core.common.flows.core.ServiceContext;
 import com.lj.app.core.common.flows.service.FlowEngine;
 import com.lj.app.core.common.flows.util.ConfigHelper;
 import com.lj.app.core.common.flows.util.XmlHelper;
-import com.lj.app.core.common.generator.util.StringHelper;
 import com.lj.app.core.common.util.ClassUtil;
 import com.lj.app.core.common.util.FileUtil;
 import com.lj.app.core.common.util.SpringContextHolder;
 import com.lj.app.core.common.util.StringUtil;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
-
 /**
- * 只允许应用程序存在一个Configuration实例
- * 初始化服务上下文，查找流程引擎实现类并初始化依赖的服务
+ * 初始化依赖的服务
  */
 public class Configuration {
 	/**
@@ -100,7 +97,7 @@ public class Configuration {
 
 		//默认使用snaker.xml配置自定义的bean
 		String config = ConfigHelper.getProperty("config");
-		if (StringHelper.isEmpty(config)) {
+		if (StringUtil.isBlank(config)) {
 			config = USER_CONFIG_FILE;
 		}
 		parser(config);

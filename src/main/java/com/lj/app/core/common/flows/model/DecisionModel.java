@@ -2,11 +2,13 @@ package com.lj.app.core.common.flows.model;
 
 
 
+import com.lj.app.core.common.exception.FlowException;
 import com.lj.app.core.common.flows.DecisionHandler;
 import com.lj.app.core.common.flows.Expression;
 import com.lj.app.core.common.flows.core.Execution;
-import com.lj.app.core.common.generator.util.ClassHelper;
-import com.lj.app.core.common.generator.util.StringHelper;
+import com.lj.app.core.common.flows.core.ServiceContext;
+import com.lj.app.core.common.util.ClassUtil;
+import com.lj.app.core.common.util.StringUtil;
 
 /**
  * 决策定义decision元素
@@ -34,14 +36,14 @@ public class DecisionModel extends NodeModel {
 	private transient Expression expression;
 	
 	public void exec(Execution execution) {
-		/*log.info(execution.getFlowOrder().getId() + "->decision execution.getArgs():" + execution.getArgs());
+		log.info(execution.getFlowOrder().getId() + "->decision execution.getArgs():" + execution.getArgs());
 		if(expression == null) {
 			expression = ServiceContext.getContext().find(Expression.class);
 		}
 		log.info("expression is " + expression);
 		if(expression == null) throw new FlowException("表达式解析器为空，请检查配置.");
 		String next = null;
-		if(StringHelper.isNotEmpty(expr)) {
+		if(StringUtil.isNotBlank(expr)) {
 			next = expression.eval(String.class, expr, execution.getArgs());
 		} else if(decide != null) {
 			next = decide.decide(execution);
@@ -49,9 +51,9 @@ public class DecisionModel extends NodeModel {
 		log.info(execution.getFlowOrder().getId() + "->decision expression[expr=" + expr + "] return result:" + next);
 		boolean isfound = false;
 		for(TransitionModel tm : getOutputs()) {
-			if(StringHelper.isEmpty(next)) {
+			if(StringUtil.isBlank(next)) {
 				String expr = tm.getExpr();
-				if(StringHelper.isNotEmpty(expr) && expression.eval(Boolean.class, expr, execution.getArgs())) {
+				if(StringUtil.isNotBlank(expr) && expression.eval(Boolean.class, expr, execution.getArgs())) {
 					tm.setEnabled(true);
 					tm.execute(execution);
 					isfound = true;
@@ -64,7 +66,7 @@ public class DecisionModel extends NodeModel {
 				}
 			}
 		}
-		if(!isfound) throw new FlowException(execution.getFlowOrder().getId() + "->decision节点无法确定下一步执行路线");*/
+		if(!isfound) throw new FlowException(execution.getFlowOrder().getId() + "->decision节点无法确定下一步执行路线");
 	}
 	
 	public String getExpr() {
@@ -80,8 +82,8 @@ public class DecisionModel extends NodeModel {
 
 	public void setHandleClass(String handleClass) {
 		this.handleClass = handleClass;
-		if(StringHelper.isNotEmpty(handleClass)) {
-			decide = (DecisionHandler)ClassHelper.newInstance(handleClass);
+		if(StringUtil.isNotBlank(handleClass)) {
+			decide = (DecisionHandler)ClassUtil.newInstance(handleClass);
 		}
 	}
 }

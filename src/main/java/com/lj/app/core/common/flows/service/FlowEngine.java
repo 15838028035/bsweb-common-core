@@ -61,6 +61,12 @@ public interface FlowEngine {
 	public FlowManagerService flowManagerService();
 	
 	/**
+	 * 任务参与
+	 * @return
+	 */
+	public FlowTaskActorService flowTaskActorService();
+	
+	/**
 	 * 根据流程定义ID启动流程实例
 	 * @param id 流程定义ID
 	 * @return Order 流程实例

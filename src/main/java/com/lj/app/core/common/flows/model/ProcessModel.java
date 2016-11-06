@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.lj.app.core.common.flows.DefaultNoGenerator;
 import com.lj.app.core.common.flows.INoGenerator;
-import com.lj.app.core.common.generator.util.ClassHelper;
+import com.lj.app.core.common.util.ClassUtil;
 import com.lj.app.core.common.util.StringUtil;
 
 /**
@@ -167,7 +167,7 @@ public class ProcessModel extends BaseModel {
 	public void setInstanceNoClass(String instanceNoClass) {
 		this.instanceNoClass = instanceNoClass;
 		if(StringUtil.isNotBlank(instanceNoClass)) {
-			generator = (INoGenerator)ClassHelper.newInstance(instanceNoClass);
+			generator = (INoGenerator)ClassUtil.newInstance(instanceNoClass);
 		}
 	}
 	

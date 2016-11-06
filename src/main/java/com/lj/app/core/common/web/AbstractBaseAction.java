@@ -11,8 +11,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
-import org.springframework.beans.BeanUtils;
 
+import com.lj.app.core.common.base.entity.BaseEntity;
 import com.lj.app.core.common.base.service.BaseService;
 import com.lj.app.core.common.pagination.Page;
 import com.lj.app.core.common.pagination.PageTool;
@@ -296,12 +296,20 @@ public abstract class AbstractBaseAction<T> extends ActionSupport implements Mod
 		
 	try{
 			if (StringUtil.isEqualsIgnoreCase(operate, AbstractBaseAction.EDIT)) {
-				BeanUtils.copyProperties(getModel(), new String[]{"updateBy","updateDate"},new String[]{String.valueOf(getLoginUserId()),DateUtil.getNowDateYYYYMMddHHMMSS()});
-				getBaseService().updateObject(getModel());
+				BaseEntity entity = (BaseEntity)getModel();
+				entity.setUpdateBy(this.getLoginUserId());
+				entity.setUpdateByUname(this.getUserName());
+				entity.setUpdateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
+				
+				getBaseService().updateObject(entity);
 				returnMessage = UPDATE_SUCCESS;
 			}else{
-				BeanUtils.copyProperties(getModel(), new String[]{"createBy","createDate"},new String[]{String.valueOf(getLoginUserId()),DateUtil.getNowDateYYYYMMddHHMMSS()});
-				getBaseService().insertObject(getModel());
+				BaseEntity entity = (BaseEntity)getModel();
+				entity.setCreateBy(this.getLoginUserId());
+				entity.setCreateByUName(this.getUserName());
+				entity.setCreateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
+				
+				getBaseService().insertObject(entity);
 				returnMessage = CREATE_SUCCESS;
 			}
 			
@@ -384,16 +392,6 @@ public abstract class AbstractBaseAction<T> extends ActionSupport implements Mod
 				"attachment;filename=" + filedisplay);
 		baos.writeTo(out);
 		out.flush();
-	}
-	
-	/**
-	 * 依据操作用户id取得操作用户名称
-	 * @param userId
-	 * @return
-	 */
-	protected String getUserNameById(int userId){
-		
-		return null;
 	}
 	
 	public abstract  BaseService getBaseService();

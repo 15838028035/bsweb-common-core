@@ -23,12 +23,12 @@ public class SimpleTaskTest  extends FlowBaseTest {
 	@Test
 	public void taskTest()  throws Exception {
 		Map<String, Object> args = new HashMap<String, Object>();
-		args.put("task1.operator", new String[]{"1"});
+		args.put("task1.operator", new String[]{"admin管理员"});
 		FlowOrder order = engine.startInstanceByName("simple", null, "2", args);
 		System.out.println("order=" + order);
 		List<FlowTask> tasks = flowQueryService.getActiveTasks(order.getId().toString());
 		for(FlowTask task : tasks) {
-			engine.executeTask(task.getId().toString(), "1", args);
+			engine.executeTask(task.getId().toString(), "admin管理员", args);
 		}
 	}
 }

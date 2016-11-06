@@ -84,9 +84,14 @@ public class ModelParser {
 		NodeParser nodeParser = null;
 		try {
 			nodeParser = ServiceContext.getContext().findByName(nodeName, NodeParser.class);
+			
+			if(nodeParser ==null) {
+				System.out.println("nodeName=" + nodeName);
+			}
 			nodeParser.parse(element);
 			return nodeParser.getModel();
 		} catch (RuntimeException e) {
+			e.printStackTrace();
 			throw new FlowException(e);
 		}
 	}

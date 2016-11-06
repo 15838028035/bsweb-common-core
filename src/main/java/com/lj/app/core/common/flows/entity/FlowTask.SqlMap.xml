@@ -25,8 +25,10 @@
    	  	<result property="parentTaskId" column="parent_Task_Id"   />
    	  	<result property="variable" column="variable"   />
    	  	<result property="createBy" column="create_by"   />
+   	  	<result property="createByUName" column="create_By_UName"   />
    	  	<result property="createDate" column="create_date"   />
    	  	<result property="updateBy" column="update_by"   />
+   	  	<result property="updateByUname" column="update_By_Uname"   />
    	  	<result property="updateDate" column="update_date"   />
     </resultMap>
 
@@ -165,6 +167,12 @@
 	             update_date <= str_to_date('#updateDateEnd#','%Y-%m-%d')
 	             ]]>
 	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createByUName">
+	             create_By_UName = #createByUName#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateByUname">
+	             update_By_Uname = #updateByUname#
+	       </isNotEmpty>
 	    </dynamic>	
 	</sql>
 
@@ -190,7 +198,9 @@
         	create_by ,
         	create_date ,
         	update_by ,
-        	update_date 
+        	update_date ,
+        	create_By_UName,
+        	update_By_Uname
 	    ]]>
 	</sql>
 	
@@ -222,7 +232,9 @@
 	        	create_by ,
 	        	create_date ,
 	        	update_by ,
-	        	update_date 
+	        	update_date ,
+	        	create_By_UName,
+        		update_By_Uname
 	        ) VALUES (
 				#id# ,
 				#taskVefrsion# ,
@@ -244,7 +256,9 @@
 				#createBy# ,
 				#createDate# ,
 				#updateBy# ,
-				#updateDate# 
+				#updateDate# ,
+				#createByUName#,
+				#updateByUname#
 	        )
 	    ]]>
     </insert>
@@ -317,13 +331,16 @@
 	        <isNotEmpty prepend="," property="updateDate">
 				update_date = #updateDate#
 			</isNotEmpty>
+			 <isNotEmpty prepend="," property="updateByUname">
+				update_By_Uname = #updateByUname#
+			</isNotEmpty>
 	        
 	   </dynamic>
         WHERE 
 	        id = #id# 
     </update>
 
-    <delete id="delete" parameterClass="java.lang.Integer">
+    <delete id="delete" >
     <![CDATA[
         delete from flow_task where
         id = #id# 

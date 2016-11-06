@@ -7,8 +7,8 @@ import com.lj.app.core.common.exception.FlowException;
 import com.lj.app.core.common.flows.Action;
 import com.lj.app.core.common.flows.FlowInterceptor;
 import com.lj.app.core.common.flows.core.Execution;
-import com.lj.app.core.common.generator.util.ClassHelper;
-import com.lj.app.core.common.generator.util.StringHelper;
+import com.lj.app.core.common.util.ClassUtil;
+import com.lj.app.core.common.util.StringUtil;
 import com.opensymphony.xwork2.util.logging.Logger;
 import com.opensymphony.xwork2.util.logging.LoggerFactory;
 
@@ -20,7 +20,7 @@ public abstract class NodeModel extends BaseModel implements Action {
 	 * 
 	 */
 	private static final long serialVersionUID = -2377317472320109317L;
-	private static final Logger log = LoggerFactory.getLogger(NodeModel.class);
+	protected static final Logger log = LoggerFactory.getLogger(NodeModel.class);
 	/**
 	 * 输入变迁集合
 	 */
@@ -166,9 +166,9 @@ public abstract class NodeModel extends BaseModel implements Action {
 
 	public void setPreInterceptors(String preInterceptors) {
 		this.preInterceptors = preInterceptors;
-		if(StringHelper.isNotEmpty(preInterceptors)) {
+		if(StringUtil.isNotBlank(preInterceptors)) {
 			for(String interceptor : preInterceptors.split(",")) {
-				FlowInterceptor instance = (FlowInterceptor)ClassHelper.newInstance(interceptor);
+				FlowInterceptor instance = (FlowInterceptor)ClassUtil.newInstance(interceptor);
 				if(instance != null) this.preInterceptorList.add(instance);
 			}
 		}
@@ -180,9 +180,9 @@ public abstract class NodeModel extends BaseModel implements Action {
 
 	public void setPostInterceptors(String postInterceptors) {
 		this.postInterceptors = postInterceptors;
-		if(StringHelper.isNotEmpty(postInterceptors)) {
+		if(StringUtil.isNotBlank(postInterceptors)) {
 			for(String interceptor : postInterceptors.split(",")) {
-				FlowInterceptor instance = (FlowInterceptor)ClassHelper.newInstance(interceptor);
+				FlowInterceptor instance = (FlowInterceptor)ClassUtil.newInstance(interceptor);
 				if(instance != null) this.postInterceptorList.add(instance);
 			}
 		}

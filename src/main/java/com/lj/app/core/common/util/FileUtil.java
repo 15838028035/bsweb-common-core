@@ -256,6 +256,11 @@ public class FileUtil {
 		}
 		return fileContent;
 	}
+	
+	public static byte[] readStreamToByte(InputStream stream) throws Exception {
+		String fileContent = readStreamToString(stream);
+		return fileContent.getBytes("UTF-8");
+	}
 
 	/**
 	 * delete file folder

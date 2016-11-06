@@ -31,7 +31,7 @@ public class FlowQueryServiceImpl implements FlowQueryService {
 	private FlowApproveService flowApproveService;
 	
 	public FlowOrder getFlowOrder(String orderId){
-		return null;
+		return (FlowOrder)flowOrderService.getInfoByKey(orderId);
 	}
 	
 	public List<FlowTask> getActiveTasks(String flowOrderId){
