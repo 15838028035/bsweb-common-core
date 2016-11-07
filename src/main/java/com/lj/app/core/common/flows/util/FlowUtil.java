@@ -28,7 +28,8 @@ import com.lj.app.core.common.flows.model.TransitionModel;
 public class FlowUtil {
 	private static Map<Class<? extends NodeModel>, String> mapper = new HashMap<Class<? extends NodeModel>, String>();
 	static {
-		mapper.put(ExtTaskModel.class, "FlowTask");
+		mapper.put(ExtTaskModel.class, "task");
+		mapper.put(TaskModel.class, "task");
 		mapper.put(CustomModel.class, "custom");
 		mapper.put(DecisionModel.class, "decision");
 		mapper.put(EndModel.class, "end");
@@ -138,7 +139,7 @@ public class FlowUtil {
 		return buffer.toString();
 	}
 	
-	private static String getBase(NodeModel node) {
+	public static String getBase(NodeModel node) {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append(":{type:'");
 		buffer.append(mapper.get(node.getClass()));
