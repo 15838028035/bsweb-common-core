@@ -21,7 +21,6 @@
    	  	<result property="expireDate" column="expire_Date"   />
    	  	<result property="remindDate" column="remind_Date"   />
    	  	<result property="actionUrl" column="action_Url"   />
-   	  	<result property="actorIds" column="actorIds"   />
    	  	<result property="parentTaskId" column="parent_Task_Id"   />
    	  	<result property="variable" column="variable"   />
    	  	<result property="createBy" column="create_by"   />
@@ -126,9 +125,6 @@
 	       <isNotEmpty prepend="AND" property="actionUrl">
 	             action_Url = #actionUrl#
 	       </isNotEmpty>
-	       <isNotEmpty prepend="AND" property="actorIds">
-	             actorIds = #actorIds#
-	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="parentTaskId">
 	             parent_Task_Id = #parentTaskId#
 	       </isNotEmpty>
@@ -183,7 +179,6 @@
         	expire_Date ,
         	remind_Date ,
         	action_Url ,
-        	actorIds ,
         	parent_Task_Id ,
         	variable ,
         	create_by ,
@@ -217,7 +212,6 @@
 	        	expire_Date ,
 	        	remind_Date ,
 	        	action_Url ,
-	        	actorIds ,
 	        	parent_Task_Id ,
 	        	variable ,
 	        	create_by ,
@@ -241,7 +235,6 @@
 				#expireDate# ,
 				#remindDate# ,
 				#actionUrl# ,
-				null,
 				#parentTaskId# ,
 				#variable# ,
 				#createBy# ,
@@ -300,9 +293,6 @@
 			</isNotEmpty>
 	        <isNotEmpty prepend="," property="actionUrl">
 				action_Url = #actionUrl#
-			</isNotEmpty>
-	        <isNotEmpty prepend="," property="actorIds">
-				actorIds = #actorIds#
 			</isNotEmpty>
 	        <isNotEmpty prepend="," property="parentTaskId">
 				parent_Task_Id = #parentTaskId#

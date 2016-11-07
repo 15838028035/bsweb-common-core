@@ -10,7 +10,10 @@ import com.lj.app.core.common.base.service.BaseServiceImpl;
 import com.lj.app.core.common.flows.FlowConstains;
 import com.lj.app.core.common.flows.entity.FlowOrderHist;
 import com.lj.app.core.common.flows.entity.FlowProcess;
+import com.lj.app.core.common.flows.model.ProcessModel;
+import com.lj.app.core.common.util.DateUtil;
 import com.lj.app.core.common.util.JsonUtil;
+import com.lj.app.core.common.util.StringUtil;
 
 /**
  * @title :
@@ -43,9 +46,25 @@ public class FlowOrderServiceImpl<FlowOrder> extends BaseServiceImpl<FlowOrder> 
 		 flowOrder.setParentId(parentId);
 		 flowOrder.setParentNodeName(parentNodeName);
 		 flowOrder.setVariable(JsonUtil.toJson(args));
+		 flowOrder.setCreateByUName(operator);
+		 flowOrder.setCreateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
+		 
+		 ProcessModel model = process.getModel();
+		if(model != null && args != null) {
+			if(StringUtil.isNotBlank(model.getExpireTime())) {
+				Date expireTime = DateUtil.formatDate(model.getExpireTime(),"yyyy-MM-dd");
+				flowOrder.setExpireTime(expireTime);
+			}
+            String orderNo = (String)args.get(FlowEngine.ID);
+            if(StringUtil.isNotBlank(orderNo)) {
+            	flowOrder.setOrderNo(orderNo);
+            } else {
+            	flowOrder.setOrderNo(model.getGenerator().generate(model));
+            }
+		}
+	
 		 int retKey = this.insertObjectReturnKey(flowOrder);
 		 return (com.lj.app.core.common.flows.entity.FlowOrder)this.getInfoByKey(retKey);
-		
 	}
 	
 	/**

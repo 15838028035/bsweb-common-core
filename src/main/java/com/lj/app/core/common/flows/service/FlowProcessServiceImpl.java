@@ -307,6 +307,8 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 	public int getLatestProcessVersion(String flowName)throws Exception{
 		Map<String,String> map = new HashMap<String,String>();
 		map.put("flowName", flowName);
+		map.put("sortColumns", " id desc");
+		
 		List list = this.queryForList("select",map);
 		if(list!=null && list.size()>0) {
 			return ((com.lj.app.core.common.flows.entity.FlowProcess)list.get(0)).getFlowVersion();

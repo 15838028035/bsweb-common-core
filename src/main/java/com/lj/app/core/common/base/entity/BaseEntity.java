@@ -59,12 +59,12 @@ public class BaseEntity implements Serializable {
 	/**
 	 * 是否有效 enable_flag
 	 */
-	private String enableFlag = "T";
+	private String enableFlag = "";
 
 	/**
 	 * 加载状态 lock_status
 	 */
-	private String lockStatus = "0";
+	private String lockStatus = "";
 
 	/**
 	 * 应用ID app_id

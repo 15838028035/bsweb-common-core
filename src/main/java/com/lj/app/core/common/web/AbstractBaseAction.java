@@ -278,7 +278,7 @@ public abstract class AbstractBaseAction<T> extends ActionSupport implements Mod
 				page.setSortColumns(orderBy);
 			}
 			
-			getBaseService().findPageList(page, condition);
+			page = getBaseService().findPageList(page, condition);
 			Struts2Utils.renderText(PageTool.pageToJsonJQGrid(this.page),new String[0]);
 			return null;
 		} catch (Exception e) {
