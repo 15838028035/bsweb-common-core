@@ -1,7 +1,12 @@
 package com.lj.app.core.common.flows.handlers.impl;
 
+import java.util.List;
+
+import com.lj.app.core.common.flows.model.ForkModel;
 import com.lj.app.core.common.flows.model.JoinModel;
 import com.lj.app.core.common.flows.model.NodeModel;
+import com.lj.app.core.common.flows.model.TransitionModel;
+import com.lj.app.core.common.flows.model.WorkModel;
 
 /**
  *  合并分支操作的处理器
@@ -18,14 +23,14 @@ public class MergeBranchHandler extends AbstractMergeHandler {
 	 * @param buffer
 	 */
 	private void findForkTaskNames(NodeModel node, StringBuilder buffer) {
-		/*if(node instanceof ForkModel) return;
+		if(node instanceof ForkModel) return;
 		List<TransitionModel> inputs = node.getInputs();
 		for(TransitionModel tm : inputs) {
 			if(tm.getSource() instanceof WorkModel) {
 				buffer.append(tm.getSource().getName()).append(",");
 			}
 			findForkTaskNames(tm.getSource(), buffer);
-		}*/
+		}
 	}
 
 	/**

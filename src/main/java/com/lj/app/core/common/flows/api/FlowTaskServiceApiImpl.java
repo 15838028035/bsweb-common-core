@@ -430,6 +430,8 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 		task.setTaskName(model.getName());
 		task.setDisplayName(model.getDisplayName());
 		task.setCreateTime(new Date());
+		task.setCreateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
+		
 		if(model.isMajor()) { 
 			task.setTaskType(TaskType.Major.ordinal());
 		} else {

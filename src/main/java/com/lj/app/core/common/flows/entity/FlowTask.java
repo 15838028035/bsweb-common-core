@@ -145,6 +145,12 @@ public class FlowTask extends BaseEntity implements Serializable, Cloneable {
      * 保持模型对象
      */
 	private TaskModel model;
+	
+	//以下是查询字段
+	private String flowVersion;
+	private String flowName;
+	private String instanceUrl;
+	private String flowProcessId;
 
 	public java.lang.Integer getId() {
 		return id;
@@ -368,6 +374,38 @@ public class FlowTask extends BaseEntity implements Serializable, Cloneable {
 
 	public void setModel(TaskModel model) {
 		this.model = model;
+	}
+
+	public String getFlowVersion() {
+		return flowVersion;
+	}
+
+	public void setFlowVersion(String flowVersion) {
+		this.flowVersion = flowVersion;
+	}
+
+	public String getFlowName() {
+		return flowName;
+	}
+
+	public void setFlowName(String flowName) {
+		this.flowName = flowName;
+	}
+
+	public String getInstanceUrl() {
+		return instanceUrl;
+	}
+
+	public void setInstanceUrl(String instanceUrl) {
+		this.instanceUrl = instanceUrl;
+	}
+
+	public String getFlowProcessId() {
+		return flowProcessId;
+	}
+
+	public void setFlowProcessId(String flowProcessId) {
+		this.flowProcessId = flowProcessId;
 	}
 
 	public boolean isMajor() {

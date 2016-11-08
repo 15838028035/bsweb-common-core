@@ -85,6 +85,11 @@ public class BaseEntity implements Serializable {
 	 * 状态
 	 */
 	private String status;
+	
+	/**
+	 * 查询条件
+	 */
+	private String conditionWhere;
 
 	/**
 	 * 从写toString方法
@@ -219,6 +224,14 @@ public class BaseEntity implements Serializable {
 
 	public void setUpdateByUname(String updateByUname) {
 		this.updateByUname = updateByUname;
+	}
+
+	public String getConditionWhere() {
+		return conditionWhere;
+	}
+
+	public void setConditionWhere(String conditionWhere) {
+		this.conditionWhere = conditionWhere;
 	}
 
 }

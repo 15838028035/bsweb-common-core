@@ -14,8 +14,6 @@ import com.lj.app.core.common.flows.parser.AbstractNodeParser;
 
 /**
  * 任务节点解析类
- * @author yuqs
- * @since 1.0
  */
 public class TaskParser extends AbstractNodeParser {
 	/**

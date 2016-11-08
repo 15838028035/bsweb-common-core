@@ -17,8 +17,7 @@ import com.opensymphony.xwork2.util.logging.LoggerFactory;
  */
 public class CreateTaskHandler implements IHandler {
 
-	private static final Logger log = LoggerFactory
-			.getLogger(CreateTaskHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(CreateTaskHandler.class);
 
 	/**
 	 * 任务模型

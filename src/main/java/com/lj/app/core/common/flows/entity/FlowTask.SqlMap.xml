@@ -5,7 +5,6 @@
 <sqlMap namespace="flowTask">
 
     <typeAlias alias="flowTask" type="com.lj.app.core.common.flows.entity.FlowTask"/>
-     <typeAlias alias="flowWorkItem" type="com.lj.app.core.common.flows.entity.FlowWorkItem"/>
 
     <resultMap id="flowTaskResult" class="flowTask">
    	  	<result property="id" column="id"   />
@@ -30,6 +29,14 @@
    	  	<result property="updateBy" column="update_by"   />
    	  	<result property="updateByUname" column="update_By_Uname"   />
    	  	<result property="updateDate" column="update_date"   />
+    </resultMap>
+    
+     <resultMap id="flowTaskResult2" extends ="flowTaskResult" class="flowTask">
+   	  	<result property="flowVersion" column="FLOW_VERSION"   />
+   	  	<result property="flowName" column="FLOW_NAME"   />
+   	  	<result property="instanceUrl" column="instance_Url"   />
+   	  	<result property="flowProcessId" column="flow_Process_Id"   />
+   	  	
     </resultMap>
 
 	<sql id="dynamicWhere">
@@ -173,6 +180,151 @@
 	       <isNotEmpty prepend="AND" property="updateByUname">
 	             update_By_Uname = #updateByUname#
 	       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+	
+	<sql id="dynamicWhere2">
+	    <dynamic prepend="  ">
+	       <isNotEmpty prepend="AND" property="id">
+	             t.id = #id#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="taskVefrsion">
+	             t.TASK_VEFRSION = #taskVefrsion#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="flowOrderId">
+	             t.FLOW_ORDER_ID = #flowOrderId#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="taskName">
+	             t.TASK_NAME = #taskName#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="displayName">
+	             t.display_Name = #displayName#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="performType">
+	             t.perform_Type = #performType#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="taskType">
+	            t.task_Type = #taskType#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="operator">
+	             t.operator = #operator#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createTime">
+	             t.create_Time = #createTime#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createTimeBegin">
+	             <![CDATA[
+	             t.create_Time >= str_to_date('#createTimebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createTimeEnd">
+	             <![CDATA[
+	             t.create_Time <= str_to_date('#createTimeEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="finishTime">
+	             t.finish_Time = #finishTime#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="finishTimeBegin">
+	             <![CDATA[
+	             t.finish_Time >= str_to_date('#finishTimebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="finishTimeEnd">
+	             <![CDATA[
+	             t.finish_Time <= str_to_date('#finishTimeEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="expireTime">
+	             t.expire_Time = #expireTime#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="expireTimeBegin">
+	             <![CDATA[
+	             t.expire_Time >= str_to_date('#expireTimebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="expireTimeEnd">
+	             <![CDATA[
+	             t.expire_Time <= str_to_date('#expireTimeEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="expireDate">
+	             t.expire_Date = #expireDate#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="expireDateBegin">
+	             <![CDATA[
+	             t.expire_Date >= str_to_date('#expireDatebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="expireDateEnd">
+	             <![CDATA[
+	             t.expire_Date <= str_to_date('#expireDateEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="remindDate">
+	             remind_Date = #remindDate#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="remindDateBegin">
+	             <![CDATA[
+	             t.remind_Date >= str_to_date('#remindDatebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="remindDateEnd">
+	             <![CDATA[
+	             t.remind_Date <= str_to_date('#remindDateEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="actionUrl">
+	             t.action_Url = #actionUrl#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="actorIds">
+	             t.actorIds = #actorIds#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="parentTaskId">
+	             t.parent_Task_Id = #parentTaskId#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="variable">
+	             t.variable = #variable#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createBy">
+	             t.create_by = #createBy#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createDate">
+	            t. create_date = #createDate#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createDateBegin">
+	             <![CDATA[
+	            t. create_date >= str_to_date('#createDatebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createDateEnd">
+	             <![CDATA[
+	             t.create_date <= str_to_date('#createDateEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateBy">
+	             t.update_by = #updateBy#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateDate">
+	             t.update_date = #updateDate#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateDateBegin">
+	             <![CDATA[
+	             t.update_date >= str_to_date('#updateDatebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateDateEnd">
+	             <![CDATA[
+	             t.update_date <= str_to_date('#updateDateEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createByUName">
+	             t.create_By_UName = #createByUName#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateByUname">
+	             t.update_By_Uname = #updateByUname#
+	       </isNotEmpty>
+	       		 $conditionWhere$
 	    </dynamic>	
 	</sql>
 
@@ -390,5 +542,65 @@
 	        from flow_task 
 	    ]]>
 		where parent_task_id in ( select ht.id from flow_TASK_HIST ht where ht.flow_orderId=#flowOrderId# and ht.task_name=#taskName# and ht.parent_task_id=#parentTaskId# )
+    </select>
+    
+    <select id="homePage" resultMap="flowTaskResult2">
+       select
+        	t.id ,
+        	t.TASK_VEFRSION ,
+        	t.FLOW_ORDER_ID ,
+        	t.TASK_NAME ,
+        	t.display_Name ,
+        	t.perform_Type ,
+        	t.task_Type ,
+        	t.operator ,
+        	t.create_Time ,
+        	t.finish_Time ,
+        	t.expire_Time ,
+        	t.expire_Date ,
+        	t.remind_Date ,
+        	t.action_Url ,
+        	t.parent_Task_Id ,
+        	t.variable ,
+        	t.create_by ,
+        	t.create_date ,
+        	t.update_by ,
+        	t.update_date ,
+        	t.create_By_UName,
+        	t.update_By_Uname,
+		
+			p.FLOW_VERSION,
+			p.FLOW_NAME,
+			p.instance_Url,
+			o.flow_Process_Id
+        	 from flow_task t left join flow_order  o
+        	 on t.FLOW_ORDER_ID = o.id
+        	 left join flow_process p
+        	 on o.FLOW_PROCESS_ID=p.id
+        	 left join flow_task_actor a
+        	 on t.id = a.task_id
+        	 
+        	  where 1=1
+        	 
+		<include refid="dynamicWhere2"/>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">$sortColumns$</isNotEmpty>
+		</dynamic>
+    </select>
+    
+    <select id="homePage_count" resultClass="long">
+    <![CDATA[
+        select 
+        count(*)
+        	 from flow_task t left join flow_order  o
+        	 on t.FLOW_ORDER_ID = o.id
+        	 left join flow_process p
+        	 on o.FLOW_PROCESS_ID=p.id
+        	 left join flow_task_actor a
+        	 on t.id = a.task_id
+        	 
+        	 where 1=1
+    ]]>
+		<include refid="dynamicWhere2"/>
     </select>
 </sqlMap>

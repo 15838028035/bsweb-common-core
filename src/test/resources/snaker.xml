@@ -5,17 +5,10 @@
 	<!-- 
 	<bean class="org.snaker.engine.access.transaction.JtaTransactionInterceptor"/>
 	 -->
-	<!-- 数据库方言配置。如果使用orm框架已自带了方言的支持，这里不需要配置
-	<bean class="org.snaker.engine.access.dialect.MySqlDialect"/>
-	<bean class="org.snaker.engine.access.dialect.PostgresqlDialect"/>
-	<bean class="org.snaker.engine.access.dialect.OracleDialect"/>
-	<bean class="org.snaker.engine.access.dialect.SQLServerDialect"/>
-	 -->
 	
 	<!-- 
 	配置表达式引擎实现类
-	org.snaker.engine.spring.SpelExpression
-	org.snaker.engine.impl.JuelExpression
+	com.lj.app.core.common.flows.spring.SpelExpression
 	 -->
-	<!-- <bean class="org.snaker.engine.impl.JuelExpression"/> -->
+<bean class="com.lj.app.core.common.flows.spring.SpelExpression"/>
 </config>
