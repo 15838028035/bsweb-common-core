@@ -7,5 +7,4 @@ public class CustomNoGenerator implements INoGenerator {
 	public String generate(ProcessModel model) {
 		return java.util.UUID.randomUUID().toString().replace("-", "");
 	}
-
 }

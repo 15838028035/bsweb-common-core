@@ -14,7 +14,6 @@ import com.lj.app.core.common.flows.AssignmentHandler;
 import com.lj.app.core.common.flows.FlowAssignment;
 import com.lj.app.core.common.flows.FlowConstains;
 import com.lj.app.core.common.flows.core.Execution;
-import com.lj.app.core.common.flows.core.ServiceContext;
 import com.lj.app.core.common.flows.entity.FlowOrder;
 import com.lj.app.core.common.flows.entity.FlowProcess;
 import com.lj.app.core.common.flows.entity.FlowTask;
@@ -26,13 +25,8 @@ import com.lj.app.core.common.flows.model.ProcessModel;
 import com.lj.app.core.common.flows.model.TaskModel;
 import com.lj.app.core.common.flows.model.TaskModel.PerformType;
 import com.lj.app.core.common.flows.model.TaskModel.TaskType;
-import com.lj.app.core.common.flows.service.FlowCompletionService;
 import com.lj.app.core.common.flows.service.FlowEngine;
-import com.lj.app.core.common.flows.service.FlowOrderService;
-import com.lj.app.core.common.flows.service.FlowTaskAccessStrategyService;
-import com.lj.app.core.common.flows.service.FlowTaskActorService;
-import com.lj.app.core.common.flows.service.FlowTaskHistService;
-import com.lj.app.core.common.flows.service.FlowTaskService;
+import com.lj.app.core.common.flows.service.FlowEngineFacets;
 import com.lj.app.core.common.util.Assert;
 import com.lj.app.core.common.util.DateUtil;
 import com.lj.app.core.common.util.JsonUtil;
@@ -48,23 +42,9 @@ import com.lj.app.core.common.util.StringUtil;
 public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 
 	private static final String START = "start";
-
-	@Autowired
-	private FlowTaskService flowTaskService;
-	//任务历史接口
-	@Autowired
-	private FlowTaskHistService flowTaskHistService;
-	//访问策略接口
-	@Autowired
-	private FlowTaskAccessStrategyService flowTaskAccessStrategyService = null;
-	//任务参与者接口
-	@Autowired
-	private FlowTaskActorService flowTaskActorService;
 	
 	@Autowired
-	private FlowCompletionService flowCompletionService;
-	@Autowired
-	private FlowOrderService<FlowOrder> flowOrderService;
+	private FlowEngineFacets flowEngineFacets;
 	
 	/**
 	 * 完成指定任务
@@ -86,7 +66,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 	 * @see SnakerEngineImpl#executeTask(String, String, java.util.Map)
 	 */
 	public FlowTask complete(String taskId, String operator, Map<String, Object> args) throws Exception {
-		FlowTask task = (FlowTask)flowTaskService.getInfoByKey(taskId);
+		FlowTask task = (FlowTask)flowEngineFacets.getEngine().flowTaskService().getInfoByKey(taskId);
 		
 		Assert.notNull(task, "指定的任务[id=" + taskId + "]不存在");
 		task.setVariable(JsonUtil.toJson(args));
@@ -98,16 +78,16 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 		flowTaskHist.setStatus(FlowConstains.STATE_FINISH);
 		flowTaskHist.setOperator(operator);
 		if(flowTaskHist.getActorIds() == null) {
-			List<FlowTaskActor> actors =flowTaskActorService.getTaskActorsByTaskId(taskId);
+			List<FlowTaskActor> actors =flowEngineFacets.getEngine().flowTaskActorService().getTaskActorsByTaskId(taskId);
 			String[] actorIds = new String[actors.size()];
 			for(int i = 0; i < actors.size(); i++) {
 				actorIds[i] = actors.get(i).getActorId();
 			}
 			flowTaskHist.setActorIds(actorIds);
 		}
-		flowTaskHistService.insertObject(flowTaskHist);
-		flowTaskService.delete(task.getId());
-		flowCompletionService.complete(flowTaskHist);
+		flowEngineFacets.getEngine().FlowTaskHistService().insertObject(flowTaskHist);
+		flowEngineFacets.getEngine().flowTaskService().delete(task.getId());
+		flowEngineFacets.getEngine().flowCompletionService().complete(flowTaskHist);
 		return task;
 	}
 
@@ -138,7 +118,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 				null : execution.getTask().getId();
 		historyTask.setParentTaskId(parentTaskId);
 		historyTask.setVariable(JsonUtil.toJson(execution.getArgs()));
-		flowTaskService.insertObject(historyTask);
+		flowEngineFacets.getEngine().flowTaskService().insertObject(historyTask);
 		return historyTask;
 		
 	}
@@ -147,14 +127,14 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 	 * 提取指定任务，设置完成时间及操作人，状态不改变
 	 */
 	public FlowTask take(String taskId, String operator) throws Exception {
-		FlowTask task = (FlowTask)flowTaskService.getInfoByKey(taskId);
+		FlowTask task = (FlowTask)flowEngineFacets.getEngine().flowTaskService().getInfoByKey(taskId);
 		Assert.notNull(task, "指定的任务[id=" + taskId + "]不存在");
 		if(!isAllowed(task, operator)) {
 			throw new FlowException("当前参与者[" + operator + "]不允许提取任务[taskId=" + taskId + "]");
 		}
 		task.setOperator(operator);
 		task.setFinishTime(new Date());
-		flowTaskService.updateObject(task);
+		flowEngineFacets.getEngine().flowTaskService().updateObject(task);
 		return task;
 	}
 
@@ -162,7 +142,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
      * 唤醒指定的历史任务
      */
     public FlowTask resume(String taskId, String operator) throws Exception {
-        FlowTaskHist flowTaskHist =(FlowTaskHist) flowTaskHistService.getInfoByKey(taskId);
+        FlowTaskHist flowTaskHist =(FlowTaskHist)flowEngineFacets.getEngine().FlowTaskHistService().getInfoByKey(taskId);
         Assert.notNull(flowTaskHist, "指定的历史任务[id=" + taskId + "]不存在");
         boolean isAllowed = true;
         if(StringUtil.isNotBlank(flowTaskHist.getOperator())) {
@@ -171,7 +151,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
         if(isAllowed) {
             FlowTask task = flowTaskHist.undoTask();
             task.setCreateTime(new Date());
-            flowTaskService.insertObject(task);
+            flowEngineFacets.getEngine().flowTaskService().insertObject(task);
             assignTask(String.valueOf(task.getId()), task.getOperator());
             return task;
         } else {
@@ -191,7 +171,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 	 * 该方法根据performType类型判断是否需要创建新的活动任务
 	 */
 	public void addTaskActor(String taskId, Integer performType, String... actors) throws Exception{
-		FlowTask flowTask = (FlowTask)flowTaskService.getInfoByKey(taskId);
+		FlowTask flowTask = (FlowTask)flowEngineFacets.getEngine().flowTaskService().getInfoByKey(taskId);
 		Assert.notNull(flowTask, "指定的任务[id=" + taskId + "]不存在");
 		if(!flowTask.isMajor()) return;
 		if(performType == null) performType = flowTask.getPerformType();
@@ -203,7 +183,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 			String oldActor = (String)data.get(flowTask.KEY_ACTOR);
 			data.put(flowTask.KEY_ACTOR, oldActor + "," + StringUtil.getStringByArray(actors));
 			flowTask.setVariable(JsonUtil.toJson(data));
-			flowTaskService.updateObject(flowTask);
+			flowEngineFacets.getEngine().flowTaskService().updateObject(flowTask);
 			break;
 		case 1:
 			try {
@@ -214,7 +194,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 					Map<String, Object> taskData = flowTask.getVariableMap();
 					taskData.put(flowTask.KEY_ACTOR, actor);
 					flowTask.setVariable(JsonUtil.toJson(taskData));
-					int newTaskid = flowTaskService.insertObjectReturnKey(newTask);
+					int newTaskid = flowEngineFacets.getEngine().flowTaskService().insertObjectReturnKey(newTask);
 					assignTask(String.valueOf(newTaskid), actor);
 				}
 			} catch(CloneNotSupportedException ex) {
@@ -230,11 +210,11 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 	 * 向指定任务移除参与者
 	 */
 	public void removeTaskActor(String taskId, String... actors)  throws Exception{
-		FlowTask flowTask = (FlowTask)flowTaskService.getInfoByKey(taskId);
+		FlowTask flowTask = (FlowTask)flowEngineFacets.getEngine().flowTaskService().getInfoByKey(taskId);
 		Assert.notNull(flowTask, "指定的任务[id=" + taskId + "]不存在");
 		if(actors == null || actors.length == 0) return;
 		if(flowTask.isMajor()) {
-			flowTaskActorService.removeTaskActor(String.valueOf(flowTask.getId()), actors);
+			flowEngineFacets.getEngine().flowTaskActorService().removeTaskActor(String.valueOf(flowTask.getId()), actors);
 			Map<String, Object> taskData = flowTask.getVariableMap();
 			String actorStr = (String)taskData.get(FlowTask.KEY_ACTOR);
 			if(StringUtil.isNotBlank(actorStr)) {
@@ -256,7 +236,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 				newActor.deleteCharAt(newActor.length() - 1);
 				taskData.put(FlowTask.KEY_ACTOR, newActor.toString());
 				flowTask.setVariable(JsonUtil.toJson(taskData));
-				flowTaskService.updateObject(flowTask);
+				flowEngineFacets.getEngine().flowTaskService().updateObject(flowTask);
 			}
 		}
 	}
@@ -265,7 +245,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 	 * 撤回指定的任务
 	 */
 	public FlowTask withdrawTask(String taskId, String operator) throws Exception{
-		FlowTaskHist hist = (FlowTaskHist)flowTaskHistService.getInfoByKey(taskId);
+		FlowTaskHist hist = (FlowTaskHist)flowEngineFacets.getEngine().FlowTaskHistService().getInfoByKey(taskId);
 		Assert.notNull(hist, "指定的历史任务[id=" + taskId + "]不存在");
 		List<FlowTask> tasks;
 		if(hist.isPerformAny()) {
@@ -277,12 +257,12 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 			throw new FlowException("后续活动任务已完成或不存在，无法撤回.");
 		}
 		for(FlowTask task : tasks) {
-			flowTaskService.delete(task.getId().toString());
+			flowEngineFacets.getEngine().flowTaskService().delete(task.getId().toString());
 		}
 		
 		FlowTask task = hist.undoTask();
 		task.setCreateTime(new Date());
-		int id = flowTaskService.insertObjectReturnKey(task);
+		int id = flowEngineFacets.getEngine().flowTaskService().insertObjectReturnKey(task);
 		assignTask(String.valueOf(id), task.getOperator());
 		return task;
 	}
@@ -296,7 +276,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 			throw new FlowException("上一步任务ID为空，无法驳回至上一步处理");
 		}
 		NodeModel current = model.getNode(currentTask.getTaskName());
-		FlowTaskHist history =(FlowTaskHist) flowTaskHistService.getInfoByKey(parentTaskId);
+		FlowTaskHist history =(FlowTaskHist) flowEngineFacets.getEngine().FlowTaskHistService().getInfoByKey(parentTaskId);
 		
 		NodeModel parent = model.getNode(history.getTaskName());
 		if(!NodeModel.canRejected(current, parent)) {
@@ -306,7 +286,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 		FlowTask task = history.undoTask();
 		task.setCreateTime(new Date());
 		task.setOperator(history.getOperator());
-		int id = flowTaskService.insertObjectReturnKey(task);
+		int id = flowEngineFacets.getEngine().flowTaskService().insertObjectReturnKey(task);
 		assignTask(String.valueOf(id), task.getOperator());
 		return task;
 		
@@ -325,7 +305,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 			FlowTaskActor taskActor = new FlowTaskActor();
 			taskActor.setTaskId(taskId);
 			taskActor.setActorId(actorId);
-			flowTaskActorService.insertObject(taskActor);
+			flowEngineFacets.getEngine().flowTaskActorService().insertObject(taskActor);
 		}
 	}
 	
@@ -334,7 +314,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 	 * 适用于转派，动态协办处理
 	 */
 	public List<FlowTask> createNewTask(String taskId, int taskType, String... actors) throws Exception{
-		FlowTask flowTask = (FlowTask)flowTaskService.getInfoByKey(taskId);
+		FlowTask flowTask = (FlowTask)flowEngineFacets.getEngine().flowTaskService().getInfoByKey(taskId);
 		Assert.notNull(flowTask, "指定的任务[id=" + taskId + "]不存在");
 		List<FlowTask> tasks = new ArrayList<FlowTask>();
 		try {
@@ -356,11 +336,11 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
      * @return TaskModel
      */
     public TaskModel getTaskModel(String taskId) throws Exception{
-    	FlowTask flowTask = (FlowTask)flowTaskService.getInfoByKey(taskId);
+    	FlowTask flowTask = (FlowTask)flowEngineFacets.getEngine().flowTaskService().getInfoByKey(taskId);
         Assert.notNull(flowTask);
-        FlowOrder order =(FlowOrder) flowOrderService.getInfoByKey(flowTask.getFlowOrderId());
+        FlowOrder order =(FlowOrder) flowEngineFacets.getEngine().flowOrderService().getInfoByKey(flowTask.getFlowOrderId());
         Assert.notNull(order);
-        FlowProcess process =(FlowProcess) ServiceContext.getEngine().flowProcessService().getProcessById(order.getFlowProcessId());
+        FlowProcess process =(FlowProcess) flowEngineFacets.getEngine().flowProcessService().getProcessById(order.getFlowProcessId());
         ProcessModel model = process.getModel();
         NodeModel nodeModel = model.getNode(flowTask.getTaskName());
         Assert.notNull(nodeModel, "任务id无法找到节点模型.");
@@ -445,7 +425,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 	
 	private FlowTask saveTask(FlowTask task, String... actors) throws Exception{
 		task.setPerformType(PerformType.ANY.ordinal());
-		int id = flowTaskService.insertObjectReturnKey(task);
+		int id = flowEngineFacets.getEngine().flowTaskService().insertObjectReturnKey(task);
 		
 		assignTask(String.valueOf(id), actors);
 		task.setActorIds(actors);
@@ -526,9 +506,9 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 			}
 		}
 		
-		List<FlowTaskActor> actors = flowTaskActorService.getTaskActorsByTaskId(String.valueOf(task.getId()));
+		List<FlowTaskActor> actors = flowEngineFacets.getEngine().flowTaskActorService().getTaskActorsByTaskId(String.valueOf(task.getId()));
 		if(actors == null || actors.isEmpty()) return true;
-		return !StringUtil.isBlank(operator)&& getFlowTaskAccessStrategyService().isAllowed(operator, actors);
+		return !StringUtil.isBlank(operator)&& flowEngineFacets.getEngine().flowTaskAccessStrategyService().isAllowed(operator, actors);
 	}
 	/**
 	 * 获得下一个流程
@@ -539,7 +519,7 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 	public List<FlowTask> getNextActiveTasks(Integer parentTaskId) throws Exception{
 		FlowTask flowTask = new FlowTask();
 		flowTask.setParentTaskId(parentTaskId);
-		return flowTaskService.queryForList(flowTask);
+		return flowEngineFacets.getEngine().flowTaskService().queryForList(flowTask);
 	}
 	
 	/**
@@ -553,14 +533,6 @@ public class FlowTaskServiceApiImpl implements FlowTaskServiceApi{
 		map.put("flowOrderId", flowOrderId);
 		map.put("taskName", taskName);
 		map.put("parentTaskId", parentTaskId);
-		return flowTaskService.queryForList("getNextActiveTasks",map);
-	}
-	
-	public void setFlowTaskAccessStrategyService(FlowTaskAccessStrategyService strategy) {
-		this.flowTaskAccessStrategyService = strategy;
-	}
-
-	public FlowTaskAccessStrategyService getFlowTaskAccessStrategyService() {
-		return flowTaskAccessStrategyService;
+		return flowEngineFacets.getEngine().flowTaskService().queryForList("getNextActiveTasks",map);
 	}
 }

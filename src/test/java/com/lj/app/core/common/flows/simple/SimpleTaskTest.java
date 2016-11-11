@@ -1,5 +1,7 @@
 package com.lj.app.core.common.flows.simple;
 
+import static org.junit.Assert.assertTrue;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +29,15 @@ public class SimpleTaskTest  extends FlowBaseTest {
 		FlowOrder order = engine.startInstanceByName("simple", null, "2", args);
 		System.out.println("order=" + order);
 		List<FlowTask> tasks = flowQueryService.getActiveTasks(order.getId().toString());
+		assertTrue(tasks.size()==1);
+		
 		for(FlowTask task : tasks) {
 			engine.executeTask(task.getId().toString(), "admin管理员", args);
+		}
+		
+		List<FlowTask> tasksList = flowQueryService.getActiveTasks(order.getId().toString());
+		for(FlowTask task : tasksList) {
+			System.out.println("task=" + task);
 		}
 	}
 }

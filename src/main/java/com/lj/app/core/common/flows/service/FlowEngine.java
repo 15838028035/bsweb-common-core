@@ -41,6 +41,11 @@ public interface FlowEngine {
 	 * @return IQueryService 流程实例服务
 	 */
 	public FlowOrderService flowOrderService();
+	/**
+	 * 获取实例服务
+	 * @return IQueryService 流程实例服务
+	 */
+	public FlowOrderHistService flowOrderHistService();
 	
 	/**
 	 * 获取任务服务
@@ -55,6 +60,12 @@ public interface FlowEngine {
 	public FlowTaskServiceApi FlowTaskServiceApi();
 	
 	/**
+	 * 获取任务服务
+	 * @return
+	 */
+	public FlowTaskHistService FlowTaskHistService();
+	
+	/**
 	 * 获取管理服务
 	 * @return IManagerService 管理服务
 	 */
@@ -65,6 +76,15 @@ public interface FlowEngine {
 	 * @return
 	 */
 	public FlowTaskActorService flowTaskActorService();
+	
+	/**
+	 * 流程完成接口
+	 */
+	public FlowCompletionService flowCompletionService();
+	
+	public FlowTaskAccessStrategyService flowTaskAccessStrategyService();
+	
+	public FlowApproveService flowApproveService();
 	
 	/**
 	 * 根据流程定义ID启动流程实例
@@ -179,5 +199,5 @@ public interface FlowEngine {
 	 * @param model 节点模型
 	 * @return List<Task> 任务集合
 	 */
-	public List<FlowTask> createFreeTask(String orderId, String operator, Map<String, Object> args, TaskModel model);
+	public List<FlowTask> createFreeTask(String orderId, String operator, Map<String, Object> args, TaskModel model) throws Exception;
 }

@@ -32,7 +32,7 @@ public class ModelTest extends FlowBaseTest {
 	        System.out.println("order=" + order);
 	        List<FlowTask> tasks = flowQueryService.getActiveTasks(order.getId().toString());
 	        for(FlowTask task : tasks) {
-	            TaskModel model = (TaskModel)engine.flowTaskService().queryObject("select",task.getId());
+	            TaskModel model = (TaskModel)engine.FlowTaskServiceApi().getTaskModel(task.getId().toString());
 	            System.out.println(model.getName());
 	            List<TaskModel> models = model.getNextModels(TaskModel.class);
 	            for(TaskModel tm : models) {

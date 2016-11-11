@@ -11,6 +11,7 @@ import com.lj.app.core.common.flows.cfg.Configuration;
 import com.lj.app.core.common.flows.entity.FlowOrder;
 import com.lj.app.core.common.flows.entity.FlowTask;
 import com.lj.app.core.common.flows.entity.FlowTaskHist;
+import com.lj.app.core.common.flows.model.TaskModel.TaskType;
 import com.lj.app.core.common.util.StringUtil;
 
 @Service("flowEngineFacets")
@@ -63,18 +64,16 @@ public class FlowEngineFacets {
 		return getEngine().executeAndJumpTask(taskId, operator, args, nodeName);
 	}
 
-    public List<FlowTask> transferMajor(String taskId, String operator, String... actors) {
-       /* List<FlowTask> tasks = flowEngine.flowTaskService().createNewTask(taskId, TaskType.Major.ordinal(), actors);
-        flowEngine.flowTaskService().complete(taskId, operator);
-        return tasks;*/
-    	return null;
+    public List<FlowTask> transferMajor(String taskId, String operator, String... actors) throws Exception {
+        List<FlowTask> tasks = flowEngine.FlowTaskServiceApi().createNewTask(taskId, TaskType.Major.ordinal(), actors);
+        flowEngine.FlowTaskServiceApi().complete(taskId, operator);
+        return tasks;
     }
 
-    public List<FlowTask> transferAidant(String taskId, String operator, String... actors) {
-      /*  List<FlowTask> tasks = flowEngine.task().createNewTask(taskId, TaskType.Aidant.ordinal(), actors);
-        flowEngine.task().complete(taskId, operator);
-        return tasks;*/
-    	return null;
+    public List<FlowTask> transferAidant(String taskId, String operator, String... actors) throws Exception {
+        List<FlowTask> tasks = flowEngine.FlowTaskServiceApi().createNewTask(taskId, TaskType.Aidant.ordinal(), actors);
+        flowEngine.FlowTaskServiceApi().complete(taskId, operator);
+        return tasks;
     }
    
     public Map<String, Object> flowData(String orderId, String taskName) {
@@ -90,5 +89,5 @@ public class FlowEngineFacets {
 			data.put("histTasks", histTasks);
 		}
 		return data;
-}
+    }
 }

@@ -51,6 +51,10 @@ public class FlowEngineImpl implements FlowEngine {
 	 */
 	@Autowired
 	protected FlowOrderService flowOrderService;
+	
+	@Autowired
+	protected FlowOrderHistService flowOrderHistService;
+	
 	/**
 	 * 任务业务类
 	 */
@@ -58,6 +62,9 @@ public class FlowEngineImpl implements FlowEngine {
 	protected FlowTaskService flowTaskService;
 	@Autowired
 	protected FlowTaskServiceApi flowTaskServiceApi;
+	
+	@Autowired
+	public FlowTaskHistService flowTaskHistService;
 	/**
 	 * 查询业务类
 	 */
@@ -72,7 +79,20 @@ public class FlowEngineImpl implements FlowEngine {
 	/**
 	 * 任务参与
 	 */
-	private FlowTaskActorService flowTaskActorService;
+	@Autowired
+	protected FlowTaskActorService flowTaskActorService;
+	
+	/**
+	 * 流程完成接口
+	 */
+	@Autowired
+	protected FlowCompletionService flowCompletionService;
+	
+	@Autowired
+	protected FlowTaskAccessStrategyService flowTaskAccessStrategyService;
+	
+	@Autowired
+	protected FlowApproveService flowApproveService;
 
 	/**
 	 * 根据serviceContext上下文，查找processService、orderService、taskService服务
@@ -271,16 +291,16 @@ public class FlowEngineImpl implements FlowEngine {
 	 * 根据流程实例ID，操作人ID，参数列表按照节点模型model创建新的自由任务
 	 */
 	public List<FlowTask> createFreeTask(String orderId, String operator,
-			Map<String, Object> args, TaskModel model) {
-	/*	FlowOrder order = query().getFlowOrder(orderId);
+			Map<String, Object> args, TaskModel model) throws Exception {
+		FlowOrder order = flowQueryService.getFlowOrder(orderId);
 		Assert.notNull(order, "指定的流程实例[id=" + orderId + "]已完成或不存在");
-		order.setLastUpdator(operator);
-		order.setLastUpdateTime(DateHelper.getTime());
-		Process process = process().getProcessById(order.getProcessId());
+		order.setUpdateByUname(operator);
+		order.setUpdateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
+				
+		FlowProcess process = flowProcessService.getProcessById(order.getFlowProcessId());
 		Execution execution = new Execution(this, process, order, args);
 		execution.setOperator(operator);
-		return task().createTask(model, execution);*/
-		return null;
+		return flowTaskServiceApi.createTask(model, execution);
 	}
 
 	/**
@@ -422,12 +442,37 @@ public class FlowEngineImpl implements FlowEngine {
 		return  flowTaskActorService;
 	}
 
+	@Override
+	public FlowTaskHistService FlowTaskHistService() {
+		return this.flowTaskHistService;
+	}
+
 	public FlowTaskServiceApi getFlowTaskServiceApi() {
 		return flowTaskServiceApi;
 	}
 
 	public void setFlowTaskServiceApi(FlowTaskServiceApi flowTaskServiceApi) {
 		this.flowTaskServiceApi = flowTaskServiceApi;
+	}
+
+	@Override
+	public FlowCompletionService flowCompletionService() {
+		return flowCompletionService;
+	}
+
+	@Override
+	public FlowTaskAccessStrategyService flowTaskAccessStrategyService() {
+		return flowTaskAccessStrategyService;
+	}
+
+	@Override
+	public FlowOrderHistService flowOrderHistService() {
+		return flowOrderHistService;
+	}
+
+	@Override
+	public FlowApproveService flowApproveService() {
+		return flowApproveService;
 	}
 
 }
