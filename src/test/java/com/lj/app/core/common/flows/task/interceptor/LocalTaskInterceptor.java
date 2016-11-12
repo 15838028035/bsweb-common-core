@@ -20,9 +20,9 @@ public class LocalTaskInterceptor implements FlowInterceptor {
 				buffer.append(",创建时间=").append(task.getCreateTime());
 				buffer.append(",参与者={");
 				if(task.getActorIds() != null) {
-				/*	for(String actor : task.getActorIds()) {
+					for(String actor : task.getActorIds()) {
 						buffer.append(actor).append(";");
-					}*/
+					}
 				}
 				buffer.append("}]");
 				log.info(buffer.toString());

@@ -23,11 +23,8 @@ import com.lj.app.core.common.util.StringUtil;
  */
 @Service("flowOrderService")
 public class FlowOrderServiceImpl<FlowOrder> extends BaseServiceImpl<FlowOrder> implements FlowOrderService<FlowOrder>{
-
 	@Autowired
-	private FlowOrderHistService flowOrderHistService;
-	@Autowired
-	private FlowCompletionService flowCompletionService;
+	private FlowEngineFacets flowEngineFacets;
 	
 	/**
 	 *
@@ -72,37 +69,19 @@ public class FlowOrderServiceImpl<FlowOrder> extends BaseServiceImpl<FlowOrder> 
 	 * @param orderId 流程实例id
 	 */
 	public void complete(String orderId){
-		FlowOrderHist history = flowOrderHistService.getHistOrder(orderId);
+		FlowOrderHist history = flowEngineFacets.getEngine().flowOrderHistService().getHistOrder(orderId);
 		history.setStatus(FlowConstains.STATE_FINISH);
 		history.setEndTime(new Date());
 		
 		try{
-		flowOrderHistService.updateObject(history);
+			flowEngineFacets.getEngine().flowOrderHistService().updateObject(history);
 		}catch(Exception e)  {
 			e.printStackTrace();
 		}
 		this.delete(orderId);
-		FlowCompletionService completion = getFlowCompletionService();
+		FlowCompletionService completion = flowEngineFacets.getEngine().flowCompletionService();
         if(completion != null) {
             completion.complete(history);
         }
 	}
-
-	public FlowOrderHistService getFlowOrderHistService() {
-		return flowOrderHistService;
-	}
-
-	public void setFlowOrderHistService(FlowOrderHistService flowOrderHistService) {
-		this.flowOrderHistService = flowOrderHistService;
-	}
-
-	public FlowCompletionService getFlowCompletionService() {
-		return flowCompletionService;
-	}
-
-	public void setFlowCompletionService(FlowCompletionService flowCompletionService) {
-		this.flowCompletionService = flowCompletionService;
-	}
-	
-	
 }

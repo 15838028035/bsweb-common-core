@@ -66,12 +66,6 @@ public interface FlowEngine {
 	public FlowTaskHistService FlowTaskHistService();
 	
 	/**
-	 * 获取管理服务
-	 * @return IManagerService 管理服务
-	 */
-	public FlowManagerService flowManagerService();
-	
-	/**
 	 * 任务参与
 	 * @return
 	 */

@@ -22,7 +22,7 @@ public class LocalInterceptorTest extends FlowBaseTest {
 	
 	@Test
 	public void taskTest()  throws Exception {
-		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getInfoByKey(processId);
+		FlowProcess flowProcess  = engine.flowProcessService().getProcessById(processId);
 		
 		assertEquals("interceptor",flowProcess.getFlowName());
 		assertEquals("测试局部拦截器",flowProcess.getDisplayName());

@@ -70,11 +70,6 @@ public class FlowEngineImpl implements FlowEngine {
 	 */
 	@Autowired
 	protected FlowQueryService flowQueryService;
-	/**
-	 * 管理业务类
-	 */
-	@Autowired
-	protected FlowManagerService flowManagerService;
 	
 	/**
 	 * 任务参与
@@ -392,14 +387,6 @@ public class FlowEngineImpl implements FlowEngine {
 		this.flowQueryService = flowQueryService;
 	}
 
-	public FlowManagerService getFlowManagerService() {
-		return flowManagerService;
-	}
-
-	public void setFlowManagerService(FlowManagerService flowManagerService) {
-		this.flowManagerService = flowManagerService;
-	}
-
 	@Override
 	public FlowProcessService flowProcessService() {
 		return flowProcessService;
@@ -426,11 +413,6 @@ public class FlowEngineImpl implements FlowEngine {
 	 */
 	public FlowTaskServiceApi FlowTaskServiceApi(){
 		return flowTaskServiceApi;
-	}
-
-	@Override
-	public FlowManagerService flowManagerService() {
-		return flowManagerService;
 	}
 	
 	/**
