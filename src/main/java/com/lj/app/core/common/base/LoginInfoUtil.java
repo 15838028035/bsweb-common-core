@@ -23,4 +23,5 @@ public class LoginInfoUtil {
 		String loginName = securityContext.getLoginName();
 		return loginName;
 	}
+	
 }

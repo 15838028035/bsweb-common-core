@@ -306,7 +306,7 @@ public abstract class AbstractBaseAction<T> extends ActionSupport implements Mod
 			}else{
 				BaseEntity entity = (BaseEntity)getModel();
 				entity.setCreateBy(this.getLoginUserId());
-				entity.setCreateByUName(this.getUserName());
+				entity.setCreateByUname(this.getUserName());
 				entity.setCreateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
 				
 				getBaseService().insertObject(entity);

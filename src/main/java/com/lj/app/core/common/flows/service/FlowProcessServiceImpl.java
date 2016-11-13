@@ -230,7 +230,7 @@ public class FlowProcessServiceImpl<FlowProcess> extends BaseServiceImpl<FlowPro
 			entity.setModel(model);
 			entity.setFlowContent(bytes);
 			entity.setCreateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
-			entity.setCreateByUName(creator);
+			entity.setCreateByUname(creator);
 			insertObject(entity);
 			cache(entity);
 			return entity.getId().toString();

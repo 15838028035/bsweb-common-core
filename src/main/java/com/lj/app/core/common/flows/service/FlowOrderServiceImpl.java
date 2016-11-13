@@ -43,7 +43,7 @@ public class FlowOrderServiceImpl<FlowOrder> extends BaseServiceImpl<FlowOrder> 
 		 flowOrder.setParentId(parentId);
 		 flowOrder.setParentNodeName(parentNodeName);
 		 flowOrder.setVariable(JsonUtil.toJson(args));
-		 flowOrder.setCreateByUName(operator);
+		 flowOrder.setCreateByUname(operator);
 		 flowOrder.setCreateDate(DateUtil.getNowDateYYYYMMddHHMMSS());
 		 
 		 ProcessModel model = process.getModel();

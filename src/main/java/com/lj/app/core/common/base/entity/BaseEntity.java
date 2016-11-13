@@ -15,7 +15,7 @@ public class BaseEntity implements Serializable {
 	/**
 	 *  创建人 create_By_UName
 	 */
-	private String createByUName;
+	private String createByUname;
 	
 	/**
 	 * 创建日期 create_date
@@ -209,13 +209,12 @@ public class BaseEntity implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-	public String getCreateByUName() {
-		return createByUName;
+	public String getCreateByUname() {
+		return createByUname;
 	}
 
-	public void setCreateByUName(String createByUName) {
-		this.createByUName = createByUName;
+	public void setCreateByUname(String createByUname) {
+		this.createByUname = createByUname;
 	}
 
 	public String getUpdateByUname() {

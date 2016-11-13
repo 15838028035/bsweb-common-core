@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="flowFormTable">
+
+    <typeAlias alias="flowFormTable" type="com.lj.app.core.common.flows.entity.FlowFormTable"/>
+
+    <resultMap id="flowFormTableResult" class="flowFormTable">
+   	  	<result property="id" column="id"   />
+   	  	<result property="name" column="name"   />
+   	  	<result property="displayName" column="display_name"   />
+   	  	<result property="type" column="type"   />
+   	  	<result property="createBy" column="createBy"   />
+   	  	<result property="createByUname" column="create_by_uName"   />
+   	  	<result property="createDate" column="create_date"   />
+   	  	<result property="updateBy" column="update_by"   />
+   	  	<result property="updateByUname" column="update_by_uName"   />
+   	  	<result property="updateDate" column="update_date"   />
+   	  	<result property="originHtml" column="origin_html"   />
+   	  	<result property="parseHtml" column="parse_html"   />
+    </resultMap>
+
+	<sql id="dynamicWhere">
+	    <dynamic prepend="WHERE">
+	       <isNotEmpty prepend="AND" property="id">
+	             id = #id#
+	       </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="conditionWhere">
+	       		 #conditionWhere#
+	       </isNotEmpty>       
+	       <isNotEmpty prepend="AND" property="name">
+	             name = #name#
+	       </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="conditionWhere">
+	       		 #conditionWhere#
+	       </isNotEmpty>       
+	       <isNotEmpty prepend="AND" property="displayName">
+	             display_name = #displayName#
+	       </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="conditionWhere">
+	       		 #conditionWhere#
+	       </isNotEmpty>       
+	       <isNotEmpty prepend="AND" property="type">
+	             type = #type#
+	       </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="conditionWhere">
+	       		 #conditionWhere#
+	       </isNotEmpty>       
+	       <isNotEmpty prepend="AND" property="createBy">
+	             createBy = #createBy#
+	       </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="conditionWhere">
+	       		 #conditionWhere#
+	       </isNotEmpty>       
+	       <isNotEmpty prepend="AND" property="createByUname">
+	             create_by_uName = #createByUname#
+	       </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="conditionWhere">
+	       		 #conditionWhere#
+	       </isNotEmpty>       
+	       <isNotEmpty prepend="AND" property="createDate">
+	             create_date = #createDate#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createDateBegin">
+	             <![CDATA[
+	             create_date >= str_to_date('#createDatebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createDateEnd">
+	             <![CDATA[
+	             create_date <= str_to_date('#createDateEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="conditionWhere">
+	       		 #conditionWhere#
+	       </isNotEmpty>       
+	       <isNotEmpty prepend="AND" property="updateBy">
+	             update_by = #updateBy#
+	       </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="conditionWhere">
+	       		 #conditionWhere#
+	       </isNotEmpty>       
+	       <isNotEmpty prepend="AND" property="updateByUname">
+	             update_by_uName = #updateByUname#
+	       </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="conditionWhere">
+	       		 #conditionWhere#
+	       </isNotEmpty>       
+	       <isNotEmpty prepend="AND" property="updateDate">
+	             update_date = #updateDate#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateDateBegin">
+	             <![CDATA[
+	             update_date >= str_to_date('#updateDatebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateDateEnd">
+	             <![CDATA[
+	             update_date <= str_to_date('#updateDateEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="conditionWhere">
+	       		 #conditionWhere#
+	       </isNotEmpty>       
+	       <isNotEmpty prepend="AND" property="originHtml">
+	             origin_html = #originHtml#
+	       </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="conditionWhere">
+	       		 #conditionWhere#
+	       </isNotEmpty>       
+	       <isNotEmpty prepend="AND" property="parseHtml">
+	             parse_html = #parseHtml#
+	       </isNotEmpty>
+			 <isNotEmpty prepend="AND" property="conditionWhere">
+	       		 #conditionWhere#
+	       </isNotEmpty>       
+	    </dynamic>	
+	</sql>
+
+	<sql id="commonSelectColumnsPrefix">
+	    <![CDATA[
+	    select
+        	id ,
+        	name ,
+        	display_name ,
+        	type ,
+        	createBy ,
+        	create_by_uName ,
+        	create_date ,
+        	update_by ,
+        	update_by_uName ,
+        	update_date ,
+        	origin_html ,
+        	parse_html 
+	    ]]>
+	</sql>
+	
+    <insert id="insert" parameterClass="flowFormTable">
+        <selectKey resultClass="int" keyProperty="id"  type="post">
+             SELECT LAST_INSERT_ID()
+        </selectKey>
+
+	    <![CDATA[
+	        INSERT INTO
+	        flow_form_table (
+	        	id ,
+	        	name ,
+	        	display_name ,
+	        	type ,
+	        	createBy ,
+	        	create_by_uName ,
+	        	create_date ,
+	        	update_by ,
+	        	update_by_uName ,
+	        	update_date ,
+	        	origin_html ,
+	        	parse_html 
+	        ) VALUES (
+				#id# ,
+				#name# ,
+				#displayName# ,
+				#type# ,
+				#createBy# ,
+				#createByUname# ,
+				#createDate# ,
+				#updateBy# ,
+				#updateByUname# ,
+				#updateDate# ,
+				#originHtml# ,
+				#parseHtml# 
+	        )
+	    ]]>
+    </insert>
+   
+     <update id="update" >
+    <![CDATA[
+        UPDATE flow_form_table 
+      ]]>
+      <dynamic prepend="set"> 
+	        <isNotEmpty prepend="," property="id">
+				id = #id#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="name">
+				name = #name#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="displayName">
+				display_name = #displayName#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="type">
+				type = #type#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="createBy">
+				createBy = #createBy#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="createByUname">
+				create_by_uName = #createByUname#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="createDate">
+				create_date = #createDate#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="updateBy">
+				update_by = #updateBy#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="updateByUname">
+				update_by_uName = #updateByUname#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="updateDate">
+				update_date = #updateDate#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="originHtml">
+				origin_html = #originHtml#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="parseHtml">
+				parse_html = #parseHtml#
+			</isNotEmpty>
+	        
+	   </dynamic>
+        WHERE 
+	        id = #id# 
+    </update>
+
+    <delete id="delete" parameterClass="java.lang.Integer">
+    <![CDATA[
+        delete from flow_form_table where
+        id = #id# 
+    ]]>
+    </delete>
+    
+    <select id="select" resultMap="flowFormTableResult">
+    	<include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from flow_form_table 
+	    ]]>
+		<include refid="dynamicWhere"/>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">$sortColumns$</isNotEmpty>
+		</dynamic>
+    </select>
+    
+    <select id="getInfoByKey" resultMap="flowFormTableResult">
+	    <include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from flow_form_table 
+	        where 
+		        id = #id# 
+	    ]]>
+    </select>
+
+ 	<select id="pagenate" resultMap="flowFormTableResult">
+    	<include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from flow_form_table 
+	    ]]>
+		<include refid="dynamicWhere"/>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">$sortColumns$</isNotEmpty>
+		</dynamic>
+    </select>
+    
+    <select id="pagenate_count" resultClass="long">
+    <![CDATA[
+        select 
+        count(*)
+        from flow_form_table
+    ]]>
+		<include refid="dynamicWhere"/>    
+    </select>
+
+</sqlMap>

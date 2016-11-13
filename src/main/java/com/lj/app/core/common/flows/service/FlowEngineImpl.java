@@ -88,6 +88,12 @@ public class FlowEngineImpl implements FlowEngine {
 	
 	@Autowired
 	protected FlowApproveService flowApproveService;
+	
+	@Autowired
+	protected FlowFormTableService flowFormTableService;
+	
+	@Autowired
+	protected FlowFormFieldService flowFormFieldService;
 
 	/**
 	 * 根据serviceContext上下文，查找processService、orderService、taskService服务
@@ -456,5 +462,11 @@ public class FlowEngineImpl implements FlowEngine {
 	public FlowApproveService flowApproveService() {
 		return flowApproveService;
 	}
-
+	public FlowFormTableService flowFormTableService(){
+		return flowFormTableService;
+	}
+	
+	public FlowFormFieldService flowFormFieldService(){
+		return flowFormFieldService;
+	}
 }

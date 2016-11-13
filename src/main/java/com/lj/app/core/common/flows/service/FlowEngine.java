@@ -80,6 +80,10 @@ public interface FlowEngine {
 	
 	public FlowApproveService flowApproveService();
 	
+	public FlowFormTableService flowFormTableService();
+	
+	public FlowFormFieldService flowFormFieldService();
+	
 	/**
 	 * 根据流程定义ID启动流程实例
 	 * @param id 流程定义ID

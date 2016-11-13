@@ -17,7 +17,7 @@
    	  	<result property="priority" column="priority"   />
    	  	<result property="variable" column="variable"   />
    	  	<result property="createBy" column="create_By"   />
-   	  	<result property="createByUName" column="create_By_UName"   />
+   	  	<result property="createByUname" column="create_By_UName"   />
    	  	<result property="createDate" column="create_Date"   />
    	  	<result property="updateBy" column="update_By"   />
    	  	<result property="updateByUname" column="update_By_Uname"   />
@@ -100,8 +100,8 @@
 	        <isNotEmpty prepend="AND" property="status">
 	             status = #status#
 	       </isNotEmpty>
-	        <isNotEmpty prepend="AND" property="createByUName">
-	             create_By_UName = #createByUName#
+	        <isNotEmpty prepend="AND" property="createByUname">
+	             create_By_UName = #createByUname#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="updateByUname">
 	             update_By_Uname = #updateByUname#
@@ -169,7 +169,7 @@
 				#updateDate# ,
 				#endTime#
 				#status#,
-				#createByUName#,
+				#createByUname#,
 				#updateByUname#
 	        )
 	    ]]>

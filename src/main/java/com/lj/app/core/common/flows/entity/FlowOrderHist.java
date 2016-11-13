@@ -163,7 +163,7 @@ public class FlowOrderHist extends BaseEntity{
 		StringBuilder sb = new StringBuilder();
 		sb.append("HistoryOrder(id=").append(this.id);
 		sb.append(",processId=").append(this.flowProcessId);
-		sb.append(",creator=").append(this.getCreateByUName());
+		sb.append(",creator=").append(this.getCreateByUname());
 		sb.append(",createTime").append(this.getCreateDate());
 		sb.append(",orderNo=").append(this.orderNo).append(")");
 		return sb.toString();
