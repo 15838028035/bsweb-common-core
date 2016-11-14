@@ -17,25 +17,23 @@ import com.lj.app.core.common.util.FileUtil;
 public class SimpleTaskTest  extends FlowBaseTest {
 	@Before
 	public void before() throws Exception {
-		engine = getEngine();
-		processId = engine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/task/simple/flow1.xml"));
-		engine.flowProcessService().updateType(processId, "预算管理流程");
+		processId = flowEngine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/task/simple/flow1.xml"));
 	}
 	
 	@Test
 	public void taskTest()  throws Exception {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("task1.operator", new String[]{"admin管理员"});
-		FlowOrder order = engine.startInstanceByName("simple", null, "2", args);
+		FlowOrder order = flowEngine.startInstanceByName("simple", null, "2", args);
 		System.out.println("order=" + order);
-		List<FlowTask> tasks = flowQueryService.getActiveTasks(order.getId().toString());
+		List<FlowTask> tasks = flowEngine.flowQueryService().getActiveTasks(order.getId().toString());
 		assertTrue(tasks.size()==1);
 		
 		for(FlowTask task : tasks) {
-			engine.executeTask(task.getId().toString(), "admin管理员", args);
+			flowEngine.executeTask(task.getId().toString(), "admin管理员", args);
 		}
 		
-		List<FlowTask> tasksList = flowQueryService.getActiveTasks(order.getId().toString());
+		List<FlowTask> tasksList =  flowEngine.flowQueryService().getActiveTasks(order.getId().toString());
 		for(FlowTask task : tasksList) {
 			System.out.println("task=" + task);
 		}

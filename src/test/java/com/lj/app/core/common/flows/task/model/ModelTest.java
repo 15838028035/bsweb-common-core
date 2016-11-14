@@ -20,19 +20,18 @@ public class ModelTest extends FlowBaseTest {
 
 	    @Before
 	    public void before() {
-	    	engine = getEngine();
-	        processId = engine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/task/simple/flow1.xml"));
+	        processId = flowEngine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/task/simple/flow1.xml"));
 	    }
 
 	    @Test
 	    public void taskTest() throws Exception{
 	        Map<String, Object> args = new HashMap<String, Object>();
 	        args.put("task1.operator", new String[]{"1"});
-	        FlowOrder order = engine.startInstanceByName("simple", null, "2", args);
+	        FlowOrder order = flowEngine.startInstanceByName("simple", null, "2", args);
 	        System.out.println("order=" + order);
-	        List<FlowTask> tasks = flowQueryService.getActiveTasks(order.getId().toString());
+	        List<FlowTask> tasks =  flowEngine.flowQueryService().getActiveTasks(order.getId().toString());
 	        for(FlowTask task : tasks) {
-	            TaskModel model = (TaskModel)engine.FlowTaskServiceApi().getTaskModel(task.getId().toString());
+	            TaskModel model = (TaskModel)flowEngine.FlowTaskServiceApi().getTaskModel(task.getId().toString());
 	            System.out.println(model.getName());
 	            List<TaskModel> models = model.getNextModels(TaskModel.class);
 	            for(TaskModel tm : models) {
@@ -40,7 +39,7 @@ public class ModelTest extends FlowBaseTest {
 	            }
 	        }
 	        
-	        List<TaskModel> models =((FlowProcess)engine.flowProcessService().getProcessById(processId)).getModel().getModels(TaskModel.class);
+	        List<TaskModel> models =((FlowProcess)flowEngine.flowProcessService().getProcessById(processId)).getModel().getModels(TaskModel.class);
 	            for(TaskModel tm : models) {
 	                System.out.println(tm.getName());
 	                assertNotNull(tm.getName());

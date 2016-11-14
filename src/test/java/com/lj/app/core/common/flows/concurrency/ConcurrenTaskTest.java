@@ -11,9 +11,9 @@ public class ConcurrenTaskTest  extends FlowBaseTest {
 	
 	public static void main(String[] a) throws Exception{
 		ConcurrenTaskTest con = new ConcurrenTaskTest();
-		FlowProcess process = con.engine.flowProcessService().getProcessById("1");
+		FlowProcess process = con.flowEngine.flowProcessService().getProcessById("1");
 		for(int i = 0; i < 50; i++) {
-			new Thread(new StartProcess(con.engine, process.getId().toString())).start();
+			new Thread(new StartProcess(con.flowEngine, process.getId().toString())).start();
 		}
 	}
 }

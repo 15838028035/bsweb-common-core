@@ -16,9 +16,8 @@ public class SubProcessTask1Test extends FlowBaseTest{
 	
 	@Before
 	public void before() {
-		engine = getEngine();
-		engine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/subprocess/childFlow.xml"));
-		processId = engine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/subprocess/flow1.xml"));
+		flowEngine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/subprocess/childFlow.xml"));
+		processId = flowEngine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/subprocess/flow1.xml"));
 						
 	}
 	
@@ -26,13 +25,13 @@ public class SubProcessTask1Test extends FlowBaseTest{
 	public void taskTest() throws Exception {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("task1.operator", new String[]{"1"});
-		FlowOrder order = engine.startInstanceById(processId, "2", args);
+		FlowOrder order = flowEngine.startInstanceById(processId, "2", args);
 		System.out.println("************************"+order);
 		
-		List<FlowTask> tasks = engine.flowQueryService().getActiveTasks(order.getId());
+		List<FlowTask> tasks = flowEngine.flowQueryService().getActiveTasks(order.getId());
 		for(FlowTask task : tasks) {
 			System.out.println("************************begin:::::"+task);
-			engine.executeTask(task.getId().toString(), "1", args);
+			flowEngine.executeTask(task.getId().toString(), "1", args);
 			System.out.println("************************end:::::"+task);
 		}
 }

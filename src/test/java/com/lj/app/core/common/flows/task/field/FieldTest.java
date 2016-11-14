@@ -12,13 +12,12 @@ import com.lj.app.core.common.util.FileUtil;
 public class FieldTest  extends FlowBaseTest {
 	@Before
 	public void before() {
-		engine = getEngine();
-		processId = engine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/task/field/flow1.xml"));
+		processId = flowEngine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/task/field/flow1.xml"));
 	}
 	
 	@Test
-	public void  generatorTest() throws Exception{
-		 ProcessModel model = ((FlowProcess)(engine.flowProcessService().getProcessById(processId))).getModel();
+	public void  taskTest() throws Exception{
+		 ProcessModel model = ((FlowProcess)(flowEngine.flowProcessService().getProcessById(processId))).getModel();
         TaskModel taskModel = (TaskModel)model.getNode("task1");
         System.out.println(taskModel.getFields());
 	}

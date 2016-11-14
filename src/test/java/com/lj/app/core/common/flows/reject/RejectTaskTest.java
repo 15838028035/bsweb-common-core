@@ -13,17 +13,16 @@ public class RejectTaskTest extends FlowBaseTest{
 	
 	@Before
 	public void before() {
-		engine = getEngine();
-		processId = engine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/reject/flow1.xml"));
+		processId = flowEngine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/reject/flow1.xml"));
 	}
 	
 	@Test
 	public void taskTest() throws Exception {
-		engine.startInstanceById(processId);
+		flowEngine.startInstanceById(processId);
 		
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("number", 2);
-		engine.executeTask("10", null, args);
-		engine.executeAndJumpTask("11", null, args, "task1");
+		flowEngine.executeTask("10", null, args);
+		flowEngine.executeAndJumpTask("11", null, args, "task1");
 	}
 }

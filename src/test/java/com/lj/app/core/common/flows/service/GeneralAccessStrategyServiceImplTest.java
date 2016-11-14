@@ -7,15 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.lj.app.core.common.flows.FlowBaseTest;
 import com.lj.app.core.common.flows.entity.FlowTaskActor;
 
 public class GeneralAccessStrategyServiceImplTest extends FlowBaseTest{
-
-	@Autowired
-	private FlowTaskAccessStrategyService flowTaskAccessStrategyService;
 	
 	/**
 	 * 是否允许执行任务测试
@@ -32,9 +28,9 @@ public class GeneralAccessStrategyServiceImplTest extends FlowBaseTest{
 		
 		actors.add(flowTaskActor1);
 		actors.add(flowTaskActor2);
-		assertTrue(flowTaskAccessStrategyService.isAllowed("actor1", actors));
-		assertTrue(flowTaskAccessStrategyService.isAllowed("actor2", actors));
-		assertFalse(flowTaskAccessStrategyService.isAllowed("actorNotFound", actors));
+		assertTrue(flowEngine.flowTaskAccessStrategyService().isAllowed("actor1", actors));
+		assertTrue(flowEngine.flowTaskAccessStrategyService().isAllowed("actor2", actors));
+		assertFalse(flowEngine.flowTaskAccessStrategyService().isAllowed("actorNotFound", actors));
 	}
 
 }

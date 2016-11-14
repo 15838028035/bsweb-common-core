@@ -65,21 +65,21 @@ public class FlowEngineFacets {
 	}
 
     public List<FlowTask> transferMajor(String taskId, String operator, String... actors) throws Exception {
-        List<FlowTask> tasks = flowEngine.FlowTaskServiceApi().createNewTask(taskId, TaskType.Major.ordinal(), actors);
-        flowEngine.FlowTaskServiceApi().complete(taskId, operator);
+        List<FlowTask> tasks = getEngine().FlowTaskServiceApi().createNewTask(taskId, TaskType.Major.ordinal(), actors);
+        getEngine().FlowTaskServiceApi().complete(taskId, operator);
         return tasks;
     }
 
     public List<FlowTask> transferAidant(String taskId, String operator, String... actors) throws Exception {
-        List<FlowTask> tasks = flowEngine.FlowTaskServiceApi().createNewTask(taskId, TaskType.Aidant.ordinal(), actors);
-        flowEngine.FlowTaskServiceApi().complete(taskId, operator);
+        List<FlowTask> tasks = getEngine().FlowTaskServiceApi().createNewTask(taskId, TaskType.Aidant.ordinal(), actors);
+        getEngine().FlowTaskServiceApi().complete(taskId, operator);
         return tasks;
     }
    
     public Map<String, Object> flowData(String orderId, String taskName) {
     	Map<String, Object> data = new HashMap<String, Object>();
 		if (StringUtil.isNotBlank(orderId) && StringUtil.isNotBlank(taskName)) {
-			List<FlowTaskHist> histTasks = flowEngine.flowQueryService().getHistoryTasks(orderId,taskName);
+			List<FlowTaskHist> histTasks = getEngine().flowQueryService().getHistoryTasks(orderId,taskName);
 									
 			List<Map<String, Object>> vars = new ArrayList<Map<String,Object>>();
 			for(FlowTaskHist hist : histTasks) {

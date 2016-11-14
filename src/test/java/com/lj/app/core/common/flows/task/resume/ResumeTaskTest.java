@@ -15,19 +15,18 @@ import com.lj.app.core.common.util.FileUtil;
 public class ResumeTaskTest extends FlowBaseTest {
 	@Before
 	public void before() {
-		engine = getEngine();
-		processId = engine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/task/simple/flow1.xml"));
+		processId = flowEngine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/task/simple/flow1.xml"));
 	}
 	
 	@Test
 	public void taskTest()  throws Exception {
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("task1.operator", new String[]{"1"});
-		FlowOrder order = engine.startInstanceByName("simple", 0, "2", args);
+		FlowOrder order = flowEngine.startInstanceByName("simple", 0, "2", args);
 		System.out.println("order=" + order);
-		List<FlowTask> tasks = flowQueryService.getActiveTasks(order.getId());
+		List<FlowTask> tasks =  flowEngine.flowQueryService().getActiveTasks(order.getId());
 		for(FlowTask task : tasks) {
-			engine.executeTask(task.getId().toString(), "1", args);
+			flowEngine.executeTask(task.getId().toString(), "1", args);
 		}
 		//engine.flowOrderService().resume(order.getId());
 	}

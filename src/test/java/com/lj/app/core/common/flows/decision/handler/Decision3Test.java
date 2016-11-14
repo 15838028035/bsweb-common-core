@@ -17,13 +17,12 @@ import com.lj.app.core.common.util.JsonUtil;
 public class Decision3Test extends FlowBaseTest {
 	@Before
 	public void before() {
-		engine = getEngine();
-		processId = engine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/decision/handler/flow1.xml"));
+		processId = flowEngine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/decision/handler/flow1.xml"));
 	}
 	
 	@Test
 	public void   taskTest()  throws Exception {
-		FlowProcess flowProcess  = (FlowProcess) engine.flowProcessService().getProcessById(processId);
+		FlowProcess flowProcess  = (FlowProcess) flowEngine.flowProcessService().getProcessById(processId);
 		
 		assertEquals("decision3",flowProcess.getFlowName());
 		assertEquals("测试分支流程3",flowProcess.getDisplayName());
@@ -33,7 +32,7 @@ public class Decision3Test extends FlowBaseTest {
 		args.put("task2.operator", new String[]{"1"});
 		args.put("task3.operator", new String[]{"1"});
 		args.put("content", 250);
-		FlowOrder order = engine.startInstanceById(processId, "2", args);
+		FlowOrder order = flowEngine.startInstanceById(processId, "2", args);
 		
 		String mapJson = JsonUtil.toJson(args);
 		assertEquals(mapJson, order.getVariable());

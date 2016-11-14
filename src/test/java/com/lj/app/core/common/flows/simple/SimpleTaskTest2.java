@@ -26,13 +26,12 @@ public class SimpleTaskTest2 extends FlowBaseTest {
 
 	@Before
 	public void before() throws Exception {
-		engine = getEngine();
 		processId = "96";
 	}
 
 	@Test
 	public void taskTest() throws Exception {
-		FlowProcess flowProcess = engine.flowProcessService().getProcessById(
+		FlowProcess flowProcess = flowEngine.flowProcessService().getProcessById(
 				processId);
 		assertNotNull(flowProcess);
 	}
@@ -40,19 +39,19 @@ public class SimpleTaskTest2 extends FlowBaseTest {
 	@Test
 	public void taskDeployTest() throws Exception{
 		InputStream input = FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/task/simple/11.xml");
-		engine.flowProcessService().redeploy(processId,input);
+		flowEngine.flowProcessService().redeploy(processId,input);
 	}
 	
 	@Test
 	public void diagramJsonTest() throws Exception{
-		processId = engine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/task/simple/leaveTest.xml"));
+		processId = flowEngine.flowProcessService().deploy(FileUtil.getStreamFromClasspath("com/lj/app/core/common/flows/task/simple/leaveTest.xml"));
 		
-		FlowProcess process = engine.flowProcessService().getProcessById(processId);
+		FlowProcess process = flowEngine.flowProcessService().getProcessById(processId);
 		Assert.notNull(process);
 		
 		Map<String, Object> args = new HashMap<String, Object>();
 		args.put("task1.operator", new String[]{"admin管理员"});
-		FlowOrder order = engine.startInstanceByName("simple", null, "2", args);
+		FlowOrder order = flowEngine.startInstanceByName("simple", null, "2", args);
 		System.out.println("order=" + order);
 		
 		String orderId = order.getId().toString();
@@ -64,9 +63,9 @@ public class SimpleTaskTest2 extends FlowBaseTest {
 		}
 
 		if (StringUtil.isNotBlank(orderId)) {
-			List<FlowTask> tasks = engine.flowQueryService().getActiveTasks(orderId);
+			List<FlowTask> tasks = flowEngine.flowQueryService().getActiveTasks(orderId);
 					
-			List<FlowTaskHist> historyTasks =engine.flowQueryService().getHistoryTasks(orderId);
+			List<FlowTaskHist> historyTasks =flowEngine.flowQueryService().getHistoryTasks(orderId);
 			jsonMap.put("state",FlowUtil.getStateJson(model, tasks, historyTasks));
 					
 		}
