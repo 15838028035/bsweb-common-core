@@ -20,18 +20,6 @@
        
       <sqlMap resource="com/lj/app/core/common/base/entity/UpmUser.SqlMap.xml"/>
       
-      <sqlMap resource="com/lj/app/core/common/flows/entity/FlowFormTable.SqlMap.xml"/>
-      <sqlMap resource="com/lj/app/core/common/flows/entity/FlowFormField.SqlMap.xml"/>
-      
-      <sqlMap resource="com/lj/app/core/common/flows/entity/FlowProcess.SqlMap.xml"/>
-      <sqlMap resource="com/lj/app/core/common/flows/entity/FlowOrder.SqlMap.xml"/>
-      <sqlMap resource="com/lj/app/core/common/flows/entity/FlowOrderHist.SqlMap.xml"/>
-      <sqlMap resource="com/lj/app/core/common/flows/entity/FlowTask.SqlMap.xml"/>
-      <sqlMap resource="com/lj/app/core/common/flows/entity/FlowTaskHist.SqlMap.xml"/>
-      <sqlMap resource="com/lj/app/core/common/flows/entity/FlowTaskActor.SqlMap.xml"/>
-      <sqlMap resource="com/lj/app/core/common/flows/entity/FlowApprove.SqlMap.xml"/>
-      
-      <sqlMap resource="com/lj/app/core/common/flows/entity/FlowLeaveTest.SqlMap.xml"/>
       
 </sqlMapConfig>
     
