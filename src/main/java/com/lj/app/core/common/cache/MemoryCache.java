@@ -1,5 +1,6 @@
 package com.lj.app.core.common.cache;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import com.lj.app.core.common.exception.CacheException;
@@ -8,7 +9,7 @@ import com.lj.app.core.common.util.Assert;
 /**
  * 基于内存管理cache
  */
-public class MemoryCache<K, V> implements Cache<K, V> {
+public class MemoryCache<K, V> implements Cache<K, V>, Serializable {
 	/**
 	 * map cache
 	 */

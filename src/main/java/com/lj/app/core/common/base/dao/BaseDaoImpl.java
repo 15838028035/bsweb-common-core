@@ -1,5 +1,6 @@
 package com.lj.app.core.common.base.dao;
 
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import com.lj.app.core.common.base.entity.BaseEntity;
 
 
 @Component("baseDao")
-public class BaseDaoImpl<T> extends SqlMapClientDaoSupport implements BaseDao{
+public class BaseDaoImpl<T extends BaseEntity> extends SqlMapClientDaoSupport implements BaseDao, Serializable{
 
 	
 	@Resource(name = "sqlMapClient")    

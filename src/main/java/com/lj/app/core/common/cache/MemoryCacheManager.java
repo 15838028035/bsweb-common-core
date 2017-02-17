@@ -1,5 +1,6 @@
 package com.lj.app.core.common.cache;
 
+import java.io.Serializable;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -9,7 +10,7 @@ import com.lj.app.core.common.util.StringUtil;
 /**
  * 基于虚拟机内存的cache管理器
  */
-public class MemoryCacheManager implements CacheManager {
+public class MemoryCacheManager implements CacheManager,Serializable {
 	private final ConcurrentMap<String, Cache> caches;
 	
 	public MemoryCacheManager() {
