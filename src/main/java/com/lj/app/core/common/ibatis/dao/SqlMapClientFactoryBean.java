@@ -1,5 +1,6 @@
 package com.lj.app.core.common.ibatis.dao;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -17,7 +18,7 @@ import com.ibatis.sqlmap.engine.impl.SqlMapExecutorDelegate;
  * 
  */
 public class SqlMapClientFactoryBean extends
-		org.springframework.orm.ibatis.SqlMapClientFactoryBean {
+		org.springframework.orm.ibatis.SqlMapClientFactoryBean implements Serializable {
 	private SqlExecutor sqlExecutor;
 
 	public SqlExecutor getSqlExecutor() {
