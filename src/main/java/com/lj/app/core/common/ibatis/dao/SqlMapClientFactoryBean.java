@@ -34,7 +34,7 @@ public class SqlMapClientFactoryBean extends
 		super.afterPropertiesSet();
 		SqlMapClient c = (SqlMapClient) getObject();
 		if (sqlExecutor != null && c instanceof SqlMapClientImpl) {
-			SqlMapClientImpl client = (SqlMapClientImpl) c;
+			MySqlMapClientImpl client = (MySqlMapClientImpl) c;
 			SqlMapExecutorDelegate delegate = client.getDelegate();
 			try {
 				ReflectUtil.setFieldValue(delegate, "sqlExecutor",
