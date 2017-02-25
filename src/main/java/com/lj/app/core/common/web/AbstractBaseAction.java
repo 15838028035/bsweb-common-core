@@ -394,5 +394,5 @@ public abstract class AbstractBaseAction<T> extends ActionSupport implements Mod
 		out.flush();
 	}
 	
-	public abstract  BaseService getBaseService();
+	public abstract  BaseService<T> getBaseService();
 }

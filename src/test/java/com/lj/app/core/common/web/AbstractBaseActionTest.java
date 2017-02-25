@@ -1,10 +1,10 @@
 package com.lj.app.core.common.web;
 
-import  com.lj.app.core.common.base.service.BaseService;
-
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import  com.lj.app.core.common.base.service.BaseService;
 
 public abstract class AbstractBaseActionTest {
 
@@ -110,7 +110,7 @@ public abstract class AbstractBaseActionTest {
 			
 		}
 		
-		public   BaseService getBaseService(){
+		public   BaseService<Class1> getBaseService(){
 			return null;
 		}
 	}
