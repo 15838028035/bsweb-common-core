@@ -10,9 +10,9 @@
 		<relativePath>./pom_parent.xml</relativePath>
 	</parent>
 
-	<artifactId>bsweb-core</artifactId>
+	<artifactId>bsweb-common-core</artifactId>
 	<packaging>jar</packaging>
-	<name>bsweb-core</name>
+	<name>bsweb-common-core</name>
 	<url>http://maven.apache.org</url>
 
 	<dependencies>
@@ -323,7 +323,7 @@
 		 <outputDirectory>${project.basedir}/target/classes</outputDirectory>
 		 <testOutputDirectory>${project.basedir}/target/test-classes</testOutputDirectory>
 		
-		<testSourceDirectory>${project.basedir}/src/test/java,${project.basedir}/src/acceptancetest/java</testSourceDirectory>
+		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
 <!-- 		<outputDirectory>${project.basedir}/src/main/webapp/Web-INF/classes</outputDirectory> -->
 <!-- 		<testOutputDirectory>${project.basedir}/src/main/webapp/Web-INF/classes</testOutputDirectory> -->
 		

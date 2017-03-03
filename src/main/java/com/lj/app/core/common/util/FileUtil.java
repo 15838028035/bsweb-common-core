@@ -17,12 +17,15 @@ import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.io.Writer;
 import java.net.URL;
-import java.net.URLEncoder;
+import java.util.Enumeration;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.struts2.ServletActionContext;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.lj.app.core.common.exception.FlowException;
+import com.lj.app.core.common.generator.util.ClassHelper;
+import com.lj.app.core.common.generator.util.FileHelper;
 
 public class FileUtil {
 	public static final int DEFAULT_CHUNK_SIZE = 1024;
@@ -30,10 +33,35 @@ public class FileUtil {
 	
 	private static final int BUFFER_SIZE = 16 * 1024;
 	
+	private static Log log = LogFactory.getLog(FileUtil.class);
+	
 	private FileUtil() {
 
 	}
-
+	
+	public static File getFileByClassLoader(String resourceName)
+			throws IOException {
+		String pathToUse = resourceName;
+		if (pathToUse.startsWith("/")) {
+			pathToUse = pathToUse.substring(1);
+		}
+		Enumeration<URL> urls = ClassHelper.getDefaultClassLoader()
+				.getResources(pathToUse);
+		while (urls.hasMoreElements()) {
+			return new File(urls.nextElement().getFile());
+		}
+		urls = FileHelper.class.getClassLoader().getResources(pathToUse);
+		while (urls.hasMoreElements()) {
+			return new File(urls.nextElement().getFile());
+		}
+		urls = ClassLoader.getSystemResources(pathToUse);
+		while (urls.hasMoreElements()) {
+			return new File(urls.nextElement().getFile());
+		}
+		throw new FileNotFoundException("classpath:" + resourceName);
+	}
+	
+	
 	public static void createFile(InputStream in, String filePath) {
 		if (in == null)
 			throw new RuntimeException("create file error: inputstream is null");
@@ -331,42 +359,6 @@ public class FileUtil {
 
 	}
 
-	/**
-	 * 下载文件
-	 * @param filename  文件名称
-	 * @param filepath 文件路径
-	 * @throws Exception 异常信息
-	 */
-	public static void downloadFile(String filename,String filepath) throws Exception {
-		 download(filepath,  filename,  ServletActionContext.getResponse().getOutputStream());
-	}
-
-	/**
-	 * 下载文件
-	 * @param filepath  文件路径
-	 * @param filedisplay 文件显示名称
-	 * @param out  输出流
-	 * @throws IOException IO异常
-	 */
-	public static  void download(String filepath, String filedisplay, OutputStream out)
-			throws IOException {
-		File f = new File(filepath);
-		FileInputStream in = new FileInputStream(f);
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		byte[] b = new byte[MagicNumber.INT_2048];
-		int i = 0;
-		while ((i = in.read(b)) != -1) {
-			baos.write(b, 0, i);
-		}
-
-		ServletActionContext.getResponse().setContentType("bin");
-		filedisplay = URLEncoder.encode(filedisplay, "UTF-8");
-		ServletActionContext.getResponse().addHeader("Content-Disposition",
-				"attachment;filename=" + filedisplay);
-		baos.writeTo(out);
-		out.flush();
-	}
-	
 	/**
 	 * 根据文件名称resource打开输入流，并返回
 	 * @param resource

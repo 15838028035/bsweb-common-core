@@ -17,7 +17,7 @@ public class GeneratorMainTest {
 		
 		g.clean();
 		
-		g.generateByTable("FLOW_FORM_FIELD");
+		g.generateByTable("UPM_USER");
 
 		System.out.println("");
 		System.out

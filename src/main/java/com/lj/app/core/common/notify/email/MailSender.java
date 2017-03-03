@@ -15,12 +15,12 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 
 import com.lj.app.core.common.freeMarker.FreeMarkerTemplateUtils;
 import com.lj.app.core.common.notify.entity.UpmNotice;
 import com.lj.app.core.common.notify.service.UpmNoticeService;
 import com.lj.app.core.common.properties.PropertiesUtil;
+import com.lj.app.core.common.util.FileUtil;
 import com.lj.app.core.common.util.StringUtil;
 
 import freemarker.template.Configuration;
@@ -51,11 +51,31 @@ public class MailSender {
 	public static final String MAIL_SUBJECT =  "subject";//邮件主题
 	public static final String MAIL_FTL_NAME =  "ftlName";//邮件模版名称
 	
-	 public MailSender()  throws Exception{  
+	 public MailSender()  {  
          configuration = new Configuration();  
          configuration.setDefaultEncoding("UTF-8"); 
-     	File file = ResourceUtils.getFile("classpath:" + MAILT_EMPLATE_DIR);
-		configuration.setDirectoryForTemplateLoading(file);
+         File file =null;
+         try{
+        	 file  = FileUtil.getFileByClassLoader(MAILT_EMPLATE_DIR);
+         }catch(Exception e){
+        	 e.printStackTrace();
+         }
+         
+         if (file==null) {
+        	String  mailt_emplate_dir_config =  PropertiesUtil.getProperty(MAILT_EMPLATE_DIR);
+        	log.debug("mailt_emplate_dir_config="+mailt_emplate_dir_config);
+        	 file= new File(mailt_emplate_dir_config);
+         }
+         
+         if (file!=null) {
+        	 try{
+         	 configuration.setDirectoryForTemplateLoading(file);
+        	 }catch(Exception e) {
+        		 e.printStackTrace();
+        		 log.error(e);
+        	 }
+          }
+				
      }  
 	
 	/**
