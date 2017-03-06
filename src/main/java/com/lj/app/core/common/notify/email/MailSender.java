@@ -1,6 +1,5 @@
 package com.lj.app.core.common.notify.email;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
@@ -20,7 +19,6 @@ import com.lj.app.core.common.freeMarker.FreeMarkerTemplateUtils;
 import com.lj.app.core.common.notify.entity.UpmNotice;
 import com.lj.app.core.common.notify.service.UpmNoticeService;
 import com.lj.app.core.common.properties.PropertiesUtil;
-import com.lj.app.core.common.util.FileUtil;
 import com.lj.app.core.common.util.StringUtil;
 
 import freemarker.template.Configuration;
@@ -54,28 +52,7 @@ public class MailSender {
 	 public MailSender()  {  
          configuration = new Configuration();  
          configuration.setDefaultEncoding("UTF-8"); 
-         File file =null;
-         try{
-        	 file  = FileUtil.getFileByClassLoader(MAILT_EMPLATE_DIR);
-         }catch(Exception e){
-        	 e.printStackTrace();
-         }
-         
-         if (file==null) {
-        	String  mailt_emplate_dir_config =  PropertiesUtil.getProperty(MAILT_EMPLATE_DIR);
-        	log.debug("mailt_emplate_dir_config="+mailt_emplate_dir_config);
-        	 file= new File(mailt_emplate_dir_config);
-         }
-         
-         if (file!=null) {
-        	 try{
-         	 configuration.setDirectoryForTemplateLoading(file);
-        	 }catch(Exception e) {
-        		 e.printStackTrace();
-        		 log.error(e);
-        	 }
-          }
-				
+         configuration.setClassForTemplateLoading(this.getClass(), "/mailTemplate");
      }  
 	
 	/**

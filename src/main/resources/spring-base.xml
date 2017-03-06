@@ -87,7 +87,7 @@
 		<property name="lobHandler" ref="lobHandler"></property>
 	</bean>         
 	
-	<bean  class="org.springframework.jdbc.core.JdbcTemplate">
+	<bean  id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
   		<constructor-arg><ref bean="dataSource"/></constructor-arg>
 	</bean>
    		
