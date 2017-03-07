@@ -44,6 +44,11 @@ public class UpmUser extends BaseEntity{
 	 */
 	private String userGroupCode;
 	
+	/**
+	 * 邮箱
+	 */
+	private String email;
+	
 	private int userGroupAndUserRelId;//用户组关联id
 	
 	/**
@@ -112,6 +117,12 @@ public class UpmUser extends BaseEntity{
 	}
 	public void setLastLoginTime(java.util.Date lastLoginTime) {
 		this.lastLoginTime = lastLoginTime;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 }

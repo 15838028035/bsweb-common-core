@@ -20,6 +20,7 @@
    	  	<result property="updateDate" column="update_Date"/>
    	  	<result property="enableFlag" column="enable_Flag"/>
    	  	<result property="lockStatus" column="lock_Status"/>
+   	  	<result property="email" column="email"/>
     </resultMap>
     
      <resultMap id="upmUserResult2" class="upmUser" extends="upmUserResult">
@@ -68,6 +69,10 @@
 	       <isNotEmpty prepend="AND" property="lockStatus">
 	             lock_Status = #lockStatus#
 	       </isNotEmpty>
+	        <isNotEmpty prepend="AND" property="email">
+	             email = #email#
+	       </isNotEmpty>
+	       
 	    </dynamic>	
 	</sql>
 
@@ -86,7 +91,8 @@
         	update_By ,
         	update_Date ,
         	enable_Flag ,
-        	lock_Status 
+        	lock_Status ,
+        	email
 	    ]]>
 	</sql>
 	
@@ -110,7 +116,8 @@
 	        	update_By ,
 	        	update_Date ,
 	        	enable_Flag ,
-	        	lock_Status 
+	        	lock_Status ,
+	        	email
 	        ) VALUES (
 				#id# ,
 				#loginNo# ,
@@ -124,7 +131,8 @@
 				#updateBy# ,
 				#updateDate# ,
 				#enableFlag# ,
-				#lockStatus# 
+				#lockStatus# ,
+				#email#
 	        )
 	    ]]>
     </insert>
@@ -144,7 +152,8 @@
 			update_By = #updateBy# ,
 			update_Date = #updateDate# ,
 			enable_Flag = #enableFlag# ,
-			lock_Status = #lockStatus# 
+			lock_Status = #lockStatus# ,
+			email=#email#
         WHERE 
 	        id = #id# 
     ]]>
@@ -210,6 +219,7 @@
         	u.update_By ,
         	u.update_Date ,
         	u.enable_Flag ,
+        	u.email,
         	u.lock_Status FROM UPM_USER U ,UPM_USER_GROUP P, upm_user_and_user_group_rel  r
 
 	where r.userId=u.id and r.groupId=p.id
