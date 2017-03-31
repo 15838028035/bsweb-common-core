@@ -1,10 +1,11 @@
 package com.lj.app.core.common.security;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @SuppressWarnings("unchecked")
-public class CMSecurityContext {
+public class CMSecurityContext implements Serializable{
 
 	private Long mainAcctId;
 	

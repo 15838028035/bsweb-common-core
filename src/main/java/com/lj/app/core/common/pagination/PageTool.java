@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
-
 import com.lj.app.core.common.util.StringUtil;
+
+import net.sf.json.JSONObject;
 
 public class PageTool {
 	private static final String JSONPAGE = "page";
@@ -48,6 +48,28 @@ public class PageTool {
 		mapResult.put("page", page.getPageNumber());
 		mapResult.put("total", page.getTotalPages());
 		mapResult.put("records", page.getTotalCount());
+		mapResult.put("rows", page.getResult());
+		return toJsonString(page,mapResult);
+	}
+	
+	public static String pageToJsonBootStrap(Page page) {
+		Map<String,Object> mapResult = new HashMap<String,Object>();
+		mapResult.put("pageNumber", page.getPageNumber());
+		mapResult.put("pageSize", page.getPageSize());
+		mapResult.put("page", page.getPageNumber());
+		mapResult.put("totalPage", page.getTotalPages());
+		mapResult.put("total", page.getTotalCount());
+		mapResult.put("rows", page.getResult());
+		return page.toJsonString(mapResult);
+	}
+	
+	public static String mapPageToJsonBootStrap(Page page) {
+		Map<String,Object> mapResult = new HashMap<String,Object>();
+		mapResult.put("pageNumber", page.getPageNumber());
+		mapResult.put("pageSize", page.getPageSize());
+		mapResult.put("page", page.getPageNumber());
+		mapResult.put("totalPage", page.getTotalPages());
+		mapResult.put("total", page.getTotalCount());
 		mapResult.put("rows", page.getResult());
 		return toJsonString(page,mapResult);
 	}
