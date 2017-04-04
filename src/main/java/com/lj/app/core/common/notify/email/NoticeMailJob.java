@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.lj.app.core.common.notify.entity.UpmNotice;
@@ -23,7 +22,7 @@ public class NoticeMailJob {
 	private static long currentCount = 0l;
 	private static final long eachNum = 10;
 
-	 @Scheduled(cron="0 */30 * * * ? ")   //每5秒执行一次  
+	 //@Scheduled(cron="0 */30 * * * ? ")   //每5秒执行一次  
 	public void scanning() {
 		List<UpmNotice> list = upmNoticeService.getUapNoticeMail(currentCount,eachNum);
 		currentCount = list.size() > 0 ? list.get(0).getId() : currentCount;

@@ -23,6 +23,7 @@ public class PropertiesReader {
 	private static final String BASE_CONFIG_FILE_NAME = "base-config.properties";
 	
 	private static final String ENV_CONFIG_FILE_NAME = "env.properties";
+	private static final String ENV_LOCAL_CONFIG_FILE_NAME = "env-local.properties";
 	private static final String RULE_CONFIG_FILE_NAME = "rule.properties";
 	
 	private static final String CORE_URL="";
@@ -40,6 +41,7 @@ public class PropertiesReader {
 			
 			logger.warn("Now,Loading default file~~~");
 			loadConfigFileByUrlAndFileName(CORE_URL,ENV_CONFIG_FILE_NAME);
+			loadConfigFileByUrlAndFileName(CORE_URL,ENV_LOCAL_CONFIG_FILE_NAME);
 			loadConfigFileByUrlAndFileName(CORE_URL,RULE_CONFIG_FILE_NAME);
 			logger.warn("Loading config file finished~~");
 		} catch (Exception e) {

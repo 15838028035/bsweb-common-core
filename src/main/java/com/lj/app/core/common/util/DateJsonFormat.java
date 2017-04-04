@@ -20,6 +20,10 @@ public class DateJsonFormat implements JsonValueProcessor {
 	}
 
 	public Object processObjectValue(String key, Object value, JsonConfig arg2) {
+		if(value==null) {
+			return "";
+		}
+		
 		if (value instanceof Date) {
 			return DateUtil.formatDate((Date)value, DateUtil.DATE_FOMRAT_yyyy_MM_dd_hh_MMss);
 		}
