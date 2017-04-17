@@ -2,21 +2,22 @@ package com.lj.app.core.common.pagination;
 
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
 
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.lj.app.core.common.util.DateJsonFormat;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
+
 public class Page<T> implements Serializable {
 	
-	private List<T> result;
+	private List<T> result = new ArrayList<T>();
 
 	private T filters;
 	
