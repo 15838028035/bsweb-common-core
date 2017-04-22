@@ -43,7 +43,11 @@ public class MapAndObject implements Map {
 		if ((result == null) && (this.bean != null)
 				&& ((key instanceof String))) {
 			String propertyName = (String) key;
-			return FastPropertyUtils.getBeanPropertyValue(this.bean, propertyName);
+			Object fastObj = FastPropertyUtils.getBeanPropertyValue(this.bean, propertyName);
+			if(fastObj instanceof String){
+				fastObj = ((String) fastObj).trim();
+			}
+			return fastObj;
 		}
 		return result;
 	}
