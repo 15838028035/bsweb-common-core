@@ -10,7 +10,7 @@
    	  	<result property="id" column="id"/>
    	  	<result property="loginNo" column="login_No"/>
    	  	<result property="pwd" column="pwd"/>
-   	  	<result property="userName" column="userName"/>
+   	  	<result property="userName" column="user_Name"/>
    	  	<result property="address" column="address"/>
    	  	<result property="mobile" column="mobile"/>
    	  	<result property="orgDesc" column="org_Desc"/>
@@ -40,7 +40,7 @@
 	             pwd = #pwd#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="userName">
-	             userName = #userName#
+	             user_Name= #userName#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="address">
 	             address = #address#
@@ -82,7 +82,7 @@
         	id ,
         	login_No ,
         	pwd ,
-        	userName ,
+        	user_Name,
         	address ,
         	mobile ,
         	org_Desc,
@@ -107,7 +107,7 @@
 	        	id ,
 	        	login_No ,
 	        	pwd ,
-	        	userName ,
+	        	user_Name,
 	        	address ,
 	        	mobile ,
 	        	org_Desc,
@@ -143,7 +143,7 @@
 			id = #id# ,
 			login_No = #loginNo# ,
 			pwd = #pwd# ,
-			userName = #userName# ,
+			user_Name= #userName# ,
 			address = #address# ,
 			mobile = #mobile# ,
 			org_Desc = #orgDesc# ,
@@ -210,7 +210,7 @@
         	u.id ,
         	u.login_No ,
         	u.pwd ,
-        	u.userName ,
+        	u.user_Name ,
         	u.address ,
         	u.mobile ,
         	u.org_Desc,
@@ -289,7 +289,7 @@
 	             u.pwd = #pwd#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="userName">
-	             u.userName = #userName#
+	             u.user_Name = #userName#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="address">
 	             u.address = #address#
