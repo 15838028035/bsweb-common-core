@@ -39,6 +39,7 @@ public class BootStrapTreeView {
 	}
 
 	public Map<String, Boolean> getState() {
+		state.put("checked", Boolean.valueOf(String.valueOf(checked)));
 		return state;
 	}
 

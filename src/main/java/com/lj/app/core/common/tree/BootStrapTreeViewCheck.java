@@ -149,4 +149,13 @@ public class BootStrapTreeViewCheck {
 		result.setParentId(parentId);
 		return result;
 	}
+	
+	public static BootStrapTreeView createNew(String id,String text,int checked, String parentId){
+		BootStrapTreeView result = new BootStrapTreeView();
+		result.setId(id);
+		result.setText(text);
+		result.setChecked(checked);
+		result.setParentId(parentId);
+		return result;
+	}
 }
