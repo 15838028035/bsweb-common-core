@@ -31,7 +31,7 @@
 	</scm>
 
 	<modules>
-		<module>bsweb-core</module>
+		<module>bsweb-common-core</module>
 	</modules>
 
 	<!-- 设定除中央仓repo1.maven.org/maven2/)外的其他仓库,按设定顺序进行查 -->
