@@ -48,16 +48,14 @@
 
 	<distributionManagement>
 		<repository>
-			<id>project-release</id>
-			<name>project-release</name>
-			<url>file://D:\GitHub\maven-repo\release</url>
-		</repository>
-
-		<snapshotRepository>
-			<id>project-release</id>
-			<name>project-release</name>
-			<url>file://D:\GitHub\maven-repo\snapshot</url>
-		</snapshotRepository>
+            <id>nexus-releases</id>
+            <url>http://127.0.0.1:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <url>http://127.0.0.1:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+        
 	</distributionManagement>
 
 	<properties>
