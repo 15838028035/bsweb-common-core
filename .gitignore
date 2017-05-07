@@ -13,7 +13,6 @@ src/main/webapp/WEB-INF/classes/
 src/main/webapp/WEB-INF/lib/
 src/main/webapp/WEB-INF/logs/
 src/main/resources/generator.properties
-src/main/java/com/lj/app/core/common/generator
 src/main/resources/template/
 
 target/
