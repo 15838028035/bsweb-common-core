@@ -13,6 +13,11 @@ bsweb-common-core常用工程代码
 
 ## 添加sqlMap.xml文件到工程中
 
+# 4 项目发布到nexus
+	查看插件 mvn help:describe -Dplugin=deploy  -Ddetail -X
+	 mvn deploy 
+	
+
 # 贡献代码
 ## 1、fork  代码
 ## 2、创建分支
