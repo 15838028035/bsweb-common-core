@@ -5,7 +5,7 @@
 	<groupId>com.lj.app.bsweb</groupId>
 	<artifactId>bsweb</artifactId>
 	<packaging>pom</packaging>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>com.lj.app.bsweb Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
@@ -25,9 +25,9 @@
 	</developers>
 
 	<scm>
-		<connection>scm:git:https://github.com/liujie15838028035/bsweb.git</connection>
-		<developerConnection>scm:git:https://github.com/liujie15838028035/bsweb.git</developerConnection>
-		<url>scm:git:https://github.com/liujie15838028035/bsweb.git</url>
+		<connection>scm:git:git@github.com:975545486/bsweb-common-core.git</connection>
+		<developerConnection>scm:git:git@github.com:975545486/bsweb-common-core.git</developerConnection>
+		<url>scm:git:git@github.com:975545486/bsweb-common-core.git</url>
 	</scm>
 
 	<modules>
@@ -445,9 +445,6 @@
 
 	<build>
 
-		<testSourceDirectory>${project.basedir}/src/test/java,${project.basedir}/src/acceptancetest/java</testSourceDirectory>
-		<outputDirectory>${project.basedir}/src/main/webapp/Web-INF/classes</outputDirectory>
-		<testOutputDirectory>${project.basedir}/target/test-classes</testOutputDirectory>
 		<resources>
 			<resource>
 				<directory>${project.basedir}/src/main/java</directory>
@@ -528,9 +525,6 @@
 								<exclude>com/lj/app/core/common/generator/**</exclude>
 								<exclude>com/lj/app/core/common/generator/util/**</exclude>
 								<exclude>com/lj/app/core/common/generator/provider/**</exclude>
-								
-								<exclude>com/lj/app/core/common/service/dbsolution/**</exclude>
-								<exclude>com/lj/app/core/common/service/dbsolution/impl/**</exclude>
 							</excludes>
 						</instrumentation>
 						<executions>
@@ -626,28 +620,7 @@
 						<outputDirectory>${project.basedir}/src/main/webapp/WEB-INF/lib</outputDirectory>
 					</configuration>
 				</plugin>
-
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>build-helper-maven-plugin</artifactId>
-					<version>1.7</version>
-					<executions>
-						<execution>
-							<id>add-source</id>
-							<phase>generate-test-sources</phase>
-							<goals>
-								<goal>add-test-source</goal>
-							</goals>
-							<configuration>
-								<sources>
-									<source>${project.basedir}/src/test/java</source>
-									<source>${project.basedir}/src/acceptancetest/java</source>
-								</sources>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-
+				
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
@@ -739,9 +712,6 @@
 								<exclude>com/lj/app/core/common/generator/**</exclude>
 								<exclude>com/lj/app/core/common/generator/util/**</exclude>
 								<exclude>com/lj/app/core/common/generator/provider/**</exclude>
-								
-								<exclude>com/lj/app/core/common/service/dbsolution/**</exclude>
-								<exclude>com/lj/app/core/common/service/dbsolution/impl/**</exclude>
 							</excludes>
 						</instrumentation>
 						<executions>

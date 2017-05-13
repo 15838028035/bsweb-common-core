@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>com.lj.app.bsweb</groupId>
 		<artifactId>bsweb</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<version>0.0.1</version>
 		<relativePath>./pom_parent.xml</relativePath>
 	</parent>
 
@@ -319,13 +319,6 @@
 	</dependencies>
 
 	<build>
-	<!-- 	<finalName>bsweb-core</finalName> -->
-		 <outputDirectory>${project.basedir}/target/classes</outputDirectory>
-		 <testOutputDirectory>${project.basedir}/target/test-classes</testOutputDirectory>
-		
-		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
-<!-- 		<outputDirectory>${project.basedir}/src/main/webapp/Web-INF/classes</outputDirectory> -->
-<!-- 		<testOutputDirectory>${project.basedir}/src/main/webapp/Web-INF/classes</testOutputDirectory> -->
 		
 		<plugins>
 			<plugin>
@@ -372,11 +365,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
 			</plugin>
-
-<!-- 			<plugin> -->
-<!-- 				<groupId>org.codehaus.mojo</groupId> -->
-<!-- 				<artifactId>build-helper-maven-plugin</artifactId> -->
-<!-- 			</plugin> -->
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
