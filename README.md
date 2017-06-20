@@ -1,5 +1,10 @@
 # bsweb-common-core
-bsweb-common-core常用工程代码
+bsweb-common-core常用工程代码 
+主要功能包括:
+	(1)常见常用日期、字符串、数字、文件操作等工具类
+	(2)配置文件属性工具读取工具类
+	(3)代码生成器工具，可以自定义代码模板，根据模板文件生成代码。
+	
 
 # 1、maven使用
   <depenency>com.lj.app.bsweb.core</depency>
