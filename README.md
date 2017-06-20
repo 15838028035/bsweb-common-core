@@ -20,8 +20,8 @@
 ## 添加sqlMap.xml文件到工程中
 
 # 4 项目发布到nexus
-	查看插件 mvn help:describe -Dplugin=deploy  -Ddetail -X
-	执行命令 : <code> mvn deploy <code>
+	查看插件 ` mvn help:describe -Dplugin=deploy  -Ddetail -X `
+	执行命令 : ` mvn deploy `
 # 贡献代码
  1. fork代码
  2. 创建分支
