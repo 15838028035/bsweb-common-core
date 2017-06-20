@@ -7,7 +7,6 @@
 --------------------------------------------------------------
 
 # 1、maven使用
-
  `
  	<depenency>com.lj.app.bsweb.core</depency>
   	<artictId>bsweb-common-core</artictId>
@@ -20,8 +19,16 @@
 ## 添加sqlMap.xml文件到工程中
 
 # 4 项目发布到nexus
-	查看插件 ` mvn help:describe -Dplugin=deploy  -Ddetail -X `
-	执行命令 : ` mvn deploy `
+查看插件  
+	 ` 
+	 mvn help:describe -Dplugin=deploy  -Ddetail -X
+	  `
+执行命令 : 
+`
+ mvn deploy
+  `
+	
+	 
 # 贡献代码
  1. fork代码
  2. 创建分支
