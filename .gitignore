@@ -1,5 +1,6 @@
 *.class
-
+.classpath
+.settings/
 *.log
 *.jar
 .project
@@ -9,12 +10,18 @@
 *.zip
 *.rar
 
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+*.cache
+*.diff
+*.patch
+*.tmp
+
 src/main/webapp/WEB-INF/classes/
 src/main/webapp/WEB-INF/lib/
 src/main/webapp/WEB-INF/logs/
-src/main/resources/generator.properties
-src/main/resources/template/
 
 target/
-
-
