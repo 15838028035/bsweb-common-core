@@ -19,6 +19,10 @@
 ## 添加sqlMap.xml文件到工程中
 
 # 4、 项目发布到nexus
+   nexus服务启动
+   ./nexus ./install
+   ./nexus /start
+   ./nexus /stop
 查看插件  
 	 ` 
 	 mvn help:describe -Dplugin=deploy  -Ddetail -X
