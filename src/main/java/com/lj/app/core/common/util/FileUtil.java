@@ -219,6 +219,10 @@ public class FileUtil {
 	 * @param filePath
 	 */
 	public static void createFile(File file, String filePath) {
+		if(file == null) {
+			return ;
+		}
+		
 		int potPos = filePath.lastIndexOf('/') + 1;
 		String folderPath = filePath.substring(0, potPos);
 		createFolder(folderPath);
