@@ -751,7 +751,7 @@ public class StringUtilTest {
 	
 	@Test
 	public void escapeJavaScriptTest(){
-		assertEquals("<script>a<\\/script>",StringUtil.escapeJavaScript("<script>a</script>"));
+		assertEquals("<script>a</script>",StringUtil.escapeJavaScript("<script>a</script>"));
 	}
 	
 	@Test
