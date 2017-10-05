@@ -3,12 +3,13 @@ package com.lj.app.core.common.tree;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 public class BootStrapTreeViewCheck {
 	private BootStrapTreeView rootNode;
-	private boolean flag;// true:已处理过；false:未处理过
 
 	/**
 	 * 唯一构造函数
@@ -19,8 +20,8 @@ public class BootStrapTreeViewCheck {
 	public BootStrapTreeViewCheck(String rootId,String rootText) {
 		rootNode = new BootStrapTreeView();
 		rootNode.setId(rootId);
+		rootNode.setNodeId(rootId);
 		rootNode.setText(rootText);
-		flag = false;
 	}
 
 	/**
@@ -30,8 +31,8 @@ public class BootStrapTreeViewCheck {
 	 * @param text
 	 * @return
 	 */
-	public BootStrapTreeView addNode(String id, String text) {
-		return addNode(id, text, null);
+	public BootStrapTreeView addNode(String id,Boolean checked, String text) {
+		return addNode(id, text,true, null);
 	}
 
 	/**
@@ -45,16 +46,20 @@ public class BootStrapTreeViewCheck {
 	 *            如果为null，将默认为根节点
 	 * @return
 	 */
-	public BootStrapTreeView addNode(String id, String text, BootStrapTreeView parentNode) {
+	public BootStrapTreeView addNode(String id, String text,Boolean checked, BootStrapTreeView parentNode) {
 		BootStrapTreeView node = new BootStrapTreeView();
 		node.setId(id);
+		node.setNodeId(id);
 		node.setText(text);
+		Map<String,Boolean> stateMap = node.getState();
+		stateMap.put("checked", checked);
+		node.setState(stateMap);
+		
 		if (null == parentNode || parentNode.equals(rootNode)) {
 			rootNode.addNodes(node);
 		} else {
 			parentNode.addNodes(node);
 		}
-		flag = false;
 
 		return node;
 	}
@@ -104,7 +109,7 @@ public class BootStrapTreeViewCheck {
 					for (int i = 0; i < whileList.size(); i++) {
 						BootStrapTreeView tmpNode = whileList.get(i);
 						if (parentNodeId.equals(tmpNode.getParentId())) {
-							BootStrapTreeView node = bootStrapTreeViewCheck.addNode(tmpNode.getId(), tmpNode.getText(), parentNode);
+							BootStrapTreeView node = bootStrapTreeViewCheck.addNode(tmpNode.getId(), tmpNode.getText(),Boolean.valueOf(tmpNode.getState().get("checked")), parentNode);
 							swapList.remove(tmpNode);
 							swapParentList.add(node);
 						}
@@ -122,6 +127,66 @@ public class BootStrapTreeViewCheck {
 			return bootStrapTreeViewCheck;
 		}
 		return null;
+	}
+	
+	/**
+	 * 将List&lt;DefaultTreeNodeNoCheck&gt;转换为SimpleTree对象。
+	 * 
+	 * @param TreeNodeNoCheckList
+	 * @param rootNodeId
+	 * @return
+	 */
+	public static String  valueOfString(List<BootStrapTreeView> bootStrapTreeViewList, String rootNodeId)
+			throws Exception {
+		if (null == bootStrapTreeViewList || bootStrapTreeViewList.isEmpty() || null == rootNodeId) {
+			return null;
+		}
+
+		BootStrapTreeView rootNode = findRootNode(bootStrapTreeViewList, rootNodeId);// 根节点
+		if (null != rootNode) {
+			bootStrapTreeViewList.remove(rootNode);
+
+			BootStrapTreeViewCheck bootStrapTreeViewCheck = new BootStrapTreeViewCheck(rootNode.getId(), rootNode.getText());
+			List<BootStrapTreeView> whileList = new ArrayList<BootStrapTreeView>();
+			whileList.addAll(bootStrapTreeViewList);
+			List<BootStrapTreeView> swapList = new ArrayList<BootStrapTreeView>();
+			swapList.addAll(bootStrapTreeViewList);
+			List<BootStrapTreeView> parentList = new ArrayList<BootStrapTreeView>();
+			List<BootStrapTreeView> swapParentList = new ArrayList<BootStrapTreeView>();
+			parentList.add(bootStrapTreeViewCheck.rootNode);
+			while (parentList.size() > 0 && !whileList.isEmpty()) {// 必须是并且关系，否则会死循环（因为里面有的节点可能根本就没有对应的父节点）
+				for (int j = 0; j < parentList.size(); j++) {
+					BootStrapTreeView parentNode = parentList.get(j);
+					String parentNodeId = parentNode.getId();
+					for (int i = 0; i < whileList.size(); i++) {
+						BootStrapTreeView tmpNode = whileList.get(i);
+						if (parentNodeId.equals(tmpNode.getParentId())) {
+							Boolean isCheck =true;
+							
+							if(tmpNode.getState().get("checked") != null) {
+								isCheck= Boolean.valueOf(tmpNode.getState().get("checked"));
+							}
+							BootStrapTreeView node = bootStrapTreeViewCheck.addNode(tmpNode.getId(), tmpNode.getText(),isCheck, parentNode);
+							swapList.remove(tmpNode);
+							swapParentList.add(node);
+						}
+					}
+					whileList = new ArrayList<BootStrapTreeView>();
+					whileList.addAll(swapList);
+					if ((whileList.isEmpty())) {
+						return bootStrapTreeViewCheck.toJsonString();
+					}
+				}
+				parentList = new ArrayList<BootStrapTreeView>();
+				parentList.addAll(swapParentList);
+				swapParentList = new ArrayList<BootStrapTreeView>();
+			}
+			
+			return bootStrapTreeViewCheck.toJsonString();
+		}else {
+			return  JSONArray.fromObject(bootStrapTreeViewList).toString();
+		}
+		
 	}
 
 	/**
@@ -143,19 +208,33 @@ public class BootStrapTreeViewCheck {
 	}
 
 	public static BootStrapTreeView createNew(String id, String text, String parentId) {
-		BootStrapTreeView result = new BootStrapTreeView();
-		result.setId(id);
-		result.setText(text);
-		result.setParentId(parentId);
-		return result;
+		return  createNew( id, text, true,  parentId,  "");
 	}
 	
-	public static BootStrapTreeView createNew(String id,String text,int checked, String parentId){
+	public static BootStrapTreeView createNew(String id,String text,boolean checked, String parentId){
+		return  createNew( id, text, checked,  parentId,  "");
+	}
+	
+	public static BootStrapTreeView createNew(String id,String text,boolean checked, String parentId, String href){
 		BootStrapTreeView result = new BootStrapTreeView();
 		result.setId(id);
+		result.setNodeId(id);
 		result.setText(text);
-		result.setChecked(checked);
+		Map<String,Boolean> stateMap = result.getState();
+		stateMap.put("checked", checked);
+		result.setState(stateMap);
 		result.setParentId(parentId);
+		result.setHref(href);
 		return result;
 	}
+
+	public BootStrapTreeView getRootNode() {
+		return rootNode;
+	}
+
+	public void setRootNode(BootStrapTreeView rootNode) {
+		this.rootNode = rootNode;
+	}
+	
+	
 }

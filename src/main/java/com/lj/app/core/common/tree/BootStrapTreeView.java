@@ -10,9 +10,11 @@ public class BootStrapTreeView {
 	private String id;
 	private String text;
 	private String icon;
-	
-	private int checked;
 	private String parentId;
+	
+	private String nodeId;
+	
+	private String href;
 	
 	//checked: true,
     //disabled: true,
@@ -39,7 +41,6 @@ public class BootStrapTreeView {
 	}
 
 	public Map<String, Boolean> getState() {
-		state.put("checked", Boolean.valueOf(String.valueOf(checked)));
 		return state;
 	}
 
@@ -62,14 +63,6 @@ public class BootStrapTreeView {
 		nodes.add(childrenNode);
 	}
 
-	public int getChecked() {
-		return checked;
-	}
-
-	public void setChecked(int checked) {
-		this.checked = checked;
-	}
-
 	public String getParentId() {
 		return parentId;
 	}
@@ -84,6 +77,22 @@ public class BootStrapTreeView {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getNodeId() {
+		return nodeId;
+	}
+
+	public void setNodeId(String nodeId) {
+		this.nodeId = nodeId;
+	}
+
+	public String getHref() {
+		return href;
+	}
+
+	public void setHref(String href) {
+		this.href = href;
 	}
 	
 }

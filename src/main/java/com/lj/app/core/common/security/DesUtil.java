@@ -15,6 +15,14 @@ public class DesUtil {
  
     private final static String DES = "DES";
     public static final String DES_KEY = "wang!@#$%";
+ 
+    public static void main(String[] args) throws Exception {
+        String data = "123456";
+        String key = "wang!@#$%";
+        System.err.println(encrypt(data, key));
+        System.err.println(decrypt(encrypt(data, key), key));
+ 
+    }
     
     /**
      * Description 根据键值进行加密
@@ -127,4 +135,6 @@ public class DesUtil {
  
         return cipher.doFinal(data);
     }
+    
+    
 }
