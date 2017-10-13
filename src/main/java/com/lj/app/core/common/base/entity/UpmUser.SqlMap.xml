@@ -29,7 +29,7 @@
     
 
 	<sql id="dynamicWhere">
-	    <dynamic prepend="WHERE">
+	    <dynamic prepend=" AND">
 	        <isGreaterThan  prepend="AND"  property="id"  compareValue="0">
 	        	id = #id#
 	       </isGreaterThan>
@@ -139,24 +139,55 @@
 
     <update id="update" parameterClass="upmUser">
     <![CDATA[
-        UPDATE upm_user SET
-			id = #id# ,
-			login_No = #loginNo# ,
-			pwd = #pwd# ,
-			user_Name= #userName# ,
-			address = #address# ,
-			mobile = #mobile# ,
-			org_Desc = #orgDesc# ,
-			create_By = #createBy# ,
-			create_Date = #createDate# ,
-			update_By = #updateBy# ,
-			update_Date = #updateDate# ,
-			enable_Flag = #enableFlag# ,
-			lock_Status = #lockStatus# ,
-			email=#email#
+        UPDATE upm_user 
+      ]]>
+      <dynamic prepend="set"> 
+	        <isNotEmpty prepend="," property="id">
+				id = #id#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="loginNo">
+				login_No = #loginNo#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="pwd">
+				pwd = #pwd#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="userName">
+				user_Name = #userName#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="address">
+				address = #address#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="mobile">
+				mobile = #mobile#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="createBy">
+				create_By = #createBy#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="createDate">
+				create_Date = #createDate#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="updateBy">
+				update_By = #updateBy#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="updateDate">
+				update_Date = #updateDate#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="enableFlag">
+				enable_Flag = #enableFlag#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="lockStatus">
+				lock_Status = #lockStatus#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="orgDesc">
+				org_desc = #orgDesc#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="email">
+				email = #email#
+			</isNotEmpty>
+	        
+	   </dynamic>
         WHERE 
 	        id = #id# 
-    ]]>
     </update>
 
     <delete id="delete" parameterClass="java.lang.Integer">
@@ -169,9 +200,10 @@
     <select id="select" resultMap="upmUserResult">
     	<include refid="commonSelectColumnsPrefix"/>
 	    <![CDATA[
-	        from upm_user 
+	        from upm_user where 1=1
 	    ]]>
 		<include refid="dynamicWhere"/>
+		 $conditionWhere$
     </select>
     
     <select id="getInfoByKey" resultMap="upmUserResult">
@@ -186,7 +218,7 @@
  	<select id="pagenate" resultMap="upmUserResult">
     	<include refid="commonSelectColumnsPrefix"/>
 	    <![CDATA[
-	        from upm_user 
+	        from upm_user where 1=1
 	    ]]>
 		<include refid="dynamicWhere"/>
 		<dynamic prepend="ORDER BY">
@@ -198,7 +230,7 @@
     <![CDATA[
         select 
         count(*)
-        from upm_user
+        from upm_user where 1=1
     ]]>
 		<include refid="dynamicWhere"/>    
     </select>
