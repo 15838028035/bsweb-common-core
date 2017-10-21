@@ -110,4 +110,9 @@ public class SessionCode {
 	 */
 	public final static String PASSWORD_CHECK_COUNT = "passwordCheckCount";	
 	
+	/**
+	 * spring profiles配置
+	 */
+	public static final String SPRING_PROFILES_ACTIVE = "spring.profiles.active";
+	
 }

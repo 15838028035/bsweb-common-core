@@ -22,9 +22,10 @@ public class PropertiesReader {
 	
 	private static final String BASE_CONFIG_FILE_NAME = "base-config.properties";
 	
-	private static final String ENV_CONFIG_FILE_NAME = "env.properties";
-	private static final String ENV_LOCAL_CONFIG_FILE_NAME = "env-local.properties";
-	private static final String RULE_CONFIG_FILE_NAME = "rule.properties";
+	private static final String ENV_common = "env-common.properties";
+	private static final String ENV_DEV = "env-dev.properties";
+	private static final String ENV_TEST = "env-test.properties";
+	private static final String ENV_PRO = "env-pro.properties";
 	
 	private static final String CORE_URL="";
 	
@@ -40,9 +41,18 @@ public class PropertiesReader {
 		try {
 			
 			logger.warn("Now,Loading default file~~~");
-			loadConfigFileByUrlAndFileName(CORE_URL,ENV_CONFIG_FILE_NAME);
-			loadConfigFileByUrlAndFileName(CORE_URL,ENV_LOCAL_CONFIG_FILE_NAME);
-			loadConfigFileByUrlAndFileName(CORE_URL,RULE_CONFIG_FILE_NAME);
+			loadConfigFileByUrlAndFileName(CORE_URL,ENV_common);
+			
+			String springProfilesActive = System.getProperty("spring.profiles.active");
+			if(StringUtil.isEqual(springProfilesActive, "dev")){
+				loadConfigFileByUrlAndFileName(CORE_URL,ENV_DEV);
+			}
+			if(StringUtil.isEqual(springProfilesActive, "test")){
+				loadConfigFileByUrlAndFileName(CORE_URL,ENV_TEST);
+			}
+			if(StringUtil.isEqual(springProfilesActive, "pro")){
+				loadConfigFileByUrlAndFileName(CORE_URL,ENV_PRO);
+			}
 			logger.warn("Loading config file finished~~");
 		} catch (Exception e) {
 			e.printStackTrace();

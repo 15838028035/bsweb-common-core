@@ -3,40 +3,18 @@ package com.lj.app.core.common.base.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import jxl.Cell;
-import jxl.Sheet;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lj.app.core.common.exception.BusinessException;
 import com.lj.app.core.common.util.StringUtil;
 
+import jxl.Cell;
+import jxl.Sheet;
+
 @Service("upmUserService")
 @Transactional
 public class UpmUserServiceImpl extends BatchOptBaseServiceImpl implements UpmUserService{
-
-	/**
-	 *验证码检查
-	 */
-	public boolean identifyingCodeCheck(Integer passwordCheckCount,String rand ,Integer passwordErrorMaxTimes,String identifyingCodeInput){
-		if(passwordErrorMaxTimes!=null){
-			if (passwordErrorMaxTimes < 0) {
-				return true;
-			}
-		}else{
-			passwordErrorMaxTimes = 0;
-		}
-		if (passwordCheckCount != null && passwordCheckCount >= passwordErrorMaxTimes) { // 输入错误密码次数大于3
-			if (identifyingCodeInput.equals(rand)) {
-				return true;
-			} 
-		}  
-		if (passwordCheckCount == null || passwordCheckCount < passwordErrorMaxTimes) { // 输入错误密码次数小于3 不验证
-			return true;
-		} 
-		return false;
-	}
 
 	@Override
 	public void checkBatchExcelData(Long appId, Long adminAcctSeq,
