@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="upmJobSechdu">
+
+    <typeAlias alias="upmJobSechdu" type="com.lj.app.core.common.task.entity.UpmJobSechdu"/>
+
+    <resultMap id="upmJobSechduResult" class="upmJobSechdu">
+   	  	<result property="id" column="id"   />
+   	  	<result property="jobId" column="JOB_ID"   />
+   	  	<result property="startTime" column="START_TIME"   />
+   	  	<result property="endTime" column="END_TIME"   />
+   	  	<result property="jodStatus" column="JOD_STATUS"   />
+    </resultMap>
+
+	<sql id="dynamicWhere">
+	    <dynamic prepend="WHERE">
+	       <isNotEmpty prepend="AND" property="id">
+	             id = #id#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="jobId">
+	             JOB_ID = #jobId#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="startTime">
+	             START_TIME = #startTime#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="startTimeBegin">
+	             <![CDATA[
+	             START_TIME >= str_to_date('#startTimebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="startTimeEnd">
+	             <![CDATA[
+	             START_TIME <= str_to_date('#startTimeEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="endTime">
+	             END_TIME = #endTime#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="endTimeBegin">
+	             <![CDATA[
+	             END_TIME >= str_to_date('#endTimebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="endTimeEnd">
+	             <![CDATA[
+	             END_TIME <= str_to_date('#endTimeEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="jodStatus">
+	             JOD_STATUS = #jodStatus#
+	       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+
+	<sql id="commonSelectColumnsPrefix">
+	    <![CDATA[
+	    select
+        	id ,
+        	JOB_ID ,
+        	START_TIME ,
+        	END_TIME ,
+        	JOD_STATUS 
+	    ]]>
+	</sql>
+	
+    <insert id="insert" parameterClass="upmJobSechdu">
+        <selectKey resultClass="int" keyProperty="id"  type="post">
+             SELECT LAST_INSERT_ID()
+        </selectKey>
+
+	    <![CDATA[
+	        INSERT INTO
+	        upm_job_sechdu (
+	        	id ,
+	        	JOB_ID ,
+	        	START_TIME ,
+	        	END_TIME ,
+	        	JOD_STATUS 
+	        ) VALUES (
+				#id# ,
+				#jobId# ,
+				#startTime# ,
+				#endTime# ,
+				#jodStatus# 
+	        )
+	    ]]>
+    </insert>
+   
+     <update id="update" parameterClass="upmJobSechdu">
+    <![CDATA[
+        UPDATE upm_job_sechdu 
+      ]]>
+      <dynamic prepend="set"> 
+	        <isNotEmpty prepend="," property="id">
+				id = #id#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="jobId">
+				JOB_ID = #jobId#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="startTime">
+				START_TIME = #startTime#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="endTime">
+				END_TIME = #endTime#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="jodStatus">
+				JOD_STATUS = #jodStatus#
+			</isNotEmpty>
+	        
+	   </dynamic>
+        WHERE 
+	        id = #id# 
+    </update>
+
+    <delete id="delete" parameterClass="java.lang.Integer">
+    <![CDATA[
+        delete from upm_job_sechdu where
+        id = #id# 
+    ]]>
+    </delete>
+    
+    <select id="select" resultMap="upmJobSechduResult">
+    	<include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from upm_job_sechdu 
+	    ]]>
+		<include refid="dynamicWhere"/>
+    </select>
+    
+    <select id="getInfoByKey" resultMap="upmJobSechduResult">
+	    <include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from upm_job_sechdu 
+	        where 
+		        id = #id# 
+	    ]]>
+    </select>
+
+ 	<select id="pagenate" resultMap="upmJobSechduResult">
+    	<include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from upm_job_sechdu 
+	    ]]>
+		<include refid="dynamicWhere"/>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">$sortColumns$</isNotEmpty>
+		</dynamic>
+    </select>
+    
+    <select id="pagenate_count" resultClass="long">
+    <![CDATA[
+        select 
+        count(*)
+        from upm_job_sechdu
+    ]]>
+		<include refid="dynamicWhere"/>    
+    </select>
+
+</sqlMap>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="upmJob">
+
+    <typeAlias alias="upmJob" type="com.lj.app.core.common.task.entity.UpmJob"/>
+
+    <resultMap id="upmJobResult" class="upmJob">
+   	  	<result property="id" column="id"   />
+   	  	<result property="jobName" column="job_name"   />
+   	  	<result property="jobClass" column="job_class"   />
+   	  	<result property="jobFrequency" column="job_Frequency"   />
+   	  	<result property="jobWeekday" column="job_weekday"   />
+   	  	<result property="jobMonthday" column="job_monthday"   />
+   	  	<result property="jobHour" column="job_hour"   />
+   	  	<result property="jobDesc" column="JOB_DESC"   />
+   	  	<result property="scheDetailId" column="SCHE_DETAIL_ID"   />
+   	  	<result property="status" column="status"   />
+   	  	<result property="createBy" column="create_by"   />
+   	  	<result property="createByUname" column="create_by_uname"   />
+   	  	<result property="createDate" column="create_date"   />
+   	  	<result property="updateBy" column="update_by"   />
+   	  	<result property="updateByUname" column="update_by_uname"   />
+   	  	<result property="updateDate" column="update_date"   />
+    </resultMap>
+
+	<sql id="dynamicWhere">
+	    <dynamic prepend="WHERE">
+	       <isNotEmpty prepend="AND" property="id">
+	             id = #id#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="jobName">
+	             job_name = #jobName#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="jobClass">
+	             job_class = #jobClass#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="jobFrequency">
+	             job_Frequency = #jobFrequency#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="jobWeekday">
+	             job_weekday = #jobWeekday#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="jobMonthday">
+	             job_monthday = #jobMonthday#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="jobHour">
+	             job_hour = #jobHour#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="jobDesc">
+	             JOB_DESC = #jobDesc#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="scheDetailId">
+	             SCHE_DETAIL_ID = #scheDetailId#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="status">
+	             status = #status#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createBy">
+	             create_by = #createBy#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createByUname">
+	             create_by_uname = #createByUname#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createDate">
+	             create_date = #createDate#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createDateBegin">
+	             <![CDATA[
+	             create_date >= str_to_date('#createDatebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="createDateEnd">
+	             <![CDATA[
+	             create_date <= str_to_date('#createDateEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateBy">
+	             update_by = #updateBy#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateByUname">
+	             update_by_uname = #updateByUname#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateDate">
+	             update_date = #updateDate#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateDateBegin">
+	             <![CDATA[
+	             update_date >= str_to_date('#updateDatebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="updateDateEnd">
+	             <![CDATA[
+	             update_date <= str_to_date('#updateDateEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+	    </dynamic>	
+	</sql>
+
+	<sql id="commonSelectColumnsPrefix">
+	    <![CDATA[
+	    select
+        	id ,
+        	job_name ,
+        	job_class ,
+        	job_Frequency ,
+        	job_weekday ,
+        	job_monthday ,
+        	job_hour ,
+        	JOB_DESC ,
+        	SCHE_DETAIL_ID ,
+        	status ,
+        	create_by ,
+        	create_by_uname ,
+        	create_date ,
+        	update_by ,
+        	update_by_uname ,
+        	update_date 
+	    ]]>
+	</sql>
+	
+    <insert id="insert" parameterClass="upmJob">
+        <selectKey resultClass="int" keyProperty="id"  type="post">
+             SELECT LAST_INSERT_ID()
+        </selectKey>
+
+	    <![CDATA[
+	        INSERT INTO
+	        upm_job (
+	        	id ,
+	        	job_name ,
+	        	job_class ,
+	        	job_Frequency ,
+	        	job_weekday ,
+	        	job_monthday ,
+	        	job_hour ,
+	        	JOB_DESC ,
+	        	SCHE_DETAIL_ID ,
+	        	status ,
+	        	create_by ,
+	        	create_by_uname ,
+	        	create_date ,
+	        	update_by ,
+	        	update_by_uname ,
+	        	update_date 
+	        ) VALUES (
+				#id# ,
+				#jobName# ,
+				#jobClass# ,
+				#jobFrequency# ,
+				#jobWeekday# ,
+				#jobMonthday# ,
+				#jobHour# ,
+				#jobDesc# ,
+				#scheDetailId# ,
+				#status# ,
+				#createBy# ,
+				#createByUname# ,
+				#createDate# ,
+				#updateBy# ,
+				#updateByUname# ,
+				#updateDate# 
+	        )
+	    ]]>
+    </insert>
+   
+     <update id="update" parameterClass="upmJob">
+    <![CDATA[
+        UPDATE upm_job 
+      ]]>
+      <dynamic prepend="set"> 
+	        <isNotEmpty prepend="," property="id">
+				id = #id#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="jobName">
+				job_name = #jobName#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="jobClass">
+				job_class = #jobClass#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="jobFrequency">
+				job_Frequency = #jobFrequency#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="jobWeekday">
+				job_weekday = #jobWeekday#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="jobMonthday">
+				job_monthday = #jobMonthday#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="jobHour">
+				job_hour = #jobHour#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="jobDesc">
+				JOB_DESC = #jobDesc#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="scheDetailId">
+				SCHE_DETAIL_ID = #scheDetailId#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="status">
+				status = #status#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="createBy">
+				create_by = #createBy#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="createByUname">
+				create_by_uname = #createByUname#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="createDate">
+				create_date = #createDate#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="updateBy">
+				update_by = #updateBy#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="updateByUname">
+				update_by_uname = #updateByUname#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="updateDate">
+				update_date = #updateDate#
+			</isNotEmpty>
+	        
+	   </dynamic>
+        WHERE 
+	        id = #id# 
+    </update>
+
+    <delete id="delete" parameterClass="java.lang.Integer">
+    <![CDATA[
+        delete from upm_job where
+        id = #id# 
+    ]]>
+    </delete>
+    
+    <select id="select" resultMap="upmJobResult">
+    	<include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from upm_job 
+	    ]]>
+		<include refid="dynamicWhere"/>
+    </select>
+    
+    <select id="getInfoByKey" resultMap="upmJobResult">
+	    <include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from upm_job 
+	        where 
+		        id = #id# 
+	    ]]>
+    </select>
+
+ 	<select id="pagenate" resultMap="upmJobResult">
+    	<include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from upm_job 
+	    ]]>
+		<include refid="dynamicWhere"/>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">$sortColumns$</isNotEmpty>
+		</dynamic>
+    </select>
+    
+    <select id="pagenate_count" resultClass="long">
+    <![CDATA[
+        select 
+        count(*)
+        from upm_job
+    ]]>
+		<include refid="dynamicWhere"/>    
+    </select>
+
+</sqlMap>
