@@ -10,7 +10,7 @@ import com.lj.app.core.common.base.service.BaseServiceImpl;
 public class TaskTestService extends BaseServiceImpl<T> implements BaseTaskService{
 
 	@Override
-	@Scheduled(cron="0 */1 * * * ? ")   //每1秒执行一次  
+	@Scheduled(cron="0 */60 * * * ? ")   //每1秒执行一次  
 	public void doRunTask() {
 		log.warn("taskTestService  doRunTask ");
 	}
