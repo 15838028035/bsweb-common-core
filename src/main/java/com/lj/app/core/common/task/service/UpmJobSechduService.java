@@ -25,10 +25,22 @@ public interface UpmJobSechduService<UpmJobSechdu> extends BaseService {
      * @return void
 	*/
 	public boolean JobStartSechdued(Integer jobId,Date jobStartDate);
+
+	/**
+	 * 作业调度结束
+	 * @param jobId
+	 * @param jobStartDate
+	 * @param isSuccess
+	 * @param resultMsg
+	 * @return
+	 */
+	public boolean JobEndSechdued(Integer jobId,Date jobStartDate,Integer isSuccess,String resultMsg);
 	
-	public boolean JobEndSechdued(Integer jobId,Date jobStartDate);
-	
-	@SuppressWarnings("unchecked")
+	/**
+	 * 执行job任务
+	 * @param jobId
+	 * @throws Exception
+	 */
 	public void runJob(Integer jobId) throws Exception ;
 	
 }

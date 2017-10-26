@@ -12,6 +12,8 @@
    	  	<result property="startTime" column="START_TIME"   />
    	  	<result property="endTime" column="END_TIME"   />
    	  	<result property="jodStatus" column="JOD_STATUS"   />
+   	  	<result property="isSuccess" column="is_success"   />
+   	  	<result property="resultMsg" column="result_msg"   />
     </resultMap>
 
 	<sql id="dynamicWhere">
@@ -51,6 +53,12 @@
 	       <isNotEmpty prepend="AND" property="jodStatus">
 	             JOD_STATUS = #jodStatus#
 	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="isSuccess">
+	             is_success = #isSuccess#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="resultMsg">
+	             result_msg = #resultMsg#
+	       </isNotEmpty>
 	    </dynamic>	
 	</sql>
 
@@ -61,7 +69,9 @@
         	JOB_ID ,
         	START_TIME ,
         	END_TIME ,
-        	JOD_STATUS 
+        	JOD_STATUS ,
+        	is_success ,
+        	result_msg 
 	    ]]>
 	</sql>
 	
@@ -77,13 +87,17 @@
 	        	JOB_ID ,
 	        	START_TIME ,
 	        	END_TIME ,
-	        	JOD_STATUS 
+	        	JOD_STATUS ,
+	        	is_success ,
+	        	result_msg 
 	        ) VALUES (
 				#id# ,
 				#jobId# ,
 				#startTime# ,
 				#endTime# ,
-				#jodStatus# 
+				#jodStatus# ,
+				#isSuccess# ,
+				#resultMsg# 
 	        )
 	    ]]>
     </insert>
@@ -107,6 +121,12 @@
 			</isNotEmpty>
 	        <isNotEmpty prepend="," property="jodStatus">
 				JOD_STATUS = #jodStatus#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="isSuccess">
+				is_success = #isSuccess#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="resultMsg">
+				result_msg = #resultMsg#
 			</isNotEmpty>
 	        
 	   </dynamic>

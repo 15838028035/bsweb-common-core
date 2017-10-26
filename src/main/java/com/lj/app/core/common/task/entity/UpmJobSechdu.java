@@ -47,6 +47,18 @@ public class UpmJobSechdu extends BaseEntity{
 	 * 状态  JOD_STATUS
 	 */
 	private String jodStatus;
+	
+	/**
+	 * 是否成功  is_success
+	 */
+	private java.lang.Integer isSuccess;
+	
+	/**
+	 * 执行结果  result_msg
+	 */
+	private String resultMsg;
+	
+
 
 	public void setId(java.lang.Integer value) {
 		this.id = value;
@@ -83,5 +95,20 @@ public class UpmJobSechdu extends BaseEntity{
 	public String getJodStatus() {
 		return this.jodStatus;
 	}
+	public void setIsSuccess(java.lang.Integer value) {
+		this.isSuccess = value;
+	}
+	
+	public java.lang.Integer getIsSuccess() {
+		return this.isSuccess;
+	}
+	public void setResultMsg(String value) {
+		this.resultMsg = value;
+	}
+	
+	public String getResultMsg() {
+		return this.resultMsg;
+	}
+
 }
 

@@ -29,7 +29,12 @@ public class UpmSchedulerService extends BaseServiceImpl<T> implements Schedulin
 	        i++;
 	        // 需要实现的任务逻辑  
 	        if(baseTaskService!=null){
+	        	try{
 	        	baseTaskService.doRunTask();
+	        	}catch(Exception e) {
+	        		e.getMessage();
+	        		log.error("upmSchedulerService run " +baseTaskService.getClass().getName() + "error, error msg: "  + e.getMessage());
+	        	}
 	        }
 	        
 	        log.warn("第"+(i)+"次开始执行操作... " +"时间：【"

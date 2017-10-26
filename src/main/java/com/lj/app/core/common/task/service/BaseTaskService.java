@@ -6,5 +6,5 @@ package com.lj.app.core.common.task.service;
  */
 public interface BaseTaskService {
 
-	public void doRunTask();
+	public void doRunTask() throws Exception;
 }

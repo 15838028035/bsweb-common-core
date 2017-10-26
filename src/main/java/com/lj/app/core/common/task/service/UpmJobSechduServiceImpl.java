@@ -72,6 +72,8 @@ public  class UpmJobSechduServiceImpl<UpmJobSechdu> extends BaseServiceImpl<UpmJ
 			upmJobSechdu.setJobId(jobId);
 			upmJobSechdu.setStartTime(jobStartDate);
 			upmJobSechdu.setJodStatus("1");//1代表执行中；2代表完成
+			upmJobSechdu.setIsSuccess(0);
+			upmJobSechdu.setResultMsg("");
 			this.insertObject(upmJobSechdu);
 			log.warn("...........end write upm_job_sechdu start info..................."+jobId);
 			return true;
@@ -83,7 +85,7 @@ public  class UpmJobSechduServiceImpl<UpmJobSechdu> extends BaseServiceImpl<UpmJ
 		}
 	}
 	
-	public boolean JobEndSechdued(Integer jobId,Date jobStartDate){
+	public boolean JobEndSechdued(Integer jobId,Date jobStartDate,Integer isSuccess,String resultMsg){
 		try {
 			log.warn("...........begin write upm_job_sechdu end info.........."+jobId);
 			com.lj.app.core.common.task.entity.UpmJobSechdu uapJobSechduCond = new com.lj.app.core.common.task.entity.UpmJobSechdu();
@@ -95,6 +97,8 @@ public  class UpmJobSechduServiceImpl<UpmJobSechdu> extends BaseServiceImpl<UpmJ
 			for(com.lj.app.core.common.task.entity.UpmJobSechdu upmJobSechdu:upmJobSechduList){
 				upmJobSechdu.setJodStatus("2");//1代表执行中；2代表完成
 				upmJobSechdu.setEndTime(new Date());
+				upmJobSechdu.setIsSuccess(isSuccess);
+				upmJobSechdu.setResultMsg(resultMsg);
 				this.updateObject(upmJobSechdu);
 			}
 			log.warn("...........end write upm_job_sechdu end info.........."+jobId);
@@ -134,9 +138,11 @@ public  class UpmJobSechduServiceImpl<UpmJobSechdu> extends BaseServiceImpl<UpmJ
 			upmSchedulerService.setCron(upmJob.getJobFrequency());
 			upmSchedulerService.setBaseTaskService(baseTaskService);
 			
-			JobEndSechdued(jobId, jobStartDate);
+			JobEndSechdued( jobId, jobStartDate, 1, "执行成功");
 		} catch (Exception e) {
-			JobEndSechdued(jobId, jobStartDate);
+			e.printStackTrace();
+			log.error("runJob 执行失败,失败原因:"  + e.getMessage());
+			JobEndSechdued( jobId, jobStartDate, 0, "执行失败,失败原因:" + e.getMessage());
 		}
 	}
 }
