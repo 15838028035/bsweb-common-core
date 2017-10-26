@@ -29,6 +29,7 @@ public class SqlMapClientFactoryBean extends
 		this.sqlExecutor = sqlExecutor;
 	}
 
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();

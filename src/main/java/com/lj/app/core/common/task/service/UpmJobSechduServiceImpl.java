@@ -10,10 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.lj.app.core.common.base.service.BaseServiceImpl;
 import com.lj.app.core.common.task.entity.UpmJob;
+import com.lj.app.core.common.task.entity.UpmJobSechdu;
 import com.lj.app.core.common.util.SpringContextHolder;
 
 @Service("upmJobSechduService")
-public  class UpmJobSechduServiceImpl<UpmJobSechdu> extends BaseServiceImpl<UpmJobSechdu> implements UpmJobSechduService<UpmJobSechdu>{
+public  class UpmJobSechduServiceImpl extends BaseServiceImpl implements UpmJobSechduService<UpmJobSechdu>{
 	
 	@Autowired
 	private UpmJobService<UpmJob>  upmJobService;
@@ -134,7 +135,7 @@ public  class UpmJobSechduServiceImpl<UpmJobSechdu> extends BaseServiceImpl<UpmJ
 
 		try {
 			Class cls = Class.forName(upmJob.getJobClass());
-			BaseTaskService baseTaskService = SpringContextHolder.getBean(cls);			
+			BaseTaskService baseTaskService =(BaseTaskService) SpringContextHolder.getBean(cls);			
 			upmSchedulerService.setCron(upmJob.getJobFrequency());
 			upmSchedulerService.setBaseTaskService(baseTaskService);
 			

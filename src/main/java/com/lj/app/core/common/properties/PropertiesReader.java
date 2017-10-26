@@ -20,8 +20,6 @@ public class PropertiesReader {
 	private static Log logger = LogFactory.getLog(PropertiesReader.class);
 	private static Map<String, Properties> propertiesMap = new HashMap<String, Properties>();
 	
-	private static final String BASE_CONFIG_FILE_NAME = "base-config.properties";
-	
 	private static final String ENV_common = "env-common.properties";
 	private static final String ENV_DEV = "env-dev.properties";
 	private static final String ENV_TEST = "env-test.properties";
@@ -68,18 +66,10 @@ public class PropertiesReader {
 		properties.putAll(provProperties);
 	}
 
-	public static String getBaseConfigValue(String key) {
-		return getBaseConfigValue(key, null);
-	}
-
 	public static String getValue(String properName, String key,
 			String defalutValue) {
 			String value = getValue(properName, key);
 			return (value == null || value.equals("")) ? defalutValue : value;
-	}
-	
-	public static String getBaseConfigValue(String key, String defalutValue) {
-		return getValue(BASE_CONFIG_FILE_NAME, key, defalutValue);
 	}
 
 	public static String getValue(String properName, String key) {

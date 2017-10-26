@@ -12,19 +12,6 @@ import org.junit.Test;
 public class PropertiesReaderTest {
 
 	@Test
-	public void getBaseConfigValueTest() {
-		PropertiesReader.setProperty("key", "value");
-		assertNull(PropertiesReader.getBaseConfigValue("key"));
-		assertNull(PropertiesReader.getBaseConfigValue("keyNotFound"));
-	}
-	
-	@Test
-	public void getBaseConfigValueDefaultTest() {
-		PropertiesReader.setProperty("key", "value");
-		assertEquals("value",PropertiesReader.getBaseConfigValue("key","value"));
-	}
-
-	@Test
 	public void getValueTest() {
 		PropertiesReader.setProperty("key", "value");
 		assertNull(PropertiesReader.getValue("key","value"));
