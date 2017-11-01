@@ -45,9 +45,12 @@ public class UpmSchedulerService extends BaseServiceImpl<T> implements Schedulin
 	      @Override
 	      public Date nextExecutionTime(TriggerContext triggerContext) { 
 	        //任务触发，可修改任务的执行周期  
-	        CronTrigger trigger = new CronTrigger(cron); 
-	        Date nextExec = trigger.nextExecutionTime(triggerContext); 
-	        return nextExec;  
+	    	  if(baseTaskService!=null){
+		        CronTrigger trigger = new CronTrigger(cron); 
+		        Date nextExec = trigger.nextExecutionTime(triggerContext); 
+		        return nextExec;  
+	    	  }
+	    	  return null;
 	      } 
 	    }); 
 	  }

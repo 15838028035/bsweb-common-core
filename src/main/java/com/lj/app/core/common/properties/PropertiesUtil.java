@@ -131,7 +131,7 @@ public class PropertiesUtil {
 	}
 
 	public  static int getInt(String key,int defaultValue) {
-	    return PropertiesReader.getInteger(key);
+	    return PropertiesReader.getInt(key,defaultValue);
 	}
 
 	public static int getRequiredInt(String key) throws IllegalStateException {
