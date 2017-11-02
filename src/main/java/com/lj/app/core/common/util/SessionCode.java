@@ -15,12 +15,17 @@ public class SessionCode {
 	 * Session 中存放登主帐号的Session Code 
 	 */
 	public final static String MAIN_ACCT = "mainAcct";
-
+	
 	
 	/**
 	 * Session 中存放，主帐号ID
 	 */
 	public final static String MAIN_ACCT_ID = "mainAcctId" ;
+	
+	/**
+	 * app菜单权限列表
+	 */
+	public final static String APP_MENU_PERMISSION_LIST ="appMenuPermissionList";
 	
 	
 	//----------------- Client Info -----------------------//
@@ -56,59 +61,16 @@ public class SessionCode {
 	public final static String CLIENT_INFO_REQUEST_ADDRESS = "requestAddress";	
 	
 	/**
-	 * Session 中存放，ip地址，逗号分隔，4A侧专用(审计+内部访问使用)
-	 */
-	public final static String CLIENT_INFO_IP_ADDRESS = "ipAddress";
-	
-	/**
-	 * Session 中存放，ip地址列表
-	 */
-	public final static String CLIENT_INFO_IP_ADDRESS_LIST = "ipAddressList";	
-	
-	/**
-	 * Session 中存放，Mac地址
-	 */
-	public final static String CLIENT_INFO_MAC_ADDRESS = "macAddress";
-	
-	/**
-	 * Session 中存放，Mac地址列表
-	 */
-	public final static String CLIENT_INFO_MAC_ADDRESS_LIST = "macAddressList";	
-	
-	/**
-	 * Session中存放，cpu序列号
-	 */
-	public final static String CLIENT_INFO_CPU_SERIAL = "cpuSerial";
-	
-	/**
 	 * Session中存放，服务器ip地址
 	 */
 	public final static String SERVER_INFO_IP_ADDRESS = "serverIp";
-	
-
-	/**
-	 * Session中存放，服务器端口
-	 */
-	public final static String SERVER_INFO_PORT = "serverPort";
-	
 	
 	/**
      * Session中存放，计算机名称
      */
 	public final static String CLIENT_INFO_HOST_NAME = "hostName";
 	
-	/**
-	 * Session中存放，登录到当前计算机的用户名称
-	 */
-	public final static String CLIENT_INFO_HOST_ACCOUNT = "hostAccount";
-	
 	public final static String SSO_LOGIN_URL = "SSO_LOGIN_URL";
-	
-	
-	/**
-	 * Session 中存放，输错的密码次数
-	 */
-	public final static String PASSWORD_CHECK_COUNT = "passwordCheckCount";	
 	
 	/**
 	 * spring profiles配置
