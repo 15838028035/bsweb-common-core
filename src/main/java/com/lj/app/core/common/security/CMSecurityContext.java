@@ -1,7 +1,9 @@
 package com.lj.app.core.common.security;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SuppressWarnings("unchecked")
@@ -16,6 +18,9 @@ public class CMSecurityContext implements Serializable{
 	private Set<String> codes = new HashSet();
 	
 	private String loginTime;
+	
+	private List<String>  userGroupList = new ArrayList<String>();//组织机构(组织机构名称)
+	private List<String>  roleList = new ArrayList<String>();//角色列表(角色名称)
 	
 	public String getLoginTime() {
 		return loginTime;
@@ -80,4 +85,19 @@ public class CMSecurityContext implements Serializable{
 		return urls;
 	}
 
+	public List<String> getRoleList() {
+		return roleList;
+	}
+
+	public void setRoleList(List<String> roleList) {
+		this.roleList = roleList;
+	}
+
+	public List<String> getUserGroupList() {
+		return userGroupList;
+	}
+
+	public void setUserGroupList(List<String> userGroupList) {
+		this.userGroupList = userGroupList;
+	}
 }

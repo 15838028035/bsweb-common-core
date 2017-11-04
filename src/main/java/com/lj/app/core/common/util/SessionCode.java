@@ -26,6 +26,18 @@ public class SessionCode {
 	 * app菜单权限列表
 	 */
 	public final static String APP_MENU_PERMISSION_LIST ="appMenuPermissionList";
+	/**
+	 * app菜单权限列表
+	 */
+	public final static String APP_MENU_PERMISSION_LIST_SIZE ="appMenuPermissionListSize";
+	/**
+	 * 角色列表
+	 */
+	public final static String APP_ROLE_LIST ="appRoleList";
+	/**
+	 * 组织机构
+	 */
+	public final static String APP_USER_GROUP_LIST ="appUserGroupList";
 	
 	
 	//----------------- Client Info -----------------------//
