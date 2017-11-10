@@ -113,10 +113,10 @@
         	status ,
         	create_by ,
         	create_by_uname ,
-        	create_date ,
+        	DATE_FORMAT(create_Date,'%Y-%m-%d %H:%i:%s') as create_Date ,
         	update_by ,
         	update_by_uname ,
-        	update_date 
+        	DATE_FORMAT(update_Date,'%Y-%m-%d %H:%i:%s') as update_Date 
 	    ]]>
 	</sql>
 	
