@@ -76,6 +76,18 @@ public class BootStrapTreeViewCheck {
 		JSONObject jsonObject = new JSONObject();
 		return jsonObject.fromObject(rootNode).toString();
 	}
+	
+	/**
+	 * 默认跟节点
+	 * @param rootId
+	 * @param rootText
+	 * @return
+	 */
+	public static String  defaultBootStrapTreeViewCheck(String rootId,String rootText) {
+		BootStrapTreeViewCheck BootStrapTreeViewCheck = new  BootStrapTreeViewCheck( rootId, rootText);
+		JSONObject jsonObject = new JSONObject();
+		return jsonObject.fromObject(BootStrapTreeViewCheck.getRootNode()).toString();
+	}
 
 	/**
 	 * 将List&lt;DefaultTreeNodeNoCheck&gt;转换为SimpleTree对象。
@@ -144,7 +156,7 @@ public class BootStrapTreeViewCheck {
 
 		BootStrapTreeView rootNode = findRootNode(bootStrapTreeViewList, rootNodeId);// 根节点
 		if (null != rootNode) {
-			bootStrapTreeViewList.remove(rootNode);
+			// bootStrapTreeViewList.remove(rootNode);
 
 			BootStrapTreeViewCheck bootStrapTreeViewCheck = new BootStrapTreeViewCheck(rootNode.getId(), rootNode.getText());
 			List<BootStrapTreeView> whileList = new ArrayList<BootStrapTreeView>();
@@ -204,6 +216,7 @@ public class BootStrapTreeViewCheck {
 				return tmpNode;
 			}
 		}
+		
 		return null;
 	}
 
