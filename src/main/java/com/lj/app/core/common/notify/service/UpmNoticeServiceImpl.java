@@ -1,6 +1,8 @@
 package com.lj.app.core.common.notify.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -11,7 +13,8 @@ public class UpmNoticeServiceImpl<UpmNotice> extends BaseServiceImpl<UpmNotice> 
 
 	@Override
 	public List<UpmNotice> getUapNoticeMail(long queryCount, long eachNum) {
-		//TODO:FIXME
-		return this.queryForList("select",null);
+		Map<String,String> filterMap =new HashMap<String,String>();
+		filterMap.put("typeId", "EMAIL");
+		return this.queryForList("select",filterMap);
 	}
 }

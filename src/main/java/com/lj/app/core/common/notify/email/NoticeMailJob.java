@@ -7,14 +7,16 @@ import java.util.Map;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.lj.app.core.common.notify.entity.UpmNotice;
 import com.lj.app.core.common.notify.service.UpmNoticeService;
+import com.lj.app.core.common.task.service.BaseTaskService;
 import com.lj.app.core.common.util.DateUtil;
 
 @Component("noticeMailJob")
-public class NoticeMailJob {
+public class NoticeMailJob implements BaseTaskService{
 	@Autowired
 	private UpmNoticeService<UpmNotice> upmNoticeService;
 	@Autowired
@@ -22,8 +24,8 @@ public class NoticeMailJob {
 	private static long currentCount = 0l;
 	private static final long eachNum = 10;
 
-	 //@Scheduled(cron="0 */30 * * * ? ")   //每5秒执行一次  
-	public void scanning() {
+	 @Scheduled(cron="0 */30 * * * ? ")   //每30分钟执行一次  
+	public void doRunTask() {
 		List<UpmNotice> list = upmNoticeService.getUapNoticeMail(currentCount,eachNum);
 		currentCount = list.size() > 0 ? list.get(0).getId() : currentCount;
 		for (UpmNotice notice : list) {
@@ -34,6 +36,7 @@ public class NoticeMailJob {
 			info.put("id", String.valueOf(notice.getId()));
 			info.put("templateDir", "templateDir");
 			info.put("templateFileName", "templateFileName");
+			info.put("notice", notice);
 			try {
 				mailSender.sendMail(notice.getParamA(), notice.getParamB()+ sendTime, info, "mailTest.ftl", true);
 			} catch (MessagingException e) {

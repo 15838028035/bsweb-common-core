@@ -12,7 +12,7 @@ public class NoticeMailJobTest extends AbstractBaseSpringTransactionTestCase{
 
 	@Test
 	public void scanningTest() {
-		noticeMailJob.scanning();
+		noticeMailJob.doRunTask();
 	}
 
 }
