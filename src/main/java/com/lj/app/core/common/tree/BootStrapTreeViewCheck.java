@@ -155,6 +155,12 @@ public class BootStrapTreeViewCheck {
 		}
 
 		BootStrapTreeView rootNode = findRootNode(bootStrapTreeViewList, rootNodeId);// 根节点
+		
+		if(rootNode==null){
+			BootStrapTreeViewCheck  BootStrapTreeViewCheck  = new  BootStrapTreeViewCheck( rootNodeId, rootNodeId);
+			rootNode = BootStrapTreeViewCheck.getRootNode();
+		}
+		
 		if (null != rootNode) {
 			// bootStrapTreeViewList.remove(rootNode);
 
