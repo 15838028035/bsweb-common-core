@@ -1,41 +1,108 @@
 package com.lj.app.core.common.cache;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
-
-import com.lj.app.core.common.exception.CacheException;
-import com.lj.app.core.common.util.Assert;
 
 /**
  * 基于内存管理cache
  */
-public class MemoryCache<K, V> implements Cache<K, V>, Serializable {
-	/**
-	 * map cache
-	 */
-	private final Map<K, V> map;
-	/**
-	 * 通过Map实现类构造MemoryCache
-	 * @param backingMap
-	 */
-	public MemoryCache(Map<K, V> backingMap) {
-		Assert.notNull(backingMap);
-		this.map = backingMap;
-	}
+public class MemoryCache implements Cache, Serializable {
 	
-	public V get(K key) throws CacheException {
-		return map.get(key);
+	private Map map = new HashMap();
+	public class Value {
+		long gmtCreate = System.currentTimeMillis();
+		int expiration;
+		Object value;
+		public Value(Object value, int expiration) {
+			this.value = value;
+			this.expiration = expiration * 1000;
+		}
+	}
+	public void add(String key, Object value, int expiration) {
+		map.put(key, new Value(value,expiration));
 	}
 
-	public V put(K key, V value) throws CacheException {
-		return map.put(key, value);
-	}
-
-	public V remove(K key) throws CacheException {
-		return map.remove(key);
-	}
-
-	public void clear() throws CacheException {
+	public void clear() {
 		map.clear();
 	}
+
+	public long decr(String key, int by) {
+		Long v = (Long)map.get(key);
+		if(v == null) {
+			v = -(long)by;
+		}else {
+			v = v - by;
+		}
+		map.put(key, v);
+		return v;
+	}
+
+	public void delete(String key) {
+		map.remove(key);
+	}
+
+	public Object get(String key) {
+		Value value = (Value)map.get(key);
+		if(value == null) return null;
+		boolean isTimeout = (value.gmtCreate + value.expiration) <= System.currentTimeMillis();
+		if(isTimeout) {
+			delete(key);
+			return null;
+		}else {
+			return value.value;
+		}
+	}
+
+	public Map<String, Object> get(String[] keys) {
+		Map<String,Object> result = new HashMap();
+		for(String key : keys) {
+			Object value = get(key);
+			result.put(key, value);
+		}
+		return result;
+	}
+
+	public long incr(String key, int by) {
+		Long v = (Long)map.get(key);
+		if(v == null) {
+			v = (long)by;
+		}else {
+			v = v + by;
+		}
+		map.put(key, v);
+		return v;
+	}
+
+	public void replace(String key, Object value, int expiration) {
+		map.put(key, new Value(value,expiration));
+	}
+
+	public boolean safeAdd(String key, Object value, int expiration) {
+		map.put(key, new Value(value,expiration));
+		return true;
+	}
+
+	public boolean safeDelete(String key) {
+		return map.remove(key) != null;
+	}
+
+	public boolean safeReplace(String key, Object value, int expiration) {
+		map.put(key, new Value(value,expiration));
+		return true;
+	}
+
+	public boolean safeSet(String key, Object value, int expiration) {
+		map.put(key, new Value(value,expiration));
+		return true;
+	}
+
+	public void set(String key, Object value, int expiration) {
+		map.put(key, new Value(value,expiration));
+	}
+
+	public void stop() {
+		map.clear();
+}
+	
 }
