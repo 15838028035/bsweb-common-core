@@ -10,11 +10,11 @@
    	  	<result property="id" column="id" />
    	  	<result property="typeId" column="TYPE_ID"   />
    	  	<result property="content" column="content"   />
-   	  	<result property="paramA" column="paramA"   />
-   	  	<result property="paramB" column="paramB"   />
+   	  	<result property="paramA" column="param_A"   />
+   	  	<result property="paramB" column="param_B"   />
    	  	<result property="sendBeginDate" column="send_Begin_Date"   />
    	  	<result property="sendEndDate" column="send_End_Date"   />
-   	  	<result property="createDateTime" column="createDate_Time"   />
+   	  	<result property="createDateTime" column="create_Date_Time"   />
    	  	<result property="extCode" column="ext_Code"   />
     </resultMap>
 
@@ -30,10 +30,10 @@
 	             content = #content#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="paramA">
-	             paramA = #paramA#
+	             param_A = #paramA#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="paramB">
-	             paramB = #paramB#
+	             param_B = #paramB#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="sendBeginDate">
 	             send_Begin_Date = #sendBeginDate#
@@ -62,16 +62,16 @@
 	             ]]>
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="createDateTime">
-	             createDate_Time = #createDateTime#
+	             create_Date_Time = #createDateTime#
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="createDateTimeBegin">
 	             <![CDATA[
-	             createDate_Time >= str_to_date('#createDateTimebegin#','%Y-%m-%d') 
+	             create_Date_Time >= str_to_date('#createDateTimebegin#','%Y-%m-%d') 
 	             ]]>
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="createDateTimeEnd">
 	             <![CDATA[
-	             createDate_Time <= str_to_date('#createDateTimeEnd#','%Y-%m-%d')
+	             create_Date_Time <= str_to_date('#createDateTimeEnd#','%Y-%m-%d')
 	             ]]>
 	       </isNotEmpty>
 	       <isNotEmpty prepend="AND" property="extCode">
@@ -86,11 +86,11 @@
         	id ,
         	TYPE_ID ,
         	content ,
-        	paramA ,
-        	paramB ,
+        	param_A ,
+        	param_B ,
         	send_Begin_Date ,
         	send_End_Date ,
-        	createDate_Time ,
+        	create_Date_Time ,
         	ext_Code 
 	    ]]>
 	</sql>
@@ -106,11 +106,11 @@
 	        	id ,
 	        	TYPE_ID ,
 	        	content ,
-	        	paramA ,
-	        	paramB ,
+	        	param_A ,
+	        	param_B ,
 	        	send_Begin_Date ,
 	        	send_End_Date ,
-	        	createDate_Time ,
+	        	create_Date_Time ,
 	        	ext_Code 
 	        ) VALUES (
 				#id# ,
@@ -141,10 +141,10 @@
 				content = #content#
 			</isNotEmpty>
 	        <isNotEmpty prepend="," property="paramA">
-				paramA = #paramA#
+				param_A = #paramA#
 			</isNotEmpty>
 	        <isNotEmpty prepend="," property="paramB">
-				paramB = #paramB#
+				param_B = #paramB#
 			</isNotEmpty>
 	        <isNotEmpty prepend="," property="sendBeginDate">
 				send_Begin_Date = #sendBeginDate#
@@ -153,7 +153,7 @@
 				send_End_Date = #sendEndDate#
 			</isNotEmpty>
 	        <isNotEmpty prepend="," property="createDateTime">
-				createDate_Time = #createDateTime#
+				create_Date_Time = #createDateTime#
 			</isNotEmpty>
 	        <isNotEmpty prepend="," property="extCode">
 				ext_Code = #extCode#
