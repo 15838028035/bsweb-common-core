@@ -7,7 +7,7 @@ public class DesUtilTest {
 
 	@Test
 	public void sysadminEncryptTest() throws Exception{
-		String sysadmin = DesUtil.encrypt("123456");
+		String sysadmin = DesUtil.encrypt("root");
 		System.out.println("sysadmin=" +sysadmin);
 	}
 }
