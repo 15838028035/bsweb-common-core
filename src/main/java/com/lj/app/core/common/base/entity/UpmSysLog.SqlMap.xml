@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="upmSysLog">
+
+    <typeAlias alias="upmSysLog" type="com.lj.app.core.common.base.entity.UpmSysLog"/>
+
+    <resultMap id="upmSysLogResult" class="upmSysLog">
+   	  	<result property="id" column="id"   />
+   	  	<result property="userName" column="user_name"   />
+   	  	<result property="operation" column="operation"   />
+   	  	<result property="method" column="method"   />
+   	  	<result property="params" column="params"   />
+   	  	<result property="ip" column="ip"   />
+   	  	<result property="reateDate" column="reate_date"   />
+    </resultMap>
+
+	<sql id="dynamicWhere">
+	    <dynamic prepend=" AND ">
+	       <isNotEmpty prepend="AND" property="id">
+	             id = #id#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="userName">
+	             user_name = #userName#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="operation">
+	             operation = #operation#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="method">
+	             method = #method#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="params">
+	             params = #params#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="ip">
+	             ip = #ip#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="reateDate">
+	             reate_date = #reateDate#
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="reateDateBegin">
+	             <![CDATA[
+	             reate_date >= str_to_date('#reateDatebegin#','%Y-%m-%d') 
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty prepend="AND" property="reateDateEnd">
+	             <![CDATA[
+	             reate_date <= str_to_date('#reateDateEnd#','%Y-%m-%d')
+	             ]]>
+	       </isNotEmpty>
+	       <isNotEmpty property="conditionWhere"> $conditionWhere$ </isNotEmpty>
+	    </dynamic>	
+	</sql>
+
+	<sql id="commonSelectColumnsPrefix">
+	    <![CDATA[
+	    select
+        	id ,
+        	user_name ,
+        	operation ,
+        	method ,
+        	params ,
+        	ip ,
+        	reate_date 
+	    ]]>
+	</sql>
+	
+    <insert id="insert" parameterClass="upmSysLog">
+        <selectKey resultClass="int" keyProperty="id"  type="post">
+             SELECT LAST_INSERT_ID()
+        </selectKey>
+
+	    <![CDATA[
+	        INSERT INTO
+	        upm_sys_log (
+	        	id ,
+	        	user_name ,
+	        	operation ,
+	        	method ,
+	        	params ,
+	        	ip ,
+	        	reate_date 
+	        ) VALUES (
+				#id# ,
+				#userName# ,
+				#operation# ,
+				#method# ,
+				#params# ,
+				#ip# ,
+				#reateDate# 
+	        )
+	    ]]>
+    </insert>
+   
+     <update id="update" parameterClass="upmSysLog">
+    <![CDATA[
+        UPDATE upm_sys_log 
+      ]]>
+      <dynamic prepend="set"> 
+	        <isNotEmpty prepend="," property="id">
+				id = #id#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="userName">
+				user_name = #userName#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="operation">
+				operation = #operation#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="method">
+				method = #method#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="params">
+				params = #params#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="ip">
+				ip = #ip#
+			</isNotEmpty>
+	        <isNotEmpty prepend="," property="reateDate">
+				reate_date = #reateDate#
+			</isNotEmpty>
+	        
+	   </dynamic>
+        WHERE 
+	        id = #id# 
+    </update>
+
+    <delete id="delete" parameterClass="java.lang.Integer">
+    <![CDATA[
+        delete from upm_sys_log where
+        id = #id# 
+    ]]>
+    </delete>
+    
+    <select id="select" resultMap="upmSysLogResult">
+    	<include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from upm_sys_log where 1=1
+	    ]]>
+		<include refid="dynamicWhere"/>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">$sortColumns$</isNotEmpty>
+		</dynamic>
+    </select>
+    
+    <select id="getInfoByKey" resultMap="upmSysLogResult">
+	    <include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from upm_sys_log 
+	        where 
+		        id = #id# 
+	    ]]>
+    </select>
+
+ 	<select id="pagenate" resultMap="upmSysLogResult">
+    	<include refid="commonSelectColumnsPrefix"/>
+	    <![CDATA[
+	        from upm_sys_log where 1=1
+	    ]]>
+		<include refid="dynamicWhere"/>
+		<dynamic prepend="ORDER BY">
+			<isNotEmpty property="sortColumns">$sortColumns$</isNotEmpty>
+		</dynamic>
+    </select>
+    
+    <select id="pagenate_count" resultClass="long">
+    <![CDATA[
+        select 
+        count(*)
+        from upm_sys_log where 1=1
+    ]]>
+		<include refid="dynamicWhere"/>    
+    </select>
+
+</sqlMap>

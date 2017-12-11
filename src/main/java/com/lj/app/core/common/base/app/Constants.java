@@ -1,28 +1,6 @@
 package com.lj.app.core.common.base.app;
 
 public class Constants {
-
-	/**
-	 * 从帐号的实体类型默认为USER
-	 */
-	public final static String USER = "user";
-	/**
-	 * 默认值字段名称，default_type为sql时，需要重命名为DEFAULT_VALUE
-	 */
-	public final static String DEFAULT_VALUE_COLUMN = "DEFAULT_VALUE";
-	/**
-	 * 列翻译结果名称，重命名为TRANSLATE_RESULT
-	 */
-	public final static String TRANSLATE_RESULT = "TRANSLATE_RESULT";
-	/**
-	 * 列翻译sql中的特殊标识
-	 */
-	public final static String TRANSLATE_ID = "#id#";
-
-	/**
-	 * 当column_translate不为空时，前台document对象增加的后缀
-	 */
-	public final static String DESC = "_DESC";
 	/**
 	 * 虚拟管理平台的编码
 	 */
@@ -187,15 +165,6 @@ public class Constants {
 	 */
 	public static class MapFilterKey {
 		/**
-		 * 应用编码
-		 */
-		public final static String AppCode = "appCode";
-		/**
-		 * 当前登录主帐号对象
-		 */
-		public final static String UpmMainAcct = "upmMainAcct";
-		
-		/**
 		 * 创建时间
 		 */
 		public final static String createTime = "createTime";
@@ -203,10 +172,6 @@ public class Constants {
 		 * 最后更新时间
 		 */
 		public final static String lastUpdateTime = "lastUpdateTime";
-		/**
-		 * 本地过滤条件
-		 */
-		public final static String LocalFilter = "localFilter";
 		/**
 		 * 是否需要根据管理员范围过滤，true or other
 		 */
@@ -220,4 +185,26 @@ public class Constants {
 		 */
 		public final static String SortColumns = "sortColumns";
 	}
+	
+	/**
+     * 菜单类型
+     */
+    public static class MenuType{
+        /**
+		 *目录
+		 */
+		public final static String CATALOG = "0";
+		
+		 /**
+		 *菜单
+		 */
+		public final static String MENU = "1";
+		
+		/**
+         * 按钮
+         */
+		public final static String BUTTON = "2";
+
+    }
+
 }

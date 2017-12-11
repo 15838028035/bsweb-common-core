@@ -72,7 +72,7 @@
 	        <isNotEmpty prepend="AND" property="email">
 	             email = #email#
 	       </isNotEmpty>
-	       
+	        <isNotEmpty property="conditionWhere"> $conditionWhere$ </isNotEmpty>
 	    </dynamic>	
 	</sql>
 
@@ -203,7 +203,6 @@
 	        from upm_user where 1=1
 	    ]]>
 		<include refid="dynamicWhere"/>
-		 $conditionWhere$
     </select>
     
     <select id="getInfoByKey" resultMap="upmUserResult">
