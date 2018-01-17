@@ -5,94 +5,105 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 
+ * bootstrap树
+ *
+ */
 public class BootStrapTreeView {
 
-	private String id;
-	private String text;
-	private String icon;
-	private String parentId;
-	
-	private String nodeId;
-	
-	private String href;
-	
-	//checked: true,
-    //disabled: true,
-    //expanded: true,
-    //selected: true
-	private Map<String,Boolean> state = new HashMap<String,Boolean>();
-	
-	private List<BootStrapTreeView> nodes;
+  private String id;
+  private String text;
+  private String icon;
+  private String parentId;
 
-	public String getText() {
-		return text;
-	}
+  private String nodeId;
 
-	public void setText(String text) {
-		this.text = text;
-	}
+  private String href;
 
-	public String getIcon() {
-		return icon;
-	}
+  // checked: true,
+  // disabled: true,
+  // expanded: true,
+  // selected: true
+  private Map<String, Boolean> state = new HashMap<String, Boolean>();
 
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
+  private List<BootStrapTreeView> nodes;
 
-	public Map<String, Boolean> getState() {
-		return state;
-	}
+  public String getText() {
+    return text;
+  }
 
-	public void setState(Map<String, Boolean> state) {
-		this.state = state;
-	}
+  public void setText(String text) {
+    this.text = text;
+  }
 
-	public List<BootStrapTreeView> getNodes() {
-		return nodes;
-	}
+  public String getIcon() {
+    return icon;
+  }
 
-	public void setNodes(List<BootStrapTreeView> nodes) {
-		this.nodes = nodes;
-	}
-	
-	public void addNodes(BootStrapTreeView childrenNode) {
-		if (null == nodes) {
-			nodes = new ArrayList<BootStrapTreeView>();
-		}
-		nodes.add(childrenNode);
-	}
+  public void setIcon(String icon) {
+    this.icon = icon;
+  }
 
-	public String getParentId() {
-		return parentId;
-	}
+  public Map<String, Boolean> getState() {
+    return state;
+  }
 
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
-	}
+  public void setState(Map<String, Boolean> state) {
+    this.state = state;
+  }
 
-	public String getId() {
-		return id;
-	}
+  public List<BootStrapTreeView> getNodes() {
+    return nodes;
+  }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  public void setNodes(List<BootStrapTreeView> nodes) {
+    this.nodes = nodes;
+  }
 
-	public String getNodeId() {
-		return nodeId;
-	}
+  /**
+   * 添加子节点
+   * 
+   * @param childrenNode
+   *          添加子节点
+   */
+  public void addNodes(BootStrapTreeView childrenNode) {
+    if (null == nodes) {
+      nodes = new ArrayList<BootStrapTreeView>();
+    }
+    nodes.add(childrenNode);
+  }
 
-	public void setNodeId(String nodeId) {
-		this.nodeId = nodeId;
-	}
+  public String getParentId() {
+    return parentId;
+  }
 
-	public String getHref() {
-		return href;
-	}
+  public void setParentId(String parentId) {
+    this.parentId = parentId;
+  }
 
-	public void setHref(String href) {
-		this.href = href;
-	}
-	
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getNodeId() {
+    return nodeId;
+  }
+
+  public void setNodeId(String nodeId) {
+    this.nodeId = nodeId;
+  }
+
+  public String getHref() {
+    return href;
+  }
+
+  public void setHref(String href) {
+    this.href = href;
+  }
+
 }
