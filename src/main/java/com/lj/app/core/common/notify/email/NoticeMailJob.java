@@ -15,34 +15,42 @@ import com.lj.app.core.common.notify.service.UpmNoticeService;
 import com.lj.app.core.common.task.service.BaseTaskService;
 import com.lj.app.core.common.util.DateUtil;
 
+/**
+ * 
+ * 通知邮件job
+ *
+ */
 @Component("noticeMailJob")
-public class NoticeMailJob implements BaseTaskService{
-	@Autowired
-	private UpmNoticeService<UpmNotice> upmNoticeService;
-	@Autowired
-	private MailSender mailSender;
-	private static long currentCount = 0l;
-	private static final long eachNum = 10;
+public class NoticeMailJob implements BaseTaskService {
+  @Autowired
+  private UpmNoticeService<UpmNotice> upmNoticeService;
+  @Autowired
+  private MailSender mailSender;
+  private static   Long currentCount = 0L;
+  private static final Long EACH_NUM = 10L;
 
-	 @Scheduled(cron="0 */30 * * * ? ")   //每30分钟执行一次  
-	public void doRunTask() {
-		List<UpmNotice> list = upmNoticeService.getUapNoticeMail(currentCount,eachNum);
-		currentCount = list.size() > 0 ? list.get(0).getId() : currentCount;
-		for (UpmNotice notice : list) {
-			Map<String, Object> info = new HashMap<String,Object>();
-			String sendTime = DateUtil.getNowDate("yyyy-MM-dd HH:mm:ss");
-			info.put("content", notice.getContent());
-			info.put("sendTime", sendTime);
-			info.put("id", String.valueOf(notice.getId()));
-			info.put("templateDir", "templateDir");
-			info.put("templateFileName", "templateFileName");
-			info.put("notice", notice);
-			try {
-				mailSender.sendMail(notice.getParamA(), notice.getParamB()+ sendTime, info, "mailTest.ftl", true);
-			} catch (MessagingException e) {
-				e.printStackTrace();
-			}
-		}
-	}
+  /**
+   * 执行定时任务
+   */
+  @Scheduled(cron = "0 */30 * * * ? ") // 每30分钟执行一次
+  public void doRunTask() {
+    List<UpmNotice> list = upmNoticeService.getUapNoticeMail(currentCount, EACH_NUM);
+    currentCount = list.size() > 0 ? list.get(0).getId() : currentCount;
+    for (UpmNotice notice : list) {
+      Map<String, Object> info = new HashMap<String, Object>();
+      String sendTime = DateUtil.getNowDate("yyyy-MM-dd HH:mm:ss");
+      info.put("content", notice.getContent());
+      info.put("sendTime", sendTime);
+      info.put("id", String.valueOf(notice.getId()));
+      info.put("templateDir", "templateDir");
+      info.put("templateFileName", "templateFileName");
+      info.put("notice", notice);
+      try {
+        mailSender.sendMail(notice.getParamA(), notice.getParamB() + sendTime, info, "mailTest.ftl", true);
+      } catch (MessagingException e) {
+        e.printStackTrace();
+      }
+    }
+  }
 
 }

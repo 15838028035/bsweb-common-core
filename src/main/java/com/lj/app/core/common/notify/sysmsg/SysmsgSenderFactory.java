@@ -7,7 +7,7 @@ package com.lj.app.core.common.notify.sysmsg;
  */
 public class SysmsgSenderFactory {
 
-	public static ISysmsgSender createSysmsgSenderImpl(){
-		return new SysmsgSenderImpl();
-	}
+  public static ISysmsgSender createSysmsgSenderImpl() {
+    return new SysmsgSenderImpl();
+  }
 }
