@@ -8,10 +8,10 @@ import com.lj.app.core.common.exception.CacheException;
  * 缓存接口
  */
 public interface Cache {
-	
+  
     /**
      * 从缓存中清除所有的对象
-     * @throws CacheException
+     * @throws CacheException 缓存异常
      */
     public void clear() throws CacheException;
     
@@ -53,17 +53,19 @@ public interface Cache {
      * @return
      */
     public Object get(String key);
+    
     /**
      * 批量查找元素
-     * @param key
+     * @param key 缓存key
      * @return
      */
     public Map<String, Object> get(String[] keys);
+    
     /**
      * 递增元素的值
-     * @param key
-     * @param by
-     * @return
+     * @param key 缓存key
+     * @param by 递增量
+     * @return long  递增元素的值
      */
     public long incr(String key, int by);
     /**
@@ -76,7 +78,7 @@ public interface Cache {
 
     /**
      * 从缓存中删除一个元素
-     * @param key
+     * @param key 缓存key
      */
     public void delete(String key);
     /**
