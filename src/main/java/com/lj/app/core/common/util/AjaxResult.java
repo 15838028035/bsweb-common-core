@@ -1,23 +1,35 @@
 package com.lj.app.core.common.util;
 
-public class AjaxResult{
-	private String opResult;
-	private String optFailureMsg;//操作失败消息
+/**
+ * ajax请求结果类
+ *
+ */
+public class AjaxResult {
+  
+  /**
+   * 操作结果
+   */
+  private String opResult;
+  
+  /**
+   * 操作失败消息
+   */
+  private String optFailureMsg;
 
-	public String getOpResult() {
-		return opResult;
-	}
+  public String getOpResult() {
+    return opResult;
+  }
 
-	public void setOpResult(String opResult) {
-		this.opResult = opResult;
-	}
+  public void setOpResult(String opResult) {
+    this.opResult = opResult;
+  }
 
-	public String getOptFailureMsg() {
-		return optFailureMsg;
-	}
+  public String getOptFailureMsg() {
+    return optFailureMsg;
+  }
 
-	public void setOptFailureMsg(String optFailureMsg) {
-		this.optFailureMsg = optFailureMsg;
-	}
-	
+  public void setOptFailureMsg(String optFailureMsg) {
+    this.optFailureMsg = optFailureMsg;
+  }
+
 }

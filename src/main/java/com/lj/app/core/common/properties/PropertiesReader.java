@@ -15,19 +15,19 @@ import com.lj.app.core.common.util.PropertyPlaceholderUtil;
 import com.lj.app.core.common.util.PropertyPlaceholderUtil.PropertyPlaceholderConfigurerResolver;
 import com.lj.app.core.common.util.StringUtil;
 
-
+/**
+ * 
+ *属性读取工具类
+ */
 public class PropertiesReader {
-	private static Log logger = LogFactory.getLog(PropertiesReader.class);
-	private static Map<String, Properties> propertiesMap = new HashMap<String, Properties>();
-	
-	private static final String ENV_common = "env-common.properties";
-	private static final String ENV_DEV = "env-dev.properties";
-	private static final String ENV_TEST = "env-test.properties";
-	private static final String ENV_PRO = "env-pro.properties";
-	
-	private static final String CORE_URL="";
-	
-	private static PropertyPlaceholderUtil propertyPlaceholderUtil = new PropertyPlaceholderUtil("${", "}", ":", false);
+  private static Log logger = LogFactory.getLog(PropertiesReader.class);
+  private static Map<String, Properties> propertiesMap = new HashMap<String, Properties>();
+  private static final String ENV_COMMON = "env-common.properties";
+  private static final String ENV_DEV = "env-dev.properties";
+  private static final String ENV_TEST = "env-test.properties";
+  private static final String ENV_PRO = "env-pro.properties";
+  private static final String CORE_URL = "";
+  private static PropertyPlaceholderUtil propertyPlaceholderUtil = new PropertyPlaceholderUtil("${", "}", ":", false);
 	
 	private static Properties properties = new Properties();
 
@@ -39,7 +39,7 @@ public class PropertiesReader {
 		try {
 			
 			logger.warn("Now,Loading default file~~~");
-			loadConfigFileByUrlAndFileName(CORE_URL,ENV_common);
+			loadConfigFileByUrlAndFileName(CORE_URL,ENV_COMMON);
 			
 			String springProfilesActive = System.getProperty("spring.profiles.active");
 			if(StringUtil.isEqual(springProfilesActive, "dev")){
@@ -92,7 +92,7 @@ public class PropertiesReader {
 	}
 
 	public static Properties getProperties() {
-		return properties;
+	  return properties;
 	}
 	
 	public static String getValueAndDefault(String key, String defaultValue) {

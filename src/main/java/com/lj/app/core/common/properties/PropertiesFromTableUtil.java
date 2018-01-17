@@ -8,8 +8,8 @@ import com.lj.app.core.common.util.SpringContextHolder;
  * 
  * 从数据库里取资源并覆盖 
  */
-public class PropertiesFromTableUtil{
-	static{
+public class PropertiesFromTableUtil {
+	static {
 		try {
 			reloadConfigPro();
 		} catch (Exception e) {
