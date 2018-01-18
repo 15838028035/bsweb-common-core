@@ -112,29 +112,4 @@ public class FreemarkerTemplateConfig extends BaseEntity {
   public String getTemplateRemark() {
     return this.templateRemark;
   }
-
-  public String toString() {
-    return new ToStringBuilder(this).append("Id", getId()).append("TemplateNo", getTemplateNo())
-        .append("TemplateName", getTemplateName()).append("TemplatePath", getTemplatePath())
-        .append("TemplateConent", getTemplateConent()).append("TestData", getTestData())
-        .append("TestEmail", getTestEmail()).append("TemplateRemark", getTemplateRemark()).toString();
-  }
-
-  public int hashCode() {
-    return new HashCodeBuilder().append(getId()).append(getTemplateNo()).append(getTemplateName())
-        .append(getTemplatePath()).append(getTemplateConent()).append(getTestData()).append(getTestEmail())
-        .append(getTemplateRemark()).toHashCode();
-  }
-
-  public boolean equals(Object obj) {
-    if (obj instanceof FreemarkerTemplateConfig == false)
-      return false;
-    if (this == obj)
-      return true;
-    FreemarkerTemplateConfig other = (FreemarkerTemplateConfig) obj;
-    return new EqualsBuilder().append(getId(), other.getId()).append(getTemplateNo(), other.getTemplateNo())
-        .append(getTemplateName(), other.getTemplateName()).append(getTemplatePath(), other.getTemplatePath())
-        .append(getTemplateConent(), other.getTemplateConent()).append(getTestData(), other.getTestData())
-        .append(getTestEmail(), other.getTestEmail()).append(getTemplateRemark(), other.getTemplateRemark()).isEquals();
-  }
 }

@@ -12,6 +12,11 @@ import com.lj.app.core.common.base.entity.UpmDictionary;
 import com.lj.app.core.common.base.entity.UpmDictionaryNote;
 import com.lj.app.core.common.util.SpringContextHolder;
 
+/**
+ * 
+ * 数据字典服务Api
+ *
+ */
 @Service("upmDictionaryNoteApiService")
 public class UpmDictionaryNoteApiServiceImpl implements UpmDictionaryNoteApiService {
 
@@ -21,6 +26,9 @@ public class UpmDictionaryNoteApiServiceImpl implements UpmDictionaryNoteApiServ
   @Autowired
   private UpmDictionaryService<UpmDictionary> upmDictionaryService;
 
+  /**
+   * 根据类别查找
+   */
   public List<UpmDictionary> findUpmDictionaryListBy(String typeCode) {
     List<UpmDictionary> list = null;
     UpmDictionaryService<UpmDictionary> upmDictionaryService = (UpmDictionaryService<UpmDictionary>) SpringContextHolder
@@ -48,6 +56,9 @@ public class UpmDictionaryNoteApiServiceImpl implements UpmDictionaryNoteApiServ
     return list;
   }
 
+  /**
+   * 根据类别查找
+   */
   public Map<String, String> findUpmDictionaryListMapBy(String typeCode) {
     Map<String, String> map = new LinkedHashMap<String, String>();
 
@@ -75,8 +86,8 @@ public class UpmDictionaryNoteApiServiceImpl implements UpmDictionaryNoteApiServ
     }
 
     if (list != null && list.size() > 0) {
-      for (UpmDictionary UpmDictionary : list) {
-        map.put(UpmDictionary.getDataCode(), UpmDictionary.getDataDesc());
+      for (UpmDictionary upmDictionary : list) {
+        map.put(upmDictionary.getDataCode(), upmDictionary.getDataDesc());
       }
     }
     return map;

@@ -1,5 +1,10 @@
 package com.lj.app.core.common.base.entity;
 
+/**
+ * 
+ * 配置管理
+ *
+ */
 public class UpmConfiguration extends BaseEntity {
 
   /**

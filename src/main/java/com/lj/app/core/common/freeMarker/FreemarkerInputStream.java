@@ -7,11 +7,18 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
+
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
+/**
+ * 
+ * freemarker读取器
+ *
+ */
 public class FreemarkerInputStream extends InputStream {
   private InputStream delegateInput;
   private Configuration conf;
@@ -49,6 +56,13 @@ public class FreemarkerInputStream extends InputStream {
     this(input, Util.newDefaultConfirutaion(), encoding, variables);
   }
 
+  /**
+   * freemarker读取器
+   * @param input 输入流
+   * @param conf 配置
+   * @param encoding 编码
+   * @param variables 变量
+   */
   public FreemarkerInputStream(InputStream input, Configuration conf, String encoding, Map<String, Object> variables) {
     this.delegateInput = input;
     this.conf = conf;
@@ -141,7 +155,7 @@ public class FreemarkerInputStream extends InputStream {
   }
 
   @Override
-  public int read() throws IOException {
+  public  int read() throws IOException {
     return freemarkerProcessedInput.read();
   }
 }

@@ -15,6 +15,12 @@ import org.springframework.stereotype.Component;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.lj.app.core.common.base.entity.BaseEntity;
 
+/**
+ * 
+ * 基础DAO
+ *
+ * @param <T> 对象
+ */
 @Component("baseDao")
 public class BaseDaoImpl<T extends BaseEntity> extends SqlMapClientDaoSupport implements BaseDao, Serializable {
 

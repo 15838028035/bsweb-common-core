@@ -12,6 +12,11 @@ import com.lj.app.core.common.util.StringUtil;
 import jxl.Cell;
 import jxl.Sheet;
 
+/**
+ * 
+ * 用户服务
+ *
+ */
 @Service("upmUserService")
 @Transactional
 public class UpmUserServiceImpl extends BatchOptBaseServiceImpl implements UpmUserService {
@@ -47,10 +52,11 @@ public class UpmUserServiceImpl extends BatchOptBaseServiceImpl implements UpmUs
     if (exceptionMsgList.size() > 0 || warnMsgList.size() > 0) {
       StringBuffer sb = new StringBuffer();
       sb.append("<html><body><p>");
-      for (String msg : exceptionMsgList)
+      for (String msg : exceptionMsgList) {
         sb.append(msg + "</br>");
+      }
       sb.append("</p></body></html>");
-      logger.info("exceptionMsgList>>>>>>" + sb.toString());
+      LOGGER.info("exceptionMsgList>>>>>>" + sb.toString());
       throw new BusinessException(sb.toString());
     }
   }

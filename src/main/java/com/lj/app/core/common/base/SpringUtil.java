@@ -5,6 +5,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.lj.app.core.common.util.SpringContextHolder;
 
+/**
+ * 
+ * Spring工具类
+ *
+ */
 public class SpringUtil {
   private static SpringUtil su = null;
   private ApplicationContext context;
@@ -18,7 +23,11 @@ public class SpringUtil {
     }
   }
 
-  synchronized public static ApplicationContext getSpringFactory() {
+  /**
+   * 获得spring容器
+   * @return  获得spring容器
+   */
+  public  static synchronized   ApplicationContext getSpringFactory() {
     if (su == null) {
       su = new SpringUtil();
     }

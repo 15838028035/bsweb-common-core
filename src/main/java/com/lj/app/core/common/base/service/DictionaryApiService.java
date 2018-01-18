@@ -7,6 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.lj.app.core.common.base.entity.UpmDictionary;
 
+/**
+ * 
+ * 数据字典Api
+ *
+ */
 @Service("dictionaryApiService")
 public class DictionaryApiService {
 
@@ -41,6 +46,12 @@ public class DictionaryApiService {
     return DictionaryUtil.findDicData(typeCode, dataCode);
   }
 
+  /**
+   * 查询数据字典
+   * @param typeCode 类型
+   * @param dataCode 数据编码
+   * @return 数据字典对象
+   */
   public UpmDictionary findDicDataNoMap(String typeCode, String dataCode) {
     UpmDictionary dic = new UpmDictionary();
     dic.setTypeCode(typeCode);

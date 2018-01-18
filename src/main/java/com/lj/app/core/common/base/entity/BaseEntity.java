@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import com.lj.app.core.common.util.StringUtil;
 
+/**
+ * 
+ * 基础实体
+ *
+ */
 @SuppressWarnings("serial")
 public class BaseEntity implements Serializable {
 

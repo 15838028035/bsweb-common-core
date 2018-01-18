@@ -75,14 +75,14 @@ public class SimpleTree {
 
   private int getChecked(int checked) {
     switch (checked) {
-    case 0:
-      return 0;
-    case 1:
-      return 1;
-    case 2:
-      return 2;
-    default:
-      return 0;// 默认为0
+      case 0:
+        return 0;
+      case 1:
+        return 1;
+      case 2:
+        return 2;
+      default:
+        return 0;// 默认为0
     }
   }
 

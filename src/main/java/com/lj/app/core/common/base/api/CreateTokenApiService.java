@@ -1,5 +1,10 @@
 package com.lj.app.core.common.base.api;
 
+/**
+ * 
+ * token服务
+ *
+ */
 public interface CreateTokenApiService {
 
   /**
@@ -12,7 +17,7 @@ public interface CreateTokenApiService {
    * @param mainAcctId
    *          主帐号ID
    * @return TOKEN
-   * @throws Exception
+   * @throws Exception 异常
    */
-  public String CreateToken(String acctSeq, String resEntityId, int mainAcctId) throws Exception;
+  public String createToken(String acctSeq, String resEntityId, int mainAcctId) throws Exception;
 }

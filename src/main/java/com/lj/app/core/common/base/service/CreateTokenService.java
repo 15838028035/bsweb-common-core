@@ -14,6 +14,11 @@ import com.lj.app.core.common.base.api.TokenApiService;
 import com.lj.app.core.common.base.entity.UpmToken;
 import com.lj.app.core.common.properties.PropertiesUtil;
 
+/**
+ * 
+ * 创建Token服务
+ *
+ */
 @Service("createTokenService")
 public class CreateTokenService {
 
@@ -22,9 +27,17 @@ public class CreateTokenService {
   @Autowired
   private TokenApiService tokenApiService;
 
-  private final static String TOKEN_TIME_OUT = PropertiesUtil.getProperty("TOKEN_TIME_OUT");
+  public static final  Integer TOKEN_TIME_OUT = PropertiesUtil.getInt("TOKEN_TIME_OUT",120000);
 
-  public String CreateToken(String acctSeq, String resEntityId, int mainAcctId) throws Exception {
+  /**
+   * 创建Token
+   * @param acctSeq 帐号ID
+   * @param resEntityId appId
+   * @param mainAcctId 帐号Id
+   * @return token
+   * @throws Exception 异常
+   */
+  public String createToken(String acctSeq, String resEntityId, int mainAcctId) throws Exception {
     long lNow = System.currentTimeMillis();// 取到毫秒，但是取的是主机的时间
     String tokenId = acctSeq + "-" + lNow;
     // String tokenId = EncryptInterface.desEncryptData(acctSeq + "-" + lNow);
@@ -34,8 +47,9 @@ public class CreateTokenService {
     // create token and save it
     UpmToken upmToken = new UpmToken();
     upmToken.setTokenId(tokenId);
-    if (resEntityId != null)
+    if (resEntityId != null) {
       upmToken.setResId(resEntityId);
+    }
     upmToken.setSubAcctId(acctSeq);
     upmToken.setMainAcctId(mainAcctId);
     String clientIp = "";
@@ -54,7 +68,7 @@ public class CreateTokenService {
       UpmToken upmTokenQuery = (UpmToken) upmTokenList.get(0);
       Date createTime = upmTokenQuery.getCreateTime();
       long lcreateTime = createTime.getTime();
-      if ((lNow - lcreateTime) > Integer.parseInt(TOKEN_TIME_OUT) * 1000) {
+      if ((lNow - lcreateTime) > TOKEN_TIME_OUT) {
         // 账号信息查看token是否失效
         tokenApiService.saveToken(upmToken);
       } else {

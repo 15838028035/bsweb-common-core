@@ -1,5 +1,11 @@
 package com.lj.app.core.common.base.service;
 
+/**
+ * 
+ * 配置管理服务
+ *
+ * @param <UpmConfiguration> 配置管理对象
+ */
 public interface UpmConfigurationService<UpmConfiguration> extends BaseService {
 
   /**

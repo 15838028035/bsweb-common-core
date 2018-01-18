@@ -9,6 +9,12 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.lj.app.core.common.base.entity.BaseEntity;
 
+/**
+ * 
+ * 基础DAO
+ *
+ * @param <T> 对象
+ */
 public interface BaseDao<T> {
 
   public SqlMapClient getSqlMapClientProfile() throws Exception;

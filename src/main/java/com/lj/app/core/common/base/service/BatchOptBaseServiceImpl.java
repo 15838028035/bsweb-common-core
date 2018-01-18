@@ -6,34 +6,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+import com.lj.app.core.common.exception.BusinessException;
+
 import jxl.Cell;
 import jxl.JXLException;
 import jxl.Sheet;
 import jxl.Workbook;
 
-import org.springframework.stereotype.Service;
-
-import com.lj.app.core.common.exception.BusinessException;
-
+/**
+ * 
+ * 批量操作服务类
+ *
+ */
 @Service("batchOptBaseService")
 public abstract class BatchOptBaseServiceImpl extends BaseServiceImpl implements BatchOptBaseService {
 
   /**
    * 校验单元格行 在列范围j内，若出现不为空的cell，则认为该行为有效行;无效行跳过执行
    * 
-   * @param sheet
-   * @param i
-   * @param column
-   * @param excelFieldSize
-   * @return
+   * @param sheet sheet
+   * @param i 第几行
+   * @param column 第几列
+   * @param excelFieldSize excle大小
+   * @return 是否通过
    */
   public boolean validateRow(Sheet sheet, int i, int column, int excelFieldSize) {
 
     for (int j = 0; j < column && j < excelFieldSize; j++) {
       Cell cell = sheet.getCell(j, i);
       String value = cell.getContents() != null ? cell.getContents().trim() : "";
-      if (!value.equals(""))
+      if (!value.equals(""))  {
         return true;
+      }
     }
     return false;
   }
@@ -41,13 +47,12 @@ public abstract class BatchOptBaseServiceImpl extends BaseServiceImpl implements
   /**
    * 校验上传文件
    * 
-   * @param f
-   * @return
-   * @throws JXLException
-   * @throws IOException
+   * @param f 文件
+   * @throws JXLException 异常
+   * @throws IOException 异常
    */
   public void importAndCheck(File f, String initfilename, String templateFileContentType) throws Exception {
-    checkAndImportExcelData(f, "批量导入Excel", 0l, 0l, 0l, "0");
+    checkAndImportExcelData(f, "批量导入Excel", 0L, 0L, 0L, "0");
   }
 
   /**
@@ -66,12 +71,12 @@ public abstract class BatchOptBaseServiceImpl extends BaseServiceImpl implements
       int column = sheet.getColumns(); // 列数
       int row = sheet.getRows(); // 行数
       int total = row - startRow + 1; // 一共导入的条数
-      if (startRow > row) {// 开始行数不能大于最大行数
+      if (startRow > row) { // 开始行数不能大于最大行数
         throw new BusinessException("开始行数不能大于最大行数" + row);
       }
       int endRow = 0;
       // 根据输入的起使行，确定创建的最后行
-      endRow = (startRow + batchProcessCount - 1) <= row ? (startRow + batchProcessCount - 1) : row;
+      endRow = (startRow + BATCHPROCESSCOUNT - 1) <= row ? (startRow + BATCHPROCESSCOUNT - 1) : row;
       List excelFieldList = new ArrayList();
 
       checkBatchExcelData(appId, adminAcctSeq, loginOrgId, null, excelFieldList, startRow, sheet, column, row, endRow);
@@ -84,7 +89,10 @@ public abstract class BatchOptBaseServiceImpl extends BaseServiceImpl implements
       throw ex;
     }
   }
-
+  
+  /**
+   * 导入校验
+   */
   public void checkBatchExcelData(Long appId, Long adminAcctSeq, String loginOrgId,
       BatchOptBaseService batchOptBaseService, List excelFieldList, int startRow, Sheet sheet, int column, int row,
       int endRow) throws Exception {
@@ -109,10 +117,11 @@ public abstract class BatchOptBaseServiceImpl extends BaseServiceImpl implements
     if (exceptionMsgList.size() > 0 || warnMsgList.size() > 0) {
       StringBuffer sb = new StringBuffer();
       sb.append("<html><body><p>");
-      for (String msg : exceptionMsgList)
+      for (String msg : exceptionMsgList) {
         sb.append(msg + "</br>");
+      }
       sb.append("</p></body></html>");
-      logger.info("exceptionMsgList>>>>>>" + sb.toString());
+      LOGGER.info("exceptionMsgList>>>>>>" + sb.toString());
       throw new BusinessException(sb.toString());
     }
   }

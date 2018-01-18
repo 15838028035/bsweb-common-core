@@ -1,5 +1,10 @@
 package com.lj.app.core.common.base.entity;
 
+/**
+ * 
+ * 数据字典项
+ *
+ */
 public class UpmDictionaryNote extends BaseEntity {
   /**
    * 编号 id

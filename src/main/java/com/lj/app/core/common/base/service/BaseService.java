@@ -7,6 +7,12 @@ import java.util.Map;
 import com.lj.app.core.common.base.entity.BaseEntity;
 import com.lj.app.core.common.pagination.Page;
 
+/**
+ * 
+ * 基础服务
+ *
+ * @param <T> 对象
+ */
 @SuppressWarnings("all")
 public interface BaseService<T> {
 

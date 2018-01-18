@@ -15,6 +15,12 @@ import com.lj.app.core.common.pagination.Page;
 import com.lj.app.core.common.util.MapAndObject;
 import com.lj.app.core.common.util.StringUtil;
 
+/**
+ * 
+ * 基础服务
+ *
+ * @param <T> 对象
+ */
 @Service("baseService")
 public abstract class BaseServiceImpl<T> implements BaseService {
 

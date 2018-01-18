@@ -8,10 +8,19 @@ import org.springframework.stereotype.Service;
 import com.lj.app.core.common.properties.PropertiesReader;
 import com.lj.app.core.common.util.SpringContextHolder;
 
+/**
+ * 
+ * 配置管理服务
+ *
+ * @param <UpmConfiguration> 配置管理对象
+ */
 @Service("upmConfigurationService")
 public class UpmConfigurationServiceImpl<UpmConfiguration> extends BaseServiceImpl<UpmConfiguration>
     implements UpmConfigurationService<UpmConfiguration> {
 
+  /**
+   * 重新加载数据库中的配置信息
+   */
   public void reloadConfigPro() throws Exception {
     UpmConfigurationService<UpmConfiguration> upmConfigurationService = SpringContextHolder
         .getBean("upmConfigurationService");

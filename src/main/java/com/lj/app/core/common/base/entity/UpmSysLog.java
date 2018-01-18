@@ -1,13 +1,7 @@
 package com.lj.app.core.common.base.entity;
 
-import com.lj.app.core.common.base.entity.BaseEntity;
-
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 /**
- * 系统日志111
+ * 系统日志
  */
 public class UpmSysLog extends BaseEntity {
 
@@ -110,27 +104,5 @@ public class UpmSysLog extends BaseEntity {
   public java.util.Date getReateDate() {
     return this.reateDate;
   }
-
-  public String toString() {
-    return new ToStringBuilder(this).append("Id", getId()).append("UserName", getUserName())
-        .append("Operation", getOperation()).append("Method", getMethod()).append("Params", getParams())
-        .append("Ip", getIp()).append("ReateDate", getReateDate()).toString();
-  }
-
-  public int hashCode() {
-    return new HashCodeBuilder().append(getId()).append(getUserName()).append(getOperation()).append(getMethod())
-        .append(getParams()).append(getIp()).append(getReateDate()).toHashCode();
-  }
-
-  public boolean equals(Object obj) {
-    if (obj instanceof UpmSysLog == false)
-      return false;
-    if (this == obj)
-      return true;
-    UpmSysLog other = (UpmSysLog) obj;
-    return new EqualsBuilder().append(getId(), other.getId()).append(getUserName(), other.getUserName())
-        .append(getOperation(), other.getOperation()).append(getMethod(), other.getMethod())
-        .append(getParams(), other.getParams()).append(getIp(), other.getIp())
-        .append(getReateDate(), other.getReateDate()).isEquals();
-  }
+  
 }

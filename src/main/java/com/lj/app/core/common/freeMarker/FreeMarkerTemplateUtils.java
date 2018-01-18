@@ -22,6 +22,11 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
+/**
+ * 
+ * 模板工具类
+ *
+ */
 public class FreeMarkerTemplateUtils {
 
   private static Log log = LogFactory.getLog(FreeMarkerTemplateUtils.class);
@@ -74,6 +79,14 @@ public class FreeMarkerTemplateUtils {
     return processTemplateIntoString(template, model);
   }
 
+  /**
+   *  解析模板内容
+   * @param template 模板
+   * @param model 对象
+   * @return 模板内容
+   * @throws FreemarkerTemplateException 模板异常
+   * @throws Exception 异常
+   */
   public static String processTemplateIntoString(Template template, Object model)
       throws FreemarkerTemplateException, Exception {
     StringWriter result = new StringWriter();
@@ -81,6 +94,13 @@ public class FreeMarkerTemplateUtils {
     return result.toString();
   }
 
+  /**
+   *  解析模板内容
+   * @param template  解析模板内容
+   * @param model 对象
+   * @param out write对象
+   * @throws FreemarkerTemplateException 模板异常
+   */
   public static void processTemplate(Template template, Object model, Writer out) throws FreemarkerTemplateException {
     try {
       template.process(model, out);
@@ -92,6 +112,13 @@ public class FreeMarkerTemplateUtils {
     }
   }
 
+  /**
+   * 获得模板
+   * @param conf 配置
+   * @param templateName 模板名称 
+   * @return 获得模板
+   * @throws FreemarkerTemplateException 模板异常
+   */
   public static Template getTemplate(Configuration conf, String templateName) throws FreemarkerTemplateException {
     try {
       return conf.getTemplate(templateName);
@@ -100,6 +127,12 @@ public class FreeMarkerTemplateUtils {
     }
   }
 
+  /**
+   * 获得模板
+   * @param conf 配置
+   * @param templateName 模板名称 
+   * @return 获得模板
+   */
   public static Template getTemplate(Configuration conf, String templateName, String encoding)
       throws FreemarkerTemplateException {
     try {
@@ -109,6 +142,15 @@ public class FreeMarkerTemplateUtils {
     }
   }
 
+  /**
+   * 获得模板
+   * @param conf 配置
+   * @param templateName 模板名称 
+   * @param locale 区域
+   * @param encoding 编码
+   * @return 获得模板
+   * @throws FreemarkerTemplateException 模板异常
+   */
   public static Template getTemplate(Configuration conf, String templateName, Locale locale, String encoding)
       throws FreemarkerTemplateException {
     try {
@@ -121,7 +163,7 @@ public class FreeMarkerTemplateUtils {
   /**
    * 获得测试模版目录
    * 
-   * @return
+   * @return 配置对象
    */
   public static Configuration getTestConfiguration() throws Exception {
     Configuration conf = new Configuration();
@@ -141,7 +183,7 @@ public class FreeMarkerTemplateUtils {
   /**
    * 获得公共的配置变量
    * 
-   * @return
+   * @return map
    */
   public static Map getShareVars() {
     Map templateModel = new HashMap();

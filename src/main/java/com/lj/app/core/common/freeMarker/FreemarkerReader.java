@@ -41,6 +41,12 @@ public class FreemarkerReader extends Reader {
     this(reader, conf, null);
   }
 
+  /**
+   * 构造函数
+   * @param reader 读取
+   * @param conf 配置
+   * @param variables 变量
+   */
   public FreemarkerReader(Reader reader, Configuration conf, Map<String, Object> variables) {
     this.conf = conf;
     this.delegateReader = reader;

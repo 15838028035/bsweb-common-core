@@ -12,6 +12,11 @@ import com.lj.app.core.common.base.entity.UpmDictionary;
 import com.lj.app.core.common.base.entity.UpmDictionaryNote;
 import com.lj.app.core.common.util.SpringContextHolder;
 
+/**
+ * 
+ * 数据字典工具类
+ *
+ */
 public class DictionaryUtil {
   private static Log logger = LogFactory.getLog(DictionaryUtil.class);
   private static Map<String, List<UpmDictionary>> dictionaryMap = new HashMap<String, List<UpmDictionary>>();
@@ -24,6 +29,10 @@ public class DictionaryUtil {
 
   private static DictionaryUtil dictionaryUtil = null;
 
+  /**
+   * 
+   * 单例模式
+   */
   public static DictionaryUtil getInstance() {
     if (dictionaryUtil == null) {
       dictionaryUtil = new DictionaryUtil();
@@ -31,12 +40,20 @@ public class DictionaryUtil {
     return dictionaryUtil;
   }
 
+  /**
+   * 根据类别和数据编码查询
+   * @param typeCode 类别
+   * @param dataCode 数据编码
+   * @return 数据字典描述
+   * @throws Exception 异常
+   */
   public static String typeAndDateCodeToName(String typeCode, String dataCode) throws Exception {
     initData();
     List<UpmDictionary> uList = (List<UpmDictionary>) dictionaryMap.get(typeCode);
     String dataDesc = null;
-    if (uList == null)
+    if (uList == null)  {
       return null;
+    }
     for (UpmDictionary upmDictionary : uList) {
       if (dataCode.equalsIgnoreCase(upmDictionary.getDataCode())) {
         dataDesc = upmDictionary.getDataDesc();
@@ -51,11 +68,19 @@ public class DictionaryUtil {
     return (List<UpmDictionary>) dictionaryMap.get(typeCode);
   }
 
+  /**
+   * 根据类别和数据编码查询
+   * @param typeCode 类别
+   * @param dataCode 数据编码
+   * @return 数据字典描述
+   * @throws Exception 异常
+   */
   public static UpmDictionary findDicData(String typeCode, String dataCode) throws Exception {
     initData();
     List<UpmDictionary> uList = (List<UpmDictionary>) dictionaryMap.get(typeCode);
-    if (uList == null)
+    if (uList == null)  {
       return null;
+    }
     UpmDictionary uu = new UpmDictionary();
     for (UpmDictionary upmDictionary : uList) {
       if (dataCode.equalsIgnoreCase(upmDictionary.getDataCode())) {
@@ -66,6 +91,10 @@ public class DictionaryUtil {
     return uu;
   }
 
+  /**
+   * 刷新
+   * @throws Exception 异常
+   */
   public void refreshDataNotStatic() throws Exception {
     dictionaryMap.clear();
     logger.warn("====Refreshing data====");
@@ -87,12 +116,19 @@ public class DictionaryUtil {
     }
   }
 
+  /**
+   * 初始化数据
+   * @throws Exception 异常
+   */
   public static void initData() throws Exception {
     if (dictionaryMap == null || dictionaryMap.size() == 0) {
       DictionaryUtil.getInstance().refreshDataNotStatic();
     }
   }
 
+  /**
+   * 刷新数据
+   */
   public static void refreshData() {
     try {
       initData();

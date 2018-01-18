@@ -1,5 +1,10 @@
 package com.lj.app.core.common.base.entity;
 
+/**
+ * 
+ * token
+ *
+ */
 public class UpmToken extends BaseEntity {
 
   /**

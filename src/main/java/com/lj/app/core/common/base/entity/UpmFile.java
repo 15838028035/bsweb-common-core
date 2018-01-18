@@ -1,5 +1,10 @@
 package com.lj.app.core.common.base.entity;
 
+/**
+ * 
+ * 文件管理
+ *
+ */
 public class UpmFile extends BaseEntity {
 
   /**
