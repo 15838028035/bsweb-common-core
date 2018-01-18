@@ -8,18 +8,30 @@ import java.net.URLConnection;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import com.lj.app.core.common.properties.PropertiesUtil;
 import com.lj.app.core.common.security.CMSecurityContext;
 import com.lj.app.core.common.util.StringUtil;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+/**
+ * 
+ *权限信息APi
+ *
+ */
 public class UpmPermissionActionApi {
 
   public static final String FIND_PERMISSION_BY_USERID_URL = PropertiesUtil
       .getPropertyTrim("FIND_PERMISSION_BY_USERID_URL");
 
+  /**
+   * 获得权限上下文信息
+   * @param userId 用户ID
+   * @param contextPath 上下文
+   * @param appId 归属应用ID
+   * @return 获得权限上下文信息
+   */
   public static CMSecurityContext getSecurityContext(int userId, String contextPath, String appId) {
     CMSecurityContext securityContext = new CMSecurityContext();
 

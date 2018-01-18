@@ -13,6 +13,11 @@ import com.lj.app.core.common.base.service.UpmTokenService;
 import com.lj.app.core.common.base.service.UpmUserService;
 import com.lj.app.core.common.security.CMSecurityContext;
 
+/**
+ * 
+ * 权限服务
+ *
+ */
 @Service
 public class SecurityServiceImpl implements SecurityService {
 

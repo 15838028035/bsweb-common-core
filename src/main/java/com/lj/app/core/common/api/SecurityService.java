@@ -2,6 +2,11 @@ package com.lj.app.core.common.api;
 
 import com.lj.app.core.common.security.CMSecurityContext;
 
+/**
+ * 
+ * 权限服务
+ *
+ */
 public interface SecurityService {
 
   public CMSecurityContext getSecurityContext(int userId, String contextPath, String appId);

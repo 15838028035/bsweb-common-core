@@ -10,16 +10,21 @@ import com.lj.app.core.common.properties.PropertiesUtil;
 
 import net.sf.json.JSONObject;
 
+/**
+ * 
+ * 登陆Api
+ *
+ */
 public class LoginActionApi {
 
   public static final String FIND_USER_INFO_URL = PropertiesUtil.getPropertyTrim("FIND_USER_INFO_URL");
   public static final String UPM_LOGIN_URL = PropertiesUtil.getPropertyTrim("UPM_LOGIN_URL");
 
   /**
-   * 
-   * @param userId
-   * @param pwd
-   * @return
+   * 获取登陆信息
+   * @param userId 用户名 
+   * @param pwd 密码
+   * @return 登陆用户信息
    */
   public static LoginUserInfo getLoginUserInfo(String userId, String pwd) {
     URLConnection connection = null;
@@ -62,10 +67,9 @@ public class LoginActionApi {
   }
 
   /**
-   * 
-   * @param userId
-   * @param pwd
-   * @return
+   * 登陆
+   * @param userId 用户名 
+   * @param pwd 密码
    */
   public static void loginUpm(String userId, String pwd) {
     URLConnection connection = null;

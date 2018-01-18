@@ -5,6 +5,11 @@ import org.springframework.stereotype.Service;
 
 import com.lj.app.core.common.security.CMSecurityContext;
 
+/**
+ * 
+ * 权限服务Api
+ *
+ */
 @Service("securityApiService")
 public class SecurityApiServiceImpl implements SecurityApiService {
   @Autowired

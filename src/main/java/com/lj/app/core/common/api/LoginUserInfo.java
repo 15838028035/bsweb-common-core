@@ -1,5 +1,10 @@
 package com.lj.app.core.common.api;
 
+/**
+ * 
+ * 登陆用户信息
+ *
+ */
 public class LoginUserInfo {
   /**
    * ID
