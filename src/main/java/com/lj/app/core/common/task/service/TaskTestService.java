@@ -2,11 +2,14 @@ package com.lj.app.core.common.task.service;
 
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.lj.app.core.common.base.service.BaseServiceImpl;
 
-@Component("taskTestService")
+/**
+ * 测试定时任务
+ */
+@Service("taskTestService")
 public class TaskTestService extends BaseServiceImpl<T> implements BaseTaskService {
 
   @Override

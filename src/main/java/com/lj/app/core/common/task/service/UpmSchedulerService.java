@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 
 import com.lj.app.core.common.base.service.BaseServiceImpl;
 
+/**
+ * 
+ * job调度服务类
+ *
+ */
 @Service("upmSchedulerService")
 public class UpmSchedulerService extends BaseServiceImpl<T> implements SchedulingConfigurer {
 

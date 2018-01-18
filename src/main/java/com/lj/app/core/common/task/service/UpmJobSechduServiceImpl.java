@@ -13,6 +13,11 @@ import com.lj.app.core.common.task.entity.UpmJob;
 import com.lj.app.core.common.task.entity.UpmJobSechdu;
 import com.lj.app.core.common.util.SpringContextHolder;
 
+/**
+ * 
+ * 定时调度服务类
+ *
+ */
 @Service("upmJobSechduService")
 public class UpmJobSechduServiceImpl extends BaseServiceImpl implements UpmJobSechduService<UpmJobSechdu> {
 
@@ -25,8 +30,8 @@ public class UpmJobSechduServiceImpl extends BaseServiceImpl implements UpmJobSe
   /**
    * 查看当前作业是否处于调度状态
    * 
-   * @param jobId
-   * @return
+   * @param jobId jobID
+   * @return 是否
    */
   public boolean isProcessJobStatus(Integer jobId) {
     Map<String, Integer> filterMap = new HashMap<String, Integer>();
@@ -47,8 +52,8 @@ public class UpmJobSechduServiceImpl extends BaseServiceImpl implements UpmJobSe
   /**
    * 查看作业作业是否调度过
    * 
-   * @param jobId
-   * @return
+   * @param jobId jobID
+   * @return 是否
    */
   public boolean hasJobSechdu(Integer jobId) {
     Map<String, Integer> filterMap = new HashMap<String, Integer>();
@@ -64,14 +69,16 @@ public class UpmJobSechduServiceImpl extends BaseServiceImpl implements UpmJobSe
   /**
    * 作业调度开始
    * 
-   * @param Long
-   *          jobId,Date jobStartDate
+   * @param jobId  jobID
+   * @param jobStartDate 作业开始时间
+   *          
    * @return void
    */
-  public boolean JobStartSechdued(Integer jobId, Date jobStartDate) {
+  public boolean jobStartSechdued(Integer jobId, Date jobStartDate) {
     try {
       log.warn("...........begin write upm_job_sechdu start info..................." + jobId);
-      com.lj.app.core.common.task.entity.UpmJobSechdu upmJobSechdu = new com.lj.app.core.common.task.entity.UpmJobSechdu();
+      com.lj.app.core.common.task.entity.UpmJobSechdu upmJobSechdu = 
+          new com.lj.app.core.common.task.entity.UpmJobSechdu();
       upmJobSechdu.setJobId(jobId);
       upmJobSechdu.setStartTime(jobStartDate);
       upmJobSechdu.setJodStatus("1");// 1代表执行中；2代表完成
@@ -86,10 +93,20 @@ public class UpmJobSechduServiceImpl extends BaseServiceImpl implements UpmJobSe
     }
   }
 
-  public boolean JobEndSechdued(Integer jobId, Date jobStartDate, Integer isSuccess, String resultMsg) {
+  /**
+   * 作业调度结束
+   * 
+   * @param jobId jobID
+   * @param jobStartDate 作业开始时间
+   * @param isSuccess 是否成功
+   * @param resultMsg 结果消息
+   * @return 是否
+   */
+  public boolean jobEndSechdued(Integer jobId, Date jobStartDate, Integer isSuccess, String resultMsg)  {
     try {
       log.warn("...........begin write upm_job_sechdu end info.........." + jobId);
-      com.lj.app.core.common.task.entity.UpmJobSechdu uapJobSechduCond = new com.lj.app.core.common.task.entity.UpmJobSechdu();
+      com.lj.app.core.common.task.entity.UpmJobSechdu uapJobSechduCond =
+          new com.lj.app.core.common.task.entity.UpmJobSechdu();
       uapJobSechduCond.setJobId(jobId);
       uapJobSechduCond.setStartTime(jobStartDate);
 
@@ -110,6 +127,12 @@ public class UpmJobSechduServiceImpl extends BaseServiceImpl implements UpmJobSe
     }
   }
 
+  /**
+   * 执行job任务
+   * 
+   * @param jobId jobID
+   * @throws Exception 异常信息
+   */
   @SuppressWarnings("unchecked")
   public void runJob(Integer jobId) throws Exception {
     UpmJob upmJob = (UpmJob) upmJobService.getInfoByKey(jobId);
@@ -123,13 +146,14 @@ public class UpmJobSechduServiceImpl extends BaseServiceImpl implements UpmJobSe
 
     for (com.lj.app.core.common.task.entity.UpmJobSechdu ujs : upmJobSechduList) {
       String jobStatus = ujs.getJodStatus();
-      if (jobStatus.equals("1"))// //1代表执行中；2代表完成
+      if (jobStatus.equals("1")) {  //1代表执行中；2代表完成
         throw new Exception("任务正在执行中，请稍等...");
+      }
     }
 
     Date jobStartDate = new Date();
 
-    JobStartSechdued(jobId, jobStartDate);
+    jobStartSechdued(jobId, jobStartDate);
 
     try {
       Class cls = Class.forName(upmJob.getJobClass());
@@ -137,11 +161,11 @@ public class UpmJobSechduServiceImpl extends BaseServiceImpl implements UpmJobSe
       upmSchedulerService.setCron(upmJob.getJobFrequency());
       upmSchedulerService.setBaseTaskService(baseTaskService);
 
-      JobEndSechdued(jobId, jobStartDate, 1, "执行成功");
+      jobEndSechdued(jobId, jobStartDate, 1, "执行成功");
     } catch (Exception e) {
       e.printStackTrace();
       log.error("runJob 执行失败,失败原因:" + e.getMessage());
-      JobEndSechdued(jobId, jobStartDate, 0, "执行失败,失败原因:" + e.getMessage());
+      jobEndSechdued(jobId, jobStartDate, 0, "执行失败,失败原因:" + e.getMessage());
     }
   }
 }
