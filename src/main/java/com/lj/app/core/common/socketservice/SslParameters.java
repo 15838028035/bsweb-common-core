@@ -3,6 +3,11 @@ package com.lj.app.core.common.socketservice;
 import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSocketFactory;
 
+/**
+ * 
+ * SSL连接参数
+ *
+ */
 public class SslParameters {
 
   private String keyStoreFilename;
@@ -14,23 +19,27 @@ public class SslParameters {
   private String trustStoreFilenameOld;
 
   protected void setKeyStoreFilename(String filename) {
-    if (filename != null)
+    if (filename != null) {
       this.keyStoreFilename = filename;
+    }
   }
 
   protected void setKeyStorePassword(String value) {
-    if (value != null)
+    if (value != null)  {
       this.keyStorePassword = value;
+    }
   }
 
   protected void setTrustStoreFilename(String filename) {
-    if (filename != null)
+    if (filename != null) {
       this.trustStoreFilename = filename;
+    }
   }
 
   private void setProperty(String tag, String value, String defaultValue) {
-    if (value == null)
+    if (value == null)  {
       value = defaultValue;
+    }
     if (value == null) {
       System.clearProperty(tag);
     } else {
@@ -65,6 +74,11 @@ public class SslParameters {
     setProperty("javax.net.ssl.trustStore", trustStoreFilenameOld, trustStoreFilenameOld);
   }
 
+  /** 
+   * SSL参数
+   * @param sslParameterClassName SSL参数
+   * @return SSL参数
+   */
   public static SslParameters setSslParameters(String sslParameterClassName) {
     Class<? extends SslParameters> sslParametersInstance;
     if (sslParameterClassName == null || "true".equalsIgnoreCase(sslParameterClassName)) {
@@ -84,7 +98,11 @@ public class SslParameters {
     }
   }
 
-  public SSLServerSocketFactory createSSLServerSocketFactory() {
+  /**
+   * 
+   * @return SSL服务工厂
+   */
+  public SSLServerSocketFactory createSslServerSocketFactory() {
     SSLServerSocketFactory ssf;
     prepareGlobalConfiguration();
     try {
@@ -95,7 +113,11 @@ public class SslParameters {
     return ssf;
   }
 
-  public SSLSocketFactory createSSLSocketFactory() {
+  /**
+   * 
+   * @return SSL服务工厂
+   */
+  public SSLSocketFactory createSslSocketFactory() {
     SSLSocketFactory ssf;
     prepareGlobalConfiguration();
     try {

@@ -3,6 +3,11 @@ package com.lj.app.core.common.generator.util;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 
+ * java原生类型映射
+ *
+ */
 public class JavaPrimitiveTypeMapping {
   static Map<String, String> wraper2primitive = new HashMap<String, String>();
   static Map<String, String> primitive2wraper = new HashMap<String, String>();
@@ -27,6 +32,11 @@ public class JavaPrimitiveTypeMapping {
     return wraper2primitive.get(className);
   }
 
+  /**
+   * 获得原始类型
+   * @param clazz 类
+   * @return 字符串
+   */
   public static String getPrimitiveType(String clazz) {
     String className = StringHelper.getJavaClassSimpleName(clazz);
     String result = wraper2primitive.get(className);
@@ -43,6 +53,11 @@ public class JavaPrimitiveTypeMapping {
     return result == null ? clazz : result;
   }
 
+  /**
+   * 获得默认值
+   * @param type 类型
+   * @return 默认值
+   */
   public static String getDefaultValue(String type) {
     if (StringHelper.isBlank(type)) {
       return "null";

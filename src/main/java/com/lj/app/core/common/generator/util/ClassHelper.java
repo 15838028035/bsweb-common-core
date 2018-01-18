@@ -1,6 +1,17 @@
 package com.lj.app.core.common.generator.util;
 
+/**
+ * 
+ * 类工具类
+ *
+ */
 public class ClassHelper {
+  
+  /**
+   * 实例化对象
+   * @param c 对象
+   * @return 实例化对象
+   */
   public static Object newInstance(Class<?> c) {
     try {
       return c.newInstance();
@@ -9,6 +20,11 @@ public class ClassHelper {
     }
   }
 
+  /**
+   * 实例化对象
+   * @param className 类名称
+   * @return 实例化对象
+   */
   public static Object newInstance(String className) {
     try {
       return newInstance(Class.forName(className));

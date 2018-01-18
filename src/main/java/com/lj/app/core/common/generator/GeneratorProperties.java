@@ -12,9 +12,14 @@ import com.lj.app.core.common.generator.util.GLogger;
 import com.lj.app.core.common.generator.util.PropertiesHelper;
 import com.lj.app.core.common.generator.util.typemapping.DatabaseTypeUtils;
 
+/**
+ * 
+ *  代码生成器属性配置
+ *
+ */
 public class GeneratorProperties {
-  static final String PROPERTIES_FILE_NAMES[] = new String[] { "generator.properties" };
-  static PropertiesHelper propertiesHelper = new PropertiesHelper(new Properties(), true);
+  public static final String [] PROPERTIES_FILE_NAMES = new String[] { "generator.properties" };
+  public static PropertiesHelper propertiesHelper = new PropertiesHelper(new Properties(), true);
 
   private GeneratorProperties() {
   }
@@ -35,6 +40,9 @@ public class GeneratorProperties {
     GeneratorProperties.getHelper().clear();
   }
 
+  /**
+   * 加载配置
+   */
   public static void reload() {
     try {
       GLogger.info("Start Load GeneratorPropeties from classpath:" + Arrays.toString(PROPERTIES_FILE_NAMES));
@@ -45,8 +53,8 @@ public class GeneratorProperties {
       setProperties(p);
 
       String basepackage = getRequiredProperty("basepackage");
-      String basepackage_dir = basepackage.replace('.', '/');
-      p.setProperty("basepackage_dir", basepackage_dir);
+      String basepackageDir = basepackage.replace('.', '/');
+      p.setProperty("basepackage_dir", basepackageDir);
       for (Iterator it = p.entrySet().iterator(); it.hasNext();) {
         Map.Entry entry = (Map.Entry) it.next();
         System.out.println("[Property] " + entry.getKey() + "=" + entry.getValue());
@@ -155,6 +163,10 @@ public class GeneratorProperties {
     getHelper().setProperty(key, value);
   }
 
+  /**
+   * 设置属性
+   * @param inputProps s输入属性
+   */
   public static void setProperties(Properties inputProps) {
     propertiesHelper = new PropertiesHelper(inputProps, true);
     for (Iterator it = propertiesHelper.entrySet().iterator(); it.hasNext();) {

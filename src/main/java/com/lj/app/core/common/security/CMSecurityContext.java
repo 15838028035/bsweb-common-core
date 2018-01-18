@@ -6,6 +6,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * 
+ * 权限容器上下文
+ *
+ */
 @SuppressWarnings("unchecked")
 public class CMSecurityContext implements Serializable {
 
@@ -33,8 +38,8 @@ public class CMSecurityContext implements Serializable {
   /**
    * 是否有url访问权限
    * 
-   * @param requestUrl
-   * @return
+   * @param requestUrl 请求地址
+   * @return 是否
    */
   public boolean hasUrlPermission(String requestUrl) {
     for (String url : urls) {
@@ -49,8 +54,8 @@ public class CMSecurityContext implements Serializable {
   /**
    * 是否有显示的权限
    * 
-   * @param requestCode
-   * @return
+   * @param requestCode 请求编码
+   * @return 是否
    */
   public boolean hasDisplayPermission(String requestCode) {
     return codes.contains(requestCode);

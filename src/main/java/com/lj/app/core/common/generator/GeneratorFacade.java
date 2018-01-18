@@ -15,10 +15,18 @@ import com.lj.app.core.common.generator.util.ClassHelper;
 import com.lj.app.core.common.generator.util.GLogger;
 import com.lj.app.core.common.generator.util.StringHelper;
 
+/**
+ * 
+ * 生成器门面类
+ *
+ */
 public class GeneratorFacade {
 
   private Generator generator = new Generator();
 
+  /**
+   * 构造函数
+   */
   public GeneratorFacade() {
     if (StringHelper.isNotBlank(GeneratorProperties.getProperty("outRoot"))) {
       generator.setOutRootDir(GeneratorProperties.getProperty("outRoot"));
@@ -33,6 +41,10 @@ public class GeneratorFacade {
     this.generator = generator;
   }
 
+  /**
+   * 打印所有表名称
+   * @throws Exception 异常
+   */
   public void printAllTableNames() throws Exception {
     List tables = DbTableFactory.getInstance().getAllTables();
     System.out.println("\n----All TableNames BEGIN----");
@@ -43,12 +55,22 @@ public class GeneratorFacade {
     System.out.println("----All TableNames END----");
   }
 
+  /**
+   * 根据表名称生成所有
+   * @throws Exception 异常
+   */
   public void generateByAllTable() throws Exception {
     List tables = DbTableFactory.getInstance().getAllTables();
-    for (int i = 0; i < tables.size(); i++)
+    for (int i = 0; i < tables.size(); i++) {
       generateByTable(((Table) tables.get(i)).getSqlName());
+    }
   }
 
+  /**
+   * 根据表名称生成代码
+   * @param tableName 表名称
+   * @throws Exception  异常
+   */
   public void generateByTable(String tableName) throws Exception {
     Generator g = createGeneratorForDbTable();
 
@@ -56,12 +78,24 @@ public class GeneratorFacade {
     generateByTable(g, table);
   }
 
+  /**
+   * 根据表名称生成代码
+   * @param g 生成对象
+   * @param table 表名称
+   * @throws Exception  异常
+   */
   private void generateByTable(Generator g, Table table) throws Exception {
     GeneratorModel m = GeneratorModel.newFromTable(table);
     String displayText = table.getSqlName() + " => " + table.getClassName();
     generateBy(g, m, displayText);
   }
 
+  /**
+   * 根据表名称生成代码
+   * @param tableName 表名称
+   * @param className 类名称
+   * @throws Exception  异常
+   */
   public void generateByTable(String tableName, String className) throws Exception {
     Generator g = createGeneratorForDbTable();
     Table table = DbTableFactory.getInstance().getTable(tableName);
@@ -99,6 +133,10 @@ public class GeneratorFacade {
     generator.deleteOutRootDir();
   }
 
+  /**
+   * 创建配置生成对象
+   * @return 生成对象
+   */
   public Generator createGeneratorForDbTable() {
     Generator g = getGenerator();
     g.setRemoveExtensions(GeneratorProperties.getProperty("generator_removeExtensions"));
@@ -113,6 +151,11 @@ public class GeneratorFacade {
     return g;
   }
 
+  /**
+   * 
+   * 生成模型
+   *
+   */
   public static class GeneratorModel {
     public Map filePathModel;
     public Map templateModel;
@@ -122,6 +165,11 @@ public class GeneratorFacade {
       this.filePathModel = filePathModel;
     }
 
+    /**
+     * 生成模型
+     * @param table 表
+     * @return 生成模型
+     */
     public static GeneratorModel newFromTable(Table table) {
       Map templateModel = new HashMap();
       templateModel.putAll(GeneratorProperties.getProperties());

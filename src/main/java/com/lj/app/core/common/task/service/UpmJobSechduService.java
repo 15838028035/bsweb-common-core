@@ -8,7 +8,7 @@ import com.lj.app.core.common.base.service.BaseService;
 /**
  * 
  * 定时调度服务类
- *
+ * @param  <UpmJobSechdu> 调度对象
  */
 public interface UpmJobSechduService<UpmJobSechdu> extends BaseService {
   /**

@@ -13,6 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+/**
+ * 
+ * 代码生成器Frame
+ *
+ */
 public class GeneratorMainFrame extends JFrame implements ActionListener {
 
   /**
@@ -105,6 +110,11 @@ public class GeneratorMainFrame extends JFrame implements ActionListener {
 
   private GridBagConstraints c = new GridBagConstraints();
 
+  /**
+   * 
+   * 代码生成器Frame
+   *
+   */
   public GeneratorMainFrame(String str) {
     super(str);
 
@@ -127,6 +137,9 @@ public class GeneratorMainFrame extends JFrame implements ActionListener {
 
   }
 
+  /**
+   * 获得配置属性
+   */
   public void getProperties() {
     templateDirProp = GeneratorProperties.getProperty("template");
     schemaProp = GeneratorProperties.getProperty("TABLE_SCHEM");
@@ -135,6 +148,9 @@ public class GeneratorMainFrame extends JFrame implements ActionListener {
     tableProp = GeneratorProperties.getProperty("TABLE_NAME");
   }
 
+  /**
+   * 添加组件
+   */
   public void addComponent() {
 
     titleInformation = new JLabel("Rapid-Frame代码生成器");
@@ -190,6 +206,16 @@ public class GeneratorMainFrame extends JFrame implements ActionListener {
 
   }
 
+  /**
+   * 添加布局
+   * @param g 布局
+   * @param c 布局
+   * @param jc 布局
+   * @param x x
+   * @param y y
+   * @param gw 宽度
+   * @param gh 高度
+   */
   public void add(GridBagLayout g, GridBagConstraints c, JComponent jc, int x, int y, int gw, int gh) {
 
     c.gridx = x;
@@ -243,7 +269,11 @@ public class GeneratorMainFrame extends JFrame implements ActionListener {
 
   }
 
-  public static void main(String args[]) {
-    new GeneratorMainFrame("Rapid-Frame代码生成器");
+  /**
+   * 执行方法
+   * @param args 运行参数
+   */
+  public static void main(String [] args)  {
+    new GeneratorMainFrame("代码生成器Frame");
   }
 }

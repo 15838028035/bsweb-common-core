@@ -13,9 +13,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class DesUtilFrame extends JFrame implements ActionListener
-
-{
+/**
+ * 
+ * DES工具类
+ *
+ */
+public class DesUtilFrame extends JFrame implements ActionListener {
 
   /**
    * 标题
@@ -27,15 +30,15 @@ public class DesUtilFrame extends JFrame implements ActionListener
    * fileNameTextField
    */
   private JTextField fileNameTextField;
+  private JButton submit;
+
+  private JTextArea result;
 
   GridBagLayout g = new GridBagLayout();
 
   GridBagConstraints c = new GridBagConstraints();
 
-  DesUtilFrame(String str)
-
-  {
-
+  DesUtilFrame(String str) {
     super(str);
 
     setSize(800, 600);
@@ -55,10 +58,10 @@ public class DesUtilFrame extends JFrame implements ActionListener
 
   }
 
-  public void addComponent()
-
-  {
-
+  /**
+   * 添加组件
+   */
+  public void addComponent() {
     titleInformation = new JLabel("des3解密工具");
 
     add(g, c, titleInformation, 0, 0, 1, 1);
@@ -83,9 +86,17 @@ public class DesUtilFrame extends JFrame implements ActionListener
 
   }
 
-  public void add(GridBagLayout g, GridBagConstraints c, JComponent jc, int x, int y, int gw, int gh)
-
-  {
+  /**
+   * 添加布局
+   * @param g 布局对象
+   * @param c 布局容器
+   * @param jc 布局组件
+   * @param x x
+   * @param y y
+   * @param gw 宽度
+   * @param gh 高度
+   */
+  public void add(GridBagLayout g, GridBagConstraints c, JComponent jc, int x, int y, int gw, int gh) {
 
     c.gridx = x;
 
@@ -103,23 +114,16 @@ public class DesUtilFrame extends JFrame implements ActionListener
 
   }
 
-  public static void main(String args[])
-
-  {
-
+  /**
+   * main
+   * @param args 参数
+   */
+  public static void main(String [] args) {
     new DesUtilFrame("des3解密工具");
-
   }
 
-  JButton submit;
-
-  JTextArea result;
-
   @Override
-  public void actionPerformed(ActionEvent arg0)
-
-  {
-
+  public void actionPerformed(ActionEvent arg0) {
     String fileNameTextFieldStr = fileNameTextField.getText();
 
     String retMsg = "";
@@ -135,5 +139,4 @@ public class DesUtilFrame extends JFrame implements ActionListener
     result.setText(retMsg);
 
   }
-
 }

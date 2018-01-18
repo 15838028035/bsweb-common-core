@@ -5,6 +5,11 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 
+ * 自定义线程池
+ *
+ */
 public class TraceThreadPoolExecutor extends ThreadPoolExecutor {
 
   public TraceThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit,

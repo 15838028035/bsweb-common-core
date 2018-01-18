@@ -11,27 +11,22 @@ import javax.crypto.spec.DESKeySpec;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
+/***
+ * 
+ * 加密工具类
+ *
+ */
 public class DesUtil {
 
-  private final static String DES = "DES";
+  public static  final  String DES = "DES";
   public static final String DES_KEY = "wang!@#$%";
-
-  public static void main(String[] args) throws Exception {
-    String data = "123456";
-    String key = "wang!@#$%";
-    System.err.println(encrypt(data, key));
-    System.err.println(decrypt(encrypt(data, key), key));
-
-  }
 
   /**
    * Description 根据键值进行加密
    * 
-   * @param data
-   * @param key
-   *          加密键byte数组
-   * @return
-   * @throws Exception
+   * @param data 值
+   * @return 根据键值进行加密
+   * @throws Exception 异常
    */
   public static String encrypt(String data) throws Exception {
     return encrypt(data, DES_KEY);
@@ -40,11 +35,9 @@ public class DesUtil {
   /**
    * Description 根据键值进行加密
    * 
-   * @param data
-   * @param key
-   *          加密键byte数组
-   * @return
-   * @throws Exception
+   * @param data 值
+   * @param key  加密键byte数组
+   * @throws Exception 异常
    */
   public static String encrypt(String data, String key) throws Exception {
     byte[] bt = encrypt(data.getBytes(), key.getBytes());
@@ -55,12 +48,10 @@ public class DesUtil {
   /**
    * Description 根据键值进行解密
    * 
-   * @param data
-   * @param key
-   *          加密键byte数组
-   * @return
-   * @throws IOException
-   * @throws Exception
+   * @param data  值
+   * @return 根据键值进行解密
+   * @throws IOException 异常
+   * @throws Exception 异常
    */
   public static String decrypt(String data) throws IOException, Exception {
     return decrypt(data, DES_KEY);
@@ -69,16 +60,17 @@ public class DesUtil {
   /**
    * Description 根据键值进行解密
    * 
-   * @param data
+   * @param data 值
    * @param key
    *          加密键byte数组
-   * @return
-   * @throws IOException
-   * @throws Exception
+   * @return 根据键值进行解密
+   * @throws IOException 异常
+   * @throws Exception 异常
    */
   public static String decrypt(String data, String key) throws IOException, Exception {
-    if (data == null)
+    if (data == null) {
       return null;
+    }
     BASE64Decoder decoder = new BASE64Decoder();
     byte[] buf = decoder.decodeBuffer(data);
     byte[] bt = decrypt(buf, key.getBytes());
@@ -88,13 +80,13 @@ public class DesUtil {
   /**
    * Description 根据键值进行加密
    * 
-   * @param data
+   * @param data 值
    * @param key
    *          加密键byte数组
-   * @return
-   * @throws Exception
+   * @return 据键值进行加密
+   * @throws Exception 异常
    */
-  private static byte[] encrypt(byte[] data, byte[] key) throws Exception {
+  public static byte[] encrypt(byte[] data, byte[] key) throws Exception {
     // 生成一个可信任的随机数源
     SecureRandom sr = new SecureRandom();
 
@@ -117,13 +109,12 @@ public class DesUtil {
   /**
    * Description 根据键值进行解密
    * 
-   * @param data
-   * @param key
-   *          加密键byte数组
-   * @return
-   * @throws Exception
+   * @param data 值
+   * @param key  加密键byte数组
+   * @return 根据键值进行解密
+   * @throws Exception 异常
    */
-  private static byte[] decrypt(byte[] data, byte[] key) throws Exception {
+   public static byte[] decrypt(byte[] data, byte[] key) throws Exception {
     // 生成一个可信任的随机数源
     SecureRandom sr = new SecureRandom();
 

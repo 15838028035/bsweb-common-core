@@ -28,6 +28,11 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
+/**
+ * 
+ * 生成器类
+ *
+ */
 public class Generator {
   private static final String GENERATOR_INSERT_LOCATION = "generator-insert-location";
   private List templateRootDirs = new ArrayList();
@@ -58,11 +63,16 @@ public class Generator {
 
   /**
    * 设置模板目录，支持用逗号分隔多个模板目录
+   * @param templateRootDir   设置模板目录，支持用逗号分隔多个模板目录
    */
   public void setTemplateRootDir(String templateRootDir) {
     setTemplateRootDirs(StringHelper.tokenizeToStringArray(templateRootDir, ","));
   }
 
+  /**
+   * 设置模板目录
+   * @param templateRootDirs   设置模板目录
+   */
   public void setTemplateRootDirs(String... templateRootDirs) {
     ArrayList<File> tempDirs = new ArrayList<File>();
     for (String dir : templateRootDirs) {
@@ -83,9 +93,14 @@ public class Generator {
     return this.encoding;
   }
 
+  /**
+   * 设置编码
+   * @param  v 编码
+   */
   public void setEncoding(String v) {
-    if (v == null)
+    if (v == null)  {
       throw new IllegalArgumentException("encoding must be not null");
+    }
     this.encoding = v;
   }
 
@@ -117,9 +132,14 @@ public class Generator {
     return sourceEncoding;
   }
 
+  /**
+   * 设置编码
+   * @param sourceEncoding 设置编码
+   */
   public void setSourceEncoding(String sourceEncoding) {
-    if (StringHelper.isBlank(sourceEncoding))
+    if (StringHelper.isBlank(sourceEncoding)) {
       throw new IllegalArgumentException("sourceEncoding must be not empty");
+    }
     this.sourceEncoding = sourceEncoding;
   }
 
@@ -127,28 +147,44 @@ public class Generator {
     return outputEncoding;
   }
 
+  /**
+   * 设置编码
+   * @param outputEncoding 设置编码
+   */
   public void setOutputEncoding(String outputEncoding) {
-    if (StringHelper.isBlank(outputEncoding))
+    if (StringHelper.isBlank(outputEncoding)) {
       throw new IllegalArgumentException("outputEncoding must be not empty");
+    }
     this.outputEncoding = outputEncoding;
   }
 
+  /**
+   * 设置根目录
+   * @param rootDir 根目录
+   */
   public void setOutRootDir(String rootDir) {
-    if (rootDir == null)
+    if (rootDir == null)  {
       throw new IllegalArgumentException("outRootDir must be not null");
+    }
     this.outRootDir = rootDir;
   }
 
+  /**
+   * 删除目录
+   * @throws IOException 异常
+   */
   public void deleteOutRootDir() throws IOException {
-    if (StringHelper.isBlank(getOutRootDir()))
+    if (StringHelper.isBlank(getOutRootDir()))  {
       throw new IllegalStateException("'outRootDir' property must be not null.");
+    }
     GLogger.info("[delete dir] " + getOutRootDir());
     FileHelper.deleteDirectory(new File(getOutRootDir()));
   }
 
   public List generateBy(Map templateModel, Map filePathModel) throws Exception {
-    if (this.templateRootDirs.size() == 0)
+    if (this.templateRootDirs.size() == 0)  {
       throw new IllegalStateException("'templateRootDirs' cannot empty");
+    }
 
     List allExceptions = new ArrayList();
     for (int i = 0; i < this.templateRootDirs.size(); i++) {
@@ -160,8 +196,9 @@ public class Generator {
   }
 
   private List<Exception> generateBy(File templateRootDir, Map templateModel, Map filePathModel) throws Exception {
-    if (templateRootDir == null)
+    if (templateRootDir == null)  {
       throw new IllegalStateException("'templateRootDir' must be not null");
+    }
     System.out
         .println("-------------------load template from templateRootDir = '" + templateRootDir.getAbsolutePath() + "'");
 
@@ -173,10 +210,12 @@ public class Generator {
       File templateFile = (File) templateFiles.get(i);
       String templateRelativePath = FileHelper.getRelativePath(templateRootDir, templateFile);
       String outputFilePath = templateRelativePath;
-      if ((templateFile.isDirectory()) || (templateFile.isHidden()))
+      if ((templateFile.isDirectory()) || (templateFile.isHidden()))  {
         continue;
-      if (templateRelativePath.trim().equals(""))
+      }
+      if (templateRelativePath.trim().equals("")) {
         continue;
+      }
       if (templateFile.getName().toLowerCase().endsWith(".include")) {
         System.out.println("[skip]\t\t endsWith '.include' template:" + templateRelativePath);
       } else {
@@ -245,6 +284,14 @@ public class Generator {
     return config;
   }
 
+  /**
+   * 新建模板
+   * @param templateRootDirs 模板目录
+   * @param defaultEncoding 编码
+   * @param templateName 模板名称
+   * @return 配置对象
+   * @throws IOException 异常
+   */
   public static Configuration newFreeMarkerConfiguration(List<File> templateRootDirs, String defaultEncoding,
       String templateName) throws IOException {
     Configuration conf = new Configuration();
@@ -268,8 +315,14 @@ public class Generator {
     return conf;
   }
 
+  /**
+   * 获得路径
+   * @param templateName 模板名称
+   * @param suffix 前缀
+   * @return 路径列表
+   */
   public static List<String> getParentPaths(String templateName, String suffix) {
-    String array[] = StringHelper.tokenizeToStringArray(templateName, "\\/");
+    String [] array = StringHelper.tokenizeToStringArray(templateName, "\\/");
     List<String> list = new ArrayList<String>();
     list.add(suffix);
     list.add(File.separator + suffix);
@@ -348,6 +401,10 @@ public class Generator {
     out.close();
   }
 
+  /**
+   * 清除
+   * @throws IOException 异常
+   */
   public void clean() throws IOException {
     String outRoot = getOutRootDir();
     System.out.println("[Delete Dir]\t" + outRoot);
@@ -355,8 +412,9 @@ public class Generator {
   }
 
   private String getOutRootDir() {
-    if (this.outRootDir == null)
+    if (this.outRootDir == null)  {
       throw new IllegalStateException("'outRootDir' property must be not null.");
+    }
     return this.outRootDir;
   }
 

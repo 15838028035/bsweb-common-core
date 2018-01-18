@@ -3,9 +3,19 @@ package com.lj.app.core.common.generator.util;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 
+ * JAVA类型转换工具类
+ *
+ */
 public class ActionScriptDataTypesUtils {
   private static final Map<String, String> preferredAsTypeForJavaType = new HashMap();
 
+  /**
+   * 获得引用类型
+   * @param javaType java类型
+   * @return 引用类型
+   */
   public static String getPreferredAsType(String javaType) {
     String result = (String) preferredAsTypeForJavaType.get(javaType);
     if (result == null) {
