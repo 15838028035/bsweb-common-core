@@ -13,30 +13,32 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-
-public class DesUtilFrame extends JFrame implements ActionListener
-
-{
-
 /**
- * 标题
+ * 
+ * DES工具类
+ *
  */
-private JLabel titleInformation;
-private JLabel fileName;
+public class DesUtilFrame extends JFrame implements ActionListener {
 
-/**
- * fileNameTextField
- */
-private JTextField fileNameTextField;
+  /**
+   * 标题
+   */
+  private JLabel titleInformation;
+  private JLabel fileName;
 
-GridBagLayout g = new GridBagLayout();
+  /**
+   * fileNameTextField
+   */
+  private JTextField fileNameTextField;
+  private JButton submit;
 
-GridBagConstraints c = new GridBagConstraints();
+  private JTextArea result;
 
-DesUtilFrame(String str)
+  GridBagLayout g = new GridBagLayout();
 
-{
+  GridBagConstraints c = new GridBagConstraints();
 
+  DesUtilFrame(String str) {
     super(str);
 
     setSize(800, 600);
@@ -54,14 +56,12 @@ DesUtilFrame(String str)
 
     setLocationRelativeTo(null);// 设居中显示;
 
-}
+  }
 
-
-
-public void addComponent()
-
-{
-
+  /**
+   * 添加组件
+   */
+  public void addComponent() {
     titleInformation = new JLabel("des3解密工具");
 
     add(g, c, titleInformation, 0, 0, 1, 1);
@@ -74,8 +74,6 @@ public void addComponent()
 
     add(g, c, fileNameTextField, 1, 1, 1, 1);
 
-  
-
     submit = new JButton("解密");
 
     c.insets = new Insets(8, 10, 4, 0);
@@ -86,11 +84,19 @@ public void addComponent()
 
     add(g, c, result, 0, 7, 3, 4);
 
-}
+  }
 
-public void add(GridBagLayout g, GridBagConstraints c, JComponent jc, int x, int y, int gw, int gh)
-
-{
+  /**
+   * 添加布局
+   * @param g 布局对象
+   * @param c 布局容器
+   * @param jc 布局组件
+   * @param x x
+   * @param y y
+   * @param gw 宽度
+   * @param gh 高度
+   */
+  public void add(GridBagLayout g, GridBagConstraints c, JComponent jc, int x, int y, int gw, int gh) {
 
     c.gridx = x;
 
@@ -106,39 +112,31 @@ public void add(GridBagLayout g, GridBagConstraints c, JComponent jc, int x, int
 
     add(jc);
 
-}
+  }
 
-public static void main(String args[])
-
-{
-
+  /**
+   * main
+   * @param args 参数
+   */
+  public static void main(String [] args) {
     new DesUtilFrame("des3解密工具");
+  }
 
-}
-
-JButton submit;
-
-JTextArea result;
-
-@Override
-public void actionPerformed(ActionEvent arg0)
-
-{
-
+  @Override
+  public void actionPerformed(ActionEvent arg0) {
     String fileNameTextFieldStr = fileNameTextField.getText();
 
-    String retMsg ="";
+    String retMsg = "";
 
     try {
 
-    	retMsg = DesUtil.decrypt(fileNameTextFieldStr);
+      retMsg = DesUtil.decrypt(fileNameTextFieldStr);
     } catch (Exception e) {
-        e.printStackTrace();
-        retMsg = "解密失败" +",异常信息:" + e.getMessage();
+      e.printStackTrace();
+      retMsg = "解密失败" + ",异常信息:" + e.getMessage();
     }
 
     result.setText(retMsg);
 
-}
-
+  }
 }

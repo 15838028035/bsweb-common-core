@@ -1,7 +1,11 @@
 package com.lj.app.core.common.base.service;
 
-import com.lj.app.core.common.base.service.BaseService;
-
+/**
+ * 
+ * token服务
+ *
+ * @param <UpmToken> token
+ */
 public interface UpmTokenService<UpmToken> extends BaseService {
 
 }

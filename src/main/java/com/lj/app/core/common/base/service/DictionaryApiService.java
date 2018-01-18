@@ -7,56 +7,67 @@ import org.springframework.stereotype.Service;
 
 import com.lj.app.core.common.base.entity.UpmDictionary;
 
+/**
+ * 
+ * 数据字典Api
+ *
+ */
 @Service("dictionaryApiService")
 public class DictionaryApiService {
 
-	@Autowired
-	private UpmDictionaryService<UpmDictionary> upmDictionaryService;
+  @Autowired
+  private UpmDictionaryService<UpmDictionary> upmDictionaryService;
 
-	public List<UpmDictionary> findByExample(UpmDictionary upmDictionary) {
-		return this.upmDictionaryService.queryForList("select",upmDictionary);
-	}
+  public List<UpmDictionary> findByExample(UpmDictionary upmDictionary) {
+    return this.upmDictionaryService.queryForList("select", upmDictionary);
+  }
 
-	public void saveUpmDictionary(UpmDictionary upmDictionary) throws Exception {
-		this.upmDictionaryService.insertObject(upmDictionary);
-	}
+  public void saveUpmDictionary(UpmDictionary upmDictionary) throws Exception {
+    this.upmDictionaryService.insertObject(upmDictionary);
+  }
 
-	public List<UpmDictionary> getAllUpmDictionary() {
-		return this.upmDictionaryService.queryForList("select");
-	}
-	
-	public String typeAndDateCodeToName(String typeCode, String dataCode)  throws Exception{
-		return DictionaryUtil.typeAndDateCodeToName(typeCode, dataCode);
-	}
+  public List<UpmDictionary> getAllUpmDictionary() {
+    return this.upmDictionaryService.queryForList("select");
+  }
 
-	public List<UpmDictionary> findByTypeCode(String typeCode)  throws Exception{
-		return DictionaryUtil.findByTypeCode(typeCode);
-	}
+  public String typeAndDateCodeToName(String typeCode, String dataCode) throws Exception {
+    return DictionaryUtil.typeAndDateCodeToName(typeCode, dataCode);
+  }
 
-	public List<UpmDictionary> getDicData(String typeCode)  throws Exception{
-		return DictionaryUtil.findByTypeCode(typeCode);
-	}
+  public List<UpmDictionary> findByTypeCode(String typeCode) throws Exception {
+    return DictionaryUtil.findByTypeCode(typeCode);
+  }
 
-	public UpmDictionary findDicData(String typeCode, String dataCode)  throws Exception{
-		return DictionaryUtil.findDicData(typeCode, dataCode);
-	}
+  public List<UpmDictionary> getDicData(String typeCode) throws Exception {
+    return DictionaryUtil.findByTypeCode(typeCode);
+  }
 
-	public UpmDictionary findDicDataNoMap(String typeCode, String dataCode) {
-		UpmDictionary dic = new UpmDictionary();
-		dic.setTypeCode(typeCode);
-		dic.setDataCode(dataCode);
-		return (UpmDictionary) this.upmDictionaryService.queryForList("select",dic).get(0);
-	}
+  public UpmDictionary findDicData(String typeCode, String dataCode) throws Exception {
+    return DictionaryUtil.findDicData(typeCode, dataCode);
+  }
 
-	public List<UpmDictionary> listAllUpmDictionary() {
-		return upmDictionaryService.queryForList("select");
-	}
+  /**
+   * 查询数据字典
+   * @param typeCode 类型
+   * @param dataCode 数据编码
+   * @return 数据字典对象
+   */
+  public UpmDictionary findDicDataNoMap(String typeCode, String dataCode) {
+    UpmDictionary dic = new UpmDictionary();
+    dic.setTypeCode(typeCode);
+    dic.setDataCode(dataCode);
+    return (UpmDictionary) this.upmDictionaryService.queryForList("select", dic).get(0);
+  }
 
-	public List<UpmDictionary> listUpmDictionaryByExample(UpmDictionary entity) {
-		return upmDictionaryService.queryForList("select",entity);
-	}
+  public List<UpmDictionary> listAllUpmDictionary() {
+    return upmDictionaryService.queryForList("select");
+  }
 
-	public void deleteByNoteCode(String typeCode) {
-		this.upmDictionaryService.delete(typeCode);
-	}
+  public List<UpmDictionary> listUpmDictionaryByExample(UpmDictionary entity) {
+    return upmDictionaryService.queryForList("select", entity);
+  }
+
+  public void deleteByNoteCode(String typeCode) {
+    this.upmDictionaryService.delete(typeCode);
+  }
 }

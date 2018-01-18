@@ -4,233 +4,239 @@ import java.io.Serializable;
 
 import com.lj.app.core.common.util.StringUtil;
 
+/**
+ * 
+ * 基础实体
+ *
+ */
 @SuppressWarnings("serial")
 public class BaseEntity implements Serializable {
 
-	/**
-	 * 创建人 create_by
-	 */
-	private Integer createBy;
-	
-	/**
-	 *  创建人 create_By_UName
-	 */
-	private String createByUname;
-	
-	/**
-	 * 创建日期 create_date
-	 */
-	private String createDate;
-	
-	/**
-	 * 创建时间查询
-	 */
-	private String createDateBegin;
-	
-	/**
-	 * 创建时间查询
-	 */
-	private String createDateEnd;
-	/**
-	 * 更新人 update_by
-	 */
-	private Integer updateBy;
+  /**
+   * 创建人 create_by
+   */
+  private Integer createBy;
 
-	/**
-	 *  更新人 update_By_Uname
-	 */
-	private String updateByUname;
-	
-	/**
-	 * 更新日期 update_date
-	 */
-	private String updateDate;
-	
-	/**
-	 * 更新日期 查询
-	 */
-	private String updateDatebegin;
-	
-	/**
-	 * 更新日期 查询
-	 */
-	private String updateDateEnd;
+  /**
+   * 创建人 create_By_UName
+   */
+  private String createByUname;
 
-	/**
-	 * 是否有效 enable_flag
-	 */
-	private String enableFlag = "";
+  /**
+   * 创建日期 create_date
+   */
+  private String createDate;
 
-	/**
-	 * 加载状态 lock_status
-	 */
-	private String lockStatus = "";
+  /**
+   * 创建时间查询
+   */
+  private String createDateBegin;
 
-	/**
-	 * 应用ID app_id
-	 */
-	private String appId;
+  /**
+   * 创建时间查询
+   */
+  private String createDateEnd;
+  /**
+   * 更新人 update_by
+   */
+  private Integer updateBy;
 
-	/**
-	 * 排序字段
-	 */
-	private String sidx;
+  /**
+   * 更新人 update_By_Uname
+   */
+  private String updateByUname;
 
-	/**
-	 * 排序方式
-	 */
-	private String sord;
-	
-	/**
-	 * 状态
-	 */
-	private String status;
-	
-	/**
-	 * 查询条件
-	 */
-	private String conditionWhere;
+  /**
+   * 更新日期 update_date
+   */
+  private String updateDate;
 
-	/**
-	 * 从写toString方法
-	 */
-	public String toString() {
-		return StringUtil.props(this);
-	}
+  /**
+   * 更新日期 查询
+   */
+  private String updateDatebegin;
 
-	public Integer getCreateBy() {
-		return createBy;
-	}
+  /**
+   * 更新日期 查询
+   */
+  private String updateDateEnd;
 
-	public void setCreateBy(Integer createBy) {
-		this.createBy = createBy;
-	}
+  /**
+   * 是否有效 enable_flag
+   */
+  private String enableFlag = "";
 
-	public String getCreateDate() {
-		return createDate;
-	}
+  /**
+   * 加载状态 lock_status
+   */
+  private String lockStatus = "";
 
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
+  /**
+   * 应用ID app_id
+   */
+  private String appId;
 
-	public Integer getUpdateBy() {
-		return updateBy;
-	}
+  /**
+   * 排序字段
+   */
+  private String sidx;
 
-	public void setUpdateBy(Integer updateBy) {
-		this.updateBy = updateBy;
-	}
+  /**
+   * 排序方式
+   */
+  private String sord;
 
-	public String getUpdateDate() {
-		return updateDate;
-	}
+  /**
+   * 状态
+   */
+  private String status;
 
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
-	}
+  /**
+   * 查询条件
+   */
+  private String conditionWhere;
 
-	public String getEnableFlag() {
-		return enableFlag;
-	}
+  /**
+   * 从写toString方法
+   */
+  public String toString() {
+    return StringUtil.props(this);
+  }
 
-	public void setEnableFlag(String enableFlag) {
-		this.enableFlag = enableFlag;
-	}
+  public Integer getCreateBy() {
+    return createBy;
+  }
 
-	public String getLockStatus() {
-		return lockStatus;
-	}
+  public void setCreateBy(Integer createBy) {
+    this.createBy = createBy;
+  }
 
-	public void setLockStatus(String lockStatus) {
-		this.lockStatus = lockStatus;
-	}
+  public String getCreateDate() {
+    return createDate;
+  }
 
-	public String getAppId() {
-		return appId;
-	}
+  public void setCreateDate(String createDate) {
+    this.createDate = createDate;
+  }
 
-	public void setAppId(String appId) {
-		this.appId = appId;
-	}
+  public Integer getUpdateBy() {
+    return updateBy;
+  }
 
-	public String getSidx() {
-		return sidx;
-	}
+  public void setUpdateBy(Integer updateBy) {
+    this.updateBy = updateBy;
+  }
 
-	public void setSidx(String sidx) {
-		this.sidx = sidx;
-	}
+  public String getUpdateDate() {
+    return updateDate;
+  }
 
-	public String getSord() {
-		return sord;
-	}
+  public void setUpdateDate(String updateDate) {
+    this.updateDate = updateDate;
+  }
 
-	public void setSord(String sord) {
-		this.sord = sord;
-	}
+  public String getEnableFlag() {
+    return enableFlag;
+  }
 
-	public String getCreateDateBegin() {
-		return createDateBegin;
-	}
+  public void setEnableFlag(String enableFlag) {
+    this.enableFlag = enableFlag;
+  }
 
-	public void setCreateDateBegin(String createDateBegin) {
-		this.createDateBegin = createDateBegin;
-	}
+  public String getLockStatus() {
+    return lockStatus;
+  }
 
-	public String getCreateDateEnd() {
-		return createDateEnd;
-	}
+  public void setLockStatus(String lockStatus) {
+    this.lockStatus = lockStatus;
+  }
 
-	public void setCreateDateEnd(String createDateEnd) {
-		this.createDateEnd = createDateEnd;
-	}
+  public String getAppId() {
+    return appId;
+  }
 
-	public String getUpdateDatebegin() {
-		return updateDatebegin;
-	}
+  public void setAppId(String appId) {
+    this.appId = appId;
+  }
 
-	public void setUpdateDatebegin(String updateDatebegin) {
-		this.updateDatebegin = updateDatebegin;
-	}
+  public String getSidx() {
+    return sidx;
+  }
 
-	public String getUpdateDateEnd() {
-		return updateDateEnd;
-	}
+  public void setSidx(String sidx) {
+    this.sidx = sidx;
+  }
 
-	public void setUpdateDateEnd(String updateDateEnd) {
-		this.updateDateEnd = updateDateEnd;
-	}
+  public String getSord() {
+    return sord;
+  }
 
-	public String getStatus() {
-		return status;
-	}
+  public void setSord(String sord) {
+    this.sord = sord;
+  }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public String getCreateByUname() {
-		return createByUname;
-	}
+  public String getCreateDateBegin() {
+    return createDateBegin;
+  }
 
-	public void setCreateByUname(String createByUname) {
-		this.createByUname = createByUname;
-	}
+  public void setCreateDateBegin(String createDateBegin) {
+    this.createDateBegin = createDateBegin;
+  }
 
-	public String getUpdateByUname() {
-		return updateByUname;
-	}
+  public String getCreateDateEnd() {
+    return createDateEnd;
+  }
 
-	public void setUpdateByUname(String updateByUname) {
-		this.updateByUname = updateByUname;
-	}
+  public void setCreateDateEnd(String createDateEnd) {
+    this.createDateEnd = createDateEnd;
+  }
 
-	public String getConditionWhere() {
-		return conditionWhere;
-	}
+  public String getUpdateDatebegin() {
+    return updateDatebegin;
+  }
 
-	public void setConditionWhere(String conditionWhere) {
-		this.conditionWhere = conditionWhere;
-	}
+  public void setUpdateDatebegin(String updateDatebegin) {
+    this.updateDatebegin = updateDatebegin;
+  }
+
+  public String getUpdateDateEnd() {
+    return updateDateEnd;
+  }
+
+  public void setUpdateDateEnd(String updateDateEnd) {
+    this.updateDateEnd = updateDateEnd;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public String getCreateByUname() {
+    return createByUname;
+  }
+
+  public void setCreateByUname(String createByUname) {
+    this.createByUname = createByUname;
+  }
+
+  public String getUpdateByUname() {
+    return updateByUname;
+  }
+
+  public void setUpdateByUname(String updateByUname) {
+    this.updateByUname = updateByUname;
+  }
+
+  public String getConditionWhere() {
+    return conditionWhere;
+  }
+
+  public void setConditionWhere(String conditionWhere) {
+    this.conditionWhere = conditionWhere;
+  }
 
 }

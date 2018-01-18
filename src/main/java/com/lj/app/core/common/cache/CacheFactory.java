@@ -6,9 +6,9 @@ package com.lj.app.core.common.cache;
  */
 public class CacheFactory {
 
-	private static  MemoryCache memoryCache = new MemoryCache();
-	
-	public static  Cache getCache() {
-		return memoryCache;
-	}
+  private static MemoryCache memoryCache = new MemoryCache();
+
+  public static Cache getCache() {
+    return memoryCache;
+  }
 }

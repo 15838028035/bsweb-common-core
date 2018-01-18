@@ -13,245 +13,267 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class GeneratorMainFrame extends JFrame implements ActionListener{
+/**
+ * 
+ * 代码生成器Frame
+ *
+ */
+public class GeneratorMainFrame extends JFrame implements ActionListener {
 
-	/**
-	 * 标题
-	 */
-	private JLabel titleInformation;
+  /**
+   * 标题
+   */
+  private JLabel titleInformation;
 
-	/**
-	 * 模板目录
-	 */
-	private JLabel templateDir;
-	/**
-	 * schema
-	 */
-	private JLabel schema;
+  /**
+   * 模板目录
+   */
+  private JLabel templateDir;
+  /**
+   * schema
+   */
+  private JLabel schema;
 
-	/**
-	 * 包目录
-	 * 
-	 */
-	private JLabel basepackage;
+  /**
+   * 包目录
+   * 
+   */
+  private JLabel basepackage;
 
-	/**
-	 * 输出目录
-	 */
-	private JLabel outRoot;
+  /**
+   * 输出目录
+   */
+  private JLabel outRoot;
 
-	/**
-	 * 表
-	 */
-	private JLabel table;
+  /**
+   * 表
+   */
+  private JLabel table;
 
-	/**
-	 * 模板目录
-	 */
-	private JTextField templateDirTextFiled;
+  /**
+   * 模板目录
+   */
+  private JTextField templateDirTextFiled;
 
-	/**
-	 * schema
-	 */
-	private JTextField schemaTextField;
+  /**
+   * schema
+   */
+  private JTextField schemaTextField;
 
-	/**
-	 * 包目录
-	 */
-	private JTextField basepackageTextField;
+  /**
+   * 包目录
+   */
+  private JTextField basepackageTextField;
 
-	/**
-	 * 输出目录
-	 */
-	private JTextField outRootTextField;
+  /**
+   * 输出目录
+   */
+  private JTextField outRootTextField;
 
-	/**
-	 * 表
-	 */
-	private JTextField tableTextField;
+  /**
+   * 表
+   */
+  private JTextField tableTextField;
 
-	/**
-	 * 模板目录
-	 */
-	private String templateDirProp;
-	/**
-	 * schema
-	 */
-	private String schemaProp;
-	/**
-	 * package
-	 */
-	private String basepackageProp;
-	/**
-	 * 输出目录
-	 */
-	private String outRootProp;
-	/**
-	 * 表名
-	 */
-	private String tableProp;
-	
-	/**
-	 * 执行按钮
-	 */
-	private JButton submit;
-	
-	/**
-	 * 执行结果
-	 */
-	private JTextArea result;
+  /**
+   * 模板目录
+   */
+  private String templateDirProp;
+  /**
+   * schema
+   */
+  private String schemaProp;
+  /**
+   * package
+   */
+  private String basepackageProp;
+  /**
+   * 输出目录
+   */
+  private String outRootProp;
+  /**
+   * 表名
+   */
+  private String tableProp;
 
-	private GridBagLayout g = new GridBagLayout();
+  /**
+   * 执行按钮
+   */
+  private JButton submit;
 
-	private GridBagConstraints c = new GridBagConstraints();
+  /**
+   * 执行结果
+   */
+  private JTextArea result;
 
-	public GeneratorMainFrame(String str){
-		super(str);
+  private GridBagLayout g = new GridBagLayout();
 
-		setSize(800, 600);
+  private GridBagConstraints c = new GridBagConstraints();
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  /**
+   * 
+   * 代码生成器Frame
+   *
+   */
+  public GeneratorMainFrame(String str) {
+    super(str);
 
-		setLayout(g);
+    setSize(800, 600);
 
-		getProperties();
-		// 调用方法
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		addComponent();
+    setLayout(g);
 
-		submit.addActionListener(this);
+    getProperties();
+    // 调用方法
 
-		setVisible(true);
+    addComponent();
 
-		setLocationRelativeTo(null);// 设居中显示;
+    submit.addActionListener(this);
 
-	}
+    setVisible(true);
 
-	public void getProperties() {
-		templateDirProp = GeneratorProperties.getProperty("template");
-		schemaProp = GeneratorProperties.getProperty("TABLE_SCHEM");
-		basepackageProp = GeneratorProperties.getProperty("basepackage");
-		outRootProp = GeneratorProperties.getProperty("outRoot");
-		tableProp = GeneratorProperties.getProperty("TABLE_NAME");
-	}
+    setLocationRelativeTo(null);// 设居中显示;
 
-	public void addComponent(){
+  }
 
+  /**
+   * 获得配置属性
+   */
+  public void getProperties() {
+    templateDirProp = GeneratorProperties.getProperty("template");
+    schemaProp = GeneratorProperties.getProperty("TABLE_SCHEM");
+    basepackageProp = GeneratorProperties.getProperty("basepackage");
+    outRootProp = GeneratorProperties.getProperty("outRoot");
+    tableProp = GeneratorProperties.getProperty("TABLE_NAME");
+  }
 
-		titleInformation = new JLabel("Rapid-Frame代码生成器");
+  /**
+   * 添加组件
+   */
+  public void addComponent() {
 
-		add(g, c, titleInformation, 0, 0, 1, 1);
+    titleInformation = new JLabel("Rapid-Frame代码生成器");
 
-		templateDir = new JLabel("模板目录：");
+    add(g, c, titleInformation, 0, 0, 1, 1);
 
-		add(g, c, templateDir, 0, 1, 1, 1);
+    templateDir = new JLabel("模板目录：");
 
-		templateDirTextFiled = new JTextField(50);
-		templateDirTextFiled.setText(templateDirProp);
+    add(g, c, templateDir, 0, 1, 1, 1);
 
-		add(g, c, templateDirTextFiled, 1, 1, 1, 1);
+    templateDirTextFiled = new JTextField(50);
+    templateDirTextFiled.setText(templateDirProp);
 
-		schema = new JLabel("schema：");
-		add(g, c, schema, 0, 2, 1, 1);
+    add(g, c, templateDirTextFiled, 1, 1, 1, 1);
 
-		schemaTextField = new JTextField(50);
-		schemaTextField.setText(schemaProp);
-		add(g, c, schemaTextField, 1, 2, 2, 1);
+    schema = new JLabel("schema：");
+    add(g, c, schema, 0, 2, 1, 1);
 
-		basepackage = new JLabel("包名：");
-		add(g, c, basepackage, 0, 3, 1, 1);
+    schemaTextField = new JTextField(50);
+    schemaTextField.setText(schemaProp);
+    add(g, c, schemaTextField, 1, 2, 2, 1);
 
-		basepackageTextField = new JTextField(50);
-		basepackageTextField.setText(basepackageProp);
-		add(g, c, basepackageTextField, 1, 3, 2, 1);
+    basepackage = new JLabel("包名：");
+    add(g, c, basepackage, 0, 3, 1, 1);
 
-		outRoot = new JLabel("输出目录：");
-		add(g, c, outRoot, 0, 4, 1, 1);
+    basepackageTextField = new JTextField(50);
+    basepackageTextField.setText(basepackageProp);
+    add(g, c, basepackageTextField, 1, 3, 2, 1);
 
-		outRootTextField = new JTextField(50);
-		outRootTextField.setText(outRootProp);
-		add(g, c, outRootTextField, 1, 4, 2, 1);
+    outRoot = new JLabel("输出目录：");
+    add(g, c, outRoot, 0, 4, 1, 1);
 
-		table = new JLabel("表名：");
-		add(g, c, table, 0, 5, 1, 1);
+    outRootTextField = new JTextField(50);
+    outRootTextField.setText(outRootProp);
+    add(g, c, outRootTextField, 1, 4, 2, 1);
 
-		tableTextField = new JTextField(50);
-		tableTextField.setText(tableProp);
-		add(g, c, tableTextField, 1, 5, 2, 1);
+    table = new JLabel("表名：");
+    add(g, c, table, 0, 5, 1, 1);
 
-		submit = new JButton("生成");
+    tableTextField = new JTextField(50);
+    tableTextField.setText(tableProp);
+    add(g, c, tableTextField, 1, 5, 2, 1);
 
-		c.insets = new Insets(8, 10, 4, 0);
+    submit = new JButton("生成");
 
-		add(g, c, submit, 1, 6, 1, 1);
+    c.insets = new Insets(8, 10, 4, 0);
 
-		result = new JTextArea(15, 50);
+    add(g, c, submit, 1, 6, 1, 1);
 
-		add(g, c, result, 0, 7, 3, 4);
+    result = new JTextArea(15, 50);
 
-	}
+    add(g, c, result, 0, 7, 3, 4);
 
-	public void add(GridBagLayout g, GridBagConstraints c, JComponent jc,
-			int x, int y, int gw, int gh){
+  }
 
-		c.gridx = x;
-		c.gridy = y;
-		c.anchor = GridBagConstraints.WEST;
-		c.gridwidth = gw;
-		c.gridheight = gh;
+  /**
+   * 添加布局
+   * @param g 布局
+   * @param c 布局
+   * @param jc 布局
+   * @param x x
+   * @param y y
+   * @param gw 宽度
+   * @param gh 高度
+   */
+  public void add(GridBagLayout g, GridBagConstraints c, JComponent jc, int x, int y, int gw, int gh) {
 
-		g.setConstraints(jc, c);
-		add(jc);
-	}
+    c.gridx = x;
+    c.gridy = y;
+    c.anchor = GridBagConstraints.WEST;
+    c.gridwidth = gw;
+    c.gridheight = gh;
 
-	@Override
-	public void actionPerformed(ActionEvent arg0){
-		String templateDirStr = templateDirTextFiled.getText();
-		String schemaStr = schemaTextField.getText();
-		String basepackageStr = basepackageTextField.getText();
-		String outRootStr = outRootTextField.getText();
-		String tableStr = tableTextField.getText();
+    g.setConstraints(jc, c);
+    add(jc);
+  }
 
-		System.out.println("templateDirStr:" + templateDirStr);
+  @Override
+  public void actionPerformed(ActionEvent arg0) {
+    String templateDirStr = templateDirTextFiled.getText();
+    String schemaStr = schemaTextField.getText();
+    String basepackageStr = basepackageTextField.getText();
+    String outRootStr = outRootTextField.getText();
+    String tableStr = tableTextField.getText();
 
-		String retMsg = "文件生成成功,文件目录:\n" + outRootStr;
+    System.out.println("templateDirStr:" + templateDirStr);
 
-		try {
+    String retMsg = "文件生成成功,文件目录:\n" + outRootStr;
 
-			GeneratorProperties.setProperty("basepackage", basepackageStr);
-			GeneratorProperties.setProperty(
-					"basepackage_dir",
-					GeneratorProperties.getProperty("basepackage").replace(".",
-							"/"));
-			GeneratorProperties.setProperty("outRoot", outRootStr);
+    try {
 
-			System.out.println("basepackage_dir:"
-					+ GeneratorProperties.getProperty("basepackage_dir"));
+      GeneratorProperties.setProperty("basepackage", basepackageStr);
+      GeneratorProperties.setProperty("basepackage_dir",
+          GeneratorProperties.getProperty("basepackage").replace(".", "/"));
+      GeneratorProperties.setProperty("outRoot", outRootStr);
 
-			GeneratorFacade g = new GeneratorFacade();
-			g.clean();
-			g.getGenerator().setTemplateRootDir(templateDirStr);
-					
-			g.generateByTable(tableStr);
+      System.out.println("basepackage_dir:" + GeneratorProperties.getProperty("basepackage_dir"));
 
-			Runtime.getRuntime().exec("cmd.exe /c start " + outRootStr);
-		} catch (Exception e) {
-			e.printStackTrace();
-			retMsg = "文件生成失败,文件目录:\n" + outRootStr + ",异常信息:" + e.getMessage();
-		}
-		System.out.println("");
-		System.out
-				.println("***************************************************************");
-		System.out
-				.println("*********************Generate Success**************************");
-		System.out
-				.println("***************************************************************");
+      GeneratorFacade g = new GeneratorFacade();
+      g.clean();
+      g.getGenerator().setTemplateRootDir(templateDirStr);
 
-		result.setText(retMsg);
+      g.generateByTable(tableStr);
 
-	}
+      Runtime.getRuntime().exec("cmd.exe /c start " + outRootStr);
+    } catch (Exception e) {
+      e.printStackTrace();
+      retMsg = "文件生成失败,文件目录:\n" + outRootStr + ",异常信息:" + e.getMessage();
+    }
+    System.out.println("");
+    System.out.println("***************************************************************");
+    System.out.println("*********************Generate Success**************************");
+    System.out.println("***************************************************************");
 
-	public static void main(String args[]){
-		new GeneratorMainFrame("Rapid-Frame代码生成器");
-	}
+    result.setText(retMsg);
+
+  }
+
+  /**
+   * 执行方法
+   * @param args 运行参数
+   */
+  public static void main(String [] args)  {
+    new GeneratorMainFrame("代码生成器Frame");
+  }
 }
