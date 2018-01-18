@@ -89,13 +89,17 @@ public class FreemarkerReader extends Reader {
   public int read(char[] cbuf, int off, int len) throws IOException {
     return freemarkerProcessedReader.read(cbuf, off, len);
   }
-
-  public int hashCode() {
-    return freemarkerProcessedReader.hashCode();
-  }
-
+  
   public int read(CharBuffer target) throws IOException {
     return freemarkerProcessedReader.read(target);
+  }
+
+  public int read(char[] cbuf) throws IOException {
+    return freemarkerProcessedReader.read(cbuf);
+  }
+  
+  public int hashCode() {
+    return freemarkerProcessedReader.hashCode();
   }
 
   public long skip(long ns) throws IOException {
@@ -105,11 +109,6 @@ public class FreemarkerReader extends Reader {
   public boolean ready() throws IOException {
     return freemarkerProcessedReader.ready();
   }
-
-  public int read(char[] cbuf) throws IOException {
-    return freemarkerProcessedReader.read(cbuf);
-  }
-
   public boolean equals(Object obj) {
     return freemarkerProcessedReader.equals(obj);
   }

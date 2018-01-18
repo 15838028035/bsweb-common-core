@@ -107,15 +107,20 @@ public class FreemarkerInputStream extends InputStream {
   public int read(byte[] b) throws IOException {
     return freemarkerProcessedInput.read(b);
   }
+  
+  @Override
+  public int read(byte[] b, int off, int len) throws IOException {
+    return freemarkerProcessedInput.read(b, off, len);
+  }
+  
+  @Override
+  public  int read() throws IOException {
+    return freemarkerProcessedInput.read();
+  }
 
   @Override
   public boolean equals(Object obj) {
     return freemarkerProcessedInput.equals(obj);
-  }
-
-  @Override
-  public int read(byte[] b, int off, int len) throws IOException {
-    return freemarkerProcessedInput.read(b, off, len);
   }
 
   @Override
@@ -152,10 +157,5 @@ public class FreemarkerInputStream extends InputStream {
   @Override
   public boolean markSupported() {
     return freemarkerProcessedInput.markSupported();
-  }
-
-  @Override
-  public  int read() throws IOException {
-    return freemarkerProcessedInput.read();
   }
 }

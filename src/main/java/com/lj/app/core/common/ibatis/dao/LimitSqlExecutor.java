@@ -1,11 +1,17 @@
 package com.lj.app.core.common.ibatis.dao;
 
-import com.ibatis.sqlmap.engine.execution.SqlExecutor;
-import com.ibatis.sqlmap.engine.mapping.statement.RowHandlerCallback;
-import com.ibatis.sqlmap.engine.scope.StatementScope;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import com.ibatis.sqlmap.engine.execution.SqlExecutor;
+import com.ibatis.sqlmap.engine.mapping.statement.RowHandlerCallback;
+import com.ibatis.sqlmap.engine.scope.StatementScope;
+
+/**
+ * 
+ * limit执行器
+ *
+ */
 public class LimitSqlExecutor extends SqlExecutor {
   private Dialect dialect;
   private boolean enableLimit = true;
@@ -26,6 +32,9 @@ public class LimitSqlExecutor extends SqlExecutor {
     this.enableLimit = enableLimit;
   }
 
+  /**
+   * 
+   */
   public void executeQuery(StatementScope statementScope, Connection conn, String sql, Object[] parameters,
       int skipResults, int maxResults, RowHandlerCallback callback) throws SQLException {
     if ((supportsLimit()) && ((skipResults != 0) || (maxResults != -999999))) {
@@ -41,6 +50,10 @@ public class LimitSqlExecutor extends SqlExecutor {
     super.executeQuery(statementScope, conn, sql, parameters, skipResults, maxResults, callback);
   }
 
+  /**
+   * 是否支持
+   * @return 是否
+   */
   public boolean supportsLimit() {
     if ((this.enableLimit) && (this.dialect != null)) {
       return this.dialect.supportsLimit();

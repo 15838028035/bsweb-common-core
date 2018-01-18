@@ -12,7 +12,7 @@ import java.util.Set;
  *
  */
 @SuppressWarnings("unchecked")
-public class CMSecurityContext implements Serializable {
+public class CmSecurityContext implements Serializable {
 
   private Long mainAcctId;
 

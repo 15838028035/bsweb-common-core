@@ -3,7 +3,7 @@ package com.lj.app.core.common.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lj.app.core.common.security.CMSecurityContext;
+import com.lj.app.core.common.security.CmSecurityContext;
 
 /**
  * 
@@ -15,7 +15,7 @@ public class SecurityApiServiceImpl implements SecurityApiService {
   @Autowired
   private SecurityService securityService;
 
-  public CMSecurityContext getSecurityContext(int userId, String contextPath, String appId) {
+  public CmSecurityContext getSecurityContext(int userId, String contextPath, String appId) {
     return securityService.getSecurityContext(userId, contextPath, appId);
   }
 

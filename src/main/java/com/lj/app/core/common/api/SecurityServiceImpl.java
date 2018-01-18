@@ -11,7 +11,7 @@ import com.lj.app.core.common.base.entity.UpmToken;
 import com.lj.app.core.common.base.entity.UpmUser;
 import com.lj.app.core.common.base.service.UpmTokenService;
 import com.lj.app.core.common.base.service.UpmUserService;
-import com.lj.app.core.common.security.CMSecurityContext;
+import com.lj.app.core.common.security.CmSecurityContext;
 
 /**
  * 
@@ -27,7 +27,7 @@ public class SecurityServiceImpl implements SecurityService {
   @Autowired
   public UpmUserService upmUserService;
 
-  public CMSecurityContext getSecurityContext(int userId, String contextPath, String appId) {
+  public CmSecurityContext getSecurityContext(int userId, String contextPath, String appId) {
     return UpmPermissionActionApi.getSecurityContext(userId, contextPath, appId);
   }
 

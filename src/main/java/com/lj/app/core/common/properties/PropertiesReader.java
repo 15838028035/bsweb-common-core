@@ -139,6 +139,19 @@ public class PropertiesReader {
     return setProperty(key, String.valueOf(value));
   }
 
+  /**
+   * 设置属性
+   * 
+   * @param key
+   *          属性key
+   * @param value
+   *          属性值
+   * @return Object 属性
+   */
+  public static Object setProperty(String key, String value) {
+    return properties.setProperty(key, value);
+  }
+
   public static boolean contains(Object value) {
     return properties.contains(value);
   }
@@ -345,20 +358,6 @@ public class PropertiesReader {
   public static double getRequiredDouble(String key) throws IllegalStateException {
     return Double.parseDouble(getRequiredProperty(key));
   }
-
-  /**
-   * 设置属性
-   * 
-   * @param key
-   *          属性key
-   * @param value
-   *          属性值
-   * @return Object 属性
-   */
-  public static Object setProperty(String key, String value) {
-    return properties.setProperty(key, value);
-  }
-
   /**
    * 获得属性的值
    * 
@@ -459,8 +458,8 @@ public class PropertiesReader {
    * @return 属性值
    */
   public static String resolveProperty(String v, Properties props) {
-    PropertyPlaceholderConfigurerResolver propertyPlaceholderConfigurerResolver = new PropertyPlaceholderConfigurerResolver(
-        props);
+    PropertyPlaceholderConfigurerResolver propertyPlaceholderConfigurerResolver = 
+        new PropertyPlaceholderConfigurerResolver(props);
     return propertyPlaceholderUtil.replacePlaceholders(v, propertyPlaceholderConfigurerResolver);
   }
 

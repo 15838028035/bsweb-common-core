@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.lj.app.core.common.properties.PropertiesUtil;
-import com.lj.app.core.common.security.CMSecurityContext;
+import com.lj.app.core.common.security.CmSecurityContext;
 import com.lj.app.core.common.util.StringUtil;
 
 import net.sf.json.JSONArray;
@@ -32,13 +32,13 @@ public class UpmPermissionActionApi {
    * @param appId 归属应用ID
    * @return 获得权限上下文信息
    */
-  public static CMSecurityContext getSecurityContext(int userId, String contextPath, String appId) {
-    CMSecurityContext securityContext = new CMSecurityContext();
+  public static CmSecurityContext getSecurityContext(int userId, String contextPath, String appId) {
+    CmSecurityContext securityContext = new CmSecurityContext();
 
     // 设置主帐号信息
     securityContext.setMainAcctId(Long.parseLong(String.valueOf(userId)));
 
-    CMSecurityContext mainAcct;
+    CmSecurityContext mainAcct;
 
     // 设置权限相关的code和url
     Set<String> codeSet = new HashSet<String>();

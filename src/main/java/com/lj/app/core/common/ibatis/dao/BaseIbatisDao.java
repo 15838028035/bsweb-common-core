@@ -42,6 +42,12 @@ public abstract class BaseIbatisDao<E, PK> extends SqlMapClientDaoSupport {
     return (E) getSqlMapClientTemplate().queryForObject(stmtId, primaryKey);
   }
 
+  /**
+   * 查找
+   * @param entity 实体
+   * @param sortColumns 排序列
+   * @return 实体列表
+   */
   public List<E> findByExample(E entity, String sortColumns) {
     Map otherFilters = new HashMap();
     otherFilters.put("sortColumns", sortColumns);
@@ -63,6 +69,11 @@ public abstract class BaseIbatisDao<E, PK> extends SqlMapClientDaoSupport {
     getSqlMapClientTemplate().delete(stmtId, entity);
   }
 
+  /**
+   * 保存对象
+   * @param e 对象
+   * @return 对象
+   */
   public PK save(Object e) {
     String currentDb = ((CurrentDb) SpringContextHolder.getBean("currentDb")).getCurrentDb();
 
@@ -75,6 +86,11 @@ public abstract class BaseIbatisDao<E, PK> extends SqlMapClientDaoSupport {
     return getSqlMapClientTemplate().update(stmtId, entity);
   }
 
+  /**
+   * 批量保存
+   * @param entities 实体
+   * @throws SQLException SQL异常
+   */
   public void saveBatch(List<E> entities) throws SQLException {
     getSqlMapClient().startBatch();
     for (Iterator i$ = entities.iterator(); i$.hasNext();) {

@@ -28,6 +28,10 @@ public class PropertiesUtil {
   public static String getProperty(String name, String defaultValue) {
     return PropertiesReader.getValueAndDefault(name, defaultValue);
   }
+  
+  public static String getProperty(String key) {
+    return PropertiesReader.getProperty(key);
+  }
 
   /**
    * 获得去除首尾空格属性的值
@@ -146,6 +150,10 @@ public class PropertiesUtil {
   public static Object setProperty(String key, boolean value) {
     return PropertiesReader.setProperty(key, String.valueOf(value));
   }
+  
+  public static Object setProperty(String key, String value) {
+    return PropertiesReader.setProperty(key, value);
+  }
 
   public static boolean contains(Object value) {
     return PropertiesReader.contains(value);
@@ -227,15 +235,7 @@ public class PropertiesUtil {
   public static double getRequiredDouble(String key) throws IllegalStateException {
     return PropertiesReader.getRequiredDouble(key);
   }
-
-  public static Object setProperty(String key, String value) {
-    return PropertiesReader.setProperty(key, value);
-  }
-
-  public static String getProperty(String key) {
-    return PropertiesReader.getProperty(key);
-  }
-
+  
   public static void clear() {
     PropertiesReader.clear();
   }

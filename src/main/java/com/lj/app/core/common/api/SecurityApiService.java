@@ -1,6 +1,6 @@
 package com.lj.app.core.common.api;
 
-import com.lj.app.core.common.security.CMSecurityContext;
+import com.lj.app.core.common.security.CmSecurityContext;
 
 /**
  * 
@@ -8,7 +8,7 @@ import com.lj.app.core.common.security.CMSecurityContext;
  *
  */
 public interface SecurityApiService {
-  public CMSecurityContext getSecurityContext(int userId, String contextPath, String appId);
+  public CmSecurityContext getSecurityContext(int userId, String contextPath, String appId);
 
   /**
    * token验证

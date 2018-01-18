@@ -44,39 +44,7 @@ public class DesUtil {
     String strs = new BASE64Encoder().encode(bt);
     return strs;
   }
-
-  /**
-   * Description 根据键值进行解密
-   * 
-   * @param data  值
-   * @return 根据键值进行解密
-   * @throws IOException 异常
-   * @throws Exception 异常
-   */
-  public static String decrypt(String data) throws IOException, Exception {
-    return decrypt(data, DES_KEY);
-  }
-
-  /**
-   * Description 根据键值进行解密
-   * 
-   * @param data 值
-   * @param key
-   *          加密键byte数组
-   * @return 根据键值进行解密
-   * @throws IOException 异常
-   * @throws Exception 异常
-   */
-  public static String decrypt(String data, String key) throws IOException, Exception {
-    if (data == null) {
-      return null;
-    }
-    BASE64Decoder decoder = new BASE64Decoder();
-    byte[] buf = decoder.decodeBuffer(data);
-    byte[] bt = decrypt(buf, key.getBytes());
-    return new String(bt);
-  }
-
+  
   /**
    * Description 根据键值进行加密
    * 
@@ -109,12 +77,44 @@ public class DesUtil {
   /**
    * Description 根据键值进行解密
    * 
+   * @param data  值
+   * @return 根据键值进行解密
+   * @throws IOException 异常
+   * @throws Exception 异常
+   */
+  public static String decrypt(String data) throws IOException, Exception {
+    return decrypt(data, DES_KEY);
+  }
+   
+  /**
+   * Description 根据键值进行解密
+   * 
+   * @param data 值
+   * @param key
+   *          加密键byte数组
+   * @return 根据键值进行解密
+   * @throws IOException 异常
+   * @throws Exception 异常
+   */
+  public static String decrypt(String data, String key) throws IOException, Exception {
+    if (data == null) {
+      return null;
+    }
+    BASE64Decoder decoder = new BASE64Decoder();
+    byte[] buf = decoder.decodeBuffer(data);
+    byte[] bt = decrypt(buf, key.getBytes());
+    return new String(bt);
+  }
+  
+  /**
+   * Description 根据键值进行解密
+   * 
    * @param data 值
    * @param key  加密键byte数组
    * @return 根据键值进行解密
    * @throws Exception 异常
    */
-   public static byte[] decrypt(byte[] data, byte[] key) throws Exception {
+  public static byte[] decrypt(byte []data, byte[] key) throws Exception {
     // 生成一个可信任的随机数源
     SecureRandom sr = new SecureRandom();
 
@@ -133,5 +133,4 @@ public class DesUtil {
 
     return cipher.doFinal(data);
   }
-
 }

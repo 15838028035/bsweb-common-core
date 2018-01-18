@@ -78,22 +78,7 @@ public class FreeMarkerTemplateUtils {
     Template template = getTemplate(configuration, templateName, locale, encoding);
     return processTemplateIntoString(template, model);
   }
-
-  /**
-   *  解析模板内容
-   * @param template 模板
-   * @param model 对象
-   * @return 模板内容
-   * @throws FreemarkerTemplateException 模板异常
-   * @throws Exception 异常
-   */
-  public static String processTemplateIntoString(Template template, Object model)
-      throws FreemarkerTemplateException, Exception {
-    StringWriter result = new StringWriter();
-    template.process(model, result);
-    return result.toString();
-  }
-
+  
   /**
    *  解析模板内容
    * @param template  解析模板内容
@@ -110,6 +95,21 @@ public class FreeMarkerTemplateUtils {
       throw new FreemarkerTemplateException(
           "process template occer TemplateException,templateName:" + template.getName(), e);
     }
+  }
+
+  /**
+   *  解析模板内容
+   * @param template 模板
+   * @param model 对象
+   * @return 模板内容
+   * @throws FreemarkerTemplateException 模板异常
+   * @throws Exception 异常
+   */
+  public static String processTemplateIntoString(Template template, Object model)
+      throws FreemarkerTemplateException, Exception {
+    StringWriter result = new StringWriter();
+    template.process(model, result);
+    return result.toString();
   }
 
   /**

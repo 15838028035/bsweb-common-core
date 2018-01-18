@@ -1,5 +1,10 @@
 package com.lj.app.core.common.ibatis.dao;
 
+/**
+ * 
+ * 方言
+ *
+ */
 public abstract class Dialect {
   public abstract boolean supportsLimit();
 
