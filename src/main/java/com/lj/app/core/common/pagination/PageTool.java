@@ -12,8 +12,8 @@ import com.lj.app.core.common.util.StringUtil;
  *
  */
 public class PageTool {
-  private static final String JSONPAGE = "page";
-  private static final String JSONROWS = "rows";
+  public static final String JSONPAGE = "page";
+  public static final String JSONROWS = "rows";
 
   /**
    * 转换

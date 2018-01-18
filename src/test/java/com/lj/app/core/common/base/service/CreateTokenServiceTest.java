@@ -13,8 +13,8 @@ public class CreateTokenServiceTest extends AbstractBaseSpringTransactionTestCas
 	private CreateTokenService createTokenService;
 
 	@Test
-	public void createTokenTest() throws Exception{
-		String tokenId = createTokenService.CreateToken("1", "UPM", 0);
+	public void createTokenTest() throws Exception {
+		String tokenId = createTokenService.createToken("1", "UPM", 0);
 		assertNotNull(tokenId);
 	}
 
