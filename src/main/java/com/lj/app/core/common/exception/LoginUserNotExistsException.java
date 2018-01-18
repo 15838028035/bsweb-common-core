@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * 登陆用户不存在异常
+ *
+ */
 @SuppressWarnings("serial")
 public class LoginUserNotExistsException extends CoreBaseRunTimeException {
 

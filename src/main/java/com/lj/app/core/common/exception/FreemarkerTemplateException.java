@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * 模板异常
+ *
+ */
 public class FreemarkerTemplateException extends CoreBaseRunTimeException {
 
   public FreemarkerTemplateException() {

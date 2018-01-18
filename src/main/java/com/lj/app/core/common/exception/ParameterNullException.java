@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * 参数为空异常
+ *
+ */
 @SuppressWarnings("serial")
 public class ParameterNullException extends CoreBaseRunTimeException {
 

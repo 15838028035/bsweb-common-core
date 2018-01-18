@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * 业务逻辑异常
+ *
+ */
 @SuppressWarnings("serial")
 public class BusinessException extends CoreBaseRunTimeException {
 

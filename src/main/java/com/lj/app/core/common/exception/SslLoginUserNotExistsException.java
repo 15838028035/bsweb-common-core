@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * SSL登陆用户不存在异常
+ *
+ */
 @SuppressWarnings("serial")
 public class SslLoginUserNotExistsException extends CoreBaseRunTimeException {
 

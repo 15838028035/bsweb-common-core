@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * 接口异常
+ *
+ */
 @SuppressWarnings("serial")
 public class InterfaceException extends CoreBaseRunTimeException {
 

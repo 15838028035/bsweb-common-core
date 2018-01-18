@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * 缓存异常
+ *
+ */
 public class CacheException extends CoreBaseRunTimeException {
 
   public CacheException() {

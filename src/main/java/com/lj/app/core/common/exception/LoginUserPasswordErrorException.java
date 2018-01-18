@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * 登陆密码错误异常
+ *
+ */
 @SuppressWarnings("serial")
 public class LoginUserPasswordErrorException extends CoreBaseRunTimeException {
 

@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * 帐号邮箱异常
+ *
+ */
 @SuppressWarnings("serial")
 public class AccountMailException extends CoreBaseRunTimeException {
 

@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * 验证码输入异常
+ *
+ */
 @SuppressWarnings("serial")
 public class InvalidateInputException extends CoreBaseRunTimeException {
 

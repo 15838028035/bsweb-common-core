@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * 流程异常
+ *
+ */
 @SuppressWarnings("serial")
 public class FlowException extends CoreBaseRunTimeException {
 

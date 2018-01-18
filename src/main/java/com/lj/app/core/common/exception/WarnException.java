@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * 告警异常
+ *
+ */
 @SuppressWarnings("serial")
 public class WarnException extends CoreBaseRunTimeException {
 

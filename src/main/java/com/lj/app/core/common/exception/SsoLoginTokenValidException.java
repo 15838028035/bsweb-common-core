@@ -1,5 +1,10 @@
 package com.lj.app.core.common.exception;
 
+/**
+ * 
+ * 单点登陆token交验异常
+ *
+ */
 @SuppressWarnings("serial")
 public class SsoLoginTokenValidException extends CoreBaseRunTimeException {
 
