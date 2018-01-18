@@ -16,7 +16,9 @@ public class FileSizeUtils {
 
   /**
    * 文件大小
-   * @param fileSize  文件大小
+   * 
+   * @param fileSize
+   *          文件大小
    * @return 文件大小
    */
   public static String getHumanReadableFileSize(Long fileSize) {
@@ -28,7 +30,9 @@ public class FileSizeUtils {
 
   /**
    * 文件大小
-   * @param fileSize  文件大小
+   * 
+   * @param fileSize
+   *          文件大小
    * @return 文件大小
    */
   public static String getHumanReadableFileSize(long fileSize) {
@@ -61,7 +65,7 @@ public class FileSizeUtils {
   }
 
   private static String getHumanReadableFileSize(long fileSize, long unit, String unitName) {
-    if (fileSize == 0)  {
+    if (fileSize == 0) {
       return "0";
     }
 

@@ -23,7 +23,9 @@ public class PropertiesFromTableUtil {
 
   /**
    * 重新加载配置
-   * @throws Exception 异常信息
+   * 
+   * @throws Exception
+   *           异常信息
    */
   public static void reloadConfigPro() throws Exception {
     UpmConfigurationService<UpmConfiguration> upmConfigurationService = SpringContextHolder

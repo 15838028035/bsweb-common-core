@@ -13,29 +13,28 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-
 public class DesUtilFrame extends JFrame implements ActionListener
 
 {
 
-/**
- * 标题
- */
-private JLabel titleInformation;
-private JLabel fileName;
+  /**
+   * 标题
+   */
+  private JLabel titleInformation;
+  private JLabel fileName;
 
-/**
- * fileNameTextField
- */
-private JTextField fileNameTextField;
+  /**
+   * fileNameTextField
+   */
+  private JTextField fileNameTextField;
 
-GridBagLayout g = new GridBagLayout();
+  GridBagLayout g = new GridBagLayout();
 
-GridBagConstraints c = new GridBagConstraints();
+  GridBagConstraints c = new GridBagConstraints();
 
-DesUtilFrame(String str)
+  DesUtilFrame(String str)
 
-{
+  {
 
     super(str);
 
@@ -54,13 +53,11 @@ DesUtilFrame(String str)
 
     setLocationRelativeTo(null);// 设居中显示;
 
-}
+  }
 
+  public void addComponent()
 
-
-public void addComponent()
-
-{
+  {
 
     titleInformation = new JLabel("des3解密工具");
 
@@ -74,8 +71,6 @@ public void addComponent()
 
     add(g, c, fileNameTextField, 1, 1, 1, 1);
 
-  
-
     submit = new JButton("解密");
 
     c.insets = new Insets(8, 10, 4, 0);
@@ -86,11 +81,11 @@ public void addComponent()
 
     add(g, c, result, 0, 7, 3, 4);
 
-}
+  }
 
-public void add(GridBagLayout g, GridBagConstraints c, JComponent jc, int x, int y, int gw, int gh)
+  public void add(GridBagLayout g, GridBagConstraints c, JComponent jc, int x, int y, int gw, int gh)
 
-{
+  {
 
     c.gridx = x;
 
@@ -106,39 +101,39 @@ public void add(GridBagLayout g, GridBagConstraints c, JComponent jc, int x, int
 
     add(jc);
 
-}
+  }
 
-public static void main(String args[])
+  public static void main(String args[])
 
-{
+  {
 
     new DesUtilFrame("des3解密工具");
 
-}
+  }
 
-JButton submit;
+  JButton submit;
 
-JTextArea result;
+  JTextArea result;
 
-@Override
-public void actionPerformed(ActionEvent arg0)
+  @Override
+  public void actionPerformed(ActionEvent arg0)
 
-{
+  {
 
     String fileNameTextFieldStr = fileNameTextField.getText();
 
-    String retMsg ="";
+    String retMsg = "";
 
     try {
 
-    	retMsg = DesUtil.decrypt(fileNameTextFieldStr);
+      retMsg = DesUtil.decrypt(fileNameTextFieldStr);
     } catch (Exception e) {
-        e.printStackTrace();
-        retMsg = "解密失败" +",异常信息:" + e.getMessage();
+      e.printStackTrace();
+      retMsg = "解密失败" + ",异常信息:" + e.getMessage();
     }
 
     result.setText(retMsg);
 
-}
+  }
 
 }

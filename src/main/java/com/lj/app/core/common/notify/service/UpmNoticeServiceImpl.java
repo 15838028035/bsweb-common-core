@@ -11,7 +11,8 @@ import com.lj.app.core.common.base.service.BaseServiceImpl;
 /**
  * 通知服务类
  *
- * @param <UpmNotice> 通知对象
+ * @param <UpmNotice>
+ *          通知对象
  */
 @Service("upmNoticeService")
 public class UpmNoticeServiceImpl<UpmNotice> extends BaseServiceImpl<UpmNotice> implements UpmNoticeService<UpmNotice> {

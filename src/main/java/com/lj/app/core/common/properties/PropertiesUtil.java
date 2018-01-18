@@ -31,7 +31,9 @@ public class PropertiesUtil {
 
   /**
    * 获得去除首尾空格属性的值
-   * @param name 属性名称
+   * 
+   * @param name
+   *          属性名称
    * @return String 获得去除首尾空格属性的值
    */
   public static String getPropertyTrim(String name) {
@@ -76,9 +78,12 @@ public class PropertiesUtil {
 
   /**
    * 获得国际化消息
-   * @param filename 文件名称
-   * @param key 属性key
-   * @return String  获得国际化消息
+   * 
+   * @param filename
+   *          文件名称
+   * @param key
+   *          属性key
+   * @return String 获得国际化消息
    */
   public static String getMessage(String filename, String key) {
     Locale locale = Locale.getDefault();
@@ -104,9 +109,13 @@ public class PropertiesUtil {
 
   /**
    * 获得国际化消息
-   * @param filename 文件名称
-   * @param key 属性key
-   * @param args 列表参数
+   * 
+   * @param filename
+   *          文件名称
+   * @param key
+   *          属性key
+   * @param args
+   *          列表参数
    * @return 获得国际化消息
    */
   public static String getMessage(String filename, String key, List<String> args) {
@@ -222,7 +231,7 @@ public class PropertiesUtil {
   public static Object setProperty(String key, String value) {
     return PropertiesReader.setProperty(key, value);
   }
-  
+
   public static String getProperty(String key) {
     return PropertiesReader.getProperty(key);
   }
@@ -238,8 +247,9 @@ public class PropertiesUtil {
   /**
    * 获得字符串数组
    * 
-   * @param key 属性key
-   * @return  获得字符串数组
+   * @param key
+   *          属性key
+   * @return 获得字符串数组
    */
   public static String[] getPropertyArray(String key) {
     return PropertiesReader.getPropertyArray(key);
@@ -248,7 +258,8 @@ public class PropertiesUtil {
   /**
    * 获得属性列表list
    * 
-   * @param key 属性key
+   * @param key
+   *          属性key
    * @return 获得属性列表list
    */
   public static List<String> getPropertyList(String key) {

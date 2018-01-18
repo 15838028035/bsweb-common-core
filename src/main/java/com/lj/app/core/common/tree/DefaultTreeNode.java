@@ -2,7 +2,7 @@ package com.lj.app.core.common.tree;
 
 /**
  * 
- *  默认树节点
+ * 默认树节点
  *
  */
 public class DefaultTreeNode {

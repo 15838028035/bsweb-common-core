@@ -16,9 +16,11 @@ public class BootStrapTreeViewCheck {
   /**
    * 唯一构造函数
    * 
-   * @param rootId  根节点
-   * @param rootText 根节点文本
-   *          
+   * @param rootId
+   *          根节点
+   * @param rootText
+   *          根节点文本
+   * 
    */
   public BootStrapTreeViewCheck(String rootId, String rootText) {
     rootNode = new BootStrapTreeView();
@@ -30,9 +32,11 @@ public class BootStrapTreeViewCheck {
   /**
    * 增加节点，默认父节点为根节点
    * 
-   * @param id  节点ID
-   * @param text  节点文本
-   * @return  bootstrap树
+   * @param id
+   *          节点ID
+   * @param text
+   *          节点文本
+   * @return bootstrap树
    */
   public BootStrapTreeView addNode(String id, Boolean checked, String text) {
     return addNode(id, text, true, null);
@@ -41,13 +45,15 @@ public class BootStrapTreeViewCheck {
   /**
    * 增加节点
    * 
-   * @param id 节点ID
-   * @param text 节点文本
+   * @param id
+   *          节点ID
+   * @param text
+   *          节点文本
    * @param checked
    *          值为：0,1,2，如果非法，默认为是0
    * @param parentNode
    *          如果为null，将默认为根节点
-   * @return  bootstrap树
+   * @return bootstrap树
    */
   public BootStrapTreeView addNode(String id, String text, Boolean checked, BootStrapTreeView parentNode) {
     BootStrapTreeView node = new BootStrapTreeView();
@@ -71,7 +77,8 @@ public class BootStrapTreeViewCheck {
    * 以json方式返回对象
    * 
    * @return String 以json方式返回对象
-   * @throws Exception 异常信息
+   * @throws Exception
+   *           异常信息
    */
   public String toJsonString() throws Exception {
     JSONObject jsonObject = new JSONObject();
@@ -81,8 +88,10 @@ public class BootStrapTreeViewCheck {
   /**
    * 默认跟节点
    * 
-   * @param rootId  根节点
-   * @param rootText 根节点文本
+   * @param rootId
+   *          根节点
+   * @param rootText
+   *          根节点文本
    * @return String 字符串
    */
   public static String defaultBootStrapTreeViewCheck(String rootId, String rootText) {
@@ -94,8 +103,10 @@ public class BootStrapTreeViewCheck {
   /**
    * 将List&lt;DefaultTreeNodeNoCheck&gt;转换为SimpleTree对象。
    * 
-   * @param bootStrapTreeViewList 树节点列表
-   * @param rootNodeId 根节点
+   * @param bootStrapTreeViewList
+   *          树节点列表
+   * @param rootNodeId
+   *          根节点
    * @return bootstrap树
    */
   public static BootStrapTreeViewCheck valueOf(List<BootStrapTreeView> bootStrapTreeViewList, String rootNodeId)
@@ -116,7 +127,7 @@ public class BootStrapTreeViewCheck {
       List<BootStrapTreeView> parentList = new ArrayList<BootStrapTreeView>();
       List<BootStrapTreeView> swapParentList = new ArrayList<BootStrapTreeView>();
       parentList.add(bootStrapTreeViewCheck.rootNode);
-      while (parentList.size() > 0 && !whileList.isEmpty()) { //必须是并且关系，否则会死循环（因为里面有的节点可能根本就没有对应的父节点）
+      while (parentList.size() > 0 && !whileList.isEmpty()) { // 必须是并且关系，否则会死循环（因为里面有的节点可能根本就没有对应的父节点）
         for (int j = 0; j < parentList.size(); j++) {
           BootStrapTreeView parentNode = parentList.get(j);
           String parentNodeId = parentNode.getId();
@@ -147,8 +158,10 @@ public class BootStrapTreeViewCheck {
   /**
    * 将List&lt;DefaultTreeNodeNoCheck&gt;转换为SimpleTree对象。
    * 
-   * @param bootStrapTreeViewList 树节点列表
-   * @param rootNodeId 根节点
+   * @param bootStrapTreeViewList
+   *          树节点列表
+   * @param rootNodeId
+   *          根节点
    * @return bootstrap树
    */
   public static String valueOfString(List<BootStrapTreeView> bootStrapTreeViewList, String rootNodeId)
@@ -214,8 +227,10 @@ public class BootStrapTreeViewCheck {
   /**
    * 寻找根节点
    * 
-   * @param bootStrapTreeViewCheck  树节点列表
-   * @param rootNodeId 根节点
+   * @param bootStrapTreeViewCheck
+   *          树节点列表
+   * @param rootNodeId
+   *          根节点
    * @return bootStrapTree树
    */
   private static BootStrapTreeView findRootNode(List<BootStrapTreeView> bootStrapTreeViewList, String rootNodeId) {
@@ -240,11 +255,16 @@ public class BootStrapTreeViewCheck {
   /**
    * 创建bootstrap树
    * 
-   * @param id id
-   * @param text 节点文本
-   * @param checked 是否选中
-   * @param parentId 父ID
-   * @param href 连接地址
+   * @param id
+   *          id
+   * @param text
+   *          节点文本
+   * @param checked
+   *          是否选中
+   * @param parentId
+   *          父ID
+   * @param href
+   *          连接地址
    * @return bootstrap树
    */
   public static BootStrapTreeView createNew(String id, String text, boolean checked, String parentId, String href) {

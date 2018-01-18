@@ -26,7 +26,7 @@ public class NoticeMailJob implements BaseTaskService {
   private UpmNoticeService<UpmNotice> upmNoticeService;
   @Autowired
   private MailSender mailSender;
-  private static   Long currentCount = 0L;
+  private static Long currentCount = 0L;
   private static final Long EACH_NUM = 10L;
 
   /**

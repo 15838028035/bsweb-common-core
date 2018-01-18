@@ -13,7 +13,7 @@ import net.sf.json.JsonConfig;
 
 /**
  * 
- *  分页对象
+ * 分页对象
  */
 public class Page {
 
@@ -83,6 +83,7 @@ public class Page {
 
   /**
    * 总页数
+   * 
    * @return 总页数
    */
   public int getTotalPages() {
@@ -145,7 +146,9 @@ public class Page {
 
   /**
    * 格式化json
-   * @param list 列表对象
+   * 
+   * @param list
+   *          列表对象
    * @return String json字符串
    */
   public String toJsonString(List<Object> list) {
@@ -168,7 +171,9 @@ public class Page {
 
   /**
    * 格式化json
-   * @param object json对象
+   * 
+   * @param object
+   *          json对象
    * @return String json字符串
    */
   public static String toJsonString(Object object) {

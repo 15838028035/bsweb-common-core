@@ -74,8 +74,11 @@ public class PropertiesReader {
 
   /**
    * 获得属性的值
-   * @param properName 属性文名称
-   * @param key 属性
+   * 
+   * @param properName
+   *          属性文名称
+   * @param key
+   *          属性
    * @return 获得属性的值
    */
   public static String getValue(String properName, String key) {
@@ -103,8 +106,11 @@ public class PropertiesReader {
 
   /**
    * 获得属性的默认值
-   * @param key 属性key
-   * @param defaultValue 默认值
+   * 
+   * @param key
+   *          属性key
+   * @param defaultValue
+   *          默认值
    * @return String 获得属性的默认值
    */
   public static String getValueAndDefault(String key, String defaultValue) {
@@ -147,7 +153,9 @@ public class PropertiesReader {
 
   /**
    * 获得Integer类型
-   * @param key 属性key
+   * 
+   * @param key
+   *          属性key
    * @return Integer 获得Integer类型
    */
   public static Integer getInteger(String key) {
@@ -160,9 +168,12 @@ public class PropertiesReader {
 
   /**
    * 获得int类型
-   * @param key 属性key
-   * @param defaultValue 默认值
-   * @return  获得int类型
+   * 
+   * @param key
+   *          属性key
+   * @param defaultValue
+   *          默认值
+   * @return 获得int类型
    */
   public static int getInt(String key, int defaultValue) {
     String value = getProperty(key);
@@ -178,10 +189,12 @@ public class PropertiesReader {
   public static int getRequiredInt(String key) throws IllegalStateException {
     return Integer.parseInt(getRequiredProperty(key));
   }
-  
+
   /**
    * 获得Long类型
-   * @param key 属性key
+   * 
+   * @param key
+   *          属性key
    * @return Long 获得Long类型
    */
   public static Long getLong(String key) {
@@ -194,9 +207,12 @@ public class PropertiesReader {
 
   /**
    * 获得long类型
-   * @param key 属性key
-   * @param defaultValue 默认值
-   * @return  获得long类型
+   * 
+   * @param key
+   *          属性key
+   * @param defaultValue
+   *          默认值
+   * @return 获得long类型
    */
   public static long getLong(String key, long defaultValue) {
     String value = getProperty(key);
@@ -215,7 +231,9 @@ public class PropertiesReader {
 
   /**
    * 获得Boolean类型
-   * @param key 属性key
+   * 
+   * @param key
+   *          属性key
    * @return Boolean 获得Boolean类型
    */
   public static Boolean getBoolean(String key) {
@@ -228,9 +246,12 @@ public class PropertiesReader {
 
   /**
    * 获得boolean类型
-   * @param key 属性key
-   * @param defaultValue 默认值
-   * @return  获得boolean类型
+   * 
+   * @param key
+   *          属性key
+   * @param defaultValue
+   *          默认值
+   * @return 获得boolean类型
    */
   public static boolean getBoolean(String key, boolean defaultValue) {
     String value = getProperty(key);
@@ -249,7 +270,9 @@ public class PropertiesReader {
 
   /**
    * 获得Float类型
-   * @param key 属性key
+   * 
+   * @param key
+   *          属性key
    * @return Float 获得Float类型
    */
   public static Float getFloat(String key) {
@@ -262,9 +285,12 @@ public class PropertiesReader {
 
   /**
    * 获得float类型
-   * @param key 属性key
-   * @param defaultValue 默认值
-   * @return  获得float类型
+   * 
+   * @param key
+   *          属性key
+   * @param defaultValue
+   *          默认值
+   * @return 获得float类型
    */
   public static float getFloat(String key, float defaultValue) {
     String value = getProperty(key);
@@ -283,7 +309,9 @@ public class PropertiesReader {
 
   /**
    * 获得Double类型
-   * @param key 属性key
+   * 
+   * @param key
+   *          属性key
    * @return Double 获得Float类型
    */
   public static Double getDouble(String key) {
@@ -296,9 +324,12 @@ public class PropertiesReader {
 
   /**
    * 获得double类型
-   * @param key 属性key
-   * @param defaultValue 默认值
-   * @return  获得double类型
+   * 
+   * @param key
+   *          属性key
+   * @param defaultValue
+   *          默认值
+   * @return 获得double类型
    */
   public static double getDouble(String key, double defaultValue) {
     String value = getProperty(key);
@@ -317,18 +348,24 @@ public class PropertiesReader {
 
   /**
    * 设置属性
-   * @param key 属性key
-   * @param value 属性值
+   * 
+   * @param key
+   *          属性key
+   * @param value
+   *          属性值
    * @return Object 属性
    */
-  public static  Object setProperty(String key, String value) {
+  public static Object setProperty(String key, String value) {
     return properties.setProperty(key, value);
   }
 
   /**
    * 获得属性的值
-   * @param key 属性key
-   * @param defaultValue 默认值
+   * 
+   * @param key
+   *          属性key
+   * @param defaultValue
+   *          默认值
    * @return String 属性值
    */
   public static String getProperty(String key, String defaultValue) {
@@ -341,7 +378,9 @@ public class PropertiesReader {
 
   /**
    * 获得属性的值
-   * @param key 属性key
+   * 
+   * @param key
+   *          属性key
    * @return String 属性值
    */
   public static String getProperty(String key) {
@@ -368,7 +407,8 @@ public class PropertiesReader {
   /**
    * 获得字符串数组
    * 
-   * @param key 属性key
+   * @param key
+   *          属性key
    * @return String[] 属性数组
    */
   public static String[] getPropertyArray(String key) {
@@ -379,7 +419,8 @@ public class PropertiesReader {
   /**
    * 获得属性列表list
    * 
-   * @param key 属性key
+   * @param key
+   *          属性key
    * @return List 字符串列表
    */
   public static List<String> getPropertyList(String key) {
@@ -393,7 +434,9 @@ public class PropertiesReader {
 
   /**
    * 解析属性
-   * @param props 属性
+   * 
+   * @param props
+   *          属性
    * @return Properties 属性
    */
   public static Properties resolveProperties(Properties props) {
@@ -406,16 +449,18 @@ public class PropertiesReader {
     }
     return result;
   }
-  
+
   /**
    * 解析属性
-   * @param  属性key
-   * @param props 属性
+   * 
+   * @param 属性key
+   * @param props
+   *          属性
    * @return 属性值
    */
   public static String resolveProperty(String v, Properties props) {
-    PropertyPlaceholderConfigurerResolver propertyPlaceholderConfigurerResolver = 
-        new PropertyPlaceholderConfigurerResolver(props);
+    PropertyPlaceholderConfigurerResolver propertyPlaceholderConfigurerResolver = new PropertyPlaceholderConfigurerResolver(
+        props);
     return propertyPlaceholderUtil.replacePlaceholders(v, propertyPlaceholderConfigurerResolver);
   }
 

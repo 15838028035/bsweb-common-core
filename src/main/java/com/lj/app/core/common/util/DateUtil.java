@@ -33,7 +33,7 @@ public class DateUtil {
    * 
    * @param format
    *          时间格式
-   * @return
+   * @return 得到当前时间
    */
   public static String getNowDate(String format) {
     SimpleDateFormat sd = new SimpleDateFormat(format);
@@ -44,9 +44,9 @@ public class DateUtil {
   /**
    * 格式化字符串为Date对象
    * 
-   * @param date
-   * @param format
-   * @return
+   * @param date  字符串
+   * @param format 格式
+   * @return 格式化字符串为Date对象
    */
   public static Date formatDate(String date, String format) {
     Date d = null;

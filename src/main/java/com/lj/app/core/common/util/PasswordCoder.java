@@ -10,198 +10,188 @@ import java.util.List;
  */
 public class PasswordCoder {
 
-	public static final String module = PasswordCoder.class.getName();
+  public static final String MODULE = PasswordCoder.class.getName();
 
-	private final int PASSWORD_SHORTEST_LEN = 4;
-	private int minLen = 6;
-	private int maxLen = 6;
-	private boolean hasLowercase = true;
-	private boolean hasUppercase = false;
-	private boolean hasNumber = true;
-	private boolean hasSpecial = false;
-	private String specialChars = null;
+  private  static final int PASSWORD_SHORTEST_LEN = 4;
+  private int minLen = 6;
+  private int maxLen = 6;
+  private boolean hasLowercase = true;
+  private boolean hasUppercase = false;
+  private boolean hasNumber = true;
+  private boolean hasSpecial = false;
+  private String specialChars = null;
 
-	public boolean validateCode(String code) {
+  /**
+   * 生成编码
+   * @return  生成编码
+   */
+  public String generateCode() {
 
-		if (code == null)
-			return false;
+    StringBuffer sb = new StringBuffer();
 
-		if (code.length() < minLen || code.length() > maxLen)
-			return false;
+    int codeLen = calculateCodeLen();
 
-		if (hasLowercase && !StringUtil.containsLowercase(code))
-			return false;
-		if (hasUppercase && !StringUtil.containsUppercase(code))
-			return false;
-		if (hasNumber && !StringUtil.containsNumber(code))
-			return false;
-		if (hasSpecial && !StringUtil.containsChar(code, specialChars))
-			return false;
+    // 1.确定合法字符
+    List codeChars = createCodeChars();
 
-		return true;
-	}
+    // 2.字符集重新排序
+    codeChars = StringUtil.randomOrder(codeChars);
 
-	public String generateCode() {
+    // 3.按顺序确定字符集数量
+    codeChars = calculateCodeCharQuantity(codeChars, codeLen);
 
-		StringBuffer sb = new StringBuffer();
+    printList(codeChars);
 
-		int codeLen = calculateCodeLen();
+    // 4.生成编码
+    CodeChar cc = null;
+    Iterator it = codeChars.iterator();
+    while (it.hasNext()) {
+      cc = (CodeChar) it.next();
+      if (cc.name.equals("lowercase"))  {
+        sb.append(StringUtil.generateRandomLowercase(cc.quantity));
+      }
+      if (cc.name.equals("uppercase")) {
+        sb.append(StringUtil.generateRandomUppercase(cc.quantity));
+      }
+      if (cc.name.equals("number")) {
+        sb.append(StringUtil.generateRandomNumber(cc.quantity));
+      }
+      if (cc.name.equals("specialChars")) {
+        sb.append(StringUtil.generateRandomChars(specialChars, cc.quantity));
+      }
+    }
+    String code = sb.toString();
 
-		// 1.确定合法字符
-		List codeChars = createCodeChars();
+    // 对编码重新排序
+    code = StringUtil.randomOrder(code);
 
-		// 2.字符集重新排序
-		codeChars = StringUtil.randomOrder(codeChars);
+    return code;
+  }
 
-		// 3.按顺序确定字符集数量
-		codeChars = calculateCodeCharQuantity(codeChars, codeLen);
+  class CodeChar {
+    String name;
+    int quantity;
 
-		printList(codeChars);
+    public CodeChar(String name, int n) {
+      this.name = name;
+      this.quantity = n;
+    }
+  }
 
-		// 4.生成编码
-		CodeChar cc = null;
-		Iterator it = codeChars.iterator();
-		while (it.hasNext()) {
-			cc = (CodeChar) it.next();
-			if (cc.name.equals("lowercase"))
-				sb.append(StringUtil.generateRandomLowercase(cc.quantity));
-			if (cc.name.equals("uppercase"))
-				sb.append(StringUtil.generateRandomUppercase(cc.quantity));
-			if (cc.name.equals("number"))
-				sb.append(StringUtil.generateRandomNumber(cc.quantity));
-			if (cc.name.equals("specialChars"))
-				sb.append(StringUtil.generateRandomChars(specialChars,
-						cc.quantity));
-		}
-		String code = sb.toString();
+  private void printList(List list) {
+    Iterator it = list.iterator();
+    CodeChar cc = null;
+    while (it.hasNext()) {
+      cc = (CodeChar) it.next();
+      System.out.println("cc=" + cc);
+    }
 
-		// 对编码重新排序
-		code = StringUtil.randomOrder(code);
+  }
 
-		return code;
-	}
+  private int calculateCodeLen() {
+    int codeLen = PASSWORD_SHORTEST_LEN;
 
-	class CodeChar {
-		String name;
-		int quantity;
+    if (minLen >= PASSWORD_SHORTEST_LEN && maxLen >= PASSWORD_SHORTEST_LEN) {
+      BigDecimal difference = new BigDecimal(Math.random() * (maxLen - minLen));
+      difference = difference.setScale(0, BigDecimal.ROUND_HALF_UP);
+      codeLen = minLen + difference.intValue();
+    }
 
-		public CodeChar(String name, int n) {
-			this.name = name;
-			this.quantity = n;
-		}
-	}
+    return codeLen;
+  }
 
-	private void printList(List list) {
-		Iterator it = list.iterator();
-		CodeChar cc = null;
-		while (it.hasNext()) {
-			cc = (CodeChar) it.next();
-			System.out.println("cc=" + cc);
-		}
+  private List createCodeChars() {
+    List codeChars = new ArrayList();
+    if (hasLowercase) {
+      codeChars.add(new CodeChar("lowercase", 1));
+    }
+    if (hasUppercase) {
+      codeChars.add(new CodeChar("uppercase", 1));
+    }
+    if (hasNumber)  {
+      codeChars.add(new CodeChar("number", 1));
+    }
+    if (hasSpecial) {
+      codeChars.add(new CodeChar("specialChars", 1));
+    }
+    return codeChars;
+  }
 
-	}
+  private List calculateCodeCharQuantity(List codeChars, int codeLen) {
+    CodeChar cc = null;
+    int usedLen = 0;
+    int quantity = 0;
+    for (int i = 0; i < codeChars.size(); i++) {
 
-	private int calculateCodeLen() {
-		int codeLen = PASSWORD_SHORTEST_LEN;
+      if (i == codeChars.size() - 1) {
+        cc = (CodeChar) codeChars.get(i);
+        cc.quantity = codeLen - usedLen;
+        break;
+      }
+      quantity = StringUtil.randomInt(codeLen - usedLen - (codeChars.size() - (i + 1)));
+      if (quantity == 0)  {
+        quantity = 1;
+      }
+      usedLen += quantity;
+      cc = (CodeChar) codeChars.get(i);
+      cc.quantity = quantity;
+    }
+    return codeChars;
+  }
 
-		if (minLen >= PASSWORD_SHORTEST_LEN && maxLen >= PASSWORD_SHORTEST_LEN) {
-			BigDecimal difference = new BigDecimal(Math.random()
-					* (maxLen - minLen));
-			difference = difference.setScale(0, BigDecimal.ROUND_HALF_UP);
-			codeLen = minLen + difference.intValue();
-		}
+  public boolean isHasLowercase() {
+    return hasLowercase;
+  }
 
-		return codeLen;
-	}
+  public void setHasLowercase(boolean hasLowercase) {
+    this.hasLowercase = hasLowercase;
+  }
 
-	private List createCodeChars() {
-		List codeChars = new ArrayList();
-		if (hasLowercase)
-			codeChars.add(new CodeChar("lowercase", 1));
-		if (hasUppercase)
-			codeChars.add(new CodeChar("uppercase", 1));
-		if (hasNumber)
-			codeChars.add(new CodeChar("number", 1));
-		if (hasSpecial)
-			codeChars.add(new CodeChar("specialChars", 1));
-		return codeChars;
-	}
+  public boolean isHasNumber() {
+    return hasNumber;
+  }
 
-	private List calculateCodeCharQuantity(List codeChars, int codeLen) {
-		CodeChar cc = null;
-		int usedLen = 0;
-		int quantity = 0;
-		for (int i = 0; i < codeChars.size(); i++) {
+  public void setHasNumber(boolean hasNumber) {
+    this.hasNumber = hasNumber;
+  }
 
-			if (i == codeChars.size() - 1) {
-				cc = (CodeChar) codeChars.get(i);
-				cc.quantity = codeLen - usedLen;
-				break;
-			}
-			quantity = StringUtil.randomInt(codeLen - usedLen
-					- (codeChars.size() - (i + 1)));
-			if (quantity == 0)
-				quantity = 1;
-			usedLen += quantity;
-			cc = (CodeChar) codeChars.get(i);
-			cc.quantity = quantity;
-		}
-		return codeChars;
-	}
+  public boolean isHasSpecial() {
+    return hasSpecial;
+  }
 
-	public boolean isHasLowercase() {
-		return hasLowercase;
-	}
+  public void setHasSpecial(boolean hasSpecial) {
+    this.hasSpecial = hasSpecial;
+  }
 
-	public void setHasLowercase(boolean hasLowercase) {
-		this.hasLowercase = hasLowercase;
-	}
+  public boolean isHasUppercase() {
+    return hasUppercase;
+  }
 
-	public boolean isHasNumber() {
-		return hasNumber;
-	}
+  public void setHasUppercase(boolean hasUppercase) {
+    this.hasUppercase = hasUppercase;
+  }
 
-	public void setHasNumber(boolean hasNumber) {
-		this.hasNumber = hasNumber;
-	}
+  public int getMaxLen() {
+    return maxLen;
+  }
 
-	public boolean isHasSpecial() {
-		return hasSpecial;
-	}
+  public void setMaxLen(int maxLen) {
+    this.maxLen = maxLen;
+  }
 
-	public void setHasSpecial(boolean hasSpecial) {
-		this.hasSpecial = hasSpecial;
-	}
+  public int getMinLen() {
+    return minLen;
+  }
 
-	public boolean isHasUppercase() {
-		return hasUppercase;
-	}
+  public void setMinLen(int minLen) {
+    this.minLen = minLen;
+  }
 
-	public void setHasUppercase(boolean hasUppercase) {
-		this.hasUppercase = hasUppercase;
-	}
+  public String getSpecialChars() {
+    return specialChars;
+  }
 
-	public int getMaxLen() {
-		return maxLen;
-	}
-
-	public void setMaxLen(int maxLen) {
-		this.maxLen = maxLen;
-	}
-
-	public int getMinLen() {
-		return minLen;
-	}
-
-	public void setMinLen(int minLen) {
-		this.minLen = minLen;
-	}
-
-	public String getSpecialChars() {
-		return specialChars;
-	}
-
-	public void setSpecialChars(String specialChars) {
-		this.specialChars = specialChars;
-	}
+  public void setSpecialChars(String specialChars) {
+    this.specialChars = specialChars;
+  }
 }

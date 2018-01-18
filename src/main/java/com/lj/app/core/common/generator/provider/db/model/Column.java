@@ -10,286 +10,280 @@ import com.lj.app.core.common.generator.util.StringHelper;
 import com.lj.app.core.common.generator.util.TestDataGenerator;
 
 public class Column {
-	private final Table _table;
-	private final int _sqlType;
-	private final String _sqlTypeName;
-	private final String _sqlName;
-	private boolean _isPk;
-	private boolean _isFk;
-	private String fkTableName;
-	private final int _size;
-	private final int _decimalDigits;
-	private final boolean _isNullable;
-	private final boolean _isIndexed;
-	private final boolean _isUnique;
-	private final String _defaultValue;
-	private final String _remarks;
-	
-	private String javaType;
+  private final Table _table;
+  private final int _sqlType;
+  private final String _sqlTypeName;
+  private final String _sqlName;
+  private boolean _isPk;
+  private boolean _isFk;
+  private String fkTableName;
+  private final int _size;
+  private final int _decimalDigits;
+  private final boolean _isNullable;
+  private final boolean _isIndexed;
+  private final boolean _isUnique;
+  private final String _defaultValue;
+  private final String _remarks;
 
-	public Column(Table table, int sqlType, String sqlTypeName, String sqlName,
-			int size, int decimalDigits, boolean isPk, boolean isFk,
-			String fkTableName, boolean isNullable, boolean isIndexed,
-			boolean isUnique, String defaultValue, String remarks) {
-		this._table = table;
-		this._sqlType = sqlType;
-		this._sqlName = sqlName;
-		this._sqlTypeName = sqlTypeName;
-		this._size = size;
-		this._decimalDigits = decimalDigits;
-		this._isPk = isPk;
-		this._isNullable = isNullable;
-		this._isIndexed = isIndexed;
-		this._isUnique = isUnique;
-		this._defaultValue = defaultValue;
-		this._remarks = remarks;
-		this._isFk = isFk;
-		this.fkTableName = fkTableName;
+  private String javaType;
 
-		GLogger.debug(sqlName + " isPk -> " + this._isPk);
-		initOtherProperties();
-	}
+  public Column(Table table, int sqlType, String sqlTypeName, String sqlName, int size, int decimalDigits, boolean isPk,
+      boolean isFk, String fkTableName, boolean isNullable, boolean isIndexed, boolean isUnique, String defaultValue,
+      String remarks) {
+    this._table = table;
+    this._sqlType = sqlType;
+    this._sqlName = sqlName;
+    this._sqlTypeName = sqlTypeName;
+    this._size = size;
+    this._decimalDigits = decimalDigits;
+    this._isPk = isPk;
+    this._isNullable = isNullable;
+    this._isIndexed = isIndexed;
+    this._isUnique = isUnique;
+    this._defaultValue = defaultValue;
+    this._remarks = remarks;
+    this._isFk = isFk;
+    this.fkTableName = fkTableName;
 
-	public int getSqlType() {
-		return this._sqlType;
-	}
+    GLogger.debug(sqlName + " isPk -> " + this._isPk);
+    initOtherProperties();
+  }
 
-	public Table getTable() {
-		return this._table;
-	}
+  public int getSqlType() {
+    return this._sqlType;
+  }
 
-	public int getSize() {
-		return this._size;
-	}
+  public Table getTable() {
+    return this._table;
+  }
 
-	public int getDecimalDigits() {
-		return this._decimalDigits;
-	}
+  public int getSize() {
+    return this._size;
+  }
 
-	public String getSqlTypeName() {
-		return this._sqlTypeName;
-	}
+  public int getDecimalDigits() {
+    return this._decimalDigits;
+  }
 
-	public String getSqlName() {
-		return this._sqlName;
-	}
+  public String getSqlTypeName() {
+    return this._sqlTypeName;
+  }
 
-	public String getUnderscoreName() {
-		return getSqlName().toLowerCase();
-	}
+  public String getSqlName() {
+    return this._sqlName;
+  }
 
-	public boolean isPk() {
-		return this._isPk;
-	}
+  public String getUnderscoreName() {
+    return getSqlName().toLowerCase();
+  }
 
-	public boolean isFk() {
-		return this._isFk;
-	}
+  public boolean isPk() {
+    return this._isPk;
+  }
 
-	public final boolean isNullable() {
-		return this._isNullable;
-	}
+  public boolean isFk() {
+    return this._isFk;
+  }
 
-	public final boolean isIndexed() {
-		return this._isIndexed;
-	}
+  public final boolean isNullable() {
+    return this._isNullable;
+  }
 
-	public boolean isUnique() {
-		return this._isUnique;
-	}
+  public final boolean isIndexed() {
+    return this._isIndexed;
+  }
 
-	public final String getDefaultValue() {
-		return this._defaultValue;
-	}
+  public boolean isUnique() {
+    return this._isUnique;
+  }
 
-	public final String getRemarks() {
-		return StringHelper.trimBlank(this._remarks);
-	}
+  public final String getDefaultValue() {
+    return this._defaultValue;
+  }
 
-	public int hashCode() {
-		return (getTable().getSqlName() + "#" + getSqlName()).hashCode();
-	}
+  public final String getRemarks() {
+    return StringHelper.trimBlank(this._remarks);
+  }
 
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if ((o instanceof Column)) {
-			Column other = (Column) o;
-			if (getSqlName().equals(other.getSqlName())) {
-				return true;
-			}
-		}
-		return false;
-	}
+  public int hashCode() {
+    return (getTable().getSqlName() + "#" + getSqlName()).hashCode();
+  }
 
-	public String toString() {
-		return getSqlName();
-	}
+  public boolean equals(Object o) {
+    if (this == o)
+      return true;
+    if ((o instanceof Column)) {
+      Column other = (Column) o;
+      if (getSqlName().equals(other.getSqlName())) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-	protected final String prefsPrefix() {
-		return "tables/" + getTable().getSqlName() + "/columns/" + getSqlName();
-	}
+  public String toString() {
+    return getSqlName();
+  }
 
-	void setFk(boolean flag) {
-		this._isFk = flag;
-	}
+  protected final String prefsPrefix() {
+    return "tables/" + getTable().getSqlName() + "/columns/" + getSqlName();
+  }
 
-	public String getColumnName() {
-		return StringHelper.makeAllWordFirstLetterUpperCase(StringHelper
-				.toUnderscoreName(getSqlName()));
-	}
+  void setFk(boolean flag) {
+    this._isFk = flag;
+  }
 
-	public String getColumnNameFirstLower() {
-		return StringHelper.uncapitalize(getColumnName());
-	}
-	
-	public String getColumnNameFirstUpper() {
-		return StringHelper.capitalize(getColumnName());
-	}
+  public String getColumnName() {
+    return StringHelper.makeAllWordFirstLetterUpperCase(StringHelper.toUnderscoreName(getSqlName()));
+  }
 
-	public String getColumnNameLowerCase() {
-		return getColumnName().toLowerCase();
-	}
+  public String getColumnNameFirstLower() {
+    return StringHelper.uncapitalize(getColumnName());
+  }
 
-	/** @deprecated */
-	public String getColumnNameLower() {
-		return getColumnNameFirstLower();
-	}
+  public String getColumnNameFirstUpper() {
+    return StringHelper.capitalize(getColumnName());
+  }
 
-	public String getJdbcSqlTypeName() {
-		String result = JdbcType.getJdbcSqlTypeName(getSqlType());
+  public String getColumnNameLowerCase() {
+    return getColumnName().toLowerCase();
+  }
 
-		return result;
-	}
+  /** @deprecated */
+  public String getColumnNameLower() {
+    return getColumnNameFirstLower();
+  }
 
-	public String getColumnAlias() {
-		return StringHelper.emptyIf(getRemarks(), getColumnNameFirstLower());
-	}
+  public String getJdbcSqlTypeName() {
+    String result = JdbcType.getJdbcSqlTypeName(getSqlType());
 
-	public String getConstantName() {
-		return StringHelper.toUnderscoreName(getSqlName()).toUpperCase();
-	}
+    return result;
+  }
 
-	public boolean getIsNotIdOrVersionField() {
-		return !isPk();
-	}
+  public String getColumnAlias() {
+    return StringHelper.emptyIf(getRemarks(), getColumnNameFirstLower());
+  }
 
-	public String getValidateString() {
-		String result = getNoRequiredValidateString();
-		if (!isNullable()) {
-			result = "required " + result;
-		}
-		return result;
-	}
+  public String getConstantName() {
+    return StringHelper.toUnderscoreName(getSqlName()).toUpperCase();
+  }
 
-	public String getNoRequiredValidateString() {
-		String result = "";
-		if (getSqlName().indexOf("mail") >= 0) {
-			result = result + "validate-email ";
-		}
-		if (DatabaseDataTypesUtils.isFloatNumber(getSqlType(), getSize(),
-				getDecimalDigits())) {
-			result = result + "validate-number ";
-		}
-		if (DatabaseDataTypesUtils.isIntegerNumber(getSqlType(), getSize(),
-				getDecimalDigits())) {
-			result = result + "validate-integer ";
-			if (getJavaType().indexOf("Short") >= 0)
-				result = result + "max-value-32767";
-			else if (getJavaType().indexOf("Integer") >= 0)
-				result = result + "max-value-2147483647";
-			else if (getJavaType().indexOf("Byte") >= 0) {
-				result = result + "max-value-127";
-			}
+  public boolean getIsNotIdOrVersionField() {
+    return !isPk();
+  }
 
-		}
+  public String getValidateString() {
+    String result = getNoRequiredValidateString();
+    if (!isNullable()) {
+      result = "required " + result;
+    }
+    return result;
+  }
 
-		return result;
-	}
+  public String getNoRequiredValidateString() {
+    String result = "";
+    if (getSqlName().indexOf("mail") >= 0) {
+      result = result + "validate-email ";
+    }
+    if (DatabaseDataTypesUtils.isFloatNumber(getSqlType(), getSize(), getDecimalDigits())) {
+      result = result + "validate-number ";
+    }
+    if (DatabaseDataTypesUtils.isIntegerNumber(getSqlType(), getSize(), getDecimalDigits())) {
+      result = result + "validate-integer ";
+      if (getJavaType().indexOf("Short") >= 0)
+        result = result + "max-value-32767";
+      else if (getJavaType().indexOf("Integer") >= 0)
+        result = result + "max-value-2147483647";
+      else if (getJavaType().indexOf("Byte") >= 0) {
+        result = result + "max-value-127";
+      }
 
-	public boolean getIsStringColumn() {
-		return DatabaseDataTypesUtils.isString(getSqlType(), getSize(),
-				getDecimalDigits());
-	}
+    }
 
-	public boolean getIsDateTimeColumn() {
-		return DatabaseDataTypesUtils.isDate(getSqlType(), getSize(),
-				getDecimalDigits());
-	}
+    return result;
+  }
 
-	public boolean getIsNumberColumn() {
-		return (DatabaseDataTypesUtils.isFloatNumber(getSqlType(), getSize(),
-				getDecimalDigits()))
-				|| (DatabaseDataTypesUtils.isIntegerNumber(getSqlType(),
-						getSize(), getDecimalDigits()));
-	}
+  public boolean getIsStringColumn() {
+    return DatabaseDataTypesUtils.isString(getSqlType(), getSize(), getDecimalDigits());
+  }
 
-	public boolean isHtmlHidden() {
-		return (isPk()) && (this._table.isSingleId());
-	}
+  public boolean getIsDateTimeColumn() {
+    return DatabaseDataTypesUtils.isDate(getSqlType(), getSize(), getDecimalDigits());
+  }
 
-	public String getJavaType() {
-	/*	String normalJdbcJavaType = DatabaseDataTypesUtils
-				.getPreferredJavaType(getSqlType(), getSize(),
-						getDecimalDigits());
-		javaType = GeneratorProperties.getProperty(
-				"java_typemapping." + normalJdbcJavaType, normalJdbcJavaType)
-				.trim();*/
+  public boolean getIsNumberColumn() {
+    return (DatabaseDataTypesUtils.isFloatNumber(getSqlType(), getSize(), getDecimalDigits()))
+        || (DatabaseDataTypesUtils.isIntegerNumber(getSqlType(), getSize(), getDecimalDigits()));
+  }
 
-		return javaType;
-	}
-	
-	/**
-	* 得到简短的javaType的名称，如com.company.model.UserInfo,将返回 UserInfo
-	* @return
-	*/
-	public String getSimpleJavaType() {
-		return StringHelper.getJavaClassSimpleName(getJavaType());
-	}
-	
-	/**
-	* 得到尽可能简短的javaType的名称，如果是java.lang.String,将返回String, 如com.company.model.UserInfo,将返回 com.company.model.UserInfo
-	* @return
-	*/
-	public String getPossibleShortJavaType() {
-		if(getJavaType().startsWith("java.lang.")) {
-			return getSimpleJavaType();
-		}else {
-			return getJavaType();
-		}
-	}
+  public boolean isHtmlHidden() {
+    return (isPk()) && (this._table.isSingleId());
+  }
 
-	public String getAsType() {
-		return ActionScriptDataTypesUtils.getPreferredAsType(getJavaType());
-	}
+  public String getJavaType() {
+    /*
+     * String normalJdbcJavaType = DatabaseDataTypesUtils .getPreferredJavaType(getSqlType(), getSize(),
+     * getDecimalDigits()); javaType = GeneratorProperties.getProperty( "java_typemapping." + normalJdbcJavaType,
+     * normalJdbcJavaType) .trim();
+     */
 
-	public String getTestData() {
-		return new TestDataGenerator().getDBUnitTestData(getColumnName(),
-				getJavaType(), getSize());
-	}
+    return javaType;
+  }
 
-	/** nullValue for ibatis sqlmap: <result property="age" column="age" nullValue="0" /> */
-	public String getNullValue() {
-		//System.out.println("getNullValue============================="+(JavaPrimitiveTypeMapping.getDefaultValue(getJavaType())));
-		return JavaPrimitiveTypeMapping.getDefaultValue(getJavaType());
-	}
-	
-	public boolean isHasNullValue() {
-		//System.out.println("getJavaType============================="+getJavaType());
-		//System.out.println("isHasNullValue============================="+(JavaPrimitiveTypeMapping.getWrapperTypeOrNull(getJavaType()) != null));
-		return JavaPrimitiveTypeMapping.getWrapperTypeOrNull(getJavaType()) != null;
-	}
-	
-	private void initOtherProperties() {
-		String normalJdbcJavaType = DatabaseDataTypesUtils.getPreferredJavaType(getSqlType(), getSize(), getDecimalDigits());
-		javaType = GeneratorProperties.getProperty("java_typemapping."+normalJdbcJavaType,normalJdbcJavaType).trim();
-	}
-	
-	public String getFkTableName() {
-		return this.fkTableName;
-	}
+  /**
+   * 得到简短的javaType的名称，如com.company.model.UserInfo,将返回 UserInfo
+   * 
+   * @return
+   */
+  public String getSimpleJavaType() {
+    return StringHelper.getJavaClassSimpleName(getJavaType());
+  }
 
-	public void setFkTableName(String fkTableName) {
-		this.fkTableName = fkTableName;
-	}
+  /**
+   * 得到尽可能简短的javaType的名称，如果是java.lang.String,将返回String, 如com.company.model.UserInfo,将返回 com.company.model.UserInfo
+   * 
+   * @return
+   */
+  public String getPossibleShortJavaType() {
+    if (getJavaType().startsWith("java.lang.")) {
+      return getSimpleJavaType();
+    } else {
+      return getJavaType();
+    }
+  }
+
+  public String getAsType() {
+    return ActionScriptDataTypesUtils.getPreferredAsType(getJavaType());
+  }
+
+  public String getTestData() {
+    return new TestDataGenerator().getDBUnitTestData(getColumnName(), getJavaType(), getSize());
+  }
+
+  /** nullValue for ibatis sqlmap: <result property="age" column="age" nullValue="0" /> */
+  public String getNullValue() {
+    // System.out.println("getNullValue============================="+(JavaPrimitiveTypeMapping.getDefaultValue(getJavaType())));
+    return JavaPrimitiveTypeMapping.getDefaultValue(getJavaType());
+  }
+
+  public boolean isHasNullValue() {
+    // System.out.println("getJavaType============================="+getJavaType());
+    // System.out.println("isHasNullValue============================="+(JavaPrimitiveTypeMapping.getWrapperTypeOrNull(getJavaType())
+    // != null));
+    return JavaPrimitiveTypeMapping.getWrapperTypeOrNull(getJavaType()) != null;
+  }
+
+  private void initOtherProperties() {
+    String normalJdbcJavaType = DatabaseDataTypesUtils.getPreferredJavaType(getSqlType(), getSize(),
+        getDecimalDigits());
+    javaType = GeneratorProperties.getProperty("java_typemapping." + normalJdbcJavaType, normalJdbcJavaType).trim();
+  }
+
+  public String getFkTableName() {
+    return this.fkTableName;
+  }
+
+  public void setFkTableName(String fkTableName) {
+    this.fkTableName = fkTableName;
+  }
 }

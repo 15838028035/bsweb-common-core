@@ -28,7 +28,7 @@ public class DateJsonFormat implements JsonValueProcessor {
   }
 
   /**
-   *  处理对象值
+   * 处理对象值
    */
   public Object processObjectValue(String key, Object value, JsonConfig arg2) {
     if (value == null) {

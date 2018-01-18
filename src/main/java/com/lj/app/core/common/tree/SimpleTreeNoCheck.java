@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.json.JSONObject;
+
 /**
  * 
  * 简单树
@@ -17,9 +18,11 @@ public class SimpleTreeNoCheck {
   /**
    * 唯一构造函数
    * 
-     * @param rootId  根节点
-   * @param rootText 根节点文本
-   *          
+   * @param rootId
+   *          根节点
+   * @param rootText
+   *          根节点文本
+   * 
    */
   public SimpleTreeNoCheck(String rootId, String rootText) {
     rootNode = new TreeNodeNoCheck();
@@ -31,8 +34,10 @@ public class SimpleTreeNoCheck {
   /**
    * 增加节点，默认父节点为根节点
    * 
-    * @param id  节点ID
-   * @param text  节点文本
+   * @param id
+   *          节点ID
+   * @param text
+   *          节点文本
    * @return TreeNodeNoCheck
    */
   public TreeNodeNoCheck addNode(String id, String text) {
@@ -42,8 +47,10 @@ public class SimpleTreeNoCheck {
   /**
    * 增加节点
    * 
-   * @param id  节点ID
-   * @param text  节点文本
+   * @param id
+   *          节点ID
+   * @param text
+   *          节点文本
    * @param parentNode
    *          如果为null，将默认为根节点
    * @return TreeNodeNoCheck
@@ -64,6 +71,7 @@ public class SimpleTreeNoCheck {
 
   /**
    * 以json方式返回对象
+   * 
    * @return Exception
    */
   public String toJsonString() throws Exception {
@@ -74,8 +82,10 @@ public class SimpleTreeNoCheck {
   /**
    * 将List&lt;TreeNodeNoCheckList&gt;转换为SimpleTree对象。
    * 
-   * @param treeNodeNoCheckList 树节点列表
-   * @param rootNodeId 根节点
+   * @param treeNodeNoCheckList
+   *          树节点列表
+   * @param rootNodeId
+   *          根节点
    * @return SimpleTreeNoCheck树
    */
   public static SimpleTreeNoCheck valueOf(List<DefaultTreeNodeNoCheck> treeNodeNoCheckList, String rootNodeId)
@@ -126,8 +136,10 @@ public class SimpleTreeNoCheck {
   /**
    * 寻找根节点
    * 
-   * @param treeNodeNoCheckList 树节点列表
-   * @param rootNodeId 根节点
+   * @param treeNodeNoCheckList
+   *          树节点列表
+   * @param rootNodeId
+   *          根节点
    * @return DefaultTreeNodeNoCheck
    */
   private static DefaultTreeNodeNoCheck findRootNode(List<DefaultTreeNodeNoCheck> treeNodeNoCheckList,
@@ -144,9 +156,12 @@ public class SimpleTreeNoCheck {
   /**
    * 创建DefaultTreeNode树
    * 
-   * @param id id
-   * @param text 节点文本
-   * @param parentId 父ID
+   * @param id
+   *          id
+   * @param text
+   *          节点文本
+   * @param parentId
+   *          父ID
    * @return DefaultTreeNodeNoCheck树
    */
   public static DefaultTreeNodeNoCheck createNew(String id, String text, String parentId) {

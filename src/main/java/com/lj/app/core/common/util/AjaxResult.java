@@ -5,12 +5,12 @@ package com.lj.app.core.common.util;
  *
  */
 public class AjaxResult {
-  
+
   /**
    * 操作结果
    */
   private String opResult;
-  
+
   /**
    * 操作失败消息
    */

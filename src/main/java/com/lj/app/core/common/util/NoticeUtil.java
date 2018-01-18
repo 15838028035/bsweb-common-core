@@ -16,9 +16,13 @@ public class NoticeUtil {
 
   /**
    * 发送邮件
-   * @param emailAddress  接收用户
-   * @param title 邮件主题
-   * @param content 邮件内容
+   * 
+   * @param emailAddress
+   *          接收用户
+   * @param title
+   *          邮件主题
+   * @param content
+   *          邮件内容
    */
   public static boolean sendEmail(String emailAddress, String title, String content) throws Exception {
 

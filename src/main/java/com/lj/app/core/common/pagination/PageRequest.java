@@ -8,7 +8,8 @@ import java.util.List;
  * 
  * 分页对象
  *
- * @param <T> 对象
+ * @param <T>
+ *          对象
  */
 public class PageRequest<T> implements Serializable {
 
@@ -42,9 +43,13 @@ public class PageRequest<T> implements Serializable {
 
   /**
    * 构造函数
-   * @param pageSize 分页大小
-   * @param filters 过滤对象
-   * @param sortColumns 排序列
+   * 
+   * @param pageSize
+   *          分页大小
+   * @param filters
+   *          过滤对象
+   * @param sortColumns
+   *          排序列
    */
   public PageRequest(int pageNumber, int pageSize, T filters, String sortColumns) {
     this.pageNumber = pageNumber;

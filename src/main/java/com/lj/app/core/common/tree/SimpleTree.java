@@ -17,8 +17,10 @@ public class SimpleTree {
   /**
    * 唯一构造函数
    * 
-   * @param rootId  根节点
-   * @param rootText 根节点文本
+   * @param rootId
+   *          根节点
+   * @param rootText
+   *          根节点文本
    * @param checked
    *          值为：0,1,2，如果非法，默认为是0
    */
@@ -33,8 +35,10 @@ public class SimpleTree {
   /**
    * 增加节点，默认父节点为根节点
    * 
-    * @param id  节点ID
-   * @param text  节点文本
+   * @param id
+   *          节点ID
+   * @param text
+   *          节点文本
    * @return 树
    */
   public TreeNode addNode(String id, String text, int checked) {
@@ -44,8 +48,10 @@ public class SimpleTree {
   /**
    * 增加节点
    * 
-   * @param id  节点ID
-   * @param text  节点文本
+   * @param id
+   *          节点ID
+   * @param text
+   *          节点文本
    * @param checked
    *          值为：0,1,2，如果非法，默认为是0
    * @param parentNode
@@ -69,14 +75,14 @@ public class SimpleTree {
 
   private int getChecked(int checked) {
     switch (checked) {
-      case 0:
-        return 0;
-      case 1:
-        return 1;
-      case 2:
-        return 2;
-      default:
-        return 0;// 默认为0
+    case 0:
+      return 0;
+    case 1:
+      return 1;
+    case 2:
+      return 2;
+    default:
+      return 0;// 默认为0
     }
   }
 
@@ -153,7 +159,8 @@ public class SimpleTree {
    * 以json方式返回对象
    * 
    * @return String 以json方式返回对象
-   * @throws Exception 异常信息
+   * @throws Exception
+   *           异常信息
    */
   public String toJsonString() throws Exception {
     JSONObject jsonObject = new JSONObject();
@@ -163,8 +170,10 @@ public class SimpleTree {
   /**
    * 将List&lt;treeNodeList&gt;转换为SimpleTree对象。
    * 
-   * @param treeNodeList 树节点列表
-   * @param rootNodeId 根节点
+   * @param treeNodeList
+   *          树节点列表
+   * @param rootNodeId
+   *          根节点
    * @return SimpleTree树
    */
   public static SimpleTree valueOf(List<DefaultTreeNode> treeNodeList, String rootNodeId) throws Exception {
@@ -214,8 +223,10 @@ public class SimpleTree {
   /**
    * 寻找根节点
    * 
-    * @param treeNodeList 树节点列表
-   * @param rootNodeId 根节点
+   * @param treeNodeList
+   *          树节点列表
+   * @param rootNodeId
+   *          根节点
    * @return DefaultTreeNode树
    */
   private static DefaultTreeNode findRootNode(List<DefaultTreeNode> treeNodeList, String rootNodeId) {
@@ -231,10 +242,14 @@ public class SimpleTree {
   /**
    * 创建DefaultTreeNode树
    * 
-   * @param id id
-   * @param text 节点文本
-   * @param checked 是否选中
-   * @param parentId 父ID
+   * @param id
+   *          id
+   * @param text
+   *          节点文本
+   * @param checked
+   *          是否选中
+   * @param parentId
+   *          父ID
    * @return DefaultTreeNode树
    */
   public static DefaultTreeNode createNew(String id, String text, int checked, String parentId) {

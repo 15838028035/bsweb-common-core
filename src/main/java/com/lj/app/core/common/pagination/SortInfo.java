@@ -22,8 +22,11 @@ public class SortInfo implements Serializable {
 
   /**
    * 构造函数
-   * @param columnName 列名称
-   * @param sortOrder  排序方式
+   * 
+   * @param columnName
+   *          列名称
+   * @param sortOrder
+   *          排序方式
    */
   public SortInfo(String columnName, String sortOrder) {
     super();
@@ -49,12 +52,14 @@ public class SortInfo implements Serializable {
 
   /**
    * 排序解析
-   * @param sortColumns 排序列
+   * 
+   * @param sortColumns
+   *          排序列
    * @return 列表
    */
   public static List<SortInfo> parseSortColumns(String sortColumns) {
     if (sortColumns == null) {
-      return Collections.<SortInfo>emptyList();
+      return Collections.<SortInfo> emptyList();
     }
 
     List<SortInfo> results = new ArrayList();

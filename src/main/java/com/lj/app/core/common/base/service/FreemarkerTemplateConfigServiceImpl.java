@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
  * @date: 2016-10-16 08:15:30
  */
 @Service("freemarkerTemplateConfigService")
-public class FreemarkerTemplateConfigServiceImpl<FreemarkerTemplateConfig> extends BaseServiceImpl<FreemarkerTemplateConfig> implements FreemarkerTemplateConfigService<FreemarkerTemplateConfig>{
+public class FreemarkerTemplateConfigServiceImpl<FreemarkerTemplateConfig> extends
+    BaseServiceImpl<FreemarkerTemplateConfig> implements FreemarkerTemplateConfigService<FreemarkerTemplateConfig> {
 
 }

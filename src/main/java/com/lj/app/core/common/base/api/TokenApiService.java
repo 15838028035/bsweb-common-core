@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.lj.app.core.common.base.entity.UpmToken;
 import com.lj.app.core.common.base.service.UpmTokenService;
 
-
 /**
  * 获取spring服务Bean使用名称：tokenApiService
  */
@@ -17,19 +16,19 @@ import com.lj.app.core.common.base.service.UpmTokenService;
 @Service("tokenApiService")
 @SuppressWarnings("unchecked")
 public class TokenApiService {
-	
-	@Autowired
-	private UpmTokenService<UpmToken> upmTokenService;
 
-	public void saveToken(UpmToken upmToken) throws Exception {
-		upmTokenService.insertObject("insert",upmToken);
-	}
-	
-	public List<UpmToken> queryForList(Map<String,Object> map) {
-		return upmTokenService.queryForList("select",map);
-	}
-	
-	public void delete(int id) {
-		upmTokenService.delete(id);
-	}
+  @Autowired
+  private UpmTokenService<UpmToken> upmTokenService;
+
+  public void saveToken(UpmToken upmToken) throws Exception {
+    upmTokenService.insertObject("insert", upmToken);
+  }
+
+  public List<UpmToken> queryForList(Map<String, Object> map) {
+    return upmTokenService.queryForList("select", map);
+  }
+
+  public void delete(int id) {
+    upmTokenService.delete(id);
+  }
 }

@@ -15,9 +15,13 @@ public class SysmsgService {
 
   /**
    * 发送短信
-   * @param title 标题
-   * @param content 内容
-   * @param mainAcctId 帐号Id
+   * 
+   * @param title
+   *          标题
+   * @param content
+   *          内容
+   * @param mainAcctId
+   *          帐号Id
    * @return boolean 是否成功
    */
   public static boolean sendSmsInfo(String title, String content, Long mainAcctId) {

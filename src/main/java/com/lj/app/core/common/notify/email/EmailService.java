@@ -16,9 +16,13 @@ public class EmailService {
 
   /**
    * 发送邮件
-   * @param sendTo  接收用户
-   * @param subject 邮件主题
-   * @param content 邮件内容
+   * 
+   * @param sendTo
+   *          接收用户
+   * @param subject
+   *          邮件主题
+   * @param content
+   *          邮件内容
    * @return boolean 是否发送成功
    */
   public static boolean sendEmailInfo(String sendTo, String subject, String content) {

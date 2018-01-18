@@ -50,8 +50,7 @@ public class MailSender {
   public static final String MAIL_FTL_NAME = "ftlName";// 邮件模版名称
 
   /**
-   * 构造函数
-   * 设置默认编码及模板
+   * 构造函数 设置默认编码及模板
    */
   public MailSender() {
     configuration = new Configuration();
@@ -61,8 +60,10 @@ public class MailSender {
 
   /**
    * 获得邮件消息
-   * @param info 模板map
-   * @return String  获得邮件消息
+   * 
+   * @param info
+   *          模板map
+   * @return String 获得邮件消息
    */
   public String getMailText(Map<String, Object> info) {
     String htmlText = "";

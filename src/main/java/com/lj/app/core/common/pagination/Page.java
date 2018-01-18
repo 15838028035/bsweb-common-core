@@ -19,7 +19,8 @@ import net.sf.json.JsonConfig;
  * 
  * 分页对象
  *
- * @param <T> 对象
+ * @param <T>
+ *          对象
  */
 public class Page<T> implements Serializable {
 
@@ -53,9 +54,13 @@ public class Page<T> implements Serializable {
 
   /**
    * 构造函数
-   * @param pageSize 分页大小
-   * @param filters 过滤对象
-   * @param sortColumns 排序列
+   * 
+   * @param pageSize
+   *          分页大小
+   * @param filters
+   *          过滤对象
+   * @param sortColumns
+   *          排序列
    */
   public Page(int pageSize, T filters, String sortColumns) {
     if (pageNumber == 0) {
@@ -206,7 +211,9 @@ public class Page<T> implements Serializable {
 
   /**
    * 获得json字符串
-   * @param object 对象
+   * 
+   * @param object
+   *          对象
    * @return 获得json字符串
    */
   public static String toJsonString(Object object) {
