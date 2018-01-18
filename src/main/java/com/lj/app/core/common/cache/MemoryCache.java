@@ -11,6 +11,11 @@ public class MemoryCache implements Cache, Serializable {
 
   private Map map = new HashMap();
 
+  /**
+   * 
+   * 缓存内部类
+   *
+   */
   public class Value {
     long gmtCreate = System.currentTimeMillis();
     int expiration;
@@ -30,6 +35,13 @@ public class MemoryCache implements Cache, Serializable {
     map.clear();
   }
 
+  /**
+   * 递减的元素的值
+   * 
+   * @param key 缓存key
+   * @param by 递增值
+   * @return  递减的元素的值
+   */
   public long decr(String key, int by) {
     Long v = (Long) map.get(key);
     if (v == null) {
@@ -45,10 +57,17 @@ public class MemoryCache implements Cache, Serializable {
     map.remove(key);
   }
 
+  /**
+   * 根据key得到一个元素
+   * 
+   * @param key 缓存key
+   * @return 对象
+   */
   public Object get(String key) {
     Value value = (Value) map.get(key);
-    if (value == null)
+    if (value == null)  {
       return null;
+    }
     boolean isTimeout = (value.gmtCreate + value.expiration) <= System.currentTimeMillis();
     if (isTimeout) {
       delete(key);
@@ -58,6 +77,13 @@ public class MemoryCache implements Cache, Serializable {
     }
   }
 
+  /**
+   * 批量查找元素
+   * 
+   * @param keys 缓存key
+   *          
+   * @return map
+   */
   public Map<String, Object> get(String[] keys) {
     Map<String, Object> result = new HashMap();
     for (String key : keys) {
@@ -67,6 +93,15 @@ public class MemoryCache implements Cache, Serializable {
     return result;
   }
 
+  /**
+   * 递增元素的值
+   * 
+   * @param key
+   *          缓存key
+   * @param by
+   *          递增量
+   * @return long 递增元素的值
+   */
   public long incr(String key, int by) {
     Long v = (Long) map.get(key);
     if (v == null) {

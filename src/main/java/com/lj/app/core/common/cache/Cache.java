@@ -56,17 +56,17 @@ public interface Cache {
   /**
    * 根据key得到一个元素
    * 
-   * @param key
-   * @return
+   * @param key 缓存key
+   * @return 对象
    */
   public Object get(String key);
 
   /**
    * 批量查找元素
    * 
-   * @param key
-   *          缓存key
-   * @return
+   * @param keys 缓存key
+   *          
+   * @return map
    */
   public Map<String, Object> get(String[] keys);
 
@@ -84,9 +84,9 @@ public interface Cache {
   /**
    * 递减的元素的值
    * 
-   * @param key
-   * @param by
-   * @return
+   * @param key 缓存key
+   * @param by 递增值
+   * @return  递减的元素的值
    */
   public long decr(String key, int by);
 
@@ -101,7 +101,7 @@ public interface Cache {
   /**
    * 从缓存中删除一个元素,忽略掉任何异常，返回true则删除成功，否则失败
    * 
-   * @param key
+   * @param key 缓存key
    */
   public boolean safeDelete(String key);
 
