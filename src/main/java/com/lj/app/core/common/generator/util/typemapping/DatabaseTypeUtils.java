@@ -1,6 +1,16 @@
 package com.lj.app.core.common.generator.util.typemapping;
 
+/**
+ * 
+ * 数据库类型工具类
+ *
+ */
 public class DatabaseTypeUtils {
+  /**
+   * 根据驱动类获得数据库类型
+   * @param driver 驱动类
+   * @return 数据库类型
+   */
   public static String getDatabaseTypeByJdbcDriver(String driver) {
     if (driver == null) {
       return null;

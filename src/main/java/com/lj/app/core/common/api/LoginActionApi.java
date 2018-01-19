@@ -22,8 +22,11 @@ public class LoginActionApi {
 
   /**
    * 获取登陆信息
-   * @param userId 用户名 
-   * @param pwd 密码
+   * 
+   * @param userId
+   *          用户名
+   * @param pwd
+   *          密码
    * @return 登陆用户信息
    */
   public static LoginUserInfo getLoginUserInfo(String userId, String pwd) {
@@ -68,8 +71,11 @@ public class LoginActionApi {
 
   /**
    * 登陆
-   * @param userId 用户名 
-   * @param pwd 密码
+   * 
+   * @param userId
+   *          用户名
+   * @param pwd
+   *          密码
    */
   public static void loginUpm(String userId, String pwd) {
     URLConnection connection = null;

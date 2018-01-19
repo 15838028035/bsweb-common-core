@@ -18,8 +18,19 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 
+/**
+ * 
+ * freemarker模板工具类
+ *
+ */
 public class FreemarkerHelper {
 
+  /**
+   * 活动自动导入引用
+   * @param conf 配置对象
+   * @param autoIncludes 自动引入列表
+   * @return 列表
+   */
   public static List<String> getAvailableAutoInclude(Configuration conf, List<String> autoIncludes) {
     List<String> results = new ArrayList();
     for (String autoInclude : autoIncludes) {
@@ -29,6 +40,7 @@ public class FreemarkerHelper {
         t.process(new HashMap(), new StringWriter());
         results.add(autoInclude);
       } catch (Exception e) {
+        e.printStackTrace();
       }
     }
     return results;

@@ -8,6 +8,11 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 
+ * java bean工具类
+ *
+ */
 public class BeanHelper {
   public static Map describe(Object obj) {
     if ((obj instanceof Map)) {
@@ -18,8 +23,9 @@ public class BeanHelper {
     for (int i = 0; i < descriptors.length; i++) {
       String name = descriptors[i].getName();
       Method readMethod = descriptors[i].getReadMethod();
-      if (readMethod == null)
+      if (readMethod == null) {
         continue;
+      }
       try {
         map.put(name, readMethod.invoke(obj, new Object[0]));
       } catch (Exception e) {
