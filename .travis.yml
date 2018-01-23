@@ -1,12 +1,12 @@
+
 language: java
+
 jdk:
-- oraclejdk7
-install:
-- mvn install 
-
+  - oraclejdk7
+  - openjdk6
+  
 after_success:
-- mvn clean  cobertura:cobertura  
-
+- mvn clean cobertura:cobertura coveralls:cobertura
 notifications:
   email:
     - 15838028035@163.com
