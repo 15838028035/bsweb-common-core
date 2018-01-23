@@ -2,11 +2,10 @@ language:
 jdk:
 - oraclejdk7
 install:
-- mvn install  -X
+- mvn install 
 
 after_success:
-- mvn clean  cobertura:cobertura  sonar:sonar -Dsonar.host.url=https://sonarqube.com -Dsonar.login=$SONAR_TOKEN
-
+- mvn clean  cobertura:cobertura  
 
 notifications:
   email:
