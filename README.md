@@ -2,6 +2,9 @@
 # bsweb-common-core常用工程代码 
 [![Build status](https://travis-ci.org/15838028035/bsweb-common-core.svg?branch=master)](https://travis-ci.org/15838028035/bsweb-common-core)
 
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1582/badge)](https://bestpractices.coreinfrastructure.org/projects/1582)
+
+
 主要功能包括:
 	1. 1 常见常用日期、字符串、数字、文件操作等工具类
 	2. 2 配置文件属性工具读取工具类
