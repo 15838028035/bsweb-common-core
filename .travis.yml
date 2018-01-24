@@ -3,6 +3,13 @@ language: java
 
 jdk:
   - oraclejdk8
+
+env:
+  global:
+  - GH_REF: https://github.com/15838028035/bsweb-common-core.git
+  - secure: AAAAB3NzaC1yc2EAAAABIwAAAQEAtPpBWhYKwDMXLjXBENCjOoPCvQqACCmY/7H0IW6Uk3w0JODh9tbI0QA2jdwvo6xnBwGxouq5NTkTWfUhriomRcYgnEH8ClhxsvUXc+r4GZ2E7yKX0pJgMHRH9buWAJUpzTpqVTg7o5lMl7OdfgI2tA9x78G1Di7TMErFYUhiEOHaRHixNJz4JOwrBeJZ0ZiHfLmXHDnXqkH8kqbwUxfR93nuoDeNC5eQgDACSqhAJ+h+DdOERK7gwm4UbccQ+pZvGfymZeVAbrgtVcSlrakmBBfaZrlyl/JKoGD0QqgWufyVaI4oxJgVp0l5/kDIFuBMcyXHEEAfKvdbH9BnAaD9Fw== 15838028035@163.com
+
+  
  
   
 after_success:
