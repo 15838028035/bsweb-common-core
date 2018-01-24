@@ -6,7 +6,7 @@ jdk:
  
   
 after_success:
-- mvn   cobertura:cobertura  sonar:sonar -Dsonar.host.url=https://sonarqube.org -Dsonar.login=$SONAR_TOKEN
+- mvn   cobertura:cobertura  sonar:sonar -Dsonar.host.url=https://www.sonarqube.org/ -Dsonar.login=$SONAR_TOKEN
 notifications:
   email:
     - 15838028035@163.com
