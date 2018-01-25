@@ -8,6 +8,7 @@ import java.net.URLConnection;
 
 import com.lj.app.core.common.properties.PropertiesUtil;
 
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 /**
@@ -139,7 +140,7 @@ public class LoginActionApi {
    * @param appId appID
    * @return
    */
-  public static JSONObject  findPermissionByUserIdApi(String userId, String appId) {
+  public static JSONArray  findPermissionByUserIdApi(String userId, String appId) {
     URLConnection connection = null;
     try {
       String postUrl = FIND_PERMISSIONBY_UID.replace("${userId}", userId).replace("${appId}", appId);
@@ -154,7 +155,7 @@ public class LoginActionApi {
       while ((temp = br.readLine()) != null) {
         buffer.append(temp);
       }
-      JSONObject obj = JSONObject.fromObject(buffer.toString());
+      JSONArray obj = JSONArray.fromObject(buffer.toString());
       
       return obj;
 
