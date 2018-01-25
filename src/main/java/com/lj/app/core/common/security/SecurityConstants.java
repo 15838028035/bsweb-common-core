@@ -21,6 +21,7 @@ public class SecurityConstants {
 
   public static final String APPID_UPM = "UPM";
   public static final String APPID_CRM = "CRM";
+  public static final String APPID_FLOWS = "FLOWS";
 
   /**
    * 权限管理平台代码

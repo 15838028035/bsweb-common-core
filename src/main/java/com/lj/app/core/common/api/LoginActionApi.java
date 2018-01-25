@@ -19,6 +19,9 @@ public class LoginActionApi {
 
   public static final String FIND_USER_INFO_URL = PropertiesUtil.getPropertyTrim("FIND_USER_INFO_URL");
   public static final String UPM_LOGIN_URL = PropertiesUtil.getPropertyTrim("UPM_LOGIN_URL");
+  public static final String ACCESS_UPM_SYSSSO = PropertiesUtil.getPropertyTrim("ACCESS_UPM_SYSSSO");
+  public static final String FIND_PERMISSIONBY_UID = PropertiesUtil.getPropertyTrim("FIND_PERMISSIONBY_UID");
+  
 
   /**
    * 获取登陆信息
@@ -97,4 +100,69 @@ public class LoginActionApi {
       e.printStackTrace();
     }
   }
+  
+  /**
+   * 登陆
+   * 
+   * @param userId
+   *          用户名
+   * @param pwd
+   *          密码
+   */
+  public static void ssoLogin(String token) {
+    URLConnection connection = null;
+    try {
+      String accessUpmSyssso = PropertiesUtil.getProperty("ACCESS_UPM_SYSSSO");
+      String accessUpmSysssoURL  = accessUpmSyssso+ "&token="+token;
+      
+      String postUrl = accessUpmSysssoURL;
+      connection = new URL(postUrl).openConnection();
+      connection.connect();
+
+      InputStream fin = connection.getInputStream();
+
+      BufferedReader br = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
+      StringBuffer buffer = new StringBuffer();
+      String temp = null;
+      while ((temp = br.readLine()) != null) {
+        buffer.append(temp);
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+  
+  /**
+   * 获得权限信息
+   * @param userId 用户ID
+   * @param appId appID
+   * @return
+   */
+  public static JSONObject  findPermissionByUserIdApi(String userId, String appId) {
+    URLConnection connection = null;
+    try {
+      String postUrl = FIND_PERMISSIONBY_UID.replace("${userId}", userId).replace("${appId}", appId);
+      connection = new URL(postUrl).openConnection();
+      connection.connect();
+
+      InputStream fin = connection.getInputStream();
+
+      BufferedReader br = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
+      StringBuffer buffer = new StringBuffer();
+      String temp = null;
+      while ((temp = br.readLine()) != null) {
+        buffer.append(temp);
+      }
+      JSONObject obj = JSONObject.fromObject(buffer.toString());
+      
+      return obj;
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    
+    return null;
+  }
+  
 }
