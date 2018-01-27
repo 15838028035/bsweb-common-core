@@ -13,7 +13,7 @@ env:
  
   
 after_success:
-- mvn   cobertura:cobertura  sonar:sonar -Dsonar.host.url=https://sonarcloud.io   -Dsonar.login=d39d916308bf7ea7f5d9dae76d7def8c2e03fd58  -X
+- mvn   cobertura:cobertura  sonar:sonar -Dsonar.host.url=https://sonarcloud.io Dsonar.organization=15838028035-github  -Dsonar.login=d39d916308bf7ea7f5d9dae76d7def8c2e03fd58  -X
 notifications:
   email:
     - 15838028035@163.com
