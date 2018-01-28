@@ -140,6 +140,10 @@ public class ScriptRunnerUtil {
     } catch (IOException e) {
       e.fillInStackTrace();
       throw e;
+    } finally{
+      if(conn!=null)  {
+          conn.close();
+      }
     }
   }
 

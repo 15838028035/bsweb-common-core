@@ -213,7 +213,10 @@ public class DbTableFactory {
       sb.append("  ?? Couldn't get catalogs ??").append(nl);
     } finally {
       try {
-        catalogRs.close();
+        if(catalogRs!=null){
+          catalogRs.close();
+        }
+        
       } catch (Exception ignore) {
       }
     }

@@ -1102,7 +1102,7 @@ public class StringUtil {
    * @return 生成随机整数
    */
   public static int randomInt(int n) {
-    BigDecimal random = new BigDecimal(Math.random() * n);
+    BigDecimal random = BigDecimal.valueOf(Math.random() * n);
     random = random.setScale(0, BigDecimal.ROUND_HALF_UP);
     return random.intValue();
   }
@@ -1120,7 +1120,7 @@ public class StringUtil {
     StringBuilder radomChars = new StringBuilder();
     BigDecimal random = null;
     for (int i = 0; i < n; i++) {
-      random = new BigDecimal(Math.random() * (seed.length() - 1));
+      random = BigDecimal.valueOf(Math.random() * (seed.length() - 1));
       random = random.setScale(0, BigDecimal.ROUND_HALF_UP);
       radomChars.append(seed.charAt(random.intValue()));
     }

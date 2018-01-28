@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.lj.app.core.common.base.api.TokenApiService;
 import com.lj.app.core.common.base.entity.UpmToken;
+import com.lj.app.core.common.exception.InterfaceException;
 import com.lj.app.core.common.properties.PropertiesUtil;
 
 /**
@@ -37,14 +38,11 @@ public class CreateTokenService {
    * @return token
    * @throws Exception 异常
    */
-  public String createToken(String acctSeq, String resEntityId, int mainAcctId) throws Exception {
+  public String createToken(String acctSeq, String resEntityId, int mainAcctId) throws InterfaceException,Exception {
     long lNow = System.currentTimeMillis();// 取到毫秒，但是取的是主机的时间
     String tokenId = acctSeq + "-" + lNow;
-    // String tokenId = EncryptInterface.desEncryptData(acctSeq + "-" + lNow);
-    // long lNow = System.currentTimeMillis() - 1291710000000L;//临时测试用
     logger.warn("==tokenId==" + tokenId);
 
-    // create token and save it
     UpmToken upmToken = new UpmToken();
     upmToken.setTokenId(tokenId);
     if (resEntityId != null) {

@@ -1,5 +1,7 @@
 package com.lj.app.core.common.base.api;
 
+import com.lj.app.core.common.exception.InterfaceException;
+
 /**
  * 
  * token服务
@@ -19,5 +21,5 @@ public interface CreateTokenApiService {
    * @return TOKEN
    * @throws Exception 异常
    */
-  public String createToken(String acctSeq, String resEntityId, int mainAcctId) throws Exception;
+  public String createToken(String acctSeq, String resEntityId, int mainAcctId) throws InterfaceException,Exception;
 }

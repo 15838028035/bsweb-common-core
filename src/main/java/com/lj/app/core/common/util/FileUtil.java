@@ -16,7 +16,10 @@ import java.net.URL;
 import java.util.Enumeration;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
+import com.lj.app.core.common.base.app.Constants;
 import com.lj.app.core.common.exception.FlowException;
 import com.lj.app.core.common.generator.util.ClassHelper;
 import com.lj.app.core.common.generator.util.FileHelper;
@@ -33,6 +36,8 @@ public class FileUtil {
   private FileUtil() {
 
   }
+  
+  private static Log logger = LogFactory.getLog(FileUtil.class);
 
   /**
    * 根据资源名称加载文件
@@ -82,17 +87,22 @@ public class FileUtil {
         outputStream.write(by, 0, c);
       }
     } catch (IOException e) {
-      e.getStackTrace().toString();
-    }
-    try {
-      outputStream.close();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    try {
-      in.close();
-    } catch (IOException e) {
-      e.printStackTrace();
+      logger.error(e);
+    }finally {
+      if(outputStream!=null) {
+        try {
+          outputStream.close();
+        } catch (IOException e) {
+          logger.error(e);
+        }
+      }
+      if(in!=null) {
+        try {
+          in.close();
+        } catch (IOException e) {
+          logger.error(e);
+        }
+      }
     }
   }
 
@@ -119,23 +129,37 @@ public class FileUtil {
    * @param fileContent 文件内容 
    */
   public static void write(String filePath, String fileContent) {
-
+    FileOutputStream fo = null;
+    OutputStreamWriter out = null;
     try {
-      FileOutputStream fo = new FileOutputStream(filePath);
-      OutputStreamWriter out = new OutputStreamWriter(fo, "UTF-8");
+      fo = new FileOutputStream(filePath);
+       out = new OutputStreamWriter(fo, Constants.EncodingType.UTF_8);
 
       out.write(fileContent);
 
       out.close();
     } catch (FileNotFoundException ex) {
-      System.err.println("FileNotFoundException File Error!");
-      ex.printStackTrace();
+      logger.equals(ex);
     } catch (IOException ex) {
-      System.err.println("IOException File Error!");
-      ex.printStackTrace();
+      logger.equals(ex);
     } catch (Exception ex) {
-      System.err.println("Exception File Error!");
-      ex.printStackTrace();
+      logger.equals(ex);
+    }finally {
+      if(fo!=null) {
+        try{
+        fo.close();
+        }catch(Exception e){
+          logger.equals(e);
+        }
+      }
+      
+      if(out!=null) {
+        try{
+          out.close();
+        }catch(Exception e){
+          logger.equals(e);
+        }
+      }
     }
   }
 
@@ -151,9 +175,12 @@ public class FileUtil {
     }
     String fileContent = "";
     File file = new File(filePath);
+    InputStreamReader read = null;
+    BufferedReader reader = null;
+    
     try {
-      InputStreamReader read = new InputStreamReader(new FileInputStream(file), code);
-      BufferedReader reader = new BufferedReader(read);
+       read = new InputStreamReader(new FileInputStream(file), code);
+       reader = new BufferedReader(read);
       String line;
       while ((line = reader.readLine()) != null) {
         fileContent = fileContent + line + "\n";
@@ -163,8 +190,23 @@ public class FileUtil {
       reader.close();
       read = null;
     } catch (Exception ex) {
-      ex.printStackTrace();
       fileContent = "";
+      logger.error(ex);
+    }finally {
+      if(read!=null) {
+        try{  
+          read.close();
+        }catch(Exception e) {
+          logger.error(e);
+        }
+      }
+      if(reader!=null) {
+        try{  
+          reader.close();
+        }catch(Exception e) {
+          logger.error(e);
+        }
+      }
     }
     return fileContent;
   }
