@@ -254,7 +254,7 @@ public class StringHelper {
     String[] prefixs = GeneratorProperties.getStringArray(GeneratorConstants.TABLE_REMOVE_PREFIXES);
     for (String prefix : prefixs) {
       String removedPrefixSqlName = StringHelper.removePrefix(sqlName, prefix, true);
-      if (!removedPrefixSqlName.equals(sqlName)) {
+      if (removedPrefixSqlName!=null && !removedPrefixSqlName.equals(sqlName)) {
         return removedPrefixSqlName;
       }
     }
