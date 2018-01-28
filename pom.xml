@@ -56,6 +56,8 @@
 		<commons-lang.version>2.6</commons-lang.version>
 
 		<axis2.version>1.6.2</axis2.version>
+		
+		<jacoco.version>0.7.2.201409121644</jacoco.version>
 
 		<!-- Plugin的属性定 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -420,31 +422,18 @@
 				</plugin>
 
 				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>cobertura-maven-plugin</artifactId>
-					<version>2.5.2</version>
-					<configuration>
-						<instrumentation>
-							<excludes>
-								<exclude>com/lj/app/core/common/generator/**</exclude>
-								<exclude>com/lj/app/core/common/generator/util/**</exclude>
-								<exclude>com/lj/app/core/common/generator/provider/**</exclude>
-								
-								<exclude>com/lj/app/core/common/service/dbsolution/**</exclude>
-								<exclude>com/lj/app/core/common/service/dbsolution/impl/**</exclude>
-							</excludes>
-						</instrumentation>
-						<executions>
-						<execution>
-							<phase>test</phase>
-							<goals>
-							<goal>cobertura</goal>
-							</goals>
-						</execution>
-					</executions>
-					</configuration>
-					
-				</plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                </plugin>
 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -608,29 +597,21 @@
 				<artifactId>maven-jxr-plugin</artifactId>
 				<version>2.3</version>
 			</plugin>
+			
 			<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>cobertura-maven-plugin</artifactId>
-					<version>2.5.2</version>
-					<configuration>
-						<instrumentation>
-							<excludes>
-								<exclude>com/lj/app/core/common/generator/**</exclude>
-								<exclude>com/lj/app/core/common/generator/util/**</exclude>
-								<exclude>com/lj/app/core/common/generator/provider/**</exclude>
-							</excludes>
-						</instrumentation>
-						<executions>
-						<execution>
-							<phase>test</phase>
-							<goals>
-							<goal>cobertura</goal>
-							</goals>
-						</execution>
-					</executions>
-					</configuration>
-					
-			</plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
