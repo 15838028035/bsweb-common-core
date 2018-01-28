@@ -89,6 +89,7 @@ public class ScriptRunnerUtil {
    */
   private void runScript(Connection conn, Reader reader) throws IOException, SQLException {
     StringBuilder command = null;
+    Statement statement  = null;
     try {
       LineNumberReader lineReader = new LineNumberReader(reader);
       String line = null;
@@ -106,7 +107,7 @@ public class ScriptRunnerUtil {
         } else if (trimmedLine.equals(getDelimiter()) || trimmedLine.endsWith(getDelimiter())) {
           command.append(line.substring(0, line.lastIndexOf(getDelimiter())));
           command.append(" ");
-          Statement statement = conn.createStatement();
+          statement = conn.createStatement();
 
           LOG.info(command.toString());
           try {
@@ -141,6 +142,9 @@ public class ScriptRunnerUtil {
       e.fillInStackTrace();
       throw e;
     } finally{
+      if(statement!=null)  {
+        statement.close();
+      }
       if(conn!=null)  {
           conn.close();
       }
