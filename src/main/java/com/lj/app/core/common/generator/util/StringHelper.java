@@ -87,7 +87,7 @@ public class StringHelper {
       return inString;
     }
 
-    StringBuffer sbuf = new StringBuffer();
+    StringBuilder sbuf = new StringBuilder();
 
     int pos = 0;
     int index = inString.indexOf(oldPattern);
@@ -116,7 +116,7 @@ public class StringHelper {
     if ((str == null) || (str.length() == 0)) {
       return str;
     }
-    StringBuffer buf = new StringBuffer(str.length());
+    StringBuilder buf = new StringBuilder(str.length());
     if (capitalize) {
       buf.append(Character.toUpperCase(str.charAt(0)));
     } else {
@@ -206,7 +206,7 @@ public class StringHelper {
       filteredName = filteredName.toLowerCase();
     }
 
-    StringBuffer result = new StringBuffer();
+    StringBuilder result = new StringBuilder();
     if ((filteredName != null) && (filteredName.length() > 0)) {
       result.append(filteredName.substring(0, 1).toLowerCase());
       for (int i = 1; i < filteredName.length(); i++) {
@@ -307,7 +307,7 @@ public class StringHelper {
   public static String join(Object[] array, String seperator) {
     if (array == null)
       return null;
-    StringBuffer result = new StringBuffer();
+    StringBuilder result = new StringBuilder();
     for (int i = 0; i < array.length; i++) {
       result.append(array[i]);
       if (i != array.length - 1) {

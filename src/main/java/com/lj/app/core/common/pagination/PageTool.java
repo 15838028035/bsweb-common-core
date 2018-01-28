@@ -26,7 +26,7 @@ public class PageTool {
     if (StringUtil.isBlank(str)) {
       return "";
     }
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
 
     for (int i = 0; i < str.length(); i++) {
       char c = str.charAt(i);

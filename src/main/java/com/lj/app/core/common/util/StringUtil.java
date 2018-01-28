@@ -554,15 +554,15 @@ public class StringUtil {
     char[] randomChar = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o',
         'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm' };
     Random random = new Random();
-    StringBuffer stringBuffer = new StringBuffer();
+    StringBuilder StringBuilder = new StringBuilder();
     for (int i = 0; i < length; i++) {
       int r = random.nextInt();
       if (r < 0) {
         continue;
       }
-      stringBuffer.append(randomChar[Math.abs(r) % randomChar.length]);
+      StringBuilder.append(randomChar[Math.abs(r) % randomChar.length]);
     }
-    return stringBuffer.toString();
+    return StringBuilder.toString();
   }
 
   /**
@@ -600,12 +600,12 @@ public class StringUtil {
    * @return 转化后的字符串
    */
   public static String toString(List<String> list, String separator) {
-    StringBuffer stringBuffer = new StringBuffer();
+    StringBuilder StringBuilder = new StringBuilder();
     for (String str : list) {
-      stringBuffer.append(separator + str);
+      StringBuilder.append(separator + str);
     }
-    stringBuffer.deleteCharAt(0);
-    return stringBuffer.toString();
+    StringBuilder.deleteCharAt(0);
+    return StringBuilder.toString();
   }
 
   /**
@@ -712,7 +712,7 @@ public class StringUtil {
    * @return 获得字符串数组的字符形式
    */
   public static String getStringByArray(String[] values) {
-    StringBuffer valueStr = new StringBuffer();
+    StringBuilder valueStr = new StringBuilder();
     if (StringUtil.isNotBlank(values)) {
       for (int i = 0; i < values.length; i++) {
         valueStr.append(values[i]);
@@ -881,7 +881,7 @@ public class StringUtil {
       if (a > -1) {
         b = oldStr.length();
         findStartPos = a + b;
-        StringBuffer bbuf = new StringBuffer(source);
+        StringBuilder bbuf = new StringBuilder(source);
         source = bbuf.replace(a, a + b, newStr) + "";
         // 新的查找开始点位于替换后的字符串的结尾
         findStartPos = findStartPos + newStr.length() - b;
@@ -995,7 +995,7 @@ public class StringUtil {
    * @return 将list元素转换成“col1,col2”形式
    */
   public static String arrayToString(List<String> s) {
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     for (int i = 0; i < s.size(); i++) {
       if (i != s.size() - 1) {
         sb.append("'" + s.get(i) + "',");
@@ -1012,7 +1012,7 @@ public class StringUtil {
    * @return 将list元素转换成“col1,col2”形式，剔除空串的情况
    */
   public static String arrayToString2(List<String> s) {
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     for (int i = 0; i < s.size(); i++) {
       if (s.get(i).equals("")) {
         continue;
@@ -1117,7 +1117,7 @@ public class StringUtil {
    * @return 根据给定的字符串种子，产生随机n位字符串
    */
   public static String generateRandomChars(String seed, int n) {
-    StringBuffer radomChars = new StringBuffer();
+    StringBuilder radomChars = new StringBuilder();
     BigDecimal random = null;
     for (int i = 0; i < n; i++) {
       random = new BigDecimal(Math.random() * (seed.length() - 1));
@@ -1134,10 +1134,10 @@ public class StringUtil {
    * @return 对指定字符串随机重新排序
    */
   public static String randomOrder(String oldStr) {
-    StringBuffer newStr = new StringBuffer();
+    StringBuilder newStr = new StringBuilder();
     String theChar = "";
 
-    StringBuffer sb = new StringBuffer(oldStr);
+    StringBuilder sb = new StringBuilder(oldStr);
 
     for (int j = 0; j < oldStr.length(); j++) {
       theChar = generateRandomChars(sb.toString(), 1);

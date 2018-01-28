@@ -27,7 +27,7 @@ public class PasswordCoder {
    */
   public String generateCode() {
 
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
 
     int codeLen = calculateCodeLen();
 

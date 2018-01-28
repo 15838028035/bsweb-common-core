@@ -185,7 +185,7 @@ public class DbTableFactory {
     ResultSet schemaRs = null;
     ResultSet catalogRs = null;
     String nl = System.getProperty("line.separator");
-    StringBuffer sb = new StringBuffer(nl);
+    StringBuilder sb = new StringBuilder(nl);
 
     sb.append("Configured schema:").append(getSchema()).append(nl);
     sb.append("Configured catalog:").append(getCatalog()).append(nl);

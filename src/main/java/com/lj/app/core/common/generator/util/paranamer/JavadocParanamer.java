@@ -337,7 +337,7 @@ public class JavadocParanamer implements Paranamer {
     // Also note that Javadoc parameter names may differ from the names in
     // the source.
     // we don't have Pattern/Matcher :-(
-    StringBuffer regex = new StringBuffer();
+    StringBuilder regex = new StringBuilder();
     regex.append("NAME=\"");
     regex.append(constructorOrMethodName);
     // quotes needed to escape array brackets
@@ -400,7 +400,7 @@ public class JavadocParanamer implements Paranamer {
     }
     BufferedReader breader = new BufferedReader(reader);
     String line;
-    StringBuffer builder = new StringBuffer();
+    StringBuilder builder = new StringBuilder();
     while ((line = breader.readLine()) != null) {
       builder.append(line);
       builder.append("\n");

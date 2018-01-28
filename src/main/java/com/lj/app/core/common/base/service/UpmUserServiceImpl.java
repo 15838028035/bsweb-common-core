@@ -50,7 +50,7 @@ public class UpmUserServiceImpl extends BatchOptBaseServiceImpl implements UpmUs
 
     // 根据抛出异常判断是否通过，或者是警告
     if (exceptionMsgList.size() > 0 || warnMsgList.size() > 0) {
-      StringBuffer sb = new StringBuffer();
+      StringBuilder sb = new StringBuilder();
       sb.append("<html><body><p>");
       for (String msg : exceptionMsgList) {
         sb.append(msg + "</br>");

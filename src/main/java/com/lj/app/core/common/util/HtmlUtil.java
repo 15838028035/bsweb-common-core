@@ -20,7 +20,7 @@ public class HtmlUtil {
    * @return 列表转化下拉列表
    */
   public static String list2Select(String id, List<String> list) {
-    StringBuffer sb = new StringBuffer("<select id=\"").append(id == null ? "" : id).append("\">");
+    StringBuilder sb = new StringBuilder("<select id=\"").append(id == null ? "" : id).append("\">");
 
     for (Object s : list) {
       sb.append("<option value=\"").append(s).append("\">").append(s).append("</option>");
@@ -43,7 +43,7 @@ public class HtmlUtil {
    * @return 按钮
    */
   public static String getButton(String type, String value, String attribute) {
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
 
     sb.append("<input type=\"button\" value=\"").append(value == null ? "button" : value).append("\"")
         .append(attribute == null ? "" : attribute).append("/>");
@@ -58,7 +58,7 @@ public class HtmlUtil {
    * @return 下来列表
    */
   public static String mapList2Select(String selectId, List<Map<String, Object>> list) {
-    StringBuffer sb = new StringBuffer("<select id=\"").append(selectId == null ? "" : selectId).append("\">");
+    StringBuilder sb = new StringBuilder("<select id=\"").append(selectId == null ? "" : selectId).append("\">");
 
     for (Map<String, Object> map : list) {
       sb.append("<option value=\"").append(map.get("value")).append("\">").append(map.get("label")).append("</option>");

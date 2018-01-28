@@ -43,7 +43,7 @@ public class LoginActionApi {
       InputStream fin = connection.getInputStream();
 
       BufferedReader br = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
-      StringBuffer buffer = new StringBuffer();
+      StringBuilder buffer = new StringBuilder();
       String temp = null;
       while ((temp = br.readLine()) != null) {
         buffer.append(temp);
@@ -91,7 +91,7 @@ public class LoginActionApi {
       InputStream fin = connection.getInputStream();
 
       BufferedReader br = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
-      StringBuffer buffer = new StringBuffer();
+      StringBuilder buffer = new StringBuilder();
       String temp = null;
       while ((temp = br.readLine()) != null) {
         buffer.append(temp);
@@ -123,7 +123,7 @@ public class LoginActionApi {
       InputStream fin = connection.getInputStream();
 
       BufferedReader br = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
-      StringBuffer buffer = new StringBuffer();
+      StringBuilder buffer = new StringBuilder();
       String temp = null;
       while ((temp = br.readLine()) != null) {
         buffer.append(temp);
@@ -150,7 +150,7 @@ public class LoginActionApi {
       InputStream fin = connection.getInputStream();
 
       BufferedReader br = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
-      StringBuffer buffer = new StringBuffer();
+      StringBuilder buffer = new StringBuilder();
       String temp = null;
       while ((temp = br.readLine()) != null) {
         buffer.append(temp);
