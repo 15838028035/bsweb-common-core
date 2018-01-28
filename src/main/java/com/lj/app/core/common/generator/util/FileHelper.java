@@ -16,6 +16,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.lj.app.core.common.util.StringUtil;
+
 public class FileHelper {
   public static String getRelativePath(File baseDir, File file) {
     if (baseDir.equals(file))
@@ -167,13 +169,14 @@ public class FileHelper {
   }
 
   public static void loadBinaryExtentionsList(String resourceName, boolean ignoreException) {
+    InputStream input= null;
     try {
       Enumeration<URL> urls = FileHelper.class.getClassLoader().getResources(resourceName);
       boolean notFound = true;
       while (urls.hasMoreElements()) {
         notFound = false;
         URL url = urls.nextElement();
-        InputStream input = url.openStream();
+         input = url.openStream();
         binaryExtentionsList.addAll(IOHelper.readLines(new InputStreamReader(input)));
         input.close();
       }
@@ -182,6 +185,14 @@ public class FileHelper {
     } catch (Exception e) {
       if (!ignoreException)
         throw new RuntimeException("loadBinaryExtentionsList occer error,resourceName:" + resourceName, e);
+    }finally {
+      if(input!=null) {
+        try{
+          input.close();
+        } catch (Exception e) {
+          throw new IllegalStateException("close file error:" + resourceName);
+        }
+      }
     }
   }
 
@@ -195,7 +206,7 @@ public class FileHelper {
   public static boolean isBinaryFile(String filename) {
     if (StringHelper.isBlank(getExtension(filename)))
       return false;
-    return binaryExtentionsList.contains(getExtension(filename).toLowerCase());
+    return binaryExtentionsList.contains(StringUtil.trimBlank(getExtension(filename)).toLowerCase());
   }
 
   public static String getExtension(String filename) {
