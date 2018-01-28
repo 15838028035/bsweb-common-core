@@ -92,7 +92,7 @@ public class PasswordCoder {
     int codeLen = PASSWORD_SHORTEST_LEN;
 
     if (minLen >= PASSWORD_SHORTEST_LEN && maxLen >= PASSWORD_SHORTEST_LEN) {
-      BigDecimal difference = new BigDecimal(Math.random() * (maxLen - minLen));
+      BigDecimal difference = BigDecimal.valueOf(Math.random() * (maxLen - minLen));
       difference = difference.setScale(0, BigDecimal.ROUND_HALF_UP);
       codeLen = minLen + difference.intValue();
     }

@@ -110,7 +110,7 @@ public class StringUtil {
    * @return 分钟转换为小时
    */
   public static String minute2Hour(String minute) {
-    BigDecimal min = new BigDecimal(minute);
+    BigDecimal min = BigDecimal.valueOf(minute);
     return StringUtil.getRound(min, BigDecimal.valueOf(60), 2);
   }
 
