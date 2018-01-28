@@ -6,6 +6,10 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.lj.app.core.common.base.app.Constants;
 import com.lj.app.core.common.properties.PropertiesUtil;
 
 import net.sf.json.JSONArray;
@@ -18,6 +22,12 @@ import net.sf.json.JSONObject;
  */
 public class LoginActionApi {
 
+  private LoginActionApi() {
+    
+  }
+  
+  private static Log logger = LogFactory.getLog(LoginActionApi.class);
+  
   public static final String FIND_USER_INFO_URL = PropertiesUtil.getPropertyTrim("FIND_USER_INFO_URL");
   public static final String UPM_LOGIN_URL = PropertiesUtil.getPropertyTrim("UPM_LOGIN_URL");
   public static final String ACCESS_UPM_SYSSSO = PropertiesUtil.getPropertyTrim("ACCESS_UPM_SYSSSO");
@@ -42,7 +52,7 @@ public class LoginActionApi {
 
       InputStream fin = connection.getInputStream();
 
-      BufferedReader br = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
+      BufferedReader br = new BufferedReader(new InputStreamReader(fin, Constants.EncodingType.UTF_8));
       StringBuilder buffer = new StringBuilder();
       String temp = null;
       while ((temp = br.readLine()) != null) {
@@ -68,7 +78,7 @@ public class LoginActionApi {
       }
 
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
     }
     return null;
   }
@@ -98,7 +108,7 @@ public class LoginActionApi {
       }
 
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
     }
   }
   
@@ -122,7 +132,7 @@ public class LoginActionApi {
 
       InputStream fin = connection.getInputStream();
 
-      BufferedReader br = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
+      BufferedReader br = new BufferedReader(new InputStreamReader(fin, Constants.EncodingType.UTF_8));
       StringBuilder buffer = new StringBuilder();
       String temp = null;
       while ((temp = br.readLine()) != null) {
@@ -130,7 +140,7 @@ public class LoginActionApi {
       }
 
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
     }
   }
   
@@ -149,7 +159,7 @@ public class LoginActionApi {
 
       InputStream fin = connection.getInputStream();
 
-      BufferedReader br = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
+      BufferedReader br = new BufferedReader(new InputStreamReader(fin, Constants.EncodingType.UTF_8));
       StringBuilder buffer = new StringBuilder();
       String temp = null;
       while ((temp = br.readLine()) != null) {
@@ -160,7 +170,7 @@ public class LoginActionApi {
       return obj;
 
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
     }
     
     return null;

@@ -104,5 +104,21 @@ public class UpmSysLog extends BaseEntity {
   public java.util.Date getReateDate() {
     return this.reateDate;
   }
+
+  public String getReateDateBegin() {
+    return reateDateBegin;
+  }
+
+  public void setReateDateBegin(String reateDateBegin) {
+    this.reateDateBegin = reateDateBegin;
+  }
+
+  public String getReateDateEnd() {
+    return reateDateEnd;
+  }
+
+  public void setReateDateEnd(String reateDateEnd) {
+    this.reateDateEnd = reateDateEnd;
+  }
   
 }

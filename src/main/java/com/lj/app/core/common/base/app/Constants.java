@@ -10,6 +10,27 @@ public class Constants {
    * 虚拟管理平台的编码
    */
   public static final String UPM = "UPM";
+  
+  /**
+   * 编码类型
+   * 
+   */
+  public static class EncodingType {
+    /**
+     * UTF-8
+     */
+    public static final String UTF_8 = "UTF-8";
+    /**
+     * GBK
+     */
+    public static final String GBK = "GBK";
+    
+    /**
+     * GB2312
+     */
+    public static final String GB2312 = "GB2312";
+  }
+  
 
   /**
    * 属性默认值类型

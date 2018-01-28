@@ -8,6 +8,10 @@ import java.net.URLConnection;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.lj.app.core.common.base.app.Constants;
 import com.lj.app.core.common.properties.PropertiesUtil;
 import com.lj.app.core.common.security.CmSecurityContext;
 import com.lj.app.core.common.util.StringUtil;
@@ -22,6 +26,8 @@ import net.sf.json.JSONObject;
  */
 public class UpmPermissionActionApi {
 
+  private static Log logger = LogFactory.getLog(UpmPermissionActionApi.class);
+  
   public static final String FIND_PERMISSION_BY_USERID_URL = PropertiesUtil
       .getPropertyTrim("FIND_PERMISSION_BY_USERID_URL");
 
@@ -38,8 +44,6 @@ public class UpmPermissionActionApi {
     // 设置主帐号信息
     securityContext.setMainAcctId(Long.parseLong(String.valueOf(userId)));
 
-    CmSecurityContext mainAcct;
-
     // 设置权限相关的code和url
     Set<String> codeSet = new HashSet<String>();
     Set<String> urlSet = new HashSet<String>();
@@ -50,7 +54,7 @@ public class UpmPermissionActionApi {
       connection = new URL(postUrl).openConnection();
       connection.connect();
       InputStream fin = connection.getInputStream();
-      BufferedReader br = new BufferedReader(new InputStreamReader(fin, "UTF-8"));
+      BufferedReader br = new BufferedReader(new InputStreamReader(fin, Constants.EncodingType.UTF_8));
       StringBuilder buffer = new StringBuilder();
       String temp = null;
       while ((temp = br.readLine()) != null) {
@@ -60,7 +64,6 @@ public class UpmPermissionActionApi {
 
       for (int j = 0; j < jsonArray.size(); j++) {
         JSONObject obj = jsonArray.getJSONObject(j);
-        int id = (Integer) obj.get("id");
         String code = (String) obj.get("code");
         String url = (String) obj.get("url");
 
@@ -81,7 +84,7 @@ public class UpmPermissionActionApi {
       }
 
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
     }
 
     securityContext.setUrls(urlSet);
