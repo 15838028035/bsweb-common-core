@@ -2,7 +2,7 @@
 # bsweb-common-core常用工程代码 
 [![Build status](https://travis-ci.org/15838028035/bsweb-common-core.svg?branch=master)](https://travis-ci.org/15838028035/bsweb-common-core)
 
-[![Quality Gate](https://sonarcloud.io/dashboard?id=com.github.15838028035%3Absweb-common-core)](https://sonarcloud.io/dashboard?id=com.github.15838028035%3Absweb-common-core)
+[![Quality Gate](ttps://sonarcloud.io/api/badges/gate?key=com.github.15838028035%3Absweb-common-core)](https://sonarcloud.io/dashboard?id=com.github.15838028035%3Absweb-common-core)
 
 [![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1582/badge)](https://bestpractices.coreinfrastructure.org/projects/1582)
 
