@@ -13,8 +13,14 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class DateUtil {
 
+
+  private static Log logger = LogFactory.getLog(DateUtil.class);
+  
   public static final String DATE_FOMRAT_HH_mm_ss = "HH:mm:ss";
   public static final String DATE_FOMRAT_hh_mm_ss = "hh:mm:ss";
 
@@ -54,7 +60,7 @@ public class DateUtil {
       SimpleDateFormat sd = new SimpleDateFormat(format);
       d = sd.parse(date);
     } catch (ParseException e) {
-      e.printStackTrace();
+      logger.error(e);
     }
 
     return d;
@@ -157,7 +163,7 @@ public class DateUtil {
     try {
       date = handleTimeStrToTimestamp(timeStr, oldStyle);
     } catch (ParseException e) {
-      e.printStackTrace();
+      logger.error(e);
     }
     return new SimpleDateFormat(newStyle).format(date);
   }
@@ -1253,7 +1259,7 @@ public class DateUtil {
     try {
       calendar.setTime(sf.parse(date));
     } catch (ParseException e) {
-      e.printStackTrace();
+      logger.error(e);
     }
     calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) + scale);// 让日期加1
 
@@ -1269,7 +1275,7 @@ public class DateUtil {
       calendar1.setTime(df.parse(date1));
       calendar2.setTime(df.parse(date2));
     } catch (ParseException e) {
-      e.printStackTrace();
+      logger.error(e);
     }
     return calendar1.compareTo(calendar2);
   }
@@ -1284,7 +1290,7 @@ public class DateUtil {
       calendar2.setTime(df.parse(date2));
       calendar3.getTime();
     } catch (ParseException e) {
-      e.printStackTrace();
+      logger.error(e);
     }
     if (calendar3.compareTo(calendar1) < 0) {
       return 0;// 未生效
@@ -1305,7 +1311,7 @@ public class DateUtil {
       calendar2.setTime(date2);
       calendar3.getTime();
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
     }
     if (calendar3.compareTo(calendar1) < 0) {
       return 0;// 未生效

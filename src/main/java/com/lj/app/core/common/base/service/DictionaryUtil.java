@@ -133,7 +133,7 @@ public class DictionaryUtil {
     try {
       initData();
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
     }
   }
 

@@ -36,7 +36,7 @@ public class SysmsgSenderImpl implements ISysmsgSender {
         return false;
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
       return false;
     }
     return true;

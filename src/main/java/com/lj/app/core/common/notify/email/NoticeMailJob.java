@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.mail.MessagingException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -22,6 +24,8 @@ import com.lj.app.core.common.util.DateUtil;
  */
 @Component("noticeMailJob")
 public class NoticeMailJob implements BaseTaskService {
+  private static Log logger = LogFactory.getLog(NoticeMailJob.class);
+  
   @Autowired
   private UpmNoticeService<UpmNotice> upmNoticeService;
   @Autowired
@@ -48,7 +52,7 @@ public class NoticeMailJob implements BaseTaskService {
       try {
         mailSender.sendMail(notice.getParamA(), notice.getParamB() + sendTime, info, "mailTest.ftl", true);
       } catch (MessagingException e) {
-        e.printStackTrace();
+        logger.error(e);
       }
     }
   }

@@ -105,7 +105,6 @@ public class PropertiesUtil {
       String value = bundle.getString(key);
       return value;
     } catch (Exception e) {
-      e.printStackTrace();
       logger.error(e.getMessage());
       return key;
     }

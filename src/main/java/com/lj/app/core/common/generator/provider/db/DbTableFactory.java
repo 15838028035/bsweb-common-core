@@ -406,16 +406,19 @@ public class DbTableFactory {
       }
       return str;
     } catch (SQLException e) {
-      e.printStackTrace();
+      GLogger.error("SQLException",e);
       e = null;
       return e.getMessage();
     } finally {
       try {
-        if (s != null)
+        if (s != null) {
           s.close();
-        if (rs != null)
+        }
+        if (rs != null) {
           rs.close();
+        }
       } catch (SQLException e) {
+        GLogger.error("SQLException",e);
       }
     }
   }

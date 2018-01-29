@@ -5,6 +5,9 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * 
  * 自定义线程池
@@ -12,6 +15,8 @@ import java.util.concurrent.TimeUnit;
  */
 public class TraceThreadPoolExecutor extends ThreadPoolExecutor {
 
+  private static Log logger = LogFactory.getLog(TraceThreadPoolExecutor.class);
+  
   public TraceThreadPoolExecutor(int corePoolSize, int maximumPoolSize, long keepAliveTime, TimeUnit unit,
       BlockingQueue<Runnable> workQueue) {
     super(corePoolSize, maximumPoolSize, keepAliveTime, unit, workQueue);
@@ -38,7 +43,7 @@ public class TraceThreadPoolExecutor extends ThreadPoolExecutor {
         try {
           task.run();
         } catch (Exception e) {
-          clientStack.printStackTrace();
+          logger.error(e);
           // throw e;
         }
       }

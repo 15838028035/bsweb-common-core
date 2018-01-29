@@ -12,6 +12,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,8 @@ import freemarker.template.Template;
 
 public class MailSenderTest extends AbstractBaseSpringTransactionTestCase {
 
+  private static Log logger = LogFactory.getLog(MailSenderTest.class);
+  
   @Autowired
   private MailSender mailSender;
 
@@ -93,7 +97,7 @@ public class MailSenderTest extends AbstractBaseSpringTransactionTestCase {
         try {
           mailSender.sendMailBySynchronizationMode(info);
         } catch (Exception e) {
-          e.printStackTrace();
+          logger.error(e);
         }
         executedCount.getAndIncrement();
       }
@@ -221,7 +225,7 @@ public class MailSenderTest extends AbstractBaseSpringTransactionTestCase {
         try {
           mailSender.sendMailBySynchronizationMode(info);
         } catch (Exception e) {
-          e.printStackTrace();
+          logger.error(e);
         }
         executedCount.getAndIncrement();
       }

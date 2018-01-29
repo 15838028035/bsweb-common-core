@@ -76,11 +76,11 @@ public class MailSender {
       htmlText = FreeMarkerTemplateUtils.processTemplateIntoString(template, info);
 
     } catch (IOException e) {
-      e.printStackTrace();
+      log.error(e);
     } catch (TemplateException e) {
-      e.printStackTrace();
+      log.error(e);
     } catch (Exception e) {
-      e.printStackTrace();
+      log.error(e);
     }
     return htmlText;
   }
@@ -109,9 +109,9 @@ public class MailSender {
       }
 
     } catch (MailException e) {
-      e.printStackTrace();
+      log.error(e);
     } catch (NumberFormatException e) {
-      e.printStackTrace();
+      log.error(e);
     }
 
   }

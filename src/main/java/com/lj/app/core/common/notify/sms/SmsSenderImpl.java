@@ -45,7 +45,7 @@ public class SmsSenderImpl implements ISmsSender {
       }
       // FIXME
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
       return false;
     }
     return true;

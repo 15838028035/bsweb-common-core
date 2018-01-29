@@ -40,7 +40,7 @@ public class FreemarkerHelper {
         t.process(new HashMap(), new StringWriter());
         results.add(autoInclude);
       } catch (Exception e) {
-        e.printStackTrace();
+        GLogger.error("Error",e);
       }
     }
     return results;

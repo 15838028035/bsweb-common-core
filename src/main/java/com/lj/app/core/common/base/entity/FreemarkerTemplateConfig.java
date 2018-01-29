@@ -1,9 +1,5 @@
 package com.lj.app.core.common.base.entity;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 /**
  * reemarker模版配置
  */

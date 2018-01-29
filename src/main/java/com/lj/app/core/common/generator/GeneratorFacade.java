@@ -118,8 +118,7 @@ public class GeneratorFacade {
     if (exceptions.size() > 0) {
       System.err.println("[Generate Error Summary]");
       for (Exception e : exceptions) {
-        System.err.println("[GENERATE ERROR]:" + e);
-        e.printStackTrace();
+        GLogger.error("[GENERATE ERROR]:",e);
       }
     }
   }

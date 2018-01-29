@@ -5,6 +5,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.lj.app.core.common.exception.FlowException;
 
 /**
@@ -13,6 +16,9 @@ import com.lj.app.core.common.exception.FlowException;
  *
  */
 public class ReflectUtil {
+
+  private static Log logger = LogFactory.getLog(ReflectUtil.class);
+  
   /**
    * 利用反射获取指定对象的指定属性
    * 
@@ -30,9 +36,9 @@ public class ReflectUtil {
       try {
         result = field.get(obj);
       } catch (IllegalArgumentException e) {
-        e.printStackTrace();
+        logger.error(e);
       } catch (IllegalAccessException e) {
-        e.printStackTrace();
+        logger.error(e);
       }
     }
     return result;
@@ -55,6 +61,7 @@ public class ReflectUtil {
         break;
       } catch (NoSuchFieldException e) {
         // ignore exception
+        logger.error(e);
       }
     }
     return field;
@@ -77,9 +84,9 @@ public class ReflectUtil {
         field.setAccessible(true);
         field.set(obj, fieldValue);
       } catch (IllegalArgumentException e) {
-        e.printStackTrace();
+        logger.error(e);
       } catch (IllegalAccessException e) {
-        e.printStackTrace();
+        logger.error(e);
       }
     }
   }

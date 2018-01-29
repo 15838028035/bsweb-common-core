@@ -45,7 +45,7 @@ public class EmailSenderImpl implements IEmailSender {
       upmNoticeService.insertObject(upmNotice);
 
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
       return false;
     }
     return true;

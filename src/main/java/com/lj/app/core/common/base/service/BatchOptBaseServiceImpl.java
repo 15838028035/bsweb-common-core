@@ -85,7 +85,7 @@ public abstract class BatchOptBaseServiceImpl extends BaseServiceImpl implements
 
       wb.close();
     } catch (Exception ex) {
-      ex.printStackTrace();
+      log.error(ex);
       throw ex;
     }
   }

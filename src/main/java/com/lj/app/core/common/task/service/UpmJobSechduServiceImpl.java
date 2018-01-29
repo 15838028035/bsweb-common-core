@@ -88,7 +88,7 @@ public class UpmJobSechduServiceImpl extends BaseServiceImpl implements UpmJobSe
       log.warn("...........end write upm_job_sechdu start info..................." + jobId);
       return true;
     } catch (Exception e) {
-      e.printStackTrace();
+      log.error(e);
       return false;
     }
   }
@@ -122,7 +122,7 @@ public class UpmJobSechduServiceImpl extends BaseServiceImpl implements UpmJobSe
       log.warn("...........end write upm_job_sechdu end info.........." + jobId);
       return true;
     } catch (Exception e) {
-      e.printStackTrace();
+      log.error(e);
       return false;
     }
   }
@@ -163,7 +163,6 @@ public class UpmJobSechduServiceImpl extends BaseServiceImpl implements UpmJobSe
 
       jobEndSechdued(jobId, jobStartDate, 1, "执行成功");
     } catch (Exception e) {
-      e.printStackTrace();
       log.error("runJob 执行失败,失败原因:" + e.getMessage());
       jobEndSechdued(jobId, jobStartDate, 0, "执行失败,失败原因:" + e.getMessage());
     }

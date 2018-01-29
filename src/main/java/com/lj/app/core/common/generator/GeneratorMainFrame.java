@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import com.lj.app.core.common.generator.util.GLogger;
+
 /**
  * 
  * 代码生成器Frame
@@ -257,8 +259,9 @@ public class GeneratorMainFrame extends JFrame implements ActionListener {
 
       Runtime.getRuntime().exec("cmd.exe /c start " + outRootStr);
     } catch (Exception e) {
-      e.printStackTrace();
       retMsg = "文件生成失败,文件目录:\n" + outRootStr + ",异常信息:" + e.getMessage();
+
+      GLogger.error("文件生成失败",e);
     }
     System.out.println("");
     System.out.println("***************************************************************");

@@ -227,7 +227,7 @@ public class FileUtil {
         }
       }
     } catch (Exception ex) {
-      ex.printStackTrace();
+      logger.error(ex);
     }
   }
 

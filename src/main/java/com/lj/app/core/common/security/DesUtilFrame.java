@@ -13,6 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * 
  * DES工具类
@@ -20,6 +23,8 @@ import javax.swing.JTextField;
  */
 public class DesUtilFrame extends JFrame implements ActionListener {
 
+  private static Log logger = LogFactory.getLog(DesUtilFrame.class);
+  
   /**
    * 标题
    */
@@ -132,7 +137,7 @@ public class DesUtilFrame extends JFrame implements ActionListener {
 
       retMsg = DesUtil.decrypt(fileNameTextFieldStr);
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
       retMsg = "解密失败" + ",异常信息:" + e.getMessage();
     }
 

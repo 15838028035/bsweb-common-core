@@ -3,6 +3,7 @@ package com.lj.app.core.common.generator.provider.db.model;
 import java.util.List;
 
 import com.lj.app.core.common.generator.provider.db.DbTableFactory;
+import com.lj.app.core.common.generator.util.GLogger;
 import com.lj.app.core.common.generator.util.ListHashtable;
 
 public class ForeignKey {
@@ -52,7 +53,7 @@ public class ForeignKey {
     try {
       foreignTable = DbTableFactory.getInstance().getTable(this.tableName);
     } catch (Exception e) {
-      e.printStackTrace();
+      GLogger.error("initRelationship",e);
     }
     List parentPrimaryKeys = this.parentTable.getPrimaryKeyColumns();
     List foreignPrimaryKeys = foreignTable.getPrimaryKeyColumns();
@@ -140,7 +141,7 @@ public class ForeignKey {
     try {
       table = DbTableFactory.getInstance().getTable(this.tableName);
     } catch (Exception e) {
-      e.printStackTrace();
+      GLogger.error("getSqlTable",e);
     }
     return table;
   }

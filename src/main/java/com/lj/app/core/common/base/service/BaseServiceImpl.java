@@ -157,7 +157,7 @@ public abstract class BaseServiceImpl<T> implements BaseService {
       }
 
     } catch (Exception e) {
-      e.printStackTrace();
+      log.error(e);
     }
     return nameSpace;
   }

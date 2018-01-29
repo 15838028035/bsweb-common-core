@@ -53,7 +53,6 @@ public class PropertiesReader {
       }
       logger.warn("Loading config file finished~~");
     } catch (Exception e) {
-      e.printStackTrace();
       logger.error("loadConfigFileError===" + e.getMessage());
     }
   }
@@ -95,7 +94,7 @@ public class PropertiesReader {
           .debug("ReadConfig[properName=" + properName + ",key=" + key + ",value=" + properties.getProperty(key) + "]");
       return properties.getProperty(key);
     } catch (IOException e) {
-      e.printStackTrace();
+      logger.error(e);
     }
     return null;
   }

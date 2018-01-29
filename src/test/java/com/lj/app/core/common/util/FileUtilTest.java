@@ -6,11 +6,14 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.springframework.util.ResourceUtils;
 
 public class FileUtilTest {
 
+  private static Log logger = LogFactory.getLog(FileUtilTest.class);
   @Test
   public void createFileInputStreamTest() {
     // TODO:test me
@@ -60,7 +63,7 @@ public class FileUtilTest {
     try {
       file = ResourceUtils.getFile("classpath:test1.txt");
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
     }
 
     if (file == null) {

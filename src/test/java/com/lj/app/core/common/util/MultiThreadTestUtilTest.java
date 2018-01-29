@@ -9,10 +9,14 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 public class MultiThreadTestUtilTest {
 
+  private static Log logger = LogFactory.getLog(MultiThreadTestUtilTest.class);
+  
 	private AtomicInteger executedCount = new AtomicInteger();
 	int expectedCount = 2000;
 	
@@ -49,7 +53,7 @@ public class MultiThreadTestUtilTest {
 				try {
 					Thread.sleep(1);
 				} catch (InterruptedException e) {
-					e.printStackTrace();
+					logger.error(e);
 				}
 			}
 		});

@@ -21,6 +21,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.util.HtmlUtils;
 
 /**
@@ -29,6 +31,9 @@ import org.springframework.web.util.HtmlUtils;
  */
 public class StringUtil {
 
+
+  private static Log logger = LogFactory.getLog(StringUtil.class);
+  
   public static final String UPPERCASE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   public static final String LOWERCASE_CHARS = "abcdefghijklmnopqrstuvwxyz";
   public static final String NUMBER_CHARS = "0123456789";
@@ -739,7 +744,7 @@ public class StringUtil {
         return Integer.parseInt(input.toString());
       }
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
     }
     return defaultInt;
   }
@@ -758,7 +763,7 @@ public class StringUtil {
         return Float.parseFloat(input.toString());
       }
     } catch (Exception ex) {
-      ex.printStackTrace();
+      logger.error(ex);
     }
     return defaultFloat;
   }
@@ -776,7 +781,7 @@ public class StringUtil {
       byte[] bytes = input.getBytes("ISO8859-1");
       return new String(bytes, "UTF-8");
     } catch (Exception ex) {
-      ex.printStackTrace();
+      logger.error(ex);
     }
     return input;
   }
@@ -815,7 +820,7 @@ public class StringUtil {
       byte[] bytes = input.getBytes(sourceEncoding);
       return new String(bytes, targetEncoding);
     } catch (Exception ex) {
-      ex.printStackTrace();
+      logger.error(ex);
     }
     return input;
   }
@@ -1212,7 +1217,7 @@ public class StringUtil {
           }
         }
       } catch (Exception ex) {
-        ex.printStackTrace();
+        logger.error(ex);
       }
       cls = cls.getSuperclass();
     }
@@ -1233,7 +1238,7 @@ public class StringUtil {
       String flowContentStr = new String(b, "UTF-8");
       return flowContentStr;
     } catch (Exception e) {
-      e.printStackTrace();
+      logger.error(e);
     }
     return "";
   }
@@ -1255,7 +1260,7 @@ public class StringUtil {
       oos.close();
       bos.close();
     } catch (IOException ex) {
-      ex.printStackTrace();
+      logger.error(ex);
     }
     return bytes;
   }
@@ -1275,9 +1280,9 @@ public class StringUtil {
       ois.close();
       bis.close();
     } catch (IOException ex) {
-      ex.printStackTrace();
+      logger.error(ex);
     } catch (ClassNotFoundException ex) {
-      ex.printStackTrace();
+      logger.error(ex);
     }
     return obj;
   }
