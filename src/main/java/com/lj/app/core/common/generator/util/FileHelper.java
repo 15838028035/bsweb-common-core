@@ -169,14 +169,14 @@ public class FileHelper {
   }
 
   public static void loadBinaryExtentionsList(String resourceName, boolean ignoreException) {
-    InputStream input= null;
+    InputStream input = null;
     try {
       Enumeration<URL> urls = FileHelper.class.getClassLoader().getResources(resourceName);
       boolean notFound = true;
       while (urls.hasMoreElements()) {
         notFound = false;
         URL url = urls.nextElement();
-         input = url.openStream();
+        input = url.openStream();
         binaryExtentionsList.addAll(IOHelper.readLines(new InputStreamReader(input)));
         input.close();
       }
@@ -185,12 +185,12 @@ public class FileHelper {
     } catch (Exception e) {
       if (!ignoreException)
         throw new RuntimeException("loadBinaryExtentionsList occer error,resourceName:" + resourceName, e);
-    }finally {
-      if(input!=null) {
-        try{
+    } finally {
+      if (input != null) {
+        try {
           input.close();
         } catch (Exception e) {
-          throw new IllegalStateException("close file error:" + resourceName);
+          GLogger.error("close file error:" + resourceName);
         }
       }
     }
