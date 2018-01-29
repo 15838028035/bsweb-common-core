@@ -57,7 +57,7 @@
 
 		<axis2.version>1.6.2</axis2.version>
 		
-		<jacoco.version>0.7.2.201409121644</jacoco.version>
+		<jacoco.version>0.8.0</jacoco.version>
 
 		<!-- Plugin的属性定 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -373,7 +373,6 @@
 					<include>**/*.properties</include>
 					<include>**/*.ftl</include>
 				</includes>
-				<filtering>true</filtering>
 			</resource>
 		</resources>
 
@@ -409,45 +408,35 @@
 					<artifactId>maven-surefire-plugin</artifactId>
 					<version>2.12.4</version>
 					<configuration>
-						<includes>
-							<include>**/*Test.java</include>
-						</includes>
-						<excludes>
-							<exclude>**/*AcceptanceTest.java</exclude>
-						</excludes>
 						<testFailureIgnore>true</testFailureIgnore>
 						<argLine>-Xmx1024M</argLine>
 					</configuration>
-					
 				</plugin>
 				
 				<plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                       </execution>
-                       <execution>  
-			            <id>post-test</id>  
-			            <phase>test</phase>  
-			            <goals>  
-			              <goal>report</goal>  
-			            </goals>  
-			          </execution>  
-                       
-                </executions>
+                <executions>  
+                     <execution>  
+                         <goals>  
+                             <goal>prepare-agent</goal>  
+                         </goals>  
+                     </execution>  
+                     <execution>  
+                         <id>report</id>  
+                         <phase>prepare-package</phase>  
+                         <goals>  
+                             <goal>report</goal>  
+                         </goals>  
+                     </execution>  
+            	</executions>  
                 </plugin>
 
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-war-plugin</artifactId>
 					<version>2.3</version>
-					
 					<configuration>
 						<webappDirectory>${project.basedir}/src/main/webapp</webappDirectory>
 						<webResources>
@@ -542,15 +531,6 @@
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>2.12</version>
 					<inherited>true</inherited>
-<!-- 					<executions> -->
-<!-- 						<execution> -->
-<!-- 							<phase>test</phase> -->
-<!-- 							<goals> -->
-<!-- 								<goal>check</goal> -->
-<!-- 							</goals> -->
-<!-- 						</execution> -->
-<!-- 					</executions> -->
-					
 					<configuration>
 						<configLocation>${project.basedir}/checkstyle.xml</configLocation>
 						<failsOnError>false</failsOnError>
@@ -614,9 +594,6 @@
 					<sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
 					<minimumTokens>100</minimumTokens>
 					<targetJdk>${jdk.version}</targetJdk>
-					<excludes>
-						<exclude>**/xsd/*/*.java</exclude>
-					</excludes>
 				</configuration>
 			</plugin>
 
