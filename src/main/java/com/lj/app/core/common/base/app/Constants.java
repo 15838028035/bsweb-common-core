@@ -298,7 +298,7 @@ public class Constants {
     /**
      * Enable密码修改:2
      */
-    public static final String ENABLE_PWD_CHG_2 = "2";
+    public static final String ENABLE_PASSWORD_CHANGE_2 = "2";
   }
 
   /**

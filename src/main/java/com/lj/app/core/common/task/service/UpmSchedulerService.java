@@ -21,7 +21,7 @@ import com.lj.app.core.common.base.service.BaseServiceImpl;
 @Service("upmSchedulerService")
 public class UpmSchedulerService extends BaseServiceImpl<T> implements SchedulingConfigurer {
 
-  public static String cron = "0/2 * * * * ?";
+  private  static String cron = "0/2 * * * * ?";
 
   private BaseTaskService baseTaskService;// 执行类的
 

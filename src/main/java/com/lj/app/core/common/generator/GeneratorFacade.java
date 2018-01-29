@@ -156,8 +156,8 @@ public class GeneratorFacade {
    *
    */
   public static class GeneratorModel {
-    public Map filePathModel;
-    public Map templateModel;
+    private  Map filePathModel;
+    private  Map templateModel;
 
     public GeneratorModel(Map templateModel, Map filePathModel) {
       this.templateModel = templateModel;

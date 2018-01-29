@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IOHelper {
-  public static Writer NULL_WRITER = new NullWriter();
+  public static final Writer NULL_WRITER = new NullWriter();
 
   public static void copy(Reader reader, Writer writer) {
     char[] buf = new char[8192];

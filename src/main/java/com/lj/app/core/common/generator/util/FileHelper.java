@@ -163,7 +163,7 @@ public class FileHelper {
     return false;
   }
 
-  public static Set binaryExtentionsList = new HashSet();
+  private  static Set binaryExtentionsList = new HashSet();
   static {
     loadBinaryExtentionsList("binary_filelist.txt", true);
   }
