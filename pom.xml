@@ -6,6 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.15838028035</groupId>
 	<artifactId>bsweb-common-core</artifactId>
+	<packaging>jar</packaging>
 	
 	<version>0.0.1-SNAPSHOT</version>
 
@@ -421,11 +422,20 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.version}</version>
                 <executions>
-                <execution>
-                    <goals>
-                        <goal>prepare-agent</goal>
-                    </goals>
-                </execution>
+	                <execution>
+	                       <id>prepare-agent</id>
+	                       <phase>initialize</phase>
+	                       <goals>
+	                           <goal>prepare-agent</goal>
+						</goals>
+	                </execution>
+                 <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+				</execution>
             	</executions>
 	            <configuration>
 	                <destFile>${sonar.jacoco.reportPath}</destFile>
@@ -595,6 +605,12 @@
 					<targetJdk>${jdk.version}</targetJdk>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+              </plugin>
 
 		</plugins>
 

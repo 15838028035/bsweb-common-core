@@ -26,6 +26,10 @@ import net.sf.json.JSONObject;
  */
 public class UpmPermissionActionApi {
 
+  private UpmPermissionActionApi() {
+    
+  }
+  
   private static Log logger = LogFactory.getLog(UpmPermissionActionApi.class);
   
   public static final String FIND_PERMISSION_BY_USERID_URL = PropertiesUtil
