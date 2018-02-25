@@ -11,6 +11,7 @@
 *.rar
 
 
+
 # system ignore
 .DS_Store
 Thumbs.db
@@ -19,6 +20,8 @@ Thumbs.db
 *.diff
 *.patch
 *.tmp
+*.launch
+
 template/
 
 target/
