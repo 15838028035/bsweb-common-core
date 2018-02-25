@@ -155,7 +155,7 @@ public class GeneratorMainFrame extends JFrame implements ActionListener {
    */
   public void addComponent() {
 
-    titleInformation = new JLabel("Rapid-Frame代码生成器");
+    titleInformation = new JLabel("代码生成器");
 
     add(g, c, titleInformation, 0, 0, 1, 1);
 
@@ -277,6 +277,6 @@ public class GeneratorMainFrame extends JFrame implements ActionListener {
    * @param args 运行参数
    */
   public static void main(String [] args)  {
-    new GeneratorMainFrame("代码生成器Frame");
+    new GeneratorMainFrame("代码生成器");
   }
 }

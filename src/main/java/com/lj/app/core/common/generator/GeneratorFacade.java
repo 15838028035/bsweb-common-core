@@ -12,6 +12,7 @@ import com.lj.app.core.common.generator.provider.db.model.Table;
 import com.lj.app.core.common.generator.provider.java.model.JavaClass;
 import com.lj.app.core.common.generator.util.BeanHelper;
 import com.lj.app.core.common.generator.util.ClassHelper;
+import com.lj.app.core.common.generator.util.FileHelper;
 import com.lj.app.core.common.generator.util.GLogger;
 import com.lj.app.core.common.generator.util.StringHelper;
 
@@ -72,11 +73,22 @@ public class GeneratorFacade {
    * @throws Exception  异常
    */
   public void generateByTable(String tableName) throws Exception {
-    Generator g = createGeneratorForDbTable();
-
-    Table table = DbTableFactory.getInstance().getTable(tableName);
-    generateByTable(g, table);
+    generateByTable(StringHelper.tokenizeToStringArray(tableName, ","));
   }
+  
+  /**
+   * 根据表名称生成代码
+   * @param tableName 表名称
+   * @throws Exception  异常
+   */
+  public void generateByTable(String ... tableNames) throws Exception {
+    for (String tableName : tableNames) {
+      Generator g = createGeneratorForDbTable();
+      Table table = DbTableFactory.getInstance().getTable(tableName);
+      generateByTable(g, table);
+    }
+  }
+  
 
   /**
    * 根据表名称生成代码
